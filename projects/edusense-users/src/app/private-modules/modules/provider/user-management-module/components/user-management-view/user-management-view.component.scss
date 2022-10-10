@@ -1,0 +1,21 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.class-view-container .class-view__body {
+    box-shadow: none;
+}
+
+.class-view-container {
+    .class-view {
+        &__body {
+            &__view {
+                @include respond('phone') {
+                    flex-direction: column !important;
+                }
+
+                span {
+                    margin-right: 1rem !important;
+                }
+            }
+        }
+    }
+}

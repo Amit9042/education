@@ -1,0 +1,51 @@
+<div class="doubt-container side-doubt-list-container">
+    <div class="waiting-room-container meeting-room-container">
+        <div class="waiting-room meeting-room">
+            <div class="doubt-container__top">
+                <h5>{{title}}</h5>
+            </div>
+            <div class="waiting-room__body meeting-room__body">
+                <div class="side-scroll-data">
+                    <div *ngFor="let doubt of allDoubtList; let i = index">
+                        <div class="doubt-container__list">
+                            <div class="visitors-info__left">
+                                <div class="visitor-image">
+                                    <mat-icon *ngIf="!doubt?.subject_id?.logo" svgIcon="defaultSubject"></mat-icon>
+                                    <img *ngIf="doubt?.subject_id?.logo" [src]="doubt?.subject_id?.logo" (error)="onError($event)"/>
+                                </div>
+                                <div class="visitor-details">
+                                    <span class="subject">{{doubt?.subject_id?.name}}</span><br />
+                                    <a (click)="onQuestionAnswer(doubt)">
+                                        {{doubt?.question}}
+                                    </a>
+                                    <p class="posted-by" *ngIf="doubt?.from_user_obj">
+                                        Posted by
+                                        <span>{{doubt?.from_user_obj.first_name + ' ' + doubt?.from_user_obj.last_name}}</span>
+                                    </p>
+                                    <!-- posted by for not in your doubt -->
+                                    <p *ngIf="doubt?.comments.length" class="answered">
+                                        <span>{{doubt?.totalAns}}</span> <span>&nbsp;</span> <span>{{doubt?.totalAns == 1 ? 'Answer' : 'Answers'}}</span>
+                                    </p>
+                                    <p *ngIf="!doubt?.comments.length" class="unanswered">
+                                        No Answer Yet
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!allDoubtList.length">
+                    <div class="no-content-found-wrapper">
+                        <mat-icon svgIcon="noDoubts"></mat-icon>
+                        <p>No Doubts Yet!</p>
+                        <span *ngIf="!isNotAdmitted">Doubts not created yet.</span>
+                        <span *ngIf="isNotAdmitted">{{notAdmittedMsg}}</span>
+                    </div>
+                </div>
+                <div class="text-center view-all" *ngIf="allDoubtList.length">
+                    <a (click)="onAllDoubts()" id="lnkViewAll">{{ lable }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

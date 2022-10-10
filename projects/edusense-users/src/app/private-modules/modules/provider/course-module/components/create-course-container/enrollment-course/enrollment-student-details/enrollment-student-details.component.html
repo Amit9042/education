@@ -1,0 +1,37 @@
+<div class="enrollment-student-course-container">
+  <div class="enrollment-student-course">
+    <a (click)="onEnrollmentCourseOpen()">Enrollments > <span>{{ studentData?.user?.student_name }}</span></a>
+
+    <div class="enrollment-student-course__section" *ngFor="let item of lectureDetails?.lectures; let i = index">
+      <div class="enrollment-student-course__section--header">
+        <h4>Section {{ i + 1 }} - {{ item?.title | checkEmpty }}</h4>
+        <h4>({{ item?.student_lecture_section?.start_date | date:'M/d/y' }} -
+          {{ item?.student_lecture_section?.end_date | date:'M/d/y' }}) {{ item?.lectures?.length }}
+          Lectures</h4>
+      </div>
+
+      <div class="enrollment-student-course__section--body">
+        <div class="enrollment-student-course__section--body--panel"
+             *ngFor="let lecture of item?.lectures; let j = index">
+          <div class="panel-header">
+            <div class="panel-header__left">
+              <div class="panel-header__left__text-width">
+                <mat-icon svgIcon="introduction"></mat-icon>
+                <span>{{ lecture?.title | checkEmpty }}</span>
+              </div>
+              <div class="panel-header__left__date-time-width">
+                <span class="time" *ngIf="lecture?.student_lecture?.is_completed">({{
+                    lecture?.createdAt | date:'M/d/y'
+                  }} - {{ lecture?.updatedAt | date:'M/d/y' }}) </span>
+                <span class="time" *ngIf="!lecture?.student_lecture?.is_completed">({{
+                    lecture?.createdAt | date:'M/d/y'
+                  }} - -) </span>
+                <span class="time" *ngIf="lecture?.student_lecture?.is_completed">Completed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

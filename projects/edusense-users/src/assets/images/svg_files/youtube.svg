@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="115" height="86" viewBox="0 0 115 86">
+  <g id="Group_23083" data-name="Group 23083" transform="translate(-568 -4753)">
+    <g id="Rectangle_2266" data-name="Rectangle 2266" transform="translate(568 4753)" fill="#f6f7f9" stroke="rgba(32,48,97,0.1)" stroke-width="1">
+      <rect width="115" height="86" rx="10" stroke="none"/>
+      <rect x="0.5" y="0.5" width="114" height="85" rx="9.5" fill="none"/>
+    </g>
+    <g id="youtube" transform="translate(603.428 4781.137)">
+      <path id="Path_42830" data-name="Path 42830" d="M42.258,4.727a5.406,5.406,0,0,0-3.8-3.8C35.079,0,21.573,0,21.573,0S8.068,0,4.691.889a5.516,5.516,0,0,0-3.8,3.838C0,8.1,0,15.1,0,15.1s0,7.037.888,10.378a5.407,5.407,0,0,0,3.8,3.8c3.412.924,16.882.924,16.882.924s13.505,0,16.882-.889a5.406,5.406,0,0,0,3.8-3.8c.888-3.376.888-10.378.888-10.378s.036-7.037-.889-10.413Zm0,0" fill="red"/>
+      <path id="Path_42831" data-name="Path 42831" d="M204.969,115.421l11.231-6.468-11.231-6.468Zm0,0" transform="translate(-187.696 -93.848)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

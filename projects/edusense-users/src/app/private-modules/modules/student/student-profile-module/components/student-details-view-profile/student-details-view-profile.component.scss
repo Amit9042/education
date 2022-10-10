@@ -1,0 +1,26 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.class-view-container {
+    .class-view {
+        &__body {
+            &__view {
+                label {
+                    width: 29rem;
+                    word-break: break-word;
+
+                    @include respond('regular-desktop') {
+                        width: 25rem;
+                    }
+
+                    @include respond('tablet') {
+                        width: 20rem;
+                    }
+
+                    @include respond('phone') {
+                        width: 25%;
+                    }
+                }
+            }
+        }
+    }
+}

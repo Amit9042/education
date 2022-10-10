@@ -1,0 +1,111 @@
+<div class="auth-container signup-otp-container">
+    <div class="auth-box">
+      <div class="auth-box__data">
+        <div>
+          <h3>One time password (OTP)</h3>
+          <div class="row">
+            <div class="col-md-10 PLR-0">
+              <p>
+                Enter verification code we just sent you on your mobile number.
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <form [formGroup]="studentOtpForm" (ngSubmit)="onStudentOtpFormSubmit(studentOtpForm)">
+          <div class="row">
+            <div class="col-xl-12 col-md-12 PL-0">
+              <div class="otp-form-field">
+                <label>OTP</label>
+              
+                <div class="row">
+                  <div class="col-xl-12 col-md-12 PL-0">
+                    <div class="otp-form-field">
+                      <div class="otp-form-container">
+                        <div class="form-control">
+                          <input type="text" max="1" maxlength="1" id="txtOtp-1" #inputRef1 (keyup)="
+                              onBlurInput(
+                                $event,
+                                inputRef1,
+                                inputRef1.value ? inputRef2 : null
+                              )
+                            " (click)="onFocus(inputRef1)" (paste)="onPasteEvent($event)" formControlName="otpInput1" />
+                        </div>
+  
+                        <div class="form-control">
+                          <input type="text" max="1" maxlength="1" id="txtOtp-2" #inputRef2 (keyup)="
+                              onBlurInput(
+                                $event,
+                                inputRef2,
+                                inputRef2.value ? inputRef3 : inputRef1
+                              )
+                            " (click)="onFocus(inputRef2)" (paste)="onPasteEvent($event)" formControlName="otpInput2" />
+                        </div>
+  
+                        <div class="form-control">
+                          <input type="text" max="1" maxlength="1" id="txtOtp-3" #inputRef3 (keyup)="
+                              onBlurInput(
+                                $event,
+                                inputRef3,
+                                inputRef3.value ? inputRef4 : inputRef2
+                              )
+                            " (click)="onFocus(inputRef3)" (paste)="onPasteEvent($event)" formControlName="otpInput3" />
+                        </div>
+  
+                        <div class="form-control">
+                          <input type="text" max="1" maxlength="1" id="txtOtp-4" #inputRef4 (keyup)="
+                              onBlurInput(
+                                $event,
+                                inputRef4,
+                                inputRef4.value ? inputRef5 : inputRef3
+                              )
+                            " (click)="onFocus(inputRef4)" (paste)="onPasteEvent($event)" formControlName="otpInput4" />
+                        </div>
+  
+                        <div class="form-control">
+                          <input type="text" max="1" maxlength="1" id="txtOtp-5" #inputRef5 (keyup)="
+                              onBlurInput(
+                                $event,
+                                inputRef5,
+                                inputRef5.value ? inputRef6 : inputRef4
+                              )
+                            " (click)="onFocus(inputRef5)" (paste)="onPasteEvent($event)" formControlName="otpInput5" />
+                        </div>
+  
+                        <div class="form-control">
+                          <input type="text" max="1" maxlength="1"  id="txtOtp-6" #inputRef6 (keyup)="
+                              onBlurInput(
+                                $event,
+                                inputRef6,
+                                inputRef6.value ? null : inputRef5
+                              )
+                            " (click)="onFocus(inputRef6)" (paste)="onPasteEvent($event)" formControlName="otpInput6" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="auth-green-button" id="btnVerifyOtp" mat-flat-button color="primary" type="submit">
+              Verify OTP
+            </button>
+            <button (click)="onBack()" class="ML-2" id="btnBack" type="button" mat-flat-button color="accent">
+              Back
+            </button>
+          </div>
+        </form>
+  
+        <div class="row MT-4">
+          <p class="bottom-link">
+            If you didn't receive a code! 
+            <a *ngIf="showResendOTPButton" (click)="resendOtp()">Resend</a>
+            <a *ngIf="!showResendOTPButton">{{clockDisplay ? clockDisplay : ''}}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

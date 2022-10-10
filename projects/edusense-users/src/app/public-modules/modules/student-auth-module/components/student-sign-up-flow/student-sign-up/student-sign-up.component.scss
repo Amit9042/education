@@ -1,0 +1,63 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.auth-box {
+    margin: 0 auto;
+
+    &__data {
+        .logo {
+            .mat-icon {
+                width: 20rem;
+                height: auto;
+                margin: 2rem 0 4rem;
+            }
+        }
+    }
+}
+
+.signup-container {
+    &.auth-container {
+        @include respond('phone') {
+            height: calc(100vh - 4rem);
+        }
+        @include respond('iphone') {
+            height: calc(100vh - 5rem);
+        }
+        h3 {
+            margin-bottom: 1rem;
+            @include respond('iphone') {
+                margin-bottom: 0.5rem;
+            }
+        }
+        p {
+            @include respond('large-desktop') {
+                margin-bottom: 2rem;
+            }
+        }
+        .form-control {
+            // @include respond('large-desktop') {
+            //     height: 10rem !important;
+            // }
+            @include respond('medium-desktop') {
+                height: 13rem !important;
+            }
+            @include respond('regular-desktop') {
+                height: 13rem !important;
+            }
+        }
+    }
+
+    .bottom-link {
+        margin-top: 7rem;
+        @include respond('large-desktop') {
+            margin-top: 4rem !important;
+        }
+        @include respond('iphone') {
+            margin-top: 2rem !important;
+        }
+    }
+
+    // .mat-error {
+    //   @include respond("large-desktop") {
+    //     top: -0.3rem;
+    //   }
+    // }
+}

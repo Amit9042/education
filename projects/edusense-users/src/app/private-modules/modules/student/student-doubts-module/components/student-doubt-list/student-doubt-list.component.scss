@@ -1,0 +1,21 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.doubt-container {
+    .meeting-room {
+        &__body {
+            height: calc(100vh - 25rem) !important;
+            margin-top: unset !important;
+            margin-bottom: unset !important;
+            // overflow-y: auto;
+        }
+    }
+}
+.waiting-room-container {
+    padding-bottom: 2rem !important;
+}
+
+.no-content-found-wrapper {
+    mat-icon {
+        height: 14rem;
+    }
+}

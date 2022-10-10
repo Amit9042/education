@@ -1,0 +1,463 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.course-content-container {
+    .course-content {
+        margin-bottom: 10px;
+        h3 {
+            color: $primary-color;
+            font-size: 2.4rem;
+            margin-bottom: 3rem;
+        }
+
+        &__header-box {
+            @include placeholder(#a5acc0, 2rem);
+            background-color: $grey-color-36;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 12rem;
+            padding: 0 3rem;
+            border-radius: 0.5rem;
+
+            div {
+                width: 100%;
+            }
+
+            .description-input-border.section-width {
+                input {
+                    width: calc(100% - 24rem);
+                }
+            }
+        }
+
+        &__action {
+            position: absolute;
+            right: 2rem;
+            top: 0;
+            width: auto !important;
+            z-index: 1;
+
+            li {
+                margin-top: 4.5rem;
+            }
+
+            a {
+                display: inline-block;
+                margin-left: 2rem;
+
+                mat-icon {
+                    @include square(1.8rem);
+                }
+            }
+        }
+
+        &__add-box {
+            box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.16);
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            display: block;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            b {
+                color: $primary-color;
+                width: 12rem;
+                display: inline-block;
+            }
+
+            input {
+                color: $primary-color;
+                margin-left: 1rem;
+                height: 5rem;
+                border: 1px solid transparent;
+                background-color: transparent;
+                padding: 1.1rem;
+                font-size: 1.8rem;
+                font-weight: 600;
+                width: calc(100% - 24rem);
+                margin-right: 2.5rem;
+
+                &:focus,
+                &.active {
+                    background-color: $white-color;
+                    border-color: rgba(32, 48, 97, 0.2);
+                    outline: none;
+                    border-radius: 0.8rem;
+                }
+            }
+
+            button.save-btn {
+                color: $primary-color;
+                border: solid 1px rgba(29, 44, 60, 0.2);
+                background-color: transparent;
+                font-size: 1.6rem;
+                height: 5rem;
+                width: 9rem;
+                font-weight: 600;
+                border-radius: 0.3rem;
+
+                &:disabled {
+                    background-color: $grey-color-3;
+                    border-color: $grey-color-3;
+                }
+            }
+
+            &.add-section-title {
+                input {
+                    border: solid 1px rgba(29, 44, 60, 0.2);
+                    width: calc(100% - 12rem);
+                }
+            }
+        }
+
+        &__body-box {
+            background-color: $white-color;
+            padding: 0 3rem 3rem 10rem;
+
+            &.hide-panel {
+                display: none;
+            }
+
+            .hide-show-label {
+                font-size: 1.6rem;
+                margin-right: 1.1rem;
+                color: $green-color;
+            }
+
+            .add-section-link {
+                font-size: 1.8rem;
+                margin-left: 1.1rem;
+
+                mat-icon {
+                    @include square(1.8rem);
+                    margin-right: 1rem;
+                    position: relative;
+                    top: 2px;
+                }
+            }
+
+            ul {
+                li {
+                    display: block !important;
+                    min-height: 11rem;
+                    border-bottom: 1px dashed #dddddd;
+                    padding: 4.5rem 0;
+
+                    .remove-lecture {
+                        mat-icon {
+                            @include square(1.6rem);
+                            color: $grey-color-15;
+                            margin-left: 2rem;
+                        }
+                    }
+
+                    .content-type {
+                        &__title {
+                            color: $black-color-2;
+                            margin-right: 1rem;
+                            font-size: 1.6rem;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .lecture-width {
+                        width: 100%;
+                        margin-left: 0;
+                    }
+                }
+
+                .youtube-valid {
+                    position: relative;
+                    left: 1rem;
+                }
+            }
+
+            .description-input-border {
+                position: relative;
+
+                input {
+                    border: 1px solid $grey-color-9;
+                    border-radius: 0.8rem;
+                    margin-left: 0;
+                }
+
+                .amount-valid {
+                    position: absolute;
+                    top: 5.2rem;
+                    left: 1rem;
+                }
+            }
+
+            .editor-width {
+                width: 80%;
+            }
+
+            &__title {
+                position: relative;
+
+                &__icon {
+                    position: absolute;
+                    top: 0.5rem;
+                    left: -2rem;
+
+                    mat-icon {
+                        @include square(1.8rem);
+                    }
+                }
+
+                .lecture-position {
+                    position: relative;
+                    bottom: 1.5rem;
+                }
+            }
+        }
+
+        .text-view {
+            // position: relative;
+
+            &__action {
+                position: absolute;
+                right: 0;
+                z-index: 1;
+
+                a {
+                    margin-left: 2rem;
+
+                    mat-icon {
+                        @include square(1.6rem);
+                        color: $black-color;
+                    }
+                }
+            }
+
+            &__file {
+                // margin-top: 3rem;
+                margin-right: 2rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 11rem;
+                height: 8.5rem;
+                border-radius: 10px;
+                border: solid 1px rgba(32, 48, 97, 0.1);
+                background-color: #f4f5f7;
+
+                mat-icon,
+                img {
+                    width: 11rem;
+                    height: 8.5rem;
+                    border-radius: 1rem;
+                }
+            }
+
+            &__time {
+                display: inline-block;
+                color: rgba($black-color, 0.6);
+                vertical-align: top;
+                margin-top: 3rem;
+                width: 60rem;
+
+                b {
+                    color: $primary-color;
+                    display: block;
+                    width: 100%;
+                    margin-bottom: 1rem;
+                }
+
+                .duration-position {
+                    vertical-align: top;
+                }
+            }
+
+            &__resource {
+                margin-top: 2rem;
+
+                a {
+                    color: $green-color-5;
+
+                    mat-icon {
+                        @include square(1.4rem);
+                        color: $green-color-5;
+                    }
+                }
+
+                &--files {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 15px 13px 10px 0;
+
+                    label {
+                        margin-left: 5px;
+                    }
+                    a {
+                        margin-left: 5px;
+
+                        .mat-icon {
+                            width: 1.2rem;
+                            height: 1.2rem;
+                        }
+                    }
+
+                    &.pdf-document {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        padding-top: 2.5rem;
+
+                        mat-icon {
+                            vertical-align: middle;
+                            width: 3.5rem;
+                            height: 4rem;
+                            margin-right: 2rem;
+                        }
+
+                        label {
+                            color: $grey-color-12;
+                            font-weight: 600;
+                            font-size: 1.4rem;
+                            margin-right: 3rem;
+                            margin-left: 0;
+                        }
+
+                        a {
+                            background: $light-gray-color-1;
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-left: 0;
+                            border-radius: 50%;
+                            margin-left: 0;
+                            height: 3rem;
+                            width: 3rem;
+
+                            mat-icon {
+                                @include square(1rem);
+                                margin-right: 0;
+                                line-height: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__inner-html-design {
+                margin-top: 3rem;
+                width: 95%;
+
+                span {
+                    color: rgba($black-color, 0.6);
+                    margin-top: 1rem;
+                    display: block;
+                }
+
+                ol,
+                ul {
+                    li {
+                        display: block !important;
+                    }
+                }
+            }
+
+            &__you-tube-design {
+                padding-top: 3rem;
+
+                a {
+                    mat-icon {
+                        height: 8rem;
+                        width: 11rem;
+                    }
+                }
+            }
+
+            &__file-pdf-design {
+                padding-top: 3rem;
+
+                a {
+                    mat-icon {
+                        height: 8rem;
+                        width: 11rem;
+                    }
+                }
+
+                span {
+                    color: $primary-color;
+                    font-weight: bold;
+                    vertical-align: top;
+                    padding-left: 2rem;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+
+        quill-editor {
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .add-section-title {
+            .description-input-border {
+                display: inline-block;
+                input {
+                    border: 1px solid $grey-color-9;
+                    border-radius: 0.8rem;
+                    margin-left: 0;
+                }
+
+                // button.save-btn{
+                //     width: 9rem;
+                // }
+            }
+        }
+
+        .panel-content {
+            padding: 3rem 1.5rem 1rem 4.5rem;
+            background-color: $light-gray-color-3;
+            border-bottom: 1px solid #d1d4d8;
+            // display: none;
+
+            &__video {
+                img,
+                mat-icon {
+                    width: 11.5rem;
+                    height: 8.6rem;
+                    margin-right: 1.2rem;
+                    border-radius: 1rem;
+                }
+
+                &__content {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: calc(100% - 30rem);
+
+                    span {
+                        font-size: 1.8rem;
+                        font-weight: bold;
+                        line-height: 1.28;
+                        color: $primary-color;
+                        vertical-align: top;
+                        display: block;
+                    }
+
+                    label {
+                        color: rgba($black-color, 0.6);
+                        font-size: 1.6rem;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+
+        .remove-sub-lecture {
+            text-align: right;
+            display: inline-block;
+            width: 11rem;
+            mat-icon {
+                @include square(1.6rem);
+                color: $grey-color-15;
+                margin-left: 2rem;
+            }
+        }
+    }
+}

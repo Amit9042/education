@@ -1,0 +1,35 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.class-view-container {
+    .class-view {
+        &__header {
+            border-bottom: 1px solid rgba($primary-color, 0.2);
+            padding-bottom: 3rem;
+        }
+        &__body {
+            box-shadow: none;
+            &__view {
+                @include respond('phone') {
+                    flex-direction: column;
+                }
+                label {
+                    width: 15rem;
+                    margin-right: 5rem;
+                    @include respond('phone') {
+                        margin-bottom: 1rem;
+                        width: 100%;
+                    }
+                }
+                & > span {
+                    width: calc(100% - 15rem);
+                    line-height: 2.22;
+                    @include respond('phone') {
+                        width: 100%;
+                    }
+                    p {
+                        line-height: 2.22;
+                    }
+                }
+            }
+        }
+    }
+}

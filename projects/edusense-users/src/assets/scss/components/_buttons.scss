@@ -1,0 +1,118 @@
+.mat-flat-button.mat-button-base.mat-primary,
+.mat-flat-button.mat-button-base.mat-accent {
+    height: 5rem;
+    min-width: 12rem;
+    border-radius: 0.8rem;
+    line-height: 3.6rem;
+
+    @include respond('phone') {
+        height: 4.5rem;
+        min-width: 12rem;
+    }
+
+    .mat-button-wrapper {
+        font-size: 1.6rem;
+
+        @include respond('phone') {
+            font-size: 1.4rem;
+        }
+    }
+
+    mat-icon {
+        @include square(1.4rem);
+        vertical-align: top;
+        position: relative;
+        top: 0.15rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.mat-flat-button.mat-button-base.mat-accent {
+    background: transparent;
+
+    .mat-button-wrapper {
+        color: $primary-color;
+    }
+}
+
+.auth-container {
+    .mat-flat-button.mat-button-base.mat-primary,
+    .mat-flat-button.mat-button-base.mat-accent {
+        min-width: 13rem;
+    }
+}
+
+.form-control {
+    button {
+        @include border-radius(0.8rem);
+        font-size: 1.6rem;
+
+        @include respond('phone') {
+            font-size: 1.4rem;
+        }
+    }
+}
+button {
+    &.mat-icon-button {
+        @include border-radius(50%);
+    }
+}
+
+.mat-stroked-button.back {
+    height: 5rem;
+    border: none !important;
+    font-size: 1.6rem;
+
+    @include respond('phone') {
+        height: 4.5rem;
+        font-weight: 1.4rem;
+    }
+}
+
+button {
+    &:focus {
+        outline: none;
+    }
+}
+
+.round-button {
+    background-color: transparent !important;
+    border: transparent !important;
+    padding: 1rem 3.3rem !important;
+    border-radius: 40px !important;
+    height: auto !important;
+    min-width: 12rem !important;
+    font-weight: 600 !important;
+}
+
+.round-button-red {
+    background-color: rgba($reddish-color, 0.1) !important;
+    color: $reddish-color !important;
+}
+
+.round-button-primary {
+    background-color: $primary-color !important;
+    color: $white-color !important;
+}
+
+.mat-flat-button {
+    &.mat-warn {
+        background-color: $reddish-orange-color !important;
+        color: $white-color !important;
+    }
+}
+
+.mat-menu-item{
+    height:4.8rem !important;
+    line-height: 4.8rem !important;
+}
+
+.cover-image-icon{
+    mat-icon{
+        svg{
+            path{
+                fill: $primary-color !important;
+            }
+        }
+    }
+}

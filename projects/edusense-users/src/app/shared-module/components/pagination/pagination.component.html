@@ -1,0 +1,34 @@
+<div class="custom-pagination-section">
+    <div class="custom-pagination-section__show-row">
+        <span class="text-page">Rows per page:</span>
+        <label class="custom-icon">
+            <select id="matSelectPageSize" (change)="onChangePageSize($event['target']['value'])">
+                <option *ngFor="let option of pageSizeOptions">{{option}}</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="custom-pagination-section__go-to">
+        <span class="text-page">Go to:</span>
+        <input id="txtRow" type="text" [value]="rowNumber" (keydown.enter)="onClickGoToRecords($event.target.value)"/>
+    </div>
+
+    <div class="custom-pagination-section__details">
+        <span class="text-page">{{rowNumber}}
+            - {{((((rowNumber + recordsPerPage) - 1) < totalElements) ? ((rowNumber + recordsPerPage) - 1) : totalElements)}}
+            of {{totalElements}}</span>
+    </div>
+
+    <div class="custom-pagination-section__next-prev">
+        <button id="btnPrevious" matTooltip="Previous" mat-icon-button type="button" class="previous-next" [disabled]="(rowNumber === 1)"
+                (click)="onClickPrevious()">
+            <mat-icon svgIcon="leftArrow"></mat-icon>
+        </button>
+
+        <button id="btnNext" matTooltip="Next" mat-icon-button type="button" class="previous-next previous-next--next"
+                [disabled]="((rowNumber + recordsPerPage) > totalElements)" (click)="onClickNext()">
+            <mat-icon svgIcon="rightArrow"></mat-icon>
+        </button>
+    </div>
+</div>
+

@@ -1,0 +1,95 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.dialog-container {
+    // width: 124rem;
+    max-width: 95vw;
+    min-width: 50rem;
+
+    @include respond('phone') {
+        min-width: auto;
+    }
+
+    &__head {
+        padding: 2rem 4rem;
+
+        @include respond('phone') {
+            padding: 2rem 1.5rem;
+        }
+    }
+    &__bottom {
+        padding: 3rem 4rem 4.5rem;
+        max-height: calc(90vh - 8rem);
+        overflow: auto;
+
+        @include respond('tablet') {
+            padding: 2rem;
+        }
+
+        @include respond('phone') {
+            padding: 2rem 1.5rem;
+        }
+
+        .form-control {
+            height: 11rem;
+        }
+    }
+
+    .invite-user-field-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+
+        @include respond('tablet') {
+            align-items: flex-start;
+        }
+
+        @include respond('phone') {
+            align-items: flex-start;
+        }
+
+        button {
+            margin-bottom: 1.8rem;
+            mat-icon {
+                @include square(1.6rem);
+            }
+
+            @include respond('tablet') {
+                margin-top: 2rem;
+            }
+
+            @include respond('phone') {
+                margin-top: 2rem;
+            }
+        }
+    }
+
+    .add-another-field {
+        mat-icon {
+            @include square(2.2rem);
+            vertical-align: sub;
+            margin-right: 1rem;
+        }
+        a {
+            color: $primary-color;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 1.6rem;
+
+            @include respond('phone') {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
+
+.tab-pad-0 {
+    @include respond('tablet') {
+        padding-right: 0 !important;
+    }
+}
+
+.small-pad-0 {
+    @include respond('phone') {
+        padding: 0 !important;
+    }
+}

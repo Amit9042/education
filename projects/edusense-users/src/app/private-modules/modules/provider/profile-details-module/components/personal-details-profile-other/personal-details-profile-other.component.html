@@ -1,0 +1,54 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmitProfileForm(profileForm)" class="MB-5">
+
+    <div class="form-container">
+        <!-- NAME FIELD -->
+        <div class="row">
+            <div class="col-md-6 PL-0">
+                <div class="form-control">
+                    <mat-label>First Name*</mat-label>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <input id="txtFname" formControlName="provider_first_name" type="text" autocomplete="off" matInput
+                            placeholder="Enter first name" />
+                        <mat-error *ngIf="isRequiredField(formControls['provider_first_name'])">
+                            {{ validationMsg.FIRST_NAME }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidLength(formControls['provider_first_name'])">
+                            {{ validationMsg.FIRST_NAME_LENGTH }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidField(formControls['provider_first_name'])">
+                            {{ validationMsg.FIRST_NAME_VALID }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-md-6 PR-0">
+                <div class="form-control">
+                    <mat-label>Last Name*</mat-label>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <input id="txtLname" formControlName="provider_last_name" type="text" autocomplete="off" matInput
+                            placeholder="Enter last name" />
+                        <mat-error *ngIf="isRequiredField(formControls['provider_last_name'])">
+                            {{ validationMsg.LAST_NAME }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidLength(formControls['provider_last_name'])">
+                            {{ validationMsg.LAST_NAME_LENGTH }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidField(formControls['provider_last_name'])">
+                            {{ validationMsg.LAST_NAME_VALID }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="profile-details__footer">
+        <button mat-flat-button color="primary" type="submit" id="btnSave">
+            Save
+        </button>
+        <button (click)="onViewProfile()" type="button" mat-button id="btnCancel">Cancel</button>
+    </div>
+</form>

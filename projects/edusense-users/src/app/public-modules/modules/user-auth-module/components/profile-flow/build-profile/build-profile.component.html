@@ -1,0 +1,392 @@
+<div class="profile-container">
+    <form
+        [formGroup]="profileForm"
+        (ngSubmit)="onSubmitProfileForm(profileForm)"
+    >
+        <div class="row">
+            <div class="col-md-3 profile-container__left">
+                <div class="responsive-profile-img">
+                    <div>
+                        <img
+                            [src]="imageUploadDetails"
+                            *ngIf="imageUploadDetails"
+                            alt=""
+                        />
+                        <mat-icon
+                            svgIcon="providerProfile"
+                            *ngIf="!imageUploadDetails"
+                        ></mat-icon>
+                    </div>
+                    <div>
+                        <div>
+                            <button
+                                type="button"
+                                *ngIf="uploadeImage.length"
+                                mat-stroked-button
+                                (click)="onBrowseFile('profilePicture')"
+                                id="btnChangeProfile"
+                            >
+                                Change Profile Picture
+                            </button>
+                            <button
+                                type="button"
+                                *ngIf="!uploadeImage.length"
+                                mat-stroked-button
+                                (click)="onBrowseFile('profilePicture')"
+                                id="btnUploadProfile"
+                            >
+                                Upload Profile Picture
+                            </button>
+                            <input
+                                type="file"
+                                hidden
+                                id="profilePicture"
+                                accept="image/jpeg,image/png,image/jpg"
+                                (change)="onFileUpload($event)"
+                            />
+                        </div>
+                        <span>PNG, JPG, JPEG Max 5 MB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 profile-container__right">
+                <div>
+                    <h3>Build your profile</h3>
+                </div>
+                <div class="form-container">
+                    <div class="profile-details-container">
+                        <!-- INSTITUTE FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search
+                                        [formName]="profileForm"
+                                        [selectConfig]="collegetSearchConfig"
+                                        [selected]="
+                                            selectedData?.selectedProvider
+                                        "
+                                        [dataList]="providerTypeList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent(
+                                                $event,
+                                                'provider'
+                                            )
+                                        "
+                                        id="matSelectProvider"
+                                    >
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NAME FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control">
+                                    <mat-label>Name*</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <input
+                                            formControlName="name"
+                                            type="text"
+                                            autocomplete="off"
+                                            matInput
+                                            placeholder="Enter name"
+                                            id="txtName" 
+                                        />
+                                        <mat-error
+                                            *ngIf="
+                                                isRequiredField(
+                                                    formControls['name']
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.NAME }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidLength(
+                                                    formControls['name']
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.NAME_LENGTH }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidField(
+                                                    formControls['name']
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.NAME_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GRADE FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search
+                                        [formName]="profileForm"
+                                        [selectConfig]="gradeSearchConfig"
+                                        [selected]="selectedData?.grade"
+                                        [dataList]="gradeList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent($event, 'grade')
+                                        "
+                                        id="matSelectgrade"
+                                    >
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BOARD FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search
+                                        [formName]="profileForm"
+                                        [selectConfig]="boardSearchConfig"
+                                        [selected]="selectedData?.board"
+                                        [dataList]="boardList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent($event, 'board')
+                                        "
+                                        id="matSelectBoard"
+                                    >
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MEDIUM FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search
+                                        [formName]="profileForm"
+                                        [selectConfig]="mediumSearchConfig"
+                                        [selected]="selectedData?.medium"
+                                        [dataList]="mediumList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent(
+                                                $event,
+                                                'medium'
+                                            )
+                                        "
+                                        id="matSelectMedium"
+                                    >
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SUBJECT FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search
+                                        [formName]="profileForm"
+                                        [selectConfig]="subjectSearchConfig"
+                                        [selected]="selectedData?.subject"
+                                        [dataList]="subjectList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent(
+                                                $event,
+                                                'subject'
+                                            )
+                                        "
+                                        id="matSelectSubject"
+                                    >
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DESCRIPTION FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PL-0 xs-PR-0">
+                                <div class="form-control-textarea">
+                                    <mat-label>Description</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <textarea
+                                            formControlName="description"
+                                            type="text"
+                                            autocomplete="off"
+                                            matInput
+                                            placeholder="Type description"
+                                        ></textarea>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidLength(
+                                                    formControls['description']
+                                                )
+                                            "
+                                            >{{
+                                                validationMsg.DESCRIPTION_LENGTH
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="location-details">
+                            <h2>
+                                Location details<span>
+                                    <mat-icon
+                                        svgIcon="info"
+                                        matTooltip="Enter Provider's Address"
+                                        matTooltipPosition="above"
+                                    ></mat-icon>
+                                </span>
+                            </h2>
+
+                            <div class="row">
+                                <div class="col-md-6 PL-0 PR-1 xs-PR-0">
+                                    <div class="form-control">
+                                        <app-ss-select-search
+                                            [formName]="profileForm"
+                                            [selectConfig]="countrySearchConfig"
+                                            [selected]="
+                                                selectedData?.selectedCountry
+                                            "
+                                            [dataList]="countryList"
+                                            (changSelectEvent)="
+                                                onSelectChangeEvent(
+                                                    $event,
+                                                    'country'
+                                                )
+                                            "
+                                            id="matSelectCountry"
+                                        >
+                                        </app-ss-select-search>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 PL-0 xs-PR-0">
+                                    <div class="form-control">
+                                        <app-ss-select-search
+                                            [formName]="profileForm"
+                                            [selectConfig]="stateSearchConfig"
+                                            [selected]="
+                                                selectedData?.selectedState
+                                            "
+                                            [dataList]="stateList"
+                                            (changSelectEvent)="
+                                                onSelectChangeEvent(
+                                                    $event,
+                                                    'state'
+                                                )
+                                            "
+                                            id="matSelectState"
+                                        >
+                                        </app-ss-select-search>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 PL-0 xs-PR-0">
+                                    <div class="form-control">
+                                        <mat-label>City*</mat-label>
+                                        <mat-form-field
+                                            appearance="outline"
+                                            floatLabel="always"
+                                        >
+                                            <input
+                                                type="text"
+                                                placeholder="Select city"
+                                                aria-label="Number"
+                                                matInput
+                                                [matAutocomplete]="city"
+                                                autocomplete="new-city"
+                                                formControlName="cityInput"
+                                                id="txtCity"
+                                            />
+                                            <mat-error
+                                                *ngIf="
+                                                    isRequiredField(
+                                                        formControls[
+                                                            'cityInput'
+                                                        ]
+                                                    )
+                                                "
+                                            >
+                                                {{
+                                                    validationMsg.CITY
+                                                }}</mat-error
+                                            >
+                                        </mat-form-field>
+                                        <mat-autocomplete
+                                            #city="matAutocomplete"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let city of filteredCities
+                                                "
+                                                (onSelectionChange)="
+                                                    changeCity(city)
+                                                "
+                                                [value]="city.city_name"
+                                            >
+                                                <span>{{
+                                                    city.city_name
+                                                }}</span>
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 PL-0 xs-PR-0">
+                                    <div class="form-control-textarea">
+                                        <mat-label>Address</mat-label>
+                                        <mat-form-field
+                                            appearance="outline"
+                                            floatLabel="always"
+                                        >
+                                            <textarea
+                                                formControlName="address"
+                                                type="text"
+                                                autocomplete="off"
+                                                matInput
+                                                placeholder="Type address"
+                                                id="txtAddress"
+                                            ></textarea>
+                                            <mat-error
+                                                *ngIf="
+                                                    isValidLength(
+                                                        formControls['address']
+                                                    )
+                                                "
+                                                >{{
+                                                    validationMsg.ADDRESS_LENGTH
+                                                }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="PT-2 footer">
+            <button id="btnNext" mat-flat-button color="primary" type="submit">
+                Next
+            </button>
+        </div>
+    </form>
+</div>

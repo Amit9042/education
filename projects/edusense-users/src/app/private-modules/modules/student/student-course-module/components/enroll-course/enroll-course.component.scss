@@ -1,0 +1,242 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.enroll-course-container {
+    padding: 7rem 8rem;
+
+    .enroll-course-banner {
+        //AA background-image: url('../../../../../../../assets/images/course-image.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        height: 70vh;
+        width: 100%;
+        padding: 10rem 0 0 5rem;
+
+        &::after {
+            background-color: rgba($black-color, 0.7);
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 70vh;
+            width: 100%;
+            content: '';
+        }
+
+        &__content {
+            position: absolute;
+            z-index: 1;
+
+            h3,
+            h4 {
+                color: $white-color;
+            }
+
+            h3 {
+                font-weight: bold;
+                font-size: 3.5rem;
+            }
+
+            h4 {
+                font-weight: normal;
+                font-size: 1.8rem;
+                margin-top: 3rem;
+            }
+
+            &__duration {
+                padding-top: 8rem;
+
+                ul {
+                    li {
+                        padding-right: 5rem;
+                        padding-left: 5rem;
+                        border-right: 1px solid $white-color;
+
+                        &:last-child {
+                            border: none;
+                        }
+
+                        &:first-child {
+                            padding-left: 0;
+                        }
+
+                        label,
+                        span {
+                            color: $white-color;
+                        }
+
+                        label {
+                            display: block;
+                            font-weight: bold;
+                            font-size: 1.8rem;
+                        }
+
+                        span {
+                            font-size: 1.6rem;
+                            font-weight: normal;
+                        }
+                    }
+                }
+            }
+
+            &__buttons {
+                padding-top: 10rem;
+
+                .enroll-btn {
+                    color: $primary-color;
+                    border: transparent;
+                    font-weight: bold;
+                    width: 20rem;
+                    height: 5rem;
+                    border-radius: 0.8rem;
+                    font-size: 1.6rem;
+                    margin-right: 2rem;
+                }
+
+                .bookmark-btn {
+                    background-color: transparent;
+                    border: 2px solid $white-color;
+                    color: $white-color;
+                    font-weight: bold;
+                    width: 20rem;
+                    height: 5rem;
+                    border-radius: 0.8rem;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+
+    .enroll-about-course {
+        padding-top: 6rem;
+        border-bottom: 1px solid $grey-color-29;
+
+        h4 {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        p {
+            color: rgba($black-color, 0.7);
+            margin: 2rem 4rem 4rem 0;
+        }
+
+        &__skills {
+            padding-top: 2rem;
+            border-bottom: 1px solid $grey-color-29;
+            ul {
+                padding-top: 2rem;
+                li {
+                    a {
+                        background-color: $primary-color-3;
+                        color: $primary-color;
+                        display: inline-block;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        padding: 1rem;
+                        border-radius: 1rem;
+                        margin-right: 1rem;
+                        margin-bottom: 3rem;
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .enroll-course-content {
+        width: 90%;
+        padding-top: 3.5rem;
+
+        h4 {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        &__content-scroll {
+            // overflow-y: auto;
+            // height: 65rem;
+            padding-right: 1rem;
+
+            &__content-details {
+                background-color: $light-gray-color-11;
+                margin-bottom: 0.5rem;
+                height: 5.8rem;
+                padding: 1.8rem;
+
+                &__title {
+                    h1 {
+                        color: $blue-color-3;
+                        font-weight: bold;
+                        font-size: 2.8rem;
+                        margin-bottom: 2rem;
+                    }
+
+                    h3 {
+                        font-size: 1.8rem;
+                        font-weight: bold;
+                    }
+
+                    small {
+                        font-size: 1.6rem;
+                        font-weight: 600;
+                    }
+                }
+
+                &__body {
+                    background-color: $light-gray-color-11;
+                    margin-bottom: 0.5rem;
+
+                    ul {
+                        li {
+                            display: block;
+
+                            a {
+                                color: $black-color;
+                                display: block;
+                                border-radius: 0.5rem;
+                                padding: 1.8rem;
+                                height: 5.8rem;
+
+                                mat-icon {
+                                    @include square(1.5rem);
+                                    margin-right: 1rem;
+                                }
+
+                                span {
+                                    vertical-align: text-top;
+                                    font-size: 1.8rem;
+                                    font-weight: 600;
+                                }
+
+                                small {
+                                    font-size: 1.4rem;
+                                    font-weight: 600;
+                                }
+
+                                &:hover {
+                                    background-color: $primary-color-3;
+                                    text-decoration: none;
+                                }
+
+                                &.active {
+                                    background-color: $blue-color-1;
+                                    color: $white-color;
+                                }
+                            }
+                        }
+                    }
+
+                    // &:hover {
+                    //     background-color: $primary-color-3;
+                    //     text-decoration: none;
+                    // }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<div class="doubt-container partition-design-container doubt-container-spacing">
+    <div class="row">
+        <div class="col-md-9 PL-0">
+            <div class="waiting-room-container meeting-room-container">
+                <div class="waiting-room meeting-room">
+                    <div class="back-header">
+                        <mat-icon (click)="onBack()" svgIcon="back" matTooltip="Back" id="iconBack"></mat-icon>
+                        <h3>All Doubts</h3>
+                    </div>
+                    <div class="doubt-container__header row bottom-margin">
+                        <div class="col-md-12">
+                            <div class="doubt-container__header__field col-md-4 col-sm-6 PL-0 col-xs-12 xs-PR-0">
+                                <input type="text" name="search" [formControl]="questionFilterField"
+                                    placeholder="Search..." id="inputSearch" autocomplete="off" />
+                                <mat-icon svgIcon="search"></mat-icon>
+                            </div>
+                            <div
+                                class="doubt-container__header__material-field col-md-2 col-sm-3 sm-PLR-0 col-xs-6 xs-PLR-0">
+                                <div class="form-control">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-select id="matSelectSubject" placeholder="Subject"
+                                            [formControl]="subjectFilterField" [compareWith]="compareSubjects">
+                                            <mat-option value="All">All</mat-option>
+                                            <mat-option *ngFor="let subject of subjectList"
+                                                [value]="subject?.subject_id">
+                                                {{subject?.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="doubt-container__header__material-field col-md-2 col-sm-3 PR-0 col-xs-6">
+                                <div class="form-control  form-control--date">
+                                    <mat-form-field class="clear-date" appearance="outline" floatLabel="always">
+                                        <input matInput [matDatepicker]="date" placeholder="Date" disabled
+                                            [formControl]="dateFilterField"/>
+                                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                                        <mat-datepicker #date disabled="false"></mat-datepicker>
+                                        <a *ngIf="dateFilterField.value" (click)="onClearDateFilter()"><mat-icon svgIcon="close" matTooltip="clear"></mat-icon></a>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body top-margin">
+                <div *ngSwitchCase="viewType.Data">
+                    <es-user-doubt-list [doubtList]="allDoubtList" [userType]="userType.STUDENT"
+                        (quesClick)="onQuestionAnswer($event)" (bookmarkClick)="onBookmarkQuestion($event)" (scroll)="onScroll($event)">
+                    </es-user-doubt-list>
+                </div>
+                <div *ngSwitchCase="viewType.NoData">
+                    <div class="no-content-found-wrapper">
+                        <mat-icon svgIcon="noDoubts"></mat-icon>
+                        <p>Doubts Not Found!</p>
+                        <span *ngIf="!isNotAdmitted">You have not yet created any Doubt</span>
+                        <span *ngIf="isNotAdmitted">{{notAdmittedMsg}}</span>
+                    </div>
+                </div>
+
+                <div class="loader-data" *ngSwitchCase="viewType.Loading">
+                    <label>Loading...</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 left-border PLR-0">
+            <es-user-side-doubt-list [allDoubtList]="receivedDoubtList" [lable]="linkLable" [title]="title"
+                (linkClick)="onViewAllDoubts($event)" (quesClick)="onQuestionAnswer($event)">
+            </es-user-side-doubt-list>
+        </div>
+    </div>
+</div>

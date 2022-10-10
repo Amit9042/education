@@ -1,0 +1,20 @@
+mat-progress-bar {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.loader-layer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  z-index: 9999999999999;
+}
+
+.student-panel-top {
+  top: 7.8rem !important;
+}

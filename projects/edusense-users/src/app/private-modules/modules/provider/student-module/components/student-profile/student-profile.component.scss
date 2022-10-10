@@ -1,0 +1,234 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.student-profile-container {
+    &__top-right {
+        margin-right: 5rem;
+        padding-top: 3rem;
+
+        @include respond('phone') {
+            margin-right: 2rem;
+        }
+
+        button {
+            @include square(7rem);
+            background-color: $light-gray-color-1;
+            border-radius: 50%;
+            border: transparent;
+
+            @include respond('tablet') {
+                @include square(5rem);
+            }
+
+            @include respond('phone') {
+                @include square(5rem);
+                margin-bottom: 3rem;
+            }
+
+            &:focus {
+                mat-icon {
+                    color: $primary-color;
+                }
+            }
+            .mat-icon {
+                @include square(1.6rem);
+                line-height: 1.75;
+            }
+        }
+    }
+    &__body {
+        display: flex;
+        justify-content: center;
+        // flex-direction: column;
+
+        @include respond('phone') {
+            padding: 0 2rem;
+        }
+        &--details {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            @include respond('phone') {
+                width: 100%;
+            }
+        }
+        &__content {
+            border-bottom: 1px solid $primary-color-2;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            padding-bottom: 3rem;
+            margin-bottom: 3rem;
+            min-width: 80rem;
+
+            @include respond('tablet') {
+                min-width: 50rem;
+            }
+
+            @include respond('phone') {
+                min-width: auto;
+            }
+
+            img {
+                @include square(18rem);
+                margin-right: 4rem;
+
+                @include respond('regular-desktop') {
+                    @include square(15rem);
+                }
+
+                @include respond('tablet') {
+                    @include square(11rem);
+                    margin-right: 2rem;
+                }
+
+                @include respond('phone') {
+                    @include square(8rem);
+                    margin-right: 2rem;
+                }
+            }
+            h3 {
+                color: $black-color;
+                font-size: 3rem;
+                margin-bottom: 1rem;
+
+                @include respond('tablet') {
+                    font-size: 2.4rem;
+                }
+
+                @include respond('phone') {
+                    font-size: 2rem;
+                }
+            }
+            p {
+                color: rgba($black-color, 0.6);
+                font-size: 1.8rem;
+                margin-bottom: 3rem;
+
+                @include respond('tablet') {
+                    font-size: 1.6rem;
+                }
+
+                @include respond('phone') {
+                    font-size: 1.4rem;
+                }
+            }
+            button {
+                font-weight: bold;
+                font-size: 1.6rem;
+                line-height: 1.25;
+
+                @include respond('phone') {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+        label,
+        span {
+            display: inline-block;
+            font-size: 1.8rem;
+
+            @include respond('tablet') {
+                font-size: 1.6rem;
+            }
+
+            @include respond('phone') {
+                font-size: 1.4rem;
+            }
+        }
+        label {
+            color: $black-color;
+            width: 19rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            vertical-align: top;
+
+            @include respond('tablet') {
+                width: 16rem;
+            }
+
+            @include respond('phone') {
+                width: 12rem;
+                font-size: 1.4rem;
+            }
+        }
+        span {
+            color: $primary-color;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2rem;
+            position: relative;
+
+            @include respond('tablet') {
+                padding-left: 1rem;
+            }
+
+            @include respond('phone') {
+                padding-left: 1rem;
+            }
+
+            &::before {
+                background-color: $primary-color;
+                position: absolute;
+                content: '';
+                width: 0.5rem;
+                height: 0.5rem;
+                top: 0.8rem;
+                border-radius: 50%;
+                left: -1.5rem;
+
+                @include respond('tablet') {
+                    left: -0.2rem;
+                }
+
+                @include respond('phone') {
+                    left: -0.2rem;
+                    top: 0.6rem;
+                }
+            }
+        }
+
+        .student-class-list-wraper {
+            display: flex;
+            align-items: flex-start;
+            min-width: 80rem;
+            max-width: 80rem;
+
+            @include respond('tablet') {
+                min-width: 50rem;
+                max-width: 50rem;
+            }
+
+            @include respond('phone') {
+                min-width: auto;
+                max-width: auto;
+                flex-direction: column;
+            }
+
+            .student-class-list {
+                width: 50%;
+
+                label {
+                    width: 100%;
+                    font-weight: bold;
+                    margin-bottom: 3rem;
+                }
+
+                .class-name {
+                    margin-left: 2rem;
+                    padding-right: 2rem;
+
+                    @include respond('tablet') {
+                        margin-left: 0.5rem;
+                    }
+
+                    @include respond('phone') {
+                        padding-left: 1rem;
+                        padding-right: 1rem;
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,90 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.assignment-submission-list-view-container {
+    overflow-y: auto;
+    height: calc(100vh - 38rem);
+    padding: 1.6rem 4.4rem 1.6rem 2.4rem;
+    @include respond('regular-desktop') {
+        height: calc(100vh - 39rem);
+    }
+    @include respond('tab-port') {
+        height: calc(100vh - 42rem);
+    }
+    @include respond('phone') {
+        padding: 1.6rem 2.4rem 1.6rem 0.4rem;
+    }
+    a {
+        cursor: default;
+        &:hover {
+            text-decoration: none;
+        }
+        &.cursor-pointer{
+            cursor: pointer;
+        }
+    }
+    &__list {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        margin: 0.45rem 0;
+        padding: 2rem;
+
+        &:hover {
+            background-color: rgba($primary-color, 0.02);
+            a {
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                mat-icon {
+                    height: 1.4rem;
+                }
+            }
+        }
+
+        img,
+        mat-icon {
+            @include square(5rem);
+            @include border-radius(50%);
+            margin-right: 2rem;
+        }
+
+        h4 {
+            color: $black-color-2;
+            font-weight: bold;
+            font-size: 1.8rem;
+            line-height: 1.28;
+            margin-bottom: 0.8rem;
+        }
+        label,
+        span {
+            display: inline-block;
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.29;
+        }
+
+        label {
+            color: $dark-grey-color-2;
+            margin-right: 0.6rem;
+        }
+
+        span {
+            color: $primary-color;
+        }
+
+        a {
+            display: none;
+        }
+    }
+}
+
+.red-color {
+    color: $red-color;
+}
+
+.no-content-found-wrapper,
+.loader-data {
+    min-height: calc(100vh - 42rem);
+}

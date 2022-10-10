@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <g id="doctorProfile" transform="translate(1348 -3720)">
+    <g id="profi">
+      <g id="profile" transform="translate(-1348 3718.6)">
+        <circle id="Ellipse_21" data-name="Ellipse 21" cx="100" cy="100" r="100" transform="translate(0 1.4)" fill="#203061" opacity="0.2"/>
+      </g>
+    </g>
+    <g id="professions-and-jobs" transform="translate(-1320.272 3775.583)">
+      <g id="Group_21134" data-name="Group 21134" transform="translate(55.216)">
+        <g id="Group_21133" data-name="Group 21133" transform="translate(0)">
+          <path id="Path_11647" data-name="Path 11647" d="M169.819,0A17.536,17.536,0,0,0,152.3,17.517v9.075a17.515,17.515,0,1,0,35.031,0V17.517A17.535,17.535,0,0,0,169.819,0Z" transform="translate(-152.304)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Group_21136" data-name="Group 21136" transform="translate(34.007 46.954)">
+        <g id="Group_21135" data-name="Group 21135" transform="translate(0)">
+          <path id="Path_11648" data-name="Path 11648" d="M111.359,281.88a44.427,44.427,0,0,0-25.243-19.953.7.7,0,0,0-.7.171,73.139,73.139,0,0,1-12.672,9.634c-1.646-1.052-8.578-5.571-12.7-9.634a.7.7,0,0,0-.7-.171A44.417,44.417,0,0,0,34.1,281.881a.7.7,0,0,0,0,.709,44.917,44.917,0,0,0,77.255,0A.7.7,0,0,0,111.359,281.88Zm-14.806,5.225a.733.733,0,0,1-.754.682H91.055a.816.816,0,0,0-.808.719v4.906a.6.6,0,0,1-.593.681h-4.26a.73.73,0,0,1-.751-.681v-4.906a.678.678,0,0,0-.652-.719H79.043a.691.691,0,0,1-.706-.682v-4.224a.7.7,0,0,1,.706-.7h4.948a.662.662,0,0,0,.65-.7v-4.912a.738.738,0,0,1,.751-.691h4.215a.644.644,0,0,1,.64.691v4.926a.744.744,0,0,0,.762.688H95.8a.76.76,0,0,1,.754.714v4.21Z" transform="translate(-34.007 -261.896)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

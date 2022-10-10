@@ -1,0 +1,47 @@
+<div class="dialog-container">
+  <div class="dialog-container__head">
+    <h4>Edit Mobile Number</h4>
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="dialog-container__bottom">
+    <form [formGroup]="mobileNoForm" (ngSubmit)="onSubmitEditMobileNoForm(mobileNoForm)">
+      <div class="row">
+        <div class="col-md-12 PLR-0">
+          <div class="form-control mobile-no-edit">
+            <mat-label>Mobile Number*</mat-label>
+            <div class="row">
+              <div class="col-md-3 PLR-0">
+                <app-ss-select-search [formName]="mobileNoForm" [selectConfig]="countryCodeSearchConfig" [selected]="selectedCountry"
+                  [dataList]="countryCodeList"
+                  (changSelectEvent)="onCountryCodeSelectChangeEvent($event, 'countryCode')">
+                </app-ss-select-search>
+              </div>
+              <div class="col-md-9 PR-0">
+                <mat-form-field appearance="outline" floatLabel="always">
+                  <input formControlName="mobileNumber" id="txtMobileNumber" type="text" autocomplete="off" matInput
+                    placeholder="Mobile Number" />
+                  <!-- <span matPrefix>+91</span> -->
+                  <mat-error *ngIf="isRequiredField(formControls['mobileNumber'])">
+                    {{ validationMsg.MOBILE_NUMBER }}</mat-error>
+                  <mat-error *ngIf="isValidLength(formControls['mobileNumber'])">
+                    {{ validationMsg.MOBILE_NUMBER_LENGTH }}</mat-error>
+                  <mat-error *ngIf="isValidField(formControls['mobileNumber'])">
+                    {{ validationMsg.MOBILE_NUMBER_VALID }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group MT-0">
+        <button (click)="onCloseDialog()" id="btnCancel" mat-button type="button">Cancel</button>
+        <button mat-flat-button color="primary" id="btnSubmit" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

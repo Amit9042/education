@@ -1,0 +1,46 @@
+<div class="assignment-details-container">
+  <h5>Instructions</h5>
+  <p>{{ assignmentDetails?.instruction | checkEmpty }}</p>
+  <div>
+    <div class="assignment-details-container__data">
+      <label>Start date</label>
+      <span>{{
+        assignmentDetails?.start_date | date: 'dd MMMM yyyy'
+        }}</span>
+    </div>
+    <div class="assignment-details-container__data">
+      <label>Submission date</label>
+      <span>
+                {{
+        assignmentDetails?.submission_date | date: 'dd MMMM yyyy'
+        }}</span
+      >
+    </div>
+    <div class="assignment-details-container__data">
+      <label>Teacher:</label>
+      <span>{{
+        assignmentDetails?.createdBy?.first_name +
+        ' ' +
+        assignmentDetails?.createdBy?.last_name
+        }}</span>
+    </div>
+  </div>
+  <div class="assignment-details-container__pdf-view">
+    <div
+      *ngFor="
+                let assignment of assignmentDetails?.provider_assignment_attachments;
+                let i = index
+            "
+    >
+      <a (click)="viewDownloadMaterial(assignment.attachment_id,
+                        assignment.file_name,
+                        assignment.file_content_type,
+                        assignment.file_path, i+1)" class="flex-left">
+        <mat-icon
+          [svgIcon]="getIcon(assignment?.file_content_type)"
+        ></mat-icon>
+        <span>{{ assignment?.file_name }}</span>
+      </a>
+    </div>
+  </div>
+</div>

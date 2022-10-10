@@ -1,0 +1,175 @@
+<div class="que-bank-ch-list-container">
+    <div class="que-bank-ch-list-container__head">
+        <div class="que-bank-ch-list-container__head__left">
+            <a id="lnkBack" (click)="onBack()">
+                <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+            </a>
+            <!-- <mat-icon svgIcon="maths"></mat-icon> -->
+            <img *ngIf="selectedGradeAndSubject.subject_logo" [src]="selectedGradeAndSubject?.subject_logo"
+                (error)="onError($event)" />
+            <div>
+                <label>{{selectedGradeAndSubject?.subject_name}}</label>
+                <span>Grade {{selectedGradeAndSubject?.grade_name}}</span>
+            </div>
+        </div>
+        <div class="que-bank-ch-list-container__head__right">
+            <!-- <a>View Bookmarked</a> -->
+            <button id="btnViewBookmarked" (click)="onAddPracticeDetails()"
+                class="remove-shadow que-bank-ch-list-container__head__right__practice-btn MT-1" type="submit" mat-flat-button
+                color="primary">
+                Add Practice
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="waiting-room-container meeting-room-container">
+    <div class="waiting-room student-provider-pracitce-list meeting-room">
+        <form>
+            <div class="waiting-room__top">
+                <div class="row align-center">
+                    <div class="col-md-7 col-sm-12 col-xs-12 PLR-0 small-margin-2">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12 xs-PL-0 xs-PB-1 sm-PL-0">
+                                <div class="header__search header__search-white">
+                                    <div class="header__search--input">
+                                        <input id="textSearch" type="text" placeholder="Search..." id="inputSearch"
+                                            autocomplete="off" [formControl]="searchTitle" />
+                                        <mat-icon svgIcon="search"></mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 padding-right-zero PL-0 XS-PLR-0">
+                                <div class="waiting-room__top--right padding-0">
+                                    <div class="form-control student-search-class">
+                                        <div class="selection-dropdown">
+                                            <div class="form-control">
+                                                <mat-form-field appearance="outline" floatLabel="always">
+                                                    <mat-select id="matSelectStatus" placeholder="Status"
+                                                        [formControl]="searchStatus">
+                                                        <mat-option [value]="">All</mat-option>
+                                                        <mat-option [value]="true">Published</mat-option>
+                                                        <mat-option [value]="false">Not Published</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 padding-right-zero PL-0 XS-PLR-0 sm-PR-0">
+                                <div class="waiting-room__top--right padding-0">
+                                    <div class="form-control student-search-class">
+                                        <div class="selection-dropdown">
+                                            <div class="form-control">
+                                                <mat-form-field appearance="outline" floatLabel="always">
+                                                    <mat-select id="matSelectChapter" placeholder="Chapter"
+                                                        [formControl]="searchChapter">
+                                                        <mat-option [value]="">All</mat-option>
+                                                        <mat-option [value]="chapter?.id"
+                                                            *ngFor="let chapter of chapterList">
+                                                            {{chapter?.title}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="waiting-room__body meeting-room__body">
+            <div *ngIf="true">
+                <div class="row">
+                    <div class="col-md-11 PLR-0">
+                        <div (click)="onSelectQuestionList(practice)"
+                            *ngFor="let practice of practiceList; let j = index;"
+                            class="visitors-info visitor-info-color">
+                            <div class="row align-center">
+                                <div class="col-md-8 col-sm-9 col-xs-9 xs-PLR-0">
+                                    <div class="visitors-info__left">
+                                        <div class="visitor-image">
+                                            <img *ngIf="false" [src]="" />
+                                            <mat-icon svgIcon="physics-list"></mat-icon>
+                                        </div>
+                                        <div class="visitor-details">
+                                            <h4>{{practice?.name}}</h4>
+                                            <p class="chapter-practice"><span class="chapter">Chapter :
+                                                </span><span class="polymonials">{{practice?.chapterName}}</span></p>
+                                            <p class="location">{{practice?.maxQuestion}} Questions
+                                                <small
+                                                    *ngIf="!practice?.published && practice?.maxQuestion - practice?.addedQuestion > 0">{{practice?.maxQuestion - practice?.addedQuestion }}
+                                                    Questions remaining to
+                                                    add</small>
+                                            </p>
+
+                                            <p *ngIf="practice?.published" class="time-date">
+                                                <span class="publish-color">Already
+                                                    Publish</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-sm-3 col-xs-3 xs-PLR-0">
+                                    <div class="visitors-info__right" (click)="$event.stopPropagation()"
+                                        *ngIf="userConfigDetails.user_id === practice.createdBy">
+                                        <button
+                                            *ngIf="!practice?.published && practice?.maxQuestion === practice?.addedQuestion"
+                                            (click)="onPublish(practice?.id)" id="btnPublish"
+                                            class="visitors-info__right__publish-btn" mat-flat-button
+                                            color="primary">Publish</button>
+                                        <button id="btnMoreActions" mat-icon-button [matMenuTriggerFor]="menu"
+                                            *ngIf="!practice?.published">
+                                            <mat-icon svgIcon="more" matTooltip="More Actions"></mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu" #beforeMenu="matMenu" xPosition="before">
+                                            <div>
+                                                <button id="btnEdit" (click)="onEditPracticeDetails(practice)"
+                                                    type="button" mat-menu-item class="view-student">
+                                                    <span>Edit</span>
+                                                </button>
+                                            </div>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1" *ngIf="!practice?.published">
+                                    <div class="arrow-width ML-5">
+                                        <mat-icon svgIcon="rightArrow"></mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-12 xs-PB-2">
+                <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+                    [recordsPerPage]="recordsPerPage"></app-pagination>
+            </div> -->
+
+            <div class="no-practice-scroll-remove" *ngIf="!practiceList.length && !isLoadingResults">
+                <div class="no-content-found-wrapper">
+                    <mat-icon svgIcon="noPractice"></mat-icon>
+                    <p>No Practice</p>
+                    <span>There seems to be no practice to show right now.</span>
+                </div>
+            </div>
+
+            <app-data-loading *ngIf="false"></app-data-loading>
+        </div>
+
+        <div class="col-md-12 xs-PB-2 practice-list-pagination-alignment">
+            <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+                (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+        </div>
+    </div>
+</div>

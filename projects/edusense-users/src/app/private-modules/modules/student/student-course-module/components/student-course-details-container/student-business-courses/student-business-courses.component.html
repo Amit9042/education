@@ -1,0 +1,38 @@
+<div class="student-course__student-course-title">
+    <div class="row">
+        <div class="col-md-9 PL-0">
+            <h3 class="PT-0">Business Courses</h3>
+        </div>
+
+        <div class="col-md-3 text-right">
+            <a (click)="onSeeAllStudentCourses()">See All</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a  class="student-course__course-box PT-2">
+        <div class="row">
+            <div *ngFor="let i of [1,2,3]; let j=index;" class="col-md-4 PL-0">
+                <div class="student-course__course-box__details">
+                    <img src="assets/images/course-banner.png" />
+                    <div class="student-course__course-box__details__content">
+                        <small>2hr 40m</small>
+                        <h4>Advanced Malware Analysis: Ransomware</h4>
+                        <h6>3,400 reviews</h6>
+
+                        <div class="student-course__course-box__details__content__footer">
+                            <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+                            <img *ngIf="true" src="assets/images/chris.png" />
+                            <label>David Hedley</label>
+                            <a>
+                                <mat-icon *ngIf="true" svgIcon="bookmark"></mat-icon>
+                                <mat-icon *ngIf="false" svgIcon="bookedMark"></mat-icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div> 

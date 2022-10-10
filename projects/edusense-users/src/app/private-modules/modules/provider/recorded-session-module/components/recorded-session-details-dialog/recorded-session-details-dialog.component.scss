@@ -1,0 +1,6 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+mat-icon{
+    &.note-btn{
+        @include square(2.4rem);
+    }
+}

@@ -1,0 +1,43 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.course-overview-container {
+    h3 {
+        color: $primary-color;
+        font-size: 2.4rem;
+    }
+
+    .file-section {
+        .file-details {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            span {
+                margin: 0 10px 0 7px;
+                display: inline-block;
+            }
+
+            a {
+                display: inline-block;
+                background: #f3f3f3;
+                padding: 6px 9px;
+                border-radius: 100px;
+                position: relative;
+                top: 2px;
+
+                .mat-icon {
+                    width: 13px;
+                    height: 13px;
+                }
+            }
+        }
+
+        .preview-image {
+            margin: 15px 0;
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+}

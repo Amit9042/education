@@ -1,0 +1,53 @@
+<div class="assignment-view-container">
+  <div class="assignment-view-container__content">
+    <div class="assignment-view-container__content__head">
+      <a (click)="onBack()" id="lnkBack">
+        <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+      </a>
+      <div>
+        <h2>
+          {{assignmentDetail?.title | checkEmpty}}
+        </h2>
+        <p><span>{{assignmentDetail?.class?.name | checkEmpty}}</span></p>
+      </div>
+    </div>
+    <div class="assignment-view-container__content__body">
+      <div class="assignment-details-container">
+        <h5>Instructions</h5>
+        <p>{{assignmentDetail?.instruction | checkEmpty}}</p>
+        <div>
+          <div class="assignment-details-container__data">
+            <label>Start date</label>
+            <span>{{assignmentDetail?.start_date | date: 'dd MMM yyyy'}}</span>
+          </div>
+          <div class="assignment-details-container__data">
+            <label>Submission date</label>
+            <span>{{assignmentDetail?.submission_date | date: 'dd MMM yyyy'}}</span>
+          </div>
+          <div class="assignment-details-container__data">
+            <label>Teacher:</label>
+            <span>{{assignmentDetail?.createdBy?.first_name + ' ' + assignmentDetail?.createdBy?.last_name}}</span>
+          </div>
+        </div>
+        <div class="assignment-details-container__pdf-view">
+          <div *ngFor="let assignment of assignmentDetail?.provider_assignment_attachments; let i = index">
+            <a (click)="viewDownloadMaterial(assignment.attachment_id,
+                        assignment.file_name,
+                        assignment.file_content_type,
+                        assignment.file_path, i+1)" class="flex-left" id="lnkViewDownloadMaterial">
+              <mat-icon
+                [svgIcon]="getIcon(assignment?.file_content_type)"
+              ></mat-icon>
+              <span>{{ assignment?.file_name }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="assignment-view-container__content__footer">
+      <button (click)="openSubmissionDialog()" id="btnSubmission" class="remove-shadow" type="button" mat-flat-button color="primary">
+        Submission
+      </button>
+    </div>
+  </div>
+</div>

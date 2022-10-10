@@ -1,0 +1,174 @@
+.no-records-found {
+    font-family: $font-family-poppins;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 386px);
+
+    .no-records {
+        text-align: center;
+
+        .mat-icon {
+            width: 17rem;
+            height: 17rem;
+        }
+
+        p {
+            color: $primary-color;
+            font-size: 2.6rem;
+            font-weight: 500;
+            margin: 6.5rem 0 1.8rem;
+        }
+
+        span {
+            color: $grey-color-11;
+            font-size: 1.8rem;
+            opacity: 0.6;
+        }
+    }
+}
+
+.no-content-found-wrapper,
+.coming-soon-wrapper {
+    font-family: $font-family-poppins;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    min-height: calc(100vh - 38rem);
+
+    .mat-icon {
+        width: 18rem;
+        height: auto;
+        @include respond('regular-desktop') {
+            width: 13rem;
+        }
+
+        @include respond('tablet') {
+            width: 13rem;
+            height: 13rem;
+        }
+
+        @include respond('phone') {
+            width: 13rem;
+            height: 13rem;
+        }
+    }
+
+    p {
+        color: $primary-color;
+        font-size: 2.6rem;
+        font-weight: 500;
+        margin: 3.5rem 0 1.8rem;
+
+        @include respond('regular-desktop') {
+            font-size: 2.2rem;
+        }
+
+        @include respond('tablet') {
+            font-size: 2rem;
+            margin: 2rem 0 1.8rem;
+        }
+
+        @include respond('phone') {
+            font-size: 1.8rem;
+            margin: 2rem 0 1.8rem;
+        }
+    }
+
+    span {
+        color: $grey-color-11;
+        font-size: 1.8rem;
+        opacity: 0.6;
+        font-weight: normal;
+        max-width: 40rem;
+        line-height: 1.3;
+
+        @include respond('regular-desktop') {
+            font-size: 1.6rem;
+        }
+
+        @include respond('tablet') {
+            font-size: 1.6rem;
+            max-width: 95%;
+        }
+
+        @include respond('phone') {
+            font-size: 1.4rem;
+        }
+    }
+
+    &.dialog-no-data {
+        min-height: calc(100vh - 39rem);
+
+        @include respond('tablet') {
+            min-height: 40vh;
+        }
+
+        @include respond('phone') {
+            min-height: 40vh;
+        }
+
+        p {
+            padding: 0;
+        }
+    }
+
+    &.table-data {
+        min-height: calc(100vh - 50rem);
+    }
+
+    &.course-no-content-found-wrapper {
+        // .mat-icon {
+        //     width: 32rem;
+        // }
+        p {
+            margin: 0.5rem 0 1.8rem;
+        }
+    }
+}
+
+.coming-soon-wrapper {
+    height: calc(100vh - 10rem);
+
+    @include respond('phone') {
+        height: calc(100vh - 16rem);
+    }
+
+    .mat-icon {
+        width: 38rem;
+        height: auto;
+
+        @include respond('tablet') {
+            width: 30rem;
+        }
+
+        @include respond('phone') {
+            width: 25rem;
+        }
+    }
+
+    h2 {
+        color: $green-color-5;
+        font-size: 5rem;
+        font-weight: bold;
+        margin-top: 5rem;
+
+        @include respond('tablet') {
+            font-size: 3.5rem;
+            margin-top: 4rem;
+        }
+
+        @include respond('phone') {
+            font-size: 3rem;
+            margin-top: 3.5rem;
+        }
+    }
+}
+
+.no-content-found-wrapper,
+.course-no-content-found-wrapper,
+.enroll-no-data {
+    min-height: calc(100vh - 48rem) !important;
+}

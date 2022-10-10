@@ -1,0 +1,32 @@
+@import '../../../../assets/scss/abstracts/abstracts';
+.audio-control {
+    height: calc(100vh - 25rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include respond('tab-port') {
+        height: calc(100vh - 34rem);
+    }
+}
+
+audio:focus {
+    outline: none;
+}
+.ng-gallery-content {
+    height: calc(100vh - 25rem);
+    width: 86.6%;
+    margin: 0 auto;
+    @include respond('tab-port') {
+        height: auto;
+        width: 90%;
+    }
+}
+
+.video-container {
+    // @include respond('regular-desktop') {
+    //     margin-top: 12rem;
+    // }
+    @include respond('tab-port') {
+        margin-top: 17rem;
+    }
+}

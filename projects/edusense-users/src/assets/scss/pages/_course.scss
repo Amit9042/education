@@ -1,0 +1,165 @@
+.upload-course-image-button {
+    background-color: rgba($primary-color, 0.1);
+    height: 5rem;
+    border-radius: 0.8rem !important;
+    font-size: 1.6rem;
+
+    mat-icon {
+        @include square(1.6rem);
+        margin-right: 2rem;
+        vertical-align: sub !important;
+    }
+}
+
+.upload-video-action {
+    a {
+        background: $light-gray-color-1;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        border-radius: 50%;
+        margin-left: 0;
+        height: 3rem;
+        width: 3rem;
+
+        mat-icon {
+            @include square(1rem);
+            margin-right: 0;
+            line-height: 0;
+        }
+    }
+
+    p {
+        color: $grey-color-12;
+        display: inline-block;
+        margin-right: 3rem;
+        font-weight: 600;
+        font-size: 1.6rem;
+    }
+
+    .done-btn {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.cancel-btn {
+    height: 5rem;
+    font-size: 1.6rem;
+    border: 2px solid $primary-color !important;
+    min-width: 11rem;
+    border-radius: 0.8rem;
+}
+
+.content-type {
+    mat-radio-button {
+        margin-right: 3rem;
+
+        .mat-radio-label-content {
+            color: rgba($black-color-2, 0.4);
+            font-size: 1.6rem;
+        }
+
+        .mat-radio-outer-circle {
+            border: solid 2px rgba(29, 44, 60, 0.2);
+        }
+    }
+
+    .mat-radio-checked {
+        .mat-radio-label-content {
+            color: $primary-color;
+        }
+
+        .mat-radio-outer-circle {
+            border-color: $green-color-5 !important;
+        }
+
+        .mat-radio-inner-circle {
+            background-color: $green-color-5 !important;
+        }
+    }
+}
+
+.create-course-container,
+.course-title-form {
+    h3 {
+        font-size: 28px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.13;
+        letter-spacing: normal;
+        color: #1d2c3c;
+    }
+    .buttons,
+    .button-group {
+        .mat-stroked-button {
+            .mat-icon {
+                margin-right: 8px;
+                width: 15px;
+                height: 23px;
+            }
+        }
+
+        .mat-flat-button {
+            .mat-icon {
+                margin-left: 8px;
+                width: 15px !important;
+                height: 26px !important;
+                vertical-align: middle !important;
+            }
+        }
+    }
+}
+
+.done-btn {
+    background-color: $green-color-5;
+    border: 1px solid $green-color-5;
+    color: $white-color;
+    width: 8.5rem;
+    height: 4.5rem;
+    border-radius: 8px;
+}
+
+.ql-editor {
+    ol,
+    ul {
+        li {
+            display: block !important;
+        }
+    }
+}
+
+.text-view {
+    &__inner-html-design {
+        ol {
+            list-style-type: decimal !important;
+
+            li {
+                display: list-item !important;
+            }
+        }
+
+        ul {
+            list-style-type: disc !important;
+
+            li {
+                display: list-item !important;
+            }
+        }
+    }
+}
+
+.preview-course-container {
+    .preview-course-content {
+        ul {
+            list-style-type: disc !important;
+
+            li {
+                display: list-item !important;
+            }
+        }
+    }
+}

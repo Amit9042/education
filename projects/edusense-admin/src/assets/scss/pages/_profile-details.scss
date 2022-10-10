@@ -1,0 +1,293 @@
+.edit-profile-details-container {
+    padding: 6rem 6rem 0 24rem;
+    position: relative;
+    margin: 0;
+
+    @include respond('regular-desktop') {
+        padding-left: 15rem;
+    }
+
+    @include respond('tablet') {
+        padding: 5rem 2.5rem;
+    }
+
+    @include respond('phone') {
+        padding: 2.5rem 2rem;
+    }
+
+    &.profile-container {
+        display: block;
+    }
+
+    .profile-details {
+        &__header {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+
+            &--image {
+                width: 18rem;
+                height: 18rem;
+                border: solid 2px rgba($primary-color, 0.1);
+                border-radius: 50%;
+                margin-right: 4rem;
+
+                @include respond('tablet') {
+                    width: 12rem;
+                    height: 12rem;
+                    margin-right: 2.5rem;
+                }
+
+                @include respond('phone') {
+                    width: 10rem;
+                    height: 10rem;
+                    margin-right: 1.5rem;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+
+                .mat-icon {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+            }
+
+            &--details {
+                @include respond('tablet') {
+                    max-width: calc(100% - 16.5rem);
+                }
+
+                @include respond('phone') {
+                    max-width: calc(100% - 12rem);
+                }
+
+                span {
+                    color: $sky-color;
+                    text-transform: uppercase;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                }
+
+                h2 {
+                    color: $primary-color;
+                    font-size: 4rem;
+                    font-weight: bold;
+                    text-transform: capitalize;
+                    margin: 1rem 16rem 2rem 0;
+
+                    @include respond('tablet') {
+                        font-size: 2rem;
+                        margin: 1rem 12rem 2rem 0;
+                    }
+
+                    @include respond('phone') {
+                        font-size: 2rem;
+                        margin-right: 0;
+                    }
+                }
+
+                button {
+                    border: 2px solid rgba($primary-color, 0.2);
+                    height: 5rem;
+                    border-radius: 2.5rem;
+                    padding: 0 4rem;
+
+                    @include respond('phone') {
+                        height: 4rem;
+                        padding: 0 2rem;
+                    }
+
+                    span {
+                        font-size: 1.4rem;
+                        font-weight: 600;
+                        color: $primary-color;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            &.align-center {
+                align-items: center;
+
+                .note {
+                    color: rgba($primary-color, 0.4);
+                    display: block;
+                    text-transform: capitalize;
+                    margin-top: 2rem;
+                }
+            }
+
+            &.small-pad-5 {
+                @include respond('phone') {
+                    padding-top: 5rem;
+                }
+            }
+        }
+
+        &__body {
+            max-width: 80rem;
+
+            .mat-tab-group {
+                .mat-tab-label {
+                    height: 6rem;
+                    padding: 0;
+                    margin-right: 7rem;
+                    opacity: 1 !important;
+                    justify-content: flex-start;
+
+                    @include respond('tablet') {
+                        height: 4rem;
+                        margin-right: 3rem;
+                        min-width: auto;
+                    }
+
+                    @include respond('phone') {
+                        height: 4rem;
+                        margin-right: 2rem;
+                    }
+
+                    .mat-tab-label-content {
+                        font-size: 2rem;
+                        font-weight: normal;
+
+                        @include respond('tablet') {
+                            font-size: 1.6rem;
+                        }
+
+                        @include respond('phone') {
+                            font-size: 1.6rem;
+                        }
+                    }
+
+                    &-active {
+                        .mat-tab-label-content {
+                            color: $primary-color;
+                            font-size: 2rem;
+                            font-weight: bold;
+
+                            @include respond('tablet') {
+                                font-size: 1.6rem;
+                            }
+
+                            @include respond('phone') {
+                                font-size: 1.6rem;
+                            }
+                        }
+                    }
+                }
+                .mat-tab-body-wrapper {
+                    margin: 4rem 0 0;
+                }
+            }
+
+            .provider-view-container {
+                .provider-view {
+                    &__header {
+                        margin-bottom: 4rem;
+
+                        h4 {
+                            color: $black-color;
+                            font-size: 1.8rem;
+                            font-weight: 600;
+                            margin-bottom: 2rem;
+                        }
+
+                        p {
+                            color: $black-color;
+                            opacity: 0.7;
+                            font-size: 1.6rem;
+                            line-height: 1.75;
+                            margin-top: 2rem;
+                        }
+                    }
+
+                    &__body {
+                        &.class-view-container {
+                            padding: 0;
+
+                            label {
+                                margin-right: 3.5rem;
+                                font-weight: normal;
+
+                                @include respond('phone') {
+                                    min-width: 6rem;
+                                }
+                            }
+                            span {
+                                font-weight: 600;
+
+                                @include respond('tablet') {
+                                    max-width: calc(100% - 15rem);
+                                    word-break: break-word;
+                                }
+
+                                @include respond('phone') {
+                                    max-width: calc(100% - 10rem);
+                                    word-break: break-word;
+                                }
+                            }
+
+                            .class-view__body {
+                                box-shadow: none;
+
+                                &__view {
+                                    margin-bottom: 2.5rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.edit-profile-details__body {
+                .form-container,
+                .location-details {
+                    max-width: 55rem;
+                }
+            }
+        }
+    }
+    .school-code {
+        background-color: rgba($primary-color, 0.1);
+        font-size: 1.6rem;
+        font-weight: 600;
+        border-radius: 1.6rem;
+        position: absolute;
+        top: -1.2rem;
+        right: 0;
+
+        @include respond('phone') {
+            font-size: 1.2rem;
+        }
+
+        .mat-chip.mat-standard-chip {
+            background-color: transparent !important;
+        }
+    }
+}
+
+.profile-details__footer {
+    button {
+        height: 5rem;
+
+        &:first-child {
+            margin-right: 2rem;
+        }
+    }
+}
+
+@include respond('phone') {
+    .small-pad-right-0 {
+        padding-right: 0 !important;
+    }
+
+    .small-pad-left-0 {
+        padding-left: 0 !important;
+    }
+}

@@ -1,0 +1,161 @@
+<div class="que-bank-ch-list-container">
+  <div class="que-bank-ch-list-container__head practice-list-spacing">
+    <div class="que-bank-ch-list-container__head__left">
+      <a id="lnkBack" (click)="onBack()">
+        <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+      </a>
+      <!--<mat-icon  svgIcon="maths"></mat-icon>-->
+
+      <mat-icon *ngIf="!subject?.logo" svgIcon="defaultSubject"></mat-icon>
+      <img *ngIf="subject?.logo" [src]="subject?.logo" (error)="onError($event)" />
+
+      <div>
+        <label>{{subject?.name}}</label>
+        <span>{{chapterName}}</span>
+      </div>
+    </div>
+    <!-- <div class="que-bank-ch-list-container__head__right">
+      <button (click)="onBookmarkQuestionOpen()" id="lnkViewBookMarked"
+              class="MT-1" type="submit" mat-flat-button
+              color="primary">
+        View Bookmarked
+      </button>
+    </div> -->
+  </div>
+</div>
+
+<div class="waiting-room-container meeting-room-container student-practice-list-bottom-spacing">
+  <div class="waiting-room meeting-room student-provider-pracitce-list">
+    <form>
+      <div class="waiting-room__top">
+        <div class="row align-center">
+          <div class="col-md-7 col-sm-12 col-xs-12 PLR-0 small-margin-2">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6 xs-PL-0">
+                <div class="header__search header__search-white">
+                  <div class="header__search--input">
+                    <input id="txtSearch" type="text" placeholder="Search..." id="inputSearch" autocomplete="off"
+                      [formControl]="practiceName" />
+                    <mat-icon svgIcon="search"></mat-icon>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-6 padding-right-zero PL-0 xs-PR-0">
+                <div class="waiting-room__top--right padding-0">
+                  <div class="form-control student-search-class">
+                    <div class="selection-dropdown">
+                      <div class="form-control">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                          <mat-select id="matSelectStatus" placeholder="Status" [formControl]="practiceStatus">
+                            <mat-option value="">All</mat-option>
+                            <mat-option value="Not Started">Not Started</mat-option>
+                            <mat-option value="started">Resume</mat-option>
+                            <mat-option value="completed">Completed</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 col-sm-12 col-xs-12">
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="waiting-room__body meeting-room__body">
+      <div *ngIf="!isLoadingResults">
+        <div class="row">
+          <div class="col-md-11 PL-0 xs-PR-0">
+            <div [ngClass]="{'complete-question-bank' : (practice?.status === 'COMPLETED')}"
+              *ngFor="let practice of practiceList; let j = index;" class="visitors-info visitor-info-color">
+              <div class="row align-center">
+                <div class="col-md-8 col-sm-9 col-xs-9 xs-PL-0">
+                  <div class="visitors-info__left">
+                    <div class="visitor-image">
+                      <!--<img *ngIf="false" [src]=""/>-->
+                      <mat-icon svgIcon="physics-list"></mat-icon>
+                    </div>
+                    <div class="visitor-details">
+                      <h4>{{practice?.name | checkEmpty}}</h4>
+                      <p
+                        [ngClass]="{'gray' : (practice?.completeStatus === 0), 'green': (practice?.completeStatus !== 0)}">
+                        {{practice?.completeStatus}}% Completed
+                        <small>Total Questions : {{practice?.totalQuestion}}</small>
+                      </p>
+                      <p class="time-date-student" *ngIf="practice?.startedAt && practice?.status">
+                        <span>Started On : {{practice?.startedAt | date:'dd/MM/yyyy hh:mm aa'}} </span>
+                        <span *ngIf="practice?.finishedAt">Finished On :
+                          {{practice?.finishedAt | date:'dd/MM/yyyy hh:mm aa'}}</span>
+                        <!--<b class="name-create">Created by : {{practice?.providerUserName | checkEmpty}}</b>-->
+                      </p>
+                      <p class="total-question" *ngIf="practice?.status">
+                        <span>Total attempted {{practice?.totalAttemptedQuestion}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-3 xs-PR-0">
+                  <div class="visitors-info__right">
+                    <button [id]="'btnStart-' + j" *ngIf="!(practice?.startedAt)"
+                      class="visitors-info__right__publish-btn" mat-flat-button color="primary"
+                      (click)="onPracticeQuestionList(practice, false)">Start
+                    </button>
+                    <button [id]="'btnResume-' + j" *ngIf="(practice?.status === 'STARTED') && (practice?.startedAt)"
+                      class="visitors-info__right__publish-btn" mat-flat-button color="primary"
+                      (click)="onPracticeQuestionList(practice, false)">Resume
+                    </button>
+                    <!-- <button [disabled]="true" [id]="'btnComplete-' + j" *ngIf="practice?.status === 'COMPLETED'"
+                      class="visitors-info__right__publish-btn" mat-flat-button color="primary">Complete
+                    </button> -->
+
+                    <div *ngIf="practice?.status === 'COMPLETED'">
+                      <span class="completed-status">Completed</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-1 col-sm-2">
+                  <div class="ML-5" [ngClass]="{'arrow-width ' : !(practice?.status === 'COMPLETED')}">
+                    <mat-icon *ngIf="practice?.completeStatus === 0" svgIcon="rightArrow"></mat-icon>
+
+                    <button *ngIf="practice?.status === 'COMPLETED'" mat-icon-button [matMenuTriggerFor]="menu"
+                      id="btnMoreOptions">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button type="button" id="btnView" mat-menu-item (click)="onPracticeQuestionList(practice, true)">
+                        <span>View</span>
+                      </button>
+                      <button type="button" id="btnViewResult" mat-menu-item (click)="onViewPracticeResult(practice)">
+                        <span>View result</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!(isLoadingResults) && (practiceList.length === 0)">
+        <div class="no-content-found-wrapper">
+          <mat-icon svgIcon="noPractice"></mat-icon>
+          <p>No Practice Available</p>
+          <span>There seems to be no practice to show right now.</span>
+        </div>
+      </div>
+      <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+    </div>
+
+    <div class="col-md-12 practice-list-pagination-alignment" *ngIf="practiceList?.length > 0">
+      <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber" [recordsPerPage]="recordsPerPage"
+        (recordChange)="onChangePagination($event)"></app-pagination>
+    </div>
+  </div>
+</div>

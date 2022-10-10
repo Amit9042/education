@@ -1,0 +1,153 @@
+<div class="student-course-categories-container">
+    <div class="student-course__course-details">
+        <h2>Business</h2>
+      
+        <es-user-student-course-filters></es-user-student-course-filters>
+    </div>
+    
+    <div class="student-course__courses-tags">
+        <ul>
+            <li>
+                <a>#Finance</a>
+            </li>
+    
+            <li>
+                <a>#Entrepreneurship</a>
+            </li>
+    
+            <li>
+                <a>#Communications</a>
+            </li>
+    
+            <li>
+                <a class="active">#Management</a>
+            </li>
+    
+            <li>
+                <a>#Sales</a>
+            </li>
+    
+            <li>
+                <a>#Strategy</a>
+            </li>
+    
+            <li>
+                <a>#Operations</a>
+            </li>
+    
+            <li>
+                <a>#Project Management</a>
+            </li>
+    
+            <li>
+                <a>#Sales</a>
+            </li>
+    
+            <li>
+                <a>#Strategy</a>
+            </li>
+    
+            <li>
+                <a>#Operations</a>
+            </li>
+    
+            <li>
+                <a>#Project Management</a>
+            </li>
+    
+            <li>
+                <a>#Business Law</a>
+            </li>
+    
+            <li>
+                <a>#Data Analytics</a>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngFor="let i of [1,2]; let j = index">
+        <div>
+            <a (click)="onStudentCourseDeatilsOpen()" class="student-course__large-course-box">
+                <div class="row">
+                    <div class="col-md-6 PLR-0">
+                        <div class="student-course__large-course-box__left">
+                            <img src="assets/images/group.png" />
+                        </div>
+                    </div>
+    
+                    <div class="col-md-6 PL-0">
+                        <div class="student-course__large-course-box__right">
+                            <h3>Management Psychology: How To Develop And Use Emotional Intelligence</h3>
+                            <p>The goal of the course is to help organizations increase their sales and workplace
+                                mental
+                                health by developing and applying emotional intelligence!</p>
+    
+                            <div class="student-course__large-course-box__right__profile-details">
+                                <div class="student-course__large-course-box__right__profile-details__image">
+                                    <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+                                    <img *ngIf="true" src="assets/images/chris.png" />
+                                </div>
+    
+                                <div class="student-course__large-course-box__right__profile-details__details">
+                                    <label>David Hedley</label>
+                                    <span>Educational Psychology</span>
+                                </div>
+                            </div>
+    
+                            <div class="student-course__large-course-box__right__footer">
+                                <div class="row">
+                                    <div class="col-md-6 PL-0">
+                                        <small>3hr 20m</small>
+                                    </div>
+    
+                                    <div class="col-md-6 PR-0 text-right">
+                                        <a>
+                                            <mat-icon *ngIf="true" svgIcon="bookmark"></mat-icon>
+                                            <mat-icon *ngIf="false" svgIcon="bookedMark"></mat-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    
+        <div class="student-course__student-course-title">
+            <div class="row">
+                <div class="col-md-9 PL-0">
+                    <h3>Explore your interest from our library</h3>
+                </div>
+            </div>
+        </div>
+    
+        <div>
+            <a (click)="onStudentCourseDeatilsOpen()" class="student-course__course-box">
+                <div class="row">
+                    <div *ngFor="let i of [1,2,3,4]; let j=index;" class="col-md-3 PL-0">
+                        <div class="student-course__course-box__details">
+                            <img src="assets/images/course-banner.png" />
+                            <div class="student-course__course-box__details__content">
+                                <small>2hr 40m</small>
+                                <h4>Advanced Malware Analysis: Ransomware</h4>
+                                <h6>3,400 reviews</h6>
+    
+                                <div class="student-course__course-box__details__content__footer">
+                                    <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+                                    <img *ngIf="true" src="assets/images/chris.png" />
+                                    <label>David Hedley</label>
+                                    <a>
+                                        <mat-icon *ngIf="true" svgIcon="bookmark"></mat-icon>
+                                        <mat-icon *ngIf="false" svgIcon="bookedMark"></mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div> 
+    </div>
+   
+</div>

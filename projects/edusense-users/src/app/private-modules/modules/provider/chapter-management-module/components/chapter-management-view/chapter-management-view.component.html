@@ -1,0 +1,34 @@
+<div class="class-view-container">
+  <div class="class-view">
+    <div class="class-view__header">
+      <a (click)="onChapterList()" id="lnkChapterList">
+        <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+      </a>
+      <h2>Chapter Management</h2>
+    </div>
+    <div class="class-view__body">
+      <div class="class-view__body__view">
+        <label>Chapter Name</label>
+        <span>{{chapterDetails?.title | checkEmpty}}</span>
+      </div>
+
+      <div class="class-view__body__view">
+        <label>Grade</label>
+        <span>{{chapterDetails?.aliasName | checkEmpty}}</span>
+      </div>
+
+      <div class="class-view__body__view">
+        <label>Subject</label>
+        <span>{{chapterDetails?.subjectName | checkEmpty}}</span>
+      </div>
+
+      <div class="class-view__body__view">
+        <label>Description</label>
+        <span>
+          <p>{{chapterDetails?.description | checkEmpty}}</p>
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>

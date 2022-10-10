@@ -1,0 +1,112 @@
+<div class="waiting-room-container meeting-room-container">
+  <div class="waiting-room meeting-room">
+    <div class="waiting-room__top">
+      <div class="row align-center">
+        <div class="col-md-6 col-sm-12 col-xs-12 small-margin-2">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-6 PL-0">
+              <div class="header__search header__search-white">
+                <div class="header__search--input">
+                  <input id="txtSearch" type="text" name="search" [formControl]="searchControl" autocomplete="off"
+                    placeholder="Search..." id="inputSearch" />
+                  <mat-icon svgIcon="search"></mat-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6 PLR-0">
+              <div class="waiting-room__top--right">
+                <mat-select id="matSelectStatus" class="select-emergency" [(value)]="enrollStatusVal" (selectionChange)="getList()">
+                  <mat-option *ngFor="let status of enrollStatusList" [value]="status?.value">
+                    {{status.title}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+            (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+        </div>
+      </div>
+
+    </div>
+
+    <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body">
+      <div *ngSwitchCase="viewType.Data">
+        <div *ngFor="let enrllDetail of enrollmentList; let i = index;" class="list-bg">
+          <div class="row">
+            <div class="col-md-7 col-sm-7 PLR-0 col-xs-12">
+              <div class="visitors-info">
+                <div class="row align-center">
+                  <div class="col-md-12">
+                    <div class="visitors-info__left">
+                      <div class="visitor-image">
+                        <img *ngIf="enrllDetail?.user_details?.avatar_thumbnail" [src]="enrllDetail?.user_details?.avatar_thumbnail" />
+                        <mat-icon *ngIf="!enrllDetail?.user_details?.avatar_thumbnail" svgIcon="providerProfile"></mat-icon>
+                        <span class="status-visitor"
+                          [ngClass]="{'status-pending': enrllDetail?.enrollment_status == enrollStatuses.PENDING, 'status-reject': enrllDetail?.enrollment_status == enrollStatuses.REJECTED, 'status-accept': enrllDetail.enrollment_status == enrollStatuses.ACCEPETD}"></span>
+                      </div>
+                      <div class="visitor-details">
+                        <a (click)="openClassListDialog(enrllDetail)"><h4>{{enrllDetail?.user_details?.first_name + " " + enrllDetail?.user_details?.last_name}}</h4></a>
+                        <p class="location">
+                          {{enrllDetail?.student?.student_city?.city_name | checkEmpty}}
+                          {{enrllDetail?.student?.student_state?.state_name ?  ', ' + enrllDetail?.student?.student_state?.state_name : '-'}}
+                          {{enrllDetail?.student?.student_country?.country_name ?  ', ' + enrllDetail?.student?.student_country?.country_name : '-'}}
+                        </p>
+                        <p class="visit-type">{{enrllDetail?.student?.school_name | checkEmpty}}</p>
+                        <p class="visit-type">Grade :<span>{{enrllDetail?.student?.student_grade?.alias}}</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-5 text-center">
+              <p class="date-time xs-text-left">
+                <span>{{enrllDetail?.created_at | date: 'dd/MM/yyyy, hh:mm a'}}</span>
+              </p>
+            </div>
+            <div *ngIf="enrllDetail?.enrollment_status == enrollStatuses.PENDING" class="col-md-2 PR-0 col-sm-5">
+              <div class="visitors-info__right xs-text-left">
+                <a [id]="'lnkReject-'+i" (click)="onOpenRejectDialog(enrllDetail?.request_id)" class="reject-btn">Reject</a>
+                <button [id]="'btnAccept-'+i" (click)="onAccept(enrllDetail)" type="button" class="accept-button" mat-flat-button
+                  color="primary">Accept
+                </button>
+              </div>
+            </div>
+            <div *ngIf="enrllDetail?.enrollment_status == enrollStatuses.ACCEPETD" class="col-md-2 col-sm-12 PR-0 col-xs-12 pad-right-2">
+              <div class="visitors-info__right xs-text-direction">
+                <button (click)="onAssignEnrollmentRequestDialog(enrllDetail)" type="button" class="accept-button remove-focus"
+                  mat-flat-button color="primary">Assign Class
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- <div *ngSwitchCase="viewType.NoData" class="no-records-found">
+        <div class="no-records">
+          <p>
+            No enrolment data found
+          </p>
+          <span>Enrolment data is not available</span>
+        </div>
+      </div> -->
+
+      <div *ngSwitchCase="viewType.NoData">
+        <div class="no-content-found-wrapper">
+          <mat-icon svgIcon="noEnroll"></mat-icon>
+          <p>No Enrollment Request</p>
+          <span>You don't have any enrollment request yet</span>
+        </div>
+      </div>
+
+
+      <div class="loader-data" *ngSwitchCase="viewType.Loading">
+        <label>Loading...</label>
+      </div>
+    </div>
+  </div>
+</div>

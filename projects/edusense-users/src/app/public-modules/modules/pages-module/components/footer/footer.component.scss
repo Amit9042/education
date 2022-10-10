@@ -1,0 +1,212 @@
+@import '../../../../../../assets/scss/abstracts/abstracts';
+
+//page footer
+.webpage-footer {
+    @include respond('tablet') {
+        margin-bottom: 15rem;
+    }
+
+    @include respond('phone') {
+        margin-bottom: 12rem;
+    }
+
+    &__bottom {
+        border-top: 1px solid rgba($grey-color-16, 0.2);
+        &__links {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 6.8rem 33.6rem 6.8rem 16rem;
+
+            @include respond('tablet') {
+                margin: 5rem 2rem;
+                align-items: flex-start;
+                position: relative;
+                padding-left: 25%;
+            }
+
+            @include respond('phone') {
+                margin: 3rem 2rem 5rem;
+                display: block;
+            }
+
+            mat-icon {
+                width: 25.5rem;
+                height: 5.4rem;
+
+                @include respond('tablet') {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 25%;
+                    height: 3rem;
+                    left: 0;
+                }
+
+                @include respond('phone') {
+                    width: 18rem;
+                    height: auto;
+                    margin-bottom: 4rem;
+                }
+            }
+
+            &:first-child {
+                @include respond('tablet') {
+                    ul {
+                        margin-top: 0 !important;
+                    }
+                }
+
+                @include respond('phone') {
+                    ul {
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+
+            ul {
+                @include respond('tablet') {
+                    width: 33.33%;
+                }
+
+                @include respond('phone') {
+                    margin-bottom: 5rem;
+                }
+
+                li {
+                    display: block;
+                    font-size: 2.2rem;
+                    font-weight: 600;
+                    line-height: 1.5;
+                    margin-bottom: 1.5rem;
+
+                    @include respond('tablet') {
+                        font-size: 2rem;
+                        max-width: 90%;
+                        white-space: pre-wrap;
+                    }
+
+                    @include respond('phone') {
+                        margin-bottom: 0.5rem;
+                    }
+
+                    &:first-child {
+                        margin-bottom: 4.6rem;
+
+                        @include respond('phone') {
+                            margin-bottom: 2rem;
+                        }
+                    }
+                    a {
+                        color: $grey-color-16;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-weight: normal;
+                        font-size: 1.6rem;
+                        line-height: 1.5;
+
+                        @include respond('tablet') {
+                            font-size: 1.4rem;
+                        }
+
+                        &.active {
+                            color: $green-color-5;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+        &__info-share {
+            color: $grey-color-16;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            // margin: 1.6rem 23rem 6.3rem 29rem; DO NOT DELETE
+            margin: 3.6rem 20rem 6.3rem 19rem;
+
+            @include respond('regular-desktop') {
+                margin: 3.6rem 15rem 6.3rem 15rem;
+            }
+
+            // @include respond('tab-port') {
+            //     margin: 1.6rem 5rem 6.3rem 7rem;
+            // }
+
+            @include respond('tablet') {
+                margin: 5rem 2rem;
+                display: block;
+
+                p {
+                    // text-align: center;
+                    // width: 33.33%; DO NOT DELETE
+                    // font-size: 1.6rem;
+                    text-align: left;
+                    font-size: 1.6rem;
+                    margin-bottom: 2rem;
+                }
+            }
+
+            @include respond('phone') {
+                margin: 5rem 2rem;
+                display: block;
+
+                p {
+                    text-align: left;
+                    font-size: 1.4rem;
+                    margin-bottom: 2rem;
+                }
+            }
+            a {
+                color: $grey-color-16;
+                display: inline-block;
+                @include respond('tab-port') {
+                    font-size: 1.6rem;
+                    margin-bottom: 2rem;
+                    margin-right: 5rem;
+                }
+                @include respond('phone') {
+                    font-size: 1.4rem;
+                    margin-bottom: 2rem;
+                    margin-right: 5rem;
+                }
+            }
+
+            ul {
+                // @include respond('tablet') {
+                //     width: 33.33%;
+                // }
+
+                li {
+                    a {
+                        mat-icon {
+                            height: 2.9rem;
+                            width: 2.4rem;
+                            margin-left: 5rem;
+                            @include respond('tab-port') {
+                                margin-left: 0;
+                                margin-right: 3rem;
+                            }
+
+                            @include respond('phone') {
+                                margin-left: 0;
+                                margin-right: 3rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            p {
+                a {
+                    text-decoration: none;
+                    &:hover {
+                        // color:$green-color-5;
+                    }
+                }
+            }
+        }
+    }
+}

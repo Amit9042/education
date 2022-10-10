@@ -1,0 +1,28 @@
+<div class="row login-tab-container">
+
+
+  <div class="col-md-6 PL-0 responsive-remove-img">
+    <div class="auth">
+      <img *ngIf="!isProvider" src="./assets/images/graphic.png" alt="" />
+      <img *ngIf="isProvider" src="./assets/images/student_graphic.png" alt="" />
+    </div>
+  </div>
+
+
+  <div class="col-md-6 col-sm-12 col-xs-12 PLR-0">
+    <div class="auth-tabs logo-login-box">
+      <a class="edusense-logo" (click)="onHomePageUrl()" id="lnkLogo">
+        <mat-icon svgIcon="logo_edu"></mat-icon>
+      </a>
+      <mat-tab-group (selectedTabChange)="tabClick($event)">
+        <mat-tab label="Student">
+          <app-student-login></app-student-login>
+        </mat-tab>
+        <mat-tab label="Provider">
+          <app-provider-login></app-provider-login>
+        </mat-tab>
+       
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

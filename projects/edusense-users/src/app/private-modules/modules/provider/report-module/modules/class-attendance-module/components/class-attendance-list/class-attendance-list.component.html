@@ -1,0 +1,182 @@
+<div class="class-table-container class-attendance-list-container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12 PL-0 list-header-view">
+        <h2>Session Attendance</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-body attendance-list-body">
+    <table class="table" matSort mat-table [dataSource]="attendanceList">
+
+      <!-- class name column -->
+      <ng-container matColumnDef="class_name">
+        <th width="15%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Session Name</span>
+          <div class="form-control form-control--width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtSearchClass" [formControl]="classNameFilterField" type="text"
+                     autocomplete="off" matInput placeholder="Search Name"/>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.class_name | checkEmpty}}
+        </td>
+      </ng-container>
+
+      <!-- teacher column -->
+      <ng-container matColumnDef="teacher">
+        <th width="15%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Teacher</span>
+
+          <div class="form-control form-control--width">
+            <mat-form-field appearance="outline" Class Name floatLabel="always">
+              <input id="txtSearchTeacher" [formControl]="teacherFilterField" type="text"
+                     autocomplete="off" matInput placeholder="Search teacher"/>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.teacher_name | checkEmpty }}
+        </td>
+      </ng-container>
+
+      <!-- start date column -->
+      <ng-container matColumnDef="start_date">
+        <th width="13%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Start Date</span>
+          <div class="form-control form-control--width">
+            <mat-form-field class="clear-date" appearance="outline" floatLabel="always">
+              <input matInput [matDatepicker]="startDate" placeholder="Start date"
+                     [formControl]="startDateFilterField" disabled/>
+              <mat-datepicker-toggle matSuffix [for]="startDate">
+                <mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #startDate disabled="false"></mat-datepicker>
+              <a *ngIf="startDateFilterField.value" (click)="onClearDateFilter()">
+                <mat-icon svgIcon="close" matTooltip="clear"></mat-icon>
+              </a>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.session_started_at | date: 'dd-MM-yyyy HH:mm:ss'}}
+        </td>
+      </ng-container>
+
+      <!-- end time column -->
+      <ng-container matColumnDef="end_date">
+        <th width="13%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>End Date</span>
+          <div class="form-control form-control--width">
+            <mat-form-field class="clear-date" appearance="outline" floatLabel="always">
+              <input matInput [matDatepicker]="endDate" placeholder="End date"
+                     [formControl]="endDateFilterField" disabled/>
+              <mat-datepicker-toggle matSuffix [for]="endDate">
+                <mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #endDate disabled="false"></mat-datepicker>
+              <a *ngIf="endDateFilterField.value" (click)="onClearEndDateFilter()">
+                <mat-icon svgIcon="close" matTooltip="clear"></mat-icon>
+              </a>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.session_ended_at | date: 'dd-MM-yyyy HH:mm:ss' }}
+        </td>
+      </ng-container>
+
+      <!-- total column -->
+      <ng-container matColumnDef="total">
+        <th width="8%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Total</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a (click)="onViewParentClass(element, 2)"> {{ element.total_student | checkEmpty }}</a>
+        </td>
+      </ng-container>
+
+      <!-- present column -->
+      <ng-container matColumnDef="present">
+        <th width="8%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Present</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a (click)="onViewParentClass(element, 1)"> {{ element.present_student | checkEmpty }} </a>
+        </td>
+      </ng-container>
+
+      <!-- absent column -->
+      <ng-container matColumnDef="absent">
+        <th width="8%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Absent</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a (click)="onViewParentClass(element, 0)"> {{ element.absent_student | checkEmpty }} </a>
+        </td>
+      </ng-container>
+
+      <!-- status column -->
+      <ng-container matColumnDef="status">
+        <th width="15%" mat-header-cell *matHeaderCellDef>
+          <span>Select Status</span>
+          <div class="form-control form-control--width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <mat-select type="text" autocomplete="off" matInput [formControl]="statusFilterField"
+                          placeholder="Select status" matInput id="matSelectStatus">
+                <mat-option value="">All</mat-option>
+                <mat-option value="1">Created</mat-option>
+                <mat-option value="2">Started</mat-option>
+                <mat-option value="3">Completed</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ getSessionStatus(element.session_running_status) }}
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef width="5%"></th>
+        <td mat-cell *matCellDef="let element; let i = index" class="text-right">
+          <div class="table-action">
+            <button [id]="'btnAction-' + i" class="action-button" mat-button [matMenuTriggerFor]="menu">
+              <mat-icon matTooltip="More Options" svgIcon="action" [id]="'iconTriggerMenu-' + i">
+              </mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action">
+              <button [id]="'btnView-' + i" type="button" mat-menu-item [id]="'btnView-' + i"
+                      (click)="onViewParentClass(element, 2)">
+                <span>View</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr [ngClass]="{ 'row-disabled': false }" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div *ngIf="!isLoadingResults && attendanceList.length===0">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noSessionAttendance"></mat-icon>
+        <p>No session attendance available</p>
+        <span>It's look like there is no any session attendance here</span>
+      </div>
+    </div>
+
+    <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+  </div>
+
+  <div class="table-footer">
+    <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+                    (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+  </div>
+</div>

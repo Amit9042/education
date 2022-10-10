@@ -1,0 +1,491 @@
+@import '../../../assets/scss/abstracts/abstracts';
+
+.auth {
+    height: 100vh;
+
+    img {
+        vertical-align: top;
+        height: 100vh;
+        width: 100%;
+    }
+
+    &__auth-logo {
+        &__logo {
+            position: fixed;
+            top: 4.5rem;
+            left: 4rem;
+
+            mat-icon {
+                width: 15rem;
+                height: auto;
+            }
+
+            img {
+                @include square(4.8rem);
+                vertical-align: middle;
+                margin-left: 4rem;
+            }
+
+            h3 {
+                color: $primary-color;
+                display: inline-block;
+                font-size: 2.2rem;
+                font-weight: 500;
+                margin-top: 5rem;
+                padding-left: 1rem;
+            }
+        }
+    }
+
+    &__auth-img {
+        // // background: url(assets/images/image.png) no-repeat;
+        background: #e2ecfb;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__img-center {
+            img {
+                @include square(20rem);
+            }
+        }
+    }
+}
+
+.auth-container {
+    // background: $grey-color-1;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    h3 {
+        color: $primary-color;
+        font-size: 3.4rem;
+        line-height: 1.26;
+        margin-bottom: 4rem;
+        font-weight: bold;
+
+        @include respond('phone') {
+            font-size: 3rem;
+        }
+        @include respond('phone') {
+            font-size: 2.6rem;
+        }
+    }
+    p {
+        color: rgba($primary-color, 0.6);
+        display: inline-block;
+        font-size: 1.6rem;
+        line-height: 1.25;
+        margin-bottom: 4rem;
+        @include respond('regular-desktop') {
+            margin-bottom: 3rem;
+        }
+        @include respond('iphone') {
+            margin-bottom: 2rem;
+        }
+        &.bottom-link {
+            color: $primary-color;
+            a {
+                display: inline-block;
+                text-decoration: none;
+                font-weight: bold;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .mat-flat-button.mat-button-base.mat-primary {
+        background-color: $primary-color;
+        min-width: 16rem;
+        @include respond('iphone') {
+            min-width: 12rem;
+        }
+    }
+
+    // .mat-form-field-suffix .mat-icon-button {
+    //     height: 2.5em;
+    //     width: 2.5em;
+    // }
+
+    .auth-container-form {
+        margin: auto;
+        position: relative;
+        top: -3rem;
+        @include respond('phone') {
+            top: 0;
+        }
+    }
+
+    .auth-box {
+        width: 55rem;
+        @include respond('phone') {
+            width: 35rem;
+        }
+        @include respond('iphone') {
+            width: 30rem;
+        }
+
+        h4 {
+            color: $black-color;
+            font-size: 3.3rem;
+            font-weight: 700;
+            margin-bottom: 5rem;
+            line-height: 1.6;
+        }
+
+        h6 {
+            color: $black-color;
+            font-weight: 500;
+            font-size: 1.8rem;
+        }
+    }
+
+    .form-control {
+        @include placeholder($placeholder-color, 1.6rem);
+        position: relative;
+        height: 12rem !important;
+
+        input[type='text'] {
+            font-weight: 600;
+        }
+
+        input {
+            &.mat-chip-input {
+                height: 3.6rem;
+            }
+        }
+
+        mat-icon {
+            @include square(2rem);
+            position: absolute;
+            right: 2rem;
+            bottom: 1rem;
+            @include respond('phone') {
+                right: 0.5rem;
+            }
+
+            &.mat-chip-remove {
+                position: static;
+            }
+        }
+        .mat-form-field-label-wrapper {
+            top: -0.5em;
+        }
+        mat-label {
+            color: $primary-color;
+            font-size: 1.4rem;
+            margin-bottom: 0.1rem;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline {
+            @include border-radius(0.8rem);
+            background-color: rgba($grey-color-10, 0.2);
+        }
+    }
+    mat-checkbox {
+        color: $primary-color;
+        display: inline-block;
+        font-size: 1.6rem;
+        line-height: 1.25;
+        a {
+            text-decoration: underline;
+        }
+        .mat-checkbox-background {
+            @include border-radius(0.5rem);
+            svg {
+                fill: rgba($white-color, 0.5);
+            }
+        }
+    }
+
+    &.create-class-container {
+        .form-control {
+            height: 10rem !important;
+            .mat-form-field-wrapper {
+                margin: 0 !important;
+            }
+        }
+        .form-control-textarea {
+            height: 12rem !important;
+
+            @include respond('regular-desktop') {
+                @-moz-document url-prefix() {
+                    height: 14rem !important;
+                }
+            }
+        }
+        .button-group {
+            margin-top: 1rem !important;
+        }
+    }
+}
+
+// EYE ICON IN PASSOWRD FIELD
+
+.mat-form-field-suffix {
+    button.eye-icon {
+        top: -1.2rem;
+
+        .mat-icon {
+            right: 1.3rem !important;
+            bottom: 1rem;
+        }
+    }
+}
+
+// AUTO HEIGHT FOR CHIPS AUTOCOMPLETE
+
+.auth-container .auto-height-field.form-control {
+    height: auto !important;
+
+    .mat-form-field-outline {
+        height: auto;
+    }
+    .mat-form-field-infix {
+        padding: 1em 0 0.8em 0;
+    }
+}
+
+// LOGIN TAB FOR PROVIDER AND STUDENTS
+
+.login-tab-container {
+    .auth-tabs {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+        @include respond('phone') {
+            height: calc(100vh - 7rem);
+        }
+
+        .mat-tab-group .mat-tab-label {
+            height: 6rem;
+            padding: 0;
+            margin-right: 5rem;
+            opacity: 1 !important;
+            justify-content: flex-start;
+            min-width: auto;
+        }
+
+        .mat-tab-label-content {
+            color: #203061;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .mat-tab-label-active {
+            .mat-tab-label-content {
+                color: $green-color-5;
+            }
+        }
+
+        .mat-ink-bar {
+            background-color: $green-color-5 !important;
+        }
+
+        .auth-container {
+            margin-top: 5rem;
+            height: auto;
+            @include respond('regular-desktop') {
+                margin-top: 2rem;
+            }
+            @include respond('phone') {
+                margin-top: 3rem;
+            }
+            @include respond('iphone') {
+                margin-top: 2rem;
+            }
+        }
+    }
+}
+
+// CHANGE PASSWORD DIALOG
+.change-password-wrap {
+    .mat-form-field-suffix {
+        button.eye-icon {
+            top: -1rem;
+
+            .mat-icon {
+                bottom: 0.8rem !important;
+            }
+        }
+    }
+}
+
+// LOGIN PAGE CSS
+
+.login-buttons {
+    // margin-top: 10rem;
+    margin-top: 5rem;
+
+    // @include respond('regular-desktop') {
+    //     margin-top: 5rem;
+    // }
+    @include respond('phone') {
+        margin-top: 3rem;
+        padding-bottom: 2rem;
+    }
+    @include respond('iphone') {
+        margin-top: 2rem;
+    }
+
+    p {
+        // @include respond('regular-desktop') {
+        margin-bottom: 0;
+        // }
+    }
+}
+
+.login-form-container {
+    &.auth-container {
+        .form-control {
+            // @include respond('regular-desktop') {
+            height: 11rem !important;
+            // }
+            @include respond('iphone') {
+                height: 10rem !important;
+            }
+        }
+
+        h3 {
+            // @include respond('regular-desktop') {
+            margin-bottom: 2.5rem;
+            // }
+            @include respond('phone') {
+                margin-bottom: 2rem;
+            }
+            @include respond('iphone') {
+                margin-bottom: 1rem;
+                font-size: 2.5rem;
+            }
+        }
+    }
+}
+
+.panel {
+    .auth-container {
+        height: calc(100vh - 7.8rem);
+    }
+}
+
+// MOZILE ISSUE CSS
+
+@-moz-document url-prefix() {
+    .eye-icon {
+        .mat-icon {
+            bottom: 0.5rem !important;
+        }
+
+        &.reset-eye {
+            .mat-icon {
+                bottom: 0.2rem !important;
+            }
+        }
+    }
+}
+
+// DIALOGBOX WIDTH IN TEBLET
+
+.cdk-overlay-pane {
+    @include respond('tablet') {
+        max-width: 90vw !important;
+    }
+
+    @include respond('phone') {
+        max-width: 95vw !important;
+    }
+}
+
+//Responsive properties
+
+.responsive-remove-img {
+    @include respond('tab-port') {
+        display: none;
+    }
+    @include respond('phone') {
+        display: none;
+    }
+}
+
+// Green color of signup type box
+
+.sign-up-type-box__type > div {
+    &.active {
+        .mat-icon {
+            color: $green-color-5 !important;
+            fill: $green-color-5 !important;
+            opacity: 1 !important;
+
+            svg {
+                path {
+                    color: $green-color-5 !important;
+                    fill: $green-color-5 !important;
+                }
+            }
+        }
+    }
+}
+
+.edusense-logo {
+    cursor: pointer;
+    position: absolute;
+    left: 3rem;
+    top: 5rem;
+
+    @include respond('regular-desktop') {
+        top: 1rem;
+    }
+
+    @include respond('phone') {
+        background-color: $white-color;
+        position: fixed;
+        padding: 1rem 0 0 1rem;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+
+    .mat-icon {
+        width: 15rem;
+        height: auto;
+
+        @include respond('phone') {
+            width: 12rem;
+        }
+    }
+}
+
+.logo-box {
+    @include respond('phone') {
+        margin-top: 8rem !important;
+    }
+
+    @media screen and (max-width: 359px) {
+        margin-top: 15rem !important;
+    }
+
+    &--large {
+        @include respond('phone') {
+            margin-top: 12rem !important;
+        }
+        @media screen and (max-width: 359px) {
+            margin-top: 25rem !important;
+        }
+    }
+}
+
+.logo-login-box {
+    @include respond('phone') {
+        margin-top: 5rem !important;
+    }
+}

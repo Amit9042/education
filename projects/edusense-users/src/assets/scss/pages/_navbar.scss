@@ -1,0 +1,950 @@
+/*==================================
+            HEADER CSS
+====================================*/
+
+.align-center {
+    align-items: center;
+}
+
+.header {
+    height: $header-height;
+    background-color: $white-color;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+    &__logo {
+        height: $header-height;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+
+        button {
+            @include square(5.6rem);
+            background-color: $grey-color-3;
+            margin-right: 2rem;
+
+            mat-icon {
+                @include square(2rem);
+                line-height: 2rem !important;
+            }
+
+            @include respond('tablet') {
+                @include square(4.6rem);
+                margin-right: 1rem;
+
+                mat-icon {
+                    @include square(1.5rem);
+                    line-height: 2rem !important;
+                }
+            }
+
+            @include respond('phone') {
+                @include square(4.6rem);
+                margin-right: 1.2rem;
+
+                mat-icon {
+                    @include square(1.5rem);
+                    line-height: 2rem !important;
+                }
+            }
+        }
+
+        img {
+            @include respond('regular-desktop') {
+                max-width: 13rem;
+            }
+            @include respond('tablet') {
+                max-width: 10rem;
+            }
+            @include respond('phone') {
+                max-width: 9rem;
+            }
+        }
+
+        mat-icon[svgIcon='logo'] {
+            width: 10rem;
+            height: 4rem;
+        }
+    }
+
+    &__search {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        &.navbar-search {
+            width: calc(100% - 37rem);
+
+            @include respond('tablet') {
+                display: none;
+            }
+            @include respond('phone') {
+                display: none;
+            }
+        }
+
+        &--input {
+            position: relative;
+            width: 100%;
+
+            input {
+                background-color: $grey-color-3;
+                border-radius: 1rem;
+                width: 100%;
+                padding: 1.6rem 1rem;
+                margin: 0;
+                text-indent: 5rem;
+                border: 1px solid transparent;
+                height: 5rem;
+
+                @include respond('tablet') {
+                    padding: 1.2rem 1rem;
+                    text-indent: 3rem;
+                }
+
+                @include respond('phone') {
+                    padding: 1.2rem 1rem;
+                    text-indent: 3rem;
+                    font-size: 1.6rem;
+                }
+
+                &:focus {
+                    outline: none;
+                    background-color: $white-color;
+                    border: 1px solid $primary-color;
+                }
+            }
+
+            .mat-icon {
+                @include square(2rem);
+                position: absolute;
+                opacity: 0.8;
+                left: 2.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+
+                @include respond('tablet') {
+                    @include square(1.5rem);
+                    left: 1.5rem;
+                }
+
+                @include respond('phone') {
+                    @include square(1.5rem);
+                    left: 1.5rem;
+                }
+            }
+        }
+    }
+
+    &__profile {
+        @include respond('phone') {
+            background-color: $white-color;
+            box-shadow: 0 0 5px 0 rgba($black-color, 0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 9999;
+            padding: 1.5rem 0;
+        }
+
+        ul {
+            text-align: right;
+
+            &.profile-icons {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                @include respond('phone') {
+                    justify-content: center;
+                }
+            }
+
+            li {
+                margin-left: 1rem;
+                @include respond('tablet') {
+                    margin-left: 0.8rem;
+                }
+
+                @include respond('phone') {
+                    margin: 0 0.5rem;
+                }
+
+                &:last-child {
+                    position: relative;
+                    @include respond('phone') {
+                        line-height: 4rem;
+                    }
+                }
+
+                a {
+                    @include square(4rem);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: rgba($black-color, 0.8);
+                    text-decoration: none;
+                    border-radius: 50%;
+
+                    @include respond('tablet') {
+                        @include square(3rem);
+                    }
+
+                    .user-placeholder {
+                        @include square(4rem);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        margin-left: 2rem;
+
+                        mat-icon {
+                            @include square(4rem);
+                        }
+                    }
+
+                    mat-icon {
+                        @include square(2.2rem);
+                        @include respond('tablet') {
+                            @include square(2rem);
+                        }
+                    }
+
+                    &.active,
+                    &:hover,
+                    &.icon-hover {
+                        background-color: $grey-color-3;
+                        color: $primary-color;
+                        .mat-icon {
+                            .bell-1 {
+                                fill: $primary-color;
+                            }
+                        }
+                    }
+                }
+                &:last-child {
+                    margin: 0;
+                    a {
+                        line-height: inherit;
+                        position: relative;
+                        width: auto;
+                        height: auto;
+
+                        img {
+                            @include square(4rem);
+                            border-radius: 50%;
+                            vertical-align: middle;
+                        }
+
+                        &.active,
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__notification {
+            a {
+                .counter {
+                    position: relative;
+                    top: 3px;
+
+                    @include respond('regular-desktop') {
+                        top: 2px;
+                    }
+
+                    @media screen and (min-width: 1025px) and (max-width: 1279px) {
+                        top: 1px;
+                    }
+
+                    span {
+                        // @include square(2rem);
+                        background-color: $red-color;
+                        color: $white-color;
+                        position: absolute;
+                        position: absolute;
+                        display: block;
+                        border-radius: 10rem;
+                        text-align: center;
+                        right: -1rem;
+                        top: -1rem;
+                        font-size: 1.3rem;
+                        line-height: 2rem;
+                        padding: 0.1rem 0.4rem 0.1rem 0.4rem;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    &__bread-crumbs {
+        position: relative;
+
+        @include respond('phone') {
+            text-align: right;
+        }
+
+        li {
+            a {
+                text-decoration: none;
+                margin: 0 1rem;
+                font-size: 1.8rem;
+
+                @include respond('tablet') {
+                    font-size: 1.4rem;
+                    margin: 0 0.6rem;
+                }
+
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .grade-tag {
+            background-color: rgba($primary-color, 0.1);
+            color: $primary-color;
+            border-radius: 2rem;
+            line-height: 1;
+            padding: 0.7rem 1.3rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-left: 5rem;
+
+            @include respond('regular-desktop') {
+                margin-left: 2rem;
+            }
+            @include respond('tablet') {
+                margin-left: 0.5rem;
+                padding: 0.7rem 0.5rem;
+                font-size: 1.2rem;
+                margin-top: 1rem;
+            }
+
+            @include respond('phone') {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .flex-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include respond('tablet') {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.dropdown-actions {
+    background: $white-color;
+    top: 6rem;
+    position: absolute;
+    box-shadow: 1px 3px 12px 0 rgba(29, 44, 60, 0.2);
+    border: 1px solid rgba($black-color, 0.05);
+    border-radius: 3px;
+    width: 37rem;
+    right: 0;
+    z-index: 101;
+
+    @include respond('phone') {
+        top: auto;
+        bottom: 6rem;
+        width: 35rem;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 33rem;
+    }
+
+    @media screen and (max-width: 359px) {
+        width: 30rem;
+    }
+
+    ul {
+        li {
+            &:first-child {
+                background: $white-color;
+                // padding: 2.6rem;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+            }
+        }
+    }
+    &__row {
+        @include clearfix();
+        background: $primary-color-light;
+        padding: 2rem 2.6rem;
+        border: solid 1px rgba(29, 44, 60, 0.04);
+
+        &__img {
+            float: left;
+            width: 5rem;
+            img {
+                @include square(5rem);
+                border-radius: 50%;
+            }
+            &__user-placeholder {
+                mat-icon {
+                    @include square(5rem);
+                }
+            }
+        }
+        &__details {
+            float: left;
+            width: calc(100% - 5rem);
+            padding-left: 1.6rem;
+
+            h3 {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 1.8rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+            a {
+                color: $primary-color !important;
+                font-size: 1.6rem;
+                margin-left: 0 !important;
+                padding: 0 !important;
+                display: inline-block !important;
+
+                &:hover {
+                    color: $primary-color !important;
+                }
+            }
+        }
+    }
+    ul {
+        li {
+            display: block;
+            text-align: left;
+            margin: 0;
+            a {
+                padding: 1.5rem 2.6rem;
+                margin-left: 0 !important;
+                position: relative;
+                display: block;
+                // top: 0 !important;
+
+                &:hover {
+                    color: $primary-color;
+                    mat-icon {
+                        color: $primary-color;
+                    }
+                }
+
+                mat-icon {
+                    @include square(1.6rem);
+                    color: rgba($black-color, 0.8);
+                    position: absolute;
+                    right: 2rem;
+                    top: 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+.layer-hide-dropdown {
+    @include square(100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: transparent;
+    z-index: 100;
+}
+
+/*==================================
+            SIDEBAR CSS
+====================================*/
+
+.sidebar {
+    &__large {
+        @include transition();
+        @include textSelectionNone();
+        width: $large-sidebar-width;
+        background-color: $grey-color-3;
+        position: fixed;
+        top: calc(#{$header-height} + 0.1rem);
+        height: calc(100% - #{$header-height}) !important;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.16);
+        z-index: 99;
+        left: 0;
+
+        @include respond('tablet') {
+            width: 25rem;
+        }
+
+        @include respond('phone') {
+            width: 25rem;
+            z-index: 999;
+            // height: calc(100% - 15rem) !important;
+            box-shadow: none;
+        }
+
+        &__inner {
+            overflow: hidden !important;
+            margin-top: 0 !important;
+
+            li {
+                a {
+                    padding: 1.3rem 0 1.3rem 7rem !important;
+                }
+            }
+        }
+
+        ul {
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            &::-webkit-scrollbar-track {
+                background-color: $white-color;
+            }
+
+            &::-webkit-scrollbar {
+                background-color: $grey-color-3;
+                width: 0.7rem;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $grey-color-3;
+                border: 0.2rem solid $grey-color-3;
+                border-radius: 1rem;
+            }
+
+            li {
+                position: relative;
+                display: block;
+
+                a {
+                    color: $black-color;
+                    position: relative;
+                    display: block;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    padding: 1.6rem 1rem 1.6rem 2rem;
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    margin: 0 1rem 1rem 1rem;
+
+                    @include respond('tablet') {
+                        font-size: 1.6rem;
+                    }
+
+                    @include respond('phone') {
+                        font-size: 1.6rem;
+                        padding-left: 1rem;
+                    }
+
+                    mat-icon {
+                        @include square(2rem);
+                        color: $black-color;
+                        vertical-align: bottom;
+                        //vertical-align: middle;
+                        white-space: normal;
+                        margin-right: 2.8rem;
+                        position: relative;
+
+                        svg {
+                            path {
+                                fill: $black-color;
+                            }
+                        }
+
+                        @include respond('phone') {
+                            @include square(1.6rem);
+                            margin-right: 1rem;
+                        }
+
+                        &.right-arrow {
+                            position: relative;
+                            left: 50%;
+                            width: 1.6rem;
+                            height: 1.6rem;
+                            top: 0;
+                        }
+
+                        .notification-dot {
+                            @include border-radius(50%);
+                            background-color: $reddish-orange-color;
+                            position: absolute;
+                            height: 1rem;
+                            width: 1rem;
+                            top: -0.5rem;
+                            right: -0.7rem;
+                        }
+                    }
+
+                    &.active,
+                    &:hover {
+                        background: rgba($primary-color, 0.06);
+                        color: $primary-color;
+                        border-radius: 5px;
+
+                        mat-icon {
+                            color: $primary-color;
+
+                            svg {
+                                path {
+                                    fill: $primary-color;
+                                }
+                            }
+                        }
+
+                        span {
+                            color: $primary-color;
+                        }
+                    }
+
+                    &.submenu-header {
+                        &.active,
+                        &:hover {
+                            background: transparent;
+                            color: $black-color;
+                            border-radius: 5px;
+
+                            mat-icon {
+                                color: $primary-color;
+                            }
+                        }
+
+                        ul {
+                            margin-top: 25px;
+                            li {
+                                a {
+                                }
+                            }
+                        }
+                    }
+
+                    &--hide {
+                        @include transition();
+                        left: -#{$large-sidebar-width - $small-sidebar-width};
+                    }
+                }
+            }
+
+            .drop-inner-menu {
+                position: absolute;
+                right: 0;
+                top: 1.6rem;
+                height: 1.2rem !important;
+                width: 1.2rem !important;
+            }
+        }
+
+        .sidebar-scroll {
+            overflow: auto;
+            height: calc(100vh - 9rem);
+            @include respond('phone') {
+                // height:calc(100vh - 17rem);
+            }
+        }
+
+        &--hide {
+            width: $small-sidebar-width;
+
+            @include respond('phone') {
+                width: 25rem;
+                left: -25rem;
+            }
+        }
+    }
+}
+.xs-show {
+    display: none !important;
+}
+
+@include respond('phone') {
+    .xs-hide {
+        display: none !important;
+    }
+
+    .xs-show {
+        display: block !important;
+    }
+}
+
+.file-upload-progress-bar {
+    min-width: 200px !important;
+    max-width: 400px !important;
+    top: 15px;
+    position: relative;
+
+    .mat-menu-content {
+        max-height: 240px;
+
+        section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+
+            div {
+                width: 100%;
+
+                span {
+                    font-weight: 600;
+                    border-radius: 30px;
+                    background: #193a6e;
+                    color: #ccc;
+                    padding: 5px 10px;
+                    margin-right: 10px;
+                }
+
+                label {
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+
+                .mat-icon {
+                    width: 16px;
+                    height: 16px;
+                    position: relative;
+                    top: -1px;
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.multiple-institute-flex {
+    border-radius: 0.5rem !important;
+    border: 0.5px solid $grey-color-11;
+    background-color: rgba(87, 107, 121, 0.04);
+    display: flex !important;
+    flex-direction: row;
+    width: 20rem !important;
+    height: 5.6rem !important;
+    padding: 0.8rem 1.5rem 0.8rem 0.8rem;
+    margin-left: 2rem;
+    @include respond('tab-port') {
+        margin-left: 1rem;
+        width: 18rem !important;
+    }
+    @include respond('phone') {
+        margin-left: 1rem;
+        width: 14rem !important;
+    }
+    @include respond('iphone') {
+        margin-left: 1rem;
+        width: 9rem !important;
+    }
+    &:hover {
+        background-color: rgba(87, 107, 121, 0.04) !important;
+    }
+    &__width {
+        width: calc(100% - 6rem);
+        @include respond('iphone') {
+            display: none;
+        }
+        h4,
+        p {
+            @include respond('phone') {
+                line-height: 1.75 !important;
+            }
+        }
+    }
+    .user-placeholder {
+        margin-left: 0 !important;
+        margin-right: 0.8rem;
+    }
+    div {
+        text-align: left;
+    }
+    h4 {
+        @include elipsis(90%);
+        color: $primary-color;
+        font-size: 1.6rem;
+        margin-bottom: 0.2rem;
+    }
+    p {
+        color: $green-color-4;
+        font-size: 1.2rem;
+    }
+    & > mat-icon {
+        height: 1.5rem !important;
+        width: 1.1rem !important;
+        @include respond("iphone"){
+            line-height: 1;
+        }
+    }
+}
+
+.multiple-institute-dropdown {
+    width: 49.9rem;
+    @include respond('tab-port') {
+        width: 43.9rem;
+    }
+    @include respond('phone') {
+        width: 25rem;
+    }
+    &__user-details {
+        background-color: rgba($black-color, 0.03);
+        border-bottom: 0.5px solid rgba($black-color, 0.16);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        &__relative {
+            position: relative;
+            a {
+                position: absolute !important;
+                bottom: 1.2rem;
+                right: 0;
+                mat-icon {
+                    height: 3.4rem !important;
+                    width: 3.4rem !important;
+                    position: unset !important;
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+        mat-icon,
+        img {
+            @include square(11rem);
+            @include border-radius(50%);
+            margin-bottom: 1rem;
+            @include respond('phone') {
+                @include square(9rem);
+            }
+        }
+
+        h3 {
+            color: $black-color;
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+        }
+        a {
+            color: $green-color-5 !important;
+            font-size: 1.5rem;
+            padding: 0 !important;
+        }
+    }
+    &__institute-details {
+        border-bottom: 1px solid rgba($black-color, 0.16);
+        padding: 2.6rem 0 0;
+        .institute-label-width {
+            @include elipsis(90%);
+            width: calc(100% - 10rem);
+        }
+        h5 {
+            color: $grey-color-22;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            padding: 0 3rem 0.5rem;
+        }
+        ul {
+            max-height: 32rem;
+            overflow-y: auto;
+            @include respond('regular-desktop') {
+                max-height: 20rem;
+            }
+            @include respond('phone') {
+                max-height: 18rem;
+            }
+            @include respond('phone') {
+                max-height: 15rem;
+            }
+        }
+        li {
+            a {
+                display: flex !important;
+                flex-direction: row;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                padding: 1.5rem 3rem !important;
+                border-radius: unset !important;
+                @include respond('phone') {
+                    padding: 1rem !important;
+                }
+                &:hover {
+                    background-color: $grey-color-3 !important;
+
+                    label {
+                        color: $primary-color;
+                    }
+                }
+                &.active {
+                    background-color: $grey-color-3 !important;
+                    &:after {
+                        content: '';
+                        @include border-radius(50%);
+                        background-color: $white-color;
+                        border: 5px solid $green-color-5;
+                        position: absolute;
+                        right: 2rem;
+                        top: 2rem;
+                        height: 0.8rem;
+                        width: 0.8rem;
+                    }
+                }
+                img,
+                mat-icon {
+                    @include border-radius(1rem);
+                    height: 5rem !important;
+                    width: 5rem !important;
+                    position: static !important;
+                    margin-right: 2rem;
+                    @include respond('phone') {
+                        margin-right: 1rem;
+                    }
+                }
+                label {
+                    color: $dark-grey-color-3;
+                    font-weight: bold;
+                    font-size: 1.8rem;
+                    margin-bottom: 0.4rem;
+                    @include respond('phone') {
+                        line-height: 1.35;
+                    }
+                }
+                p {
+                    color: $grey-color-23;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+    &__logout {
+        border-top: rgba($black-color, 0.16);
+
+        a {
+            color: $reddish-color !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            position: static !important;
+            font-weight: bold;
+            mat-icon {
+                height: 1.4rem !important;
+                width: 1.4rem !important;
+                position: static !important;
+                margin-left: 1rem;
+                @include respond('phone') {
+                    line-height: 1;
+                }
+                svg {
+                    fill: $reddish-color !important;
+                }
+            }
+        }
+    }
+}

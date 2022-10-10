@@ -1,0 +1,277 @@
+<div class="student-header" (clickOutside)="onClickOutSide()">
+  <div class="row align-center">
+    <div class="col-md-1 col-sm-2 col-xs-2 PLR-0">
+      <div class="student-header__logo student-header__logo--web">
+        <img src="assets/images/fevicon.png" alt="" />
+        <span>EduSense</span>
+      </div>
+
+      <div class="student-header__logo student-header__logo--mobile">
+        <a (click)="onShowMenuStudent()">
+          <mat-icon svgIcon="menu"></mat-icon>
+        </a>
+      </div>
+
+    </div>
+    <div *ngIf="isShowStudentNavigation" class="col-md-5 col-sm-7 PL-0 xs-PR-0 student-details-phone">
+      <div class="student-header__details">
+        <ul>
+          <li>
+            <a (click)="openJoinClassListDialog()">
+              <mat-icon svgIcon="join-student"></mat-icon>
+              <span>Join</span>
+            </a>
+          </li>
+
+          <li>
+            <a (click)="onHideStudentResponsiveNavbar(false, false)" [routerLink]="comingSoonUrl">
+              <mat-icon svgIcon="teams-student"></mat-icon>
+              <span>Teams</span>
+            </a>
+          </li>
+
+          <li>
+            <a (click)="onHideStudentResponsiveNavbar(false, false)" [routerLink]="comingSoonUrl"
+              routerLinkActive="active">
+              <mat-icon svgIcon="chat-student"></mat-icon>
+              <span>Chat</span>
+            </a>
+          </li>
+
+          <li>
+            <a [ngClass]="{'active' : isSelectedLearn}" (click)="isShowLearn()">
+              <mat-icon svgIcon="learn-student"></mat-icon>
+              <span>Learn</span>
+              <mat-icon *ngIf="isStudentResponsive" svgIcon="downdrop"></mat-icon>
+            </a>
+
+            <ul *ngIf="activeView === htmlView.LEARN_MOBILE" class="student-menu">
+              <li>
+                <a (click)="onHideStudentResponsiveNavbar(true, false)" [routerLink]="studentMaterialUrl"
+                  routerLinkActive="active">Material</a>
+              </li>
+
+              <li>
+                <a (click)="onHideStudentResponsiveNavbar(true, false)" [routerLink]="studentAssignmentUrl"
+                  routerLinkActive="active">Assignment</a>
+              </li>
+
+              <li>
+                <a (click)="onHideStudentResponsiveNavbar(true, false)" [routerLink]="studentRecordedSessionUrl"
+                  routerLinkActive="active">Recorded session</a>
+              </li>
+
+              <li>
+                <a (click)="onHideStudentResponsiveNavbar(true, false)" [routerLink]="studentCourseUrl"
+                  routerLinkActive="active">Course</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a [routerLink]="doubtsUrl" routerLinkActive="active" (click)="onHideStudentResponsiveNavbar(false, false)">
+              <mat-icon svgIcon="doubts-student"></mat-icon>
+              <span>Doubts</span>
+            </a>
+          </li>
+
+          <li>
+            <a [ngClass]="{'active' : isSelectedAssessment}" (click)="isShowAssessment()">
+              <mat-icon svgIcon="assesment-student"></mat-icon>
+              <span>Assessment</span>
+              <mat-icon *ngIf="isStudentResponsive" svgIcon="downdrop"></mat-icon>
+            </a>
+
+            <ul *ngIf="activeView === htmlView.ASSESSMENT_MOBILE" class="student-menu">
+              <li>
+                <a (click)="onHideStudentResponsiveNavbar(false, true)" [routerLink]="studentPracticeTabUrl"
+                  routerLinkActive="active">Practice</a>
+              </li>
+
+              <li>
+                <a (click)="onHideStudentResponsiveNavbar(false, true)" [routerLink]="comingSoonUrl">Exam</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-3 col-xs-10">
+      <div class="flex-box">
+        <div class="student-header__student-search navbar-search">
+          <div class="student-header__student-search--input">
+            <input autocomplete="off" type="text" id="txtSearch" name="search" placeholder="Search..." id="searchTxt" />
+            <mat-icon svgIcon="search"></mat-icon>
+          </div>
+        </div>
+
+        <div class="student-header__student-profile text-right">
+          <ul class="profile-icons">
+            <!-- <li>
+                <a id="lnkAdd">
+                <mat-icon svgIcon="add" matTooltip="Add"></mat-icon>
+                </a>
+            </li> -->
+
+            <li class="student-header__student-profile__student-notification">
+              <a (click)="onOpenViews('notification')">
+                <div class="counter">
+                  <mat-icon matBadge="2" matBadgeColor="warn" svgIcon="bell" matTooltip="Notifications"></mat-icon>
+                  <span *ngIf="notificationCount !== 0">{{
+                    notificationCountWithPlus
+                    }}</span>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a class="setting" (click)="onOpenViews('settings')">
+                <mat-icon svgIcon="systemSettings" matTooltip="Settings"></mat-icon>
+              </a>
+            </li>
+
+            <li>
+              <!--DEVELOPER: for multi institute student side-->
+              <a class="multiple-institute-flex" (click)="onShowDropdown()">
+                <div class="user-placeholder">
+                  <img [src]="imageUploadUrl" *ngIf="imageUploadUrl" alt="" (error)="onError($event)" />
+                  <mat-icon *ngIf="!imageUploadUrl" svgIcon="userProfile" matTooltip="View Profile">
+                  </mat-icon>
+                </div>
+                <div class="multiple-institute-flex__width" *ngIf="activeEnterprise">
+                  <h4>{{activeEnterprise.provider_name}}</h4>
+                  <p>{{activeEnterprise.provider_type}}</p>
+                </div>
+                <div class="multiple-institute-flex__width" *ngIf="!activeEnterprise">
+                  <h4>{{userName}}</h4>
+                </div>
+                <mat-icon class="student-userProfilearrow" svgIcon="userProfileArrow"></mat-icon>
+              </a>
+              <div *ngIf="isShowDropdown" class="dropdown-actions profile-view-phone multiple-institute-dropdown">
+                <ul>
+                  <li>
+                    <div class="multiple-institute-dropdown__user-details">
+                      <div class="multiple-institute-dropdown__user-details__relative">
+                        <mat-icon *ngIf="!imageUploadUrl" svgIcon="userProfile"></mat-icon>
+                        <img [src]="imageUploadUrl" *ngIf="imageUploadUrl" alt="" (error)="onError($event)" />
+                        <a (click)="onEditProfile()">
+                          <mat-icon matTooltip="Edit Profile" svgIcon="edit"></mat-icon>
+                        </a>
+                      </div>
+                      <h3>{{userName}}</h3>
+                      <a (click)="onHideDropdown()" [routerLink]="onViewProfile">View Profile</a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="multiple-institute-dropdown__institute-details">
+                      <h5>Institute</h5>
+                      <ul *ngIf="enterpriseList.length">
+                        <li *ngFor="let institute of enterpriseList; let i=index">
+                          <a [ngClass]="{active: institute?.provider_id === activeEnterprise?.provider_id}"
+                            (click)="onClickInstitute(institute)">
+                            <!--DEVELOPER: true for selected class-->
+                            <div>
+                              <mat-icon *ngIf="!institute?.logo_thumbnail && !institute?.avatar_thumbnail"
+                                svgIcon="institutePlaceholder">
+                              </mat-icon>
+                              <img *ngIf="institute?.logo_thumbnail"
+                                src="{{userConfig?.public_base_url + institute?.logo_thumbnail}}"
+                                (error)="onError($event)" />
+                              <img *ngIf="institute?.logo_thumbnail == null && institute?.avatar_thumbnail"
+                                src="{{userConfig?.public_base_url + institute?.avatar_thumbnail}}"
+                                (error)="onError($event)" />
+                            </div>
+                            <div class="institute-label-width">
+                              <label>{{institute?.provider_name}}</label>
+                              <p><span>{{institute?.provider_type}}</span> |
+                                <span>{{institute?.provider_code}}</span>
+                              </p>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a (click)="openEnrollDialog()">
+                            <mat-icon svgIcon="EnrollInstitute"></mat-icon>
+                            <label>Enroll other Institute</label>
+                          </a>
+                        </li>
+                      </ul>
+                      <ul *ngIf="!enterpriseList.length">
+                        <!-- DEVELOPER: yet no institute selected-->
+                        <li>
+                          <a (click)="openEnrollDialog()">
+                            <mat-icon svgIcon="EnrollInstitute"></mat-icon>
+                            <label>Enroll Institute</label>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+
+                  <li class="multiple-institute-dropdown__logout">
+                    <a matTooltip="Logout" (click)="onLogOut()">
+                      <p>Logout</p>
+                      <mat-icon svgIcon="redLogout"></mat-icon>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="activeView === htmlView.LEARN || activeView === htmlView.ASSESSMENT" class="student-navigation-header">
+  <ul *ngIf="activeView === htmlView.LEARN">
+    <li>
+      <a (click)="isSelectedLearn = true" [routerLink]="studentMaterialUrl" routerLinkActive="active">Material</a>
+    </li>
+
+    <li>
+      <a (click)="isSelectedLearn = true" [routerLink]="studentAssignmentUrl" routerLinkActive="active">Assignment</a>
+    </li>
+
+    <li>
+      <a (click)="isSelectedLearn = true" [routerLink]="studentRecordedSessionUrl" routerLinkActive="active">Recorded
+        session</a>
+    </li>
+
+    <li>
+      <a (click)="isSelectedLearn = true" [routerLink]="studentCourseUrl" routerLinkActive="active">Course</a>
+    </li>
+  </ul>
+
+  <ul *ngIf="activeView === htmlView.ASSESSMENT">
+    <li>
+      <a (click)="isSelectedAssessment = true" [routerLink]="studentPracticeTabUrl"
+        routerLinkActive="active">Practice</a>
+    </li>
+
+    <li>
+      <a (click)="isSelectedAssessment = true" [routerLink]="comingSoonUrl" routerLinkActive="active">Exam</a>
+    </li>
+  </ul>
+</div>
+
+<div class="student-overlay-sidebar" (click)="onHideStudentResponsiveNavbar(false, false)" *ngIf="isStudentResponsive">
+
+</div>
+
+<!-- MAT DRAWER FOR SETTING -->
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #settingNav class="sidebar-drawer" position="end" hasBackdrop="false">
+    <app-setting-drawer (clickEvent)="settingNav.toggle()"></app-setting-drawer>
+  </mat-drawer>
+</mat-drawer-container>
+
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #notificationNav class="sidebar-drawer" position="end" hasBackdrop="false">
+    <app-notification-drawer *ngIf="isNotificationSlider" [data]="isNotificationSlider"
+      (clickEvent)="notificationNav.toggle()" (closeDrawerEvent)="isNotificationSlider = false">
+    </app-notification-drawer>
+  </mat-drawer>
+</mat-drawer-container>
+<!-- end -->

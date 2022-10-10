@@ -1,0 +1,45 @@
+<div class="course-title-form-container">
+  <div class="course-title-form">
+    <h3 class="text-center MB-1">Course Title *</h3>
+    <form [formGroup]="courseTitleForm" (ngSubmit)="onSubmitCourseForm(courseTitleForm)">
+      <div class="form-control">
+        <mat-label>Course Title*</mat-label>
+        <mat-form-field
+          appearance="outline"
+          floatLabel="always"
+        >
+          <input
+            id="txtName"
+            formControlName="title"
+            type="text"
+            autocomplete="off"
+            matInput
+            required
+            placeholder="Course title"
+          />
+          <mat-error *ngIf="isRequiredField(formControls['title'])">{{validationConstant.COURSE_TITLE}}</mat-error>
+          <mat-error *ngIf="isValidLength(formControls['title'])">{{validationConstant.COURSE_TITLE_LENGTH}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row buttons">
+        <div class="col-md-6 PL-0 MT-5">
+          <div class="button-group">
+            <button type="button" (click)="onCourseList()" id="btnCancel" class="cancel-btn MR-2" mat-stroked-button>
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 PR-0 text-right MT-5">
+          <div class="button-group">
+            <button mat-flat-button color="primary" type="submit" id="btnAdd" [disabled]="isLoading">
+              <span>Save & Next</span>
+              <mat-icon svgIcon="next"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

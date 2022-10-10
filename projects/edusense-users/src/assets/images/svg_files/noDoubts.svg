@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124.258" height="141.377" viewBox="0 0 124.258 141.377">
+  <g id="noDoubts" transform="translate(-1057.377 -450.071)">
+    <g id="Group_22251" data-name="Group 22251" transform="translate(1073.945 450.071)">
+      <path id="Path_7943" data-name="Path 7943" d="M103.426,0H169.7a12.409,12.409,0,0,1,12.426,12.426V45.837A12.409,12.409,0,0,1,169.7,58.263H157.271V70.689a4.1,4.1,0,0,1-7.041,2.9L136.561,60l-1.74-1.74h-31.4A12.409,12.409,0,0,1,91,45.837V12.426A12.409,12.409,0,0,1,103.426,0Z" transform="translate(-91 0)" fill="#e1e4ea"/>
+      <path id="Path_7944" data-name="Path 7944" d="M256,12.426V45.837a12.409,12.409,0,0,0,12.426,12.426h31.4l1.74,1.74V0H268.426A12.409,12.409,0,0,0,256,12.426Z" transform="translate(-256 0)" fill="rgba(154,171,183,0.6)"/>
+    </g>
+    <g id="Group_22252" data-name="Group 22252" transform="translate(1057.377 524.901)">
+      <g id="Group_1493" data-name="Group 1493">
+        <path id="Path_7945" data-name="Path 7945" d="M332.568,271A16.568,16.568,0,1,1,316,287.568,16.617,16.617,0,0,1,332.568,271Z" transform="translate(-303.574 -271)" fill="#e1e4ea"/>
+        <path id="Path_7946" data-name="Path 7946" d="M299.993,391a29.262,29.262,0,0,1,28.993,29.27,4.1,4.1,0,0,1-4.142,4.142h-49.7A4.1,4.1,0,0,1,271,420.269,29.263,29.263,0,0,1,299.993,391Z" transform="translate(-271 -357.865)" fill="#e1e4ea"/>
+      </g>
+      <path id="Path_7947" data-name="Path 7947" d="M376,420.27a4.1,4.1,0,0,0,4.142,4.142h24.852V391A29.263,29.263,0,0,0,376,420.27Z" transform="translate(-376 -357.865)" fill="#e1e4ea"/>
+      <path id="Path_7948" data-name="Path 7948" d="M376,287.568a16.617,16.617,0,0,0,16.568,16.568V271A16.617,16.617,0,0,0,376,287.568Z" transform="translate(-363.574 -271)" fill="#e1e4ea"/>
+    </g>
+    <g id="Group_22253" data-name="Group 22253" transform="translate(1123.648 524.901)">
+      <path id="Path_7949" data-name="Path 7949" d="M92.568,271A16.568,16.568,0,1,1,76,287.568,16.617,16.617,0,0,1,92.568,271Z" transform="translate(-63.574 -271)" fill="rgba(154,171,183,0.6)"/>
+      <path id="Path_7950" data-name="Path 7950" d="M59.993,391a29.263,29.263,0,0,1,28.993,29.27,4.1,4.1,0,0,1-4.142,4.142h-49.7A4.1,4.1,0,0,1,31,420.27,29.263,29.263,0,0,1,59.993,391Z" transform="translate(-31 -357.865)" fill="rgba(154,171,183,0.6)"/>
+    </g>
+  </g>
+</svg>

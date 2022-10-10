@@ -1,0 +1,29 @@
+// --------------------------------------------------------------------------------------
+// ============================ IE Browser support scss  ================================
+// --------------------------------------------------------------------------------------
+@media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
+    //    system setting IE issues
+    .table__body {
+        thead {
+            th {
+                .mat-select-arrow-wrapper {
+                    top: 7px !important;
+
+                    &:after {
+                        height: 1.4rem;
+                        top: 1.1rem !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .table__footer {
+        select {
+            &::-ms-expand {
+                display: none;
+            }
+        }
+    }
+}

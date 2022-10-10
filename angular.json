@@ -1,0 +1,398 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "edusense-admin": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/edusense-admin",
+            "sourceRoot": "projects/edusense-admin/src",
+            "prefix": "es-admin",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/edusense-admin",
+                        "index": "projects/edusense-admin/src/index.html",
+                        "main": "projects/edusense-admin/src/main.ts",
+                        "polyfills": "projects/edusense-admin/src/polyfills.ts",
+                        "tsConfig": "projects/edusense-admin/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "projects/edusense-admin/src/favicon.ico",
+                            "projects/edusense-admin/src/assets"
+                        ],
+                        "styles": ["projects/edusense-admin/src/styles.scss"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "dev": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-admin/src/environments/environment.ts",
+                                    "with": "projects/edusense-admin/src/environments/environment.dev.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
+                        "qa": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-admin/src/environments/environment.ts",
+                                    "with": "projects/edusense-admin/src/environments/environment.qa.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
+                        "demo": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-admin/src/environments/environment.ts",
+                                    "with": "projects/edusense-admin/src/environments/environment.demo.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
+                        "prod": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-admin/src/environments/environment.ts",
+                                    "with": "projects/edusense-admin/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "6mb",
+                                    "maximumError": "8mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "12kb",
+                                    "maximumError": "14kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "edusense-admin:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "edusense-admin:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "edusense-admin:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/edusense-admin/src/test.ts",
+                        "polyfills": "projects/edusense-admin/src/polyfills.ts",
+                        "tsConfig": "projects/edusense-admin/tsconfig.spec.json",
+                        "karmaConfig": "projects/edusense-admin/karma.conf.js",
+                        "assets": [
+                            "projects/edusense-admin/src/favicon.ico",
+                            "projects/edusense-admin/src/assets"
+                        ],
+                        "styles": ["projects/edusense-admin/src/styles.scss"],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/edusense-admin/tsconfig.app.json",
+                            "projects/edusense-admin/tsconfig.spec.json",
+                            "projects/edusense-admin/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/edusense-admin/e2e/protractor.conf.js",
+                        "devServerTarget": "edusense-admin:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "edusense-admin:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "edusense-users": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/edusense-users",
+            "sourceRoot": "projects/edusense-users/src",
+            "prefix": "es-user",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/edusense-users",
+                        "index": "projects/edusense-users/src/index.html",
+                        "main": "projects/edusense-users/src/main.ts",
+                        "polyfills": "projects/edusense-users/src/polyfills.ts",
+                        "tsConfig": "projects/edusense-users/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "projects/edusense-users/src/favicon.ico",
+                            "projects/edusense-users/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                            "projects/edusense-users/src/styles.scss",
+                            "node_modules/swiper/dist/css/swiper.css",
+                            "node_modules/font-awesome/css/font-awesome.min.css",
+                            "node_modules/ngx-markdown-editor/assets/highlight.js/agate.min.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "projects/edusense-users/src/assets/js/lib-jitsi-meet.min.js",
+                            "node_modules/mammoth/mammoth.browser.min.js",
+                            "projects/edusense-users/src/assets/js/pubnub.4.27.6.js",
+                            "node_modules/swiper/dist/js/swiper.js",
+                            "projects/edusense-users/src/assets/js/strophe/strophe.min.js",
+                            "node_modules/recordrtc/RecordRTC.js",
+                            "node_modules/ngx-markdown-editor/assets/highlight.js/highlight.min.js",
+                            "node_modules/ngx-markdown-editor/assets/marked.min.js",
+                            "projects/edusense-users/src/assets/js/mode-markdown.js"
+                        ]
+                    },
+                    "configurations": {
+                        "dev": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-users/src/environments/environment.ts",
+                                    "with": "projects/edusense-users/src/environments/environment.dev.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
+                        "qa": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-users/src/environments/environment.ts",
+                                    "with": "projects/edusense-users/src/environments/environment.qa.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
+                        "demo": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-users/src/environments/environment.ts",
+                                    "with": "projects/edusense-users/src/environments/environment.demo.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        },
+                        "prod": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/edusense-users/src/environments/environment.ts",
+                                    "with": "projects/edusense-users/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "6mb",
+                                    "maximumError": "8mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "12kb",
+                                    "maximumError": "14kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "edusense-users:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "edusense-users:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "edusense-users:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/edusense-users/src/test.ts",
+                        "polyfills": "projects/edusense-users/src/polyfills.ts",
+                        "tsConfig": "projects/edusense-users/tsconfig.spec.json",
+                        "karmaConfig": "projects/edusense-users/karma.conf.js",
+                        "assets": [
+                            "projects/edusense-users/src/favicon.ico",
+                            "projects/edusense-users/src/assets"
+                        ],
+                        "styles": ["projects/edusense-users/src/styles.scss"],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/edusense-users/tsconfig.app.json",
+                            "projects/edusense-users/tsconfig.spec.json",
+                            "projects/edusense-users/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/edusense-users/e2e/protractor.conf.js",
+                        "devServerTarget": "edusense-users:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "edusense-users:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "utility-lib": {
+            "projectType": "library",
+            "root": "projects/utility-lib",
+            "sourceRoot": "projects/utility-lib/src",
+            "prefix": "lib",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/utility-lib/tsconfig.lib.json",
+                        "project": "projects/utility-lib/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/utility-lib/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/utility-lib/src/test.ts",
+                        "tsConfig": "projects/utility-lib/tsconfig.spec.json",
+                        "karmaConfig": "projects/utility-lib/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/utility-lib/tsconfig.lib.json",
+                            "projects/utility-lib/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "eduSense-frontend",
+    "cli": {
+        "analytics": false
+    }
+}

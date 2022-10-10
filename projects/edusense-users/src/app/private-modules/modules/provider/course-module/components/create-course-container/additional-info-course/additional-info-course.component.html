@@ -1,0 +1,80 @@
+<div class="additional-info-course-container">
+  <div class="additional-info-form">
+    <h3>Additional Info</h3>
+    <div class="row MT-3 additional-info-form__section">
+      <div class="col-md-6 PL-0">
+        <div class="form-control">
+          <mat-label>Tags</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-chip-list #chipTagList aria-label="Fruit selection">
+              <mat-chip *ngFor="let selectedTag of selectedTagsList" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeTagSelection(selectedTag)">
+                {{ selectedTag?.name }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input #tagInput [formControl]="tagCtrl"
+                     [matAutocomplete]="autoTag" [matChipInputFor]="chipTagList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addTag($event)">
+              <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
+                <mat-option *ngFor="let tag of tagsList" [value]="tag">
+                  {{ tag?.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+
+        <div class="form-control">
+          <mat-label>Skills</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let selectedSkill of selectedSkillList" [selectable]="selectable"
+                        [removable]="removable"
+                        (removed)="removeSkillSelection(selectedSkill)">
+                {{ selectedSkill?.name }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input #skillInput [formControl]="skillCtrl"
+                     [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSkill($event)">
+                <mat-option *ngFor="let skill of skillsList" [value]="skill">
+                  {{ skill?.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+
+        <div class="row buttons">
+          <div class="col-md-3 PL-0 MT-5">
+            <div class="button-group">
+              <button type="button" (click)="onPreviewStep()" id="btnPrev" class="cancel-btn MR-2"
+                      mat-stroked-button>
+                <mat-icon svgIcon="prev"></mat-icon>
+                <span>Previous</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-9 PR-0 text-right MT-5">
+            <div class="button-group">
+              <button type="button" id="btnCancel" class="cancel-btn MR-2"
+                      mat-stroked-button (click)="onCourseList()">
+                <span>Cancel</span>
+              </button>
+
+              <button class="ML-2" mat-flat-button color="primary" type="button" id="btnAdd"
+                      (click)="onClickSaveInfo()">
+                <span>Save & Preview</span>
+                <mat-icon svgIcon="next"></mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

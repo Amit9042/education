@@ -1,0 +1,141 @@
+.preview-course-container {
+    .preview-course {
+        margin-top: 2rem;
+        h3 {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.13;
+            color: #1d2c3c;
+        }
+
+        &__section {
+            margin: 2rem 0;
+
+            &--header {
+                h4 {
+                    font-size: 2rem;
+                    font-weight: bold;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1.25;
+                    letter-spacing: normal;
+                    text-align: left;
+                    color: #203061;
+                }
+            }
+
+            &--body {
+                margin-top: 1.8rem;
+                border: 1px solid #dedede;
+                border-radius: 0.6rem;
+
+                &--panel {
+                    .panel-header {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-between;
+                        border-bottom: 1px solid #d1d4d8;
+
+                        &__left {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            width: 95%;
+                            justify-content: space-between;
+                            box-sizing: border-box;
+                            padding: 2.5rem 1.5rem 2.5rem 4.5rem;
+
+                            .mat-icon {
+                                vertical-align: bottom;
+                                margin-right: 0.8rem;
+                            }
+
+                            span {
+                                font-size: 2rem;
+                                font-weight: bold;
+                                line-height: 1.25;
+                                color: #203061;
+                            }
+
+                            span.time {
+                                font-size: 1.6rem;
+                                line-height: 1.28;
+                                color: #848181;
+                                font-weight: 500;
+                            }
+                        }
+
+                        &__right {
+                            width: 5%;
+                            box-sizing: border-box;
+                            padding: 2.5rem;
+                            text-align: center;
+                            border-left: 1px solid #d1d4d8;
+
+                            a {
+                                display: inline-block;
+
+                                .mat-icon {
+                                    width: 1.5rem;
+                                    height: 1.5rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .panel-content {
+                        padding: 3rem 1.5rem 1rem 4.5rem;
+                        background-color: #f7f7f7;
+                        border-bottom: 1px solid #d1d4d8;
+                        display: none;
+
+                        &.content-expand {
+                            display: block;
+                        }
+
+                        &__video {
+                            display: flex;
+                            flex-direction: row;
+
+                            img, mat-icon {
+                                width: 11.5rem;
+                                height: 8.6rem;
+                                margin-right: 1.2rem;
+                                border-radius: 1rem;
+                            }
+
+                            span {
+                                font-size: 1.8rem;
+                                font-weight: bold;
+                                line-height: 1.28;
+                                color: #203061;
+                            }
+                        }
+
+                        &__file {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            margin-top: 1.5rem;
+
+                            .mat-icon {
+                                width: 2.8rem;
+                                height: 2.8rem;
+                            }
+
+                            span {
+                                font-size: 1.6rem;
+                                font-weight: 600;
+                                line-height: 1.25;
+                                color: #585e6b;
+                                padding-left: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

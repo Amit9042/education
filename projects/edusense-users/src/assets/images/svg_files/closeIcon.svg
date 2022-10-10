@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__close_1_" width="30" height="30" data-name="close (1)" viewBox="0 0 30 30">
+    <defs>
+        <style>
+            .prefix__cls__close-circle-1{fill:#ff385c}
+        </style>
+    </defs>
+    <path id="prefix__Path_15827" d="M15 30a15 15 0 1 1 15-15 15.017 15.017 0 0 1-15 15zm0-27.857A12.857 12.857 0 1 0 27.857 15 12.872 12.872 0 0 0 15 2.143zm0 0" class="prefix__cls__close-circle-1" data-name="Path 15827"/>
+    <path id="prefix__Path_15828" d="M158.073 159.145a1.067 1.067 0 0 1-.758-.314L146.6 148.117a1.071 1.071 0 0 1 1.515-1.515l10.714 10.714a1.072 1.072 0 0 1-.757 1.829zm0 0" class="prefix__cls__close-circle-1" data-name="Path 15828" transform="translate(-137.715 -137.717)"/>
+    <path id="prefix__Path_15829" d="M147.357 159.144a1.072 1.072 0 0 1-.757-1.829l10.714-10.715a1.071 1.071 0 0 1 1.515 1.515l-10.714 10.715a1.067 1.067 0 0 1-.758.314zm0 0" class="prefix__cls__close-circle-1" data-name="Path 15829" transform="translate(-137.714 -137.715)"/>
+</svg>

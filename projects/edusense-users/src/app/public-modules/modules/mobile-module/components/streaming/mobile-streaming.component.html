@@ -1,0 +1,11 @@
+<div *ngIf="userDetails">
+  <app-streaming
+    [channelName]="'ss-mobile-team'"
+    [isProvider]="true"
+    [userDetails]="userDetails"
+    (endStreaming)="onEnd()">
+  </app-streaming>
+</div>
+<div *ngIf="!userDetails">
+  <label>Session is complete. Please reload to continue.</label>
+</div>

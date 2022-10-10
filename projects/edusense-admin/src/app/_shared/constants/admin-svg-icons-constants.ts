@@ -1,0 +1,23 @@
+export const ADMIN_SVG_ICONS = [
+    'menu',
+    'search',
+    'add',
+    'bell',
+    'systemSettings',
+    'help',
+    'dotsMenu',
+    'logout',
+    'userProfile',
+    'dashboard',
+    'provider',
+    'action',
+    'back',
+    'admin-provider',
+    'logo_edu',
+    'eye',
+    'hide',
+    'leftArrow',
+    'close',
+    'rightArrow',
+    'broadcast'
+];

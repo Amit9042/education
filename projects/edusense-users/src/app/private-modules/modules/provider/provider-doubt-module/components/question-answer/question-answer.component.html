@@ -1,0 +1,27 @@
+<div class="doubt-container questions-container">
+    <div class="row">
+        <div class="col-md-12 PL-0">
+            <div class="waiting-room-container meeting-room-container">
+                <div class="waiting-room meeting-room">
+                    <div class="doubt-container__top">
+                        <div class="doubt-container__top--left">
+                            <a (click)="onBackClick()" id="lnkBack">
+                                <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+                            </a>
+                            <h3>Question & Answers</h3>
+                        </div>
+                        <div class="flex-right">
+                            <button (click)="onAddAnswer(questionDetail)" class="remove-shadow" id="btnAddAnswer" mat-flat-button color="primary"
+                                type="button">
+                                Add your Answer
+                            </button>
+                        </div>
+                    </div>
+                    <lib-question-answer [questionData]="questionDetail"
+                        (answerDelete)="onAnswerDelete($event)" (questionDelete)="onQuestionDelete($event)"
+                        (answerEdit)="onAnswerEdit($event)" (questionEdit)="onQuestionEdit($event)"></lib-question-answer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

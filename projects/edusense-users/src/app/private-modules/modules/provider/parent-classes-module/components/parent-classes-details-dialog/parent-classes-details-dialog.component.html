@@ -1,0 +1,95 @@
+<div class="meeting-dialog-wrapper">
+    <div class="meeting-dialog__head">
+        <h4>{{ isEditMode ? 'Edit' : 'Create' }} Class</h4>
+        <a (click)="onCloseDialog(false)" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="meeting-dialog__bottom xs-P2">
+        <div class="auth-container create-class-container">
+            <div class="auth-box">
+                <div class="auth-box__data">
+                    <form
+                        [formGroup]="parentClassDetailsForm"
+                        (ngSubmit)="onSubmitParentClassDetailsForm(parentClassDetailsForm)"
+                    >
+                        <!-- NAME FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>Class Name*</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <input
+                                            id="txtName"
+                                            formControlName="name"
+                                            type="text"
+                                            autocomplete="off"
+                                            matInput
+                                            placeholder="Enter name"
+                                        />
+                                        <mat-error
+                                            *ngIf="
+                                                isRequiredField(
+                                                    formControls['name']
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.NAME }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidLength(
+                                                    formControls['name']
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.NAME_LENGTH }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidField(
+                                                    formControls['name']
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.NAME_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                   
+                        <!-- GRADE FIELD -->
+                            <div
+                                class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                            >
+                                <div class="form-control">
+                                    <app-ss-select-search
+                                        id="matSelectGrade"
+                                        [formName]="parentClassDetailsForm"
+                                        [selectConfig]="gradeSearchConfig"
+                                        [selected]="selectedGrade"
+                                        [dataList]="gradeList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent($event, 'grade')
+                                        "
+                                    >
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" id="btnCancel" (click)="onCloseDialog(false)" mat-button>Cancel</button>
+                            <button mat-flat-button color="primary" type="submit" id="btnAdd">
+                              {{isEditMode ? "Update" : "Add" }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

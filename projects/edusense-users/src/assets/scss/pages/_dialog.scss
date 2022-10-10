@@ -1,0 +1,160 @@
+.dialog-container {
+    &__head {
+        background-color: $grey-color-3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2.4rem 3rem;
+
+        @include respond('phone') {
+            padding: 2rem 1.5rem;
+        }
+
+        h4 {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+            line-height: 1.28;
+
+            @include respond('phone') {
+                font-size: 1.6rem;
+            }
+        }
+
+        a {
+            display: inline-flex;
+        }
+
+        .mat-icon {
+            color: $primary-color;
+            width: 1.6rem;
+            height: 1.6rem;
+
+            @include respond('phone') {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+
+            svg {
+                path {
+                    fill: $primary-color;
+                }
+            }
+        }
+    }
+
+    &__bottom {
+        background-color: $white-color;
+        padding: 2rem 3rem 3rem;
+
+        @include respond('phone') {
+            padding: 2rem 1.5rem;
+        }
+
+        .meeting-room {
+            &__body {
+                padding: 0;
+                margin: 0;
+            }
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            mat-icon {
+                @include square(2rem);
+            }
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            .mat-button-base {
+                color: $primary-color;
+            }
+            button {
+                font-weight: 600;
+                min-width: auto !important;
+                height: 5rem !important;
+                min-width: 9.6rem !important;
+                padding: auto 2rem;
+                margin-left: 1rem;
+                border-radius: 0.8rem;
+                &.mat-primary {
+                    color: $white-color;
+                }
+
+                span {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+
+        .form-control {
+            mat-icon {
+                right: 0;
+            }
+        }
+
+        p {
+            color: $primary-color;
+            display: inline-block;
+            font-size: 1.6rem;
+            line-height: 1.25;
+            padding-right: 6rem;
+
+            @include respond('phone') {
+                padding-right: 0;
+            }
+
+            &.bottom-link {
+                color: $primary-color;
+                a {
+                    display: inline-block;
+                    font-weight: bold;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dialog-list-container {
+    &__bottom {
+        .visitor-details {
+            h4 {
+                color: $black-color-2;
+                font-size: 1.8rem !important;
+
+                @include respond('phone'){
+                    font-size: 1.6rem !important;
+                }
+
+                span {
+                    color: $primary-color !important;
+                    opacity: 1 !important;
+                    font-weight: 600 !important;
+                }
+            }
+            p {
+                span {
+                    color: $grey-color-12;
+                    font-weight: 600;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
+}
+
+.prescription-view-dialog-container {
+    max-height: 90vh;
+    max-width: 80rem;
+
+    pdf-viewer {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
+}

@@ -1,0 +1,27 @@
+.slow-internet-connection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 78px);
+
+    img {
+        width: 250px;
+    }
+    
+
+    h3 {
+        font-size: 26px;
+        font-weight: 500;
+        text-align: center;
+        color: #003f6f;
+        margin: 10px 0 15px 0;
+    }
+
+    p {
+        opacity: 0.7;
+        font-size: 18px;
+        text-align: center;
+        color: #576b79;
+    }
+}

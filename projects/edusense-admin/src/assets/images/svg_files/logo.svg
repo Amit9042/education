@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="103.574" height="39" viewBox="0 0 103.574 39">
+  <g id="logo" transform="translate(-423.426 -139)">
+    <g id="logo-2" data-name="logo" transform="translate(423.426 139)">
+      <g id="Untitled-2" transform="translate(0 4.889)">
+        <rect id="Rectangle_70" data-name="Rectangle 70" width="14.084" height="14.084" transform="translate(0 15.029)" fill="#004e81"/>
+        <path id="Path_527" data-name="Path 527" d="M17.752,52H3.7V66.021h.095C4.8,54.552,14.35,52.441,17.784,52.063,17.752,52.031,17.752,52.031,17.752,52Z" transform="translate(-3.7 -52)" fill="#f2b255"/>
+        <path id="Path_528" data-name="Path 528" d="M66.552,52H52.5V66.021h.095C53.6,54.552,63.118,52.441,66.552,52.063Z" transform="translate(-37.124 -52)" fill="#f15f54"/>
+        <path id="Path_529" data-name="Path 529" d="M66.552,4.1H52.5V18.184S66.552,18.341,66.552,4.1Z" transform="translate(-37.124 10.929)" fill="#44c8bb"/>
+      </g>
+      <text id="DOO" transform="translate(70.574 29)" fill="#2b374f" font-size="28" font-family="Poppins-SemiBold, Poppins" font-weight="600"><tspan x="-32.298" y="0">DOO</tspan></text>
+    </g>
+  </g>
+</svg>

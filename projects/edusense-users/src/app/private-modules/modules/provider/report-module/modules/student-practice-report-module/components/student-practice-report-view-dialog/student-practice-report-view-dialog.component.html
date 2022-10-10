@@ -1,0 +1,57 @@
+<div class="dialog-container">
+    <div class="dialog-container__head">
+        <h4>{{data.userName}} <span>{{data.practiseName}}</span></h4>
+        <a (click)="onDialogClose()" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="dialog-container__bottom">
+        <div class="dialog-container__bottom__space-around">
+            <div class="left-section">
+                <span>{{data.totalQuestion}}</span>
+                <label>Total Question</label>
+
+            </div>
+            <div class="right-section">
+                <h6>Marks : <span>{{data.totalScore}}</span> / <span>{{data.totalMarks}}</span></h6>
+                <div>
+                    <label>Correct</label>
+                    <span>{{data.correctAnswer}}</span>
+                </div>
+                <div>
+                    <label>Wrong</label>
+                    <span>{{data.wrongAnswer}}</span>
+                </div>
+                <div>
+                    <label>Skipped</label>
+                    <span>{{data.skippedAnswer}}</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="dialog-container__bottom__space-between">
+            <div class="footer-data">
+                <mat-icon svgIcon="time"></mat-icon>
+                <div>
+                    <label>{{data.totalTimeSpent}} Secs</label>
+                    <span>Time Spent</span>
+                </div>
+            </div>
+            <div class="footer-data">
+                <mat-icon svgIcon="accuracy"></mat-icon>
+                <div>
+                    <label>{{data.accurracy}}%</label>
+                    <span>Accuracy</span>
+                </div>
+            </div>
+            <div class="footer-data">
+                <mat-icon svgIcon="speed"></mat-icon>
+                <div>
+                    <label>{{data.speed}} Sec/Q</label>
+                    <span>Speed</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

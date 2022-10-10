@@ -1,0 +1,146 @@
+<div class="class-table-container">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6 PL-0 list-header-view">
+                <h2>User Management</h2>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 PR-0 text-right">
+                <button class="ML-20" (click)="openInviteUserDialog()" class="remove-shadow" mat-flat-button
+                    color="primary" id="btnInvite">
+                    Invite User
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-body">
+        <table class="table" mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="name">
+                <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Name</span>
+                    <div class="form-control form-control--filter">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input type="text" [formControl]="nameFilterField" autocomplete="off" matInput
+                                placeholder="Search name" id="txtSearchName" />
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.user_master.first_name }} {{ element.user_master.last_name }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Email</span>
+
+                    <div class="form-control form-control--filter">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input type="text" autocomplete="off" [formControl]="emailFilterField" matInput
+                                placeholder="Search email" id="txtSearchEmail" />
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.user_master.email }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+                <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Role</span>
+                    <div class="form-control form-control--filter">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-select type="text" autocomplete="off" matInput [formControl]="roleFilterField"
+                                placeholder="Select role" matInput id="matSelectRole">
+
+                                <mat-option disable>All</mat-option>
+                                <mat-option *ngFor="
+                                            let role of roleList;" [value]="role.id">{{role.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ getRoleName(element.user_role_link.role_id) }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Action</span>
+                    <div class="form-control form-control--filter status-width">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-select type="text" autocomplete="off" matInput [formControl]="actionFilterField"
+                                placeholder="Select action" matInput id="matSelectAction">
+                                <mat-option disable>All</mat-option>
+                                <mat-option value="1">Enabled</mat-option>
+                                <mat-option value="0">Disabled</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-slide-toggle #toggleEnable [checked]="element.user_role_link.is_active == 1 ? true : false"
+                        (change)="updateUserStatus(toggleEnable,element.user_role_link.is_active,element.user_id)">
+                    </mat-slide-toggle>
+                    <!-- !material.is_active,material.material_id -->
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actionButtons" stickyEnd>
+                <th width="20%" mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element; let i = index" class="text-center">
+                    <div class="table-action">
+                        <button class="action-button" mat-button [matMenuTriggerFor]="menu">
+                            <mat-icon matTooltip="More Options" svgIcon="action" [id]="'iconTriggerMenu-' + i">
+                            </mat-icon>
+                        </button>
+
+                        <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action" #beforeMenu="matMenu"
+                            xPosition="before">
+                            <button type="button" mat-menu-item [id]="'btnView-' + i"
+                                (click)="onViewUser(element.user_id)">
+                                <span>View</span>
+                            </button>
+                            <button type="button" mat-menu-item [id]="'btnEdit-' + i"
+                                (click)="OpenEditUserDialog(element.user_id)">
+                                <span>Edit</span>
+                            </button>
+
+                            <button type="button" (click)="inviteResend(element.user_id)" mat-menu-item
+                                [id]="'btnResend-' + i">
+                                <span>Resend</span>
+                            </button>
+
+                            <!-- <button type="button" mat-menu-item [id]="'btnEnable-' + i"
+                    (click)="onEnableClick(!element.is_active,element.class_id)">
+                    <span>{{!element.is_active ? "Enable" : "Disable"}}</span>
+                  </button>
+                  <button (click)="onAddStudentDialogOpen()" type="button" mat-menu-item [id]="'btnViewAddStudent-' + i">
+                    <span>Add Student</span>
+                  </button> -->
+                        </mat-menu>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- <app-no-data *ngIf="false"></app-no-data> -->
+        <div *ngIf="!isLoadingResults && dataSource.length == 0">
+            <div class="no-content-found-wrapper table-data">
+                <mat-icon svgIcon="no-user"></mat-icon>
+                <p>No users</p>
+                <span>No any users are available</span>
+            </div>
+        </div>
+        <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+    </div>
+    <div class="table-footer">
+        <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+            (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+    </div>
+</div>

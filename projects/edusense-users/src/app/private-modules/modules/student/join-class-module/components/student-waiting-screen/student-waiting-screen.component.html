@@ -1,0 +1,16 @@
+<div class="student-waiting-screen">
+    <div class="student-screen">
+        <div class="student-screen__image">
+            <img *ngIf="classDetails?.provider_detail?.logo_thumbnail"
+                 [src]="classDetails?.provider_detail?.logo_thumbnail"/>
+            <mat-icon *ngIf="!classDetails?.provider_detail?.logo_thumbnail" svgIcon="studentProfile"></mat-icon>
+        </div>
+        <h2>
+          {{classDetails?.provider_detail?.provider_first_name | checkEmpty}}
+          {{" "}}
+          {{classDetails?.provider_detail?.provider_last_name | checkEmpty}}
+        </h2>
+        <span>{{classDetails?.name | checkEmpty}}</span>
+        <p>Please Wait, Teacher has not started the session yet</p>
+    </div>
+</div>

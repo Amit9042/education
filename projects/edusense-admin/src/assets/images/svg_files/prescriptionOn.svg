@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+  <g id="prescriptionOn" transform="translate(-1187 -861)">
+    <circle id="Ellipse_22" data-name="Ellipse 22" cx="35" cy="35" r="35" transform="translate(1187 861)" fill="#fff"/>
+    <g id="prescriptions" transform="translate(1208 882)">
+      <g id="Group_190" transform="translate(12.07 7.764)">
+        <g id="Group_189">
+          <path id="Path_11271" d="M38.15,22.8H32.337a1.175,1.175,0,0,0,0,2.3H38.15a1.061,1.061,0,0,0,.937-1.151A1.078,1.078,0,0,0,38.15,22.8Z" transform="translate(-31.4 -22.8)" fill="#203061"/>
+        </g>
+      </g>
+      <g id="Group_192" transform="translate(12.071 14.353)">
+        <g id="Group_191" transform="translate(0)">
+          <path id="Path_11272" d="M42.606,37.8H32.751a1.151,1.151,0,0,0,0,2.3h9.884a1.152,1.152,0,0,0,1.151-1.151,1.178,1.178,0,0,0-1.18-1.151Z" transform="translate(-31.6 -37.8)" fill="#203061"/>
+        </g>
+      </g>
+      <g id="Group_194" transform="translate(0 0)">
+        <g id="Group_193" transform="translate(0 0)">
+          <path id="Path_11273" d="M28.325,3.4H7.642a1.184,1.184,0,0,0-1.18,1.18V15.615H4.4A4.363,4.363,0,0,0,0,19.982V26.5a4.407,4.407,0,0,0,4.4,4.4,3.955,3.955,0,0,0,.59-.03h19.3a5.213,5.213,0,0,0,5.222-5.223V4.551A1.159,1.159,0,0,0,28.325,3.4ZM6.462,26.5a2.112,2.112,0,0,1-1.652,2.036H4.4v.03A2.053,2.053,0,0,1,2.331,26.5V19.982A2.053,2.053,0,0,1,4.4,17.917H6.462V26.5Zm20.713-.856a2.935,2.935,0,0,1-2.892,2.892H8.321a4.421,4.421,0,0,0,.5-2.036V5.731H27.175V25.648Z" transform="translate(-1 -3.4)" fill="#203061"/>
+        </g>
+      </g>
+      <g id="Group_196" transform="translate(12.07 19.653)">
+        <g id="Group_195">
+          <path id="Path_11274" d="M39.691,51.8h-7.14a1.151,1.151,0,0,0,0,2.3h7.14a1.152,1.152,0,0,0,1.151-1.151A1.171,1.171,0,0,0,39.691,51.8Z" transform="translate(-31.4 -51.8)" fill="#203061"/>
+        </g>
+      </g>
+      <g id="Group_190-2" data-name="Group_190" transform="translate(17.054 5.082) rotate(90)">
+        <g id="Group_189-2" data-name="Group_189" transform="translate(0 0)">
+          <path id="Path_11271-2" data-name="Path_11271" d="M6.582,0H.913A1.053,1.053,0,0,0,0,1.151,1.055,1.055,0,0,0,.913,2.3H6.582A1.053,1.053,0,0,0,7.5,1.151C7.472.5,7.074,0,6.582,0Z" fill="#203061"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

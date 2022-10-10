@@ -1,0 +1,92 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.course-notes-container {
+    .course-notes {
+        &__create-notes {
+            border-bottom: 1px solid $primary-color-2;
+            padding-top: 5rem;
+            padding-bottom: 4rem;
+
+            label {
+                color: $primary-color;
+                display: block;
+                margin-bottom: 0.5rem;
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+
+            input {
+                background-color: $grey-color-10;
+                border: 2px solid $primary-color-2;
+                border-radius: 0.8rem;
+                padding: 1rem;
+                width: 100%;
+                font-size: 1.6rem;
+                height: 5rem;
+
+                &:focus {
+                    border-color: $primary-color;
+                    outline: transparent;
+                }
+            }
+
+            &__time {
+                position: relative;
+
+                label {
+                    color: $primary-color;
+                    background-color: $white-color;
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    height: 3.5rem;
+                    width: 7rem;
+                    left: 3rem;
+                    top: 1rem;
+                }
+            }
+        }
+
+        &__box {
+            padding-top: 3rem;
+
+            h4 {
+                color: $green-color-5;
+                font-weight: bold;
+                font-size: 1.8rem;
+            }
+
+            span,
+            small {
+                color: $grey-color-12;
+                font-weight: 600;
+            }
+
+            span {
+                font-size: 1.6rem;
+                margin-left: 2rem;
+            }
+
+            small {
+                font-size: 1.2rem;
+                margin-left: 1rem;
+            }
+
+            mat-icon {
+                @include square(1.8rem);
+            }
+
+            p {
+                background-color: $grey-color-31;
+                color: $grey-color-13;
+                font-size: 1.5rem;
+                line-height: 1.27;
+                padding: 2rem;
+                margin-top: 1.5rem;
+            }
+        }
+    }
+}

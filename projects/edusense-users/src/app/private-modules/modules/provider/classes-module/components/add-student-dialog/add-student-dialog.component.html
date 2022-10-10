@@ -1,0 +1,46 @@
+<div class="meeting-dialog-wrapper">
+  <div class="meeting-dialog__head">
+    <h4>Add Student</h4>
+    <a matTooltip="Close" (click)="onDialogClose()" id="lnkClose">
+      <mat-icon svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom xs-P2">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="addStudentForm" (ngSubmit)="onSubmitStudentForm(addStudentForm)">
+            <div class="form-control auto-height-field">
+              <mat-label>Student Name</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let student of selectedStudentNames; let i = index" selectable removable
+                    (removed)="remove(i)" [id]="'matChipCancel-'+i">
+                    {{student}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input id="txtAddStudent" placeholder="Add Student" #studentInput [formControl]="studentCtrl"
+                    [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let student of filteredStudents | async" [value]="student">
+                    {{student?.student?.user_details?.first_name + ' ' + student?.student?.user_details?.last_name}}
+                    <span class="grade-tag">{{student?.student?.student_grade?.name | checkEmpty}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <mat-checkbox formControlName="assign_session">Assign all the session of the above class</mat-checkbox>
+            </div>
+            <div class="button-group">
+              <button (click)="onDialogClose()" type="button" mat-button id="btnCancel">Cancel</button>
+              <button mat-flat-button color="primary" type="submit" id="btnSave">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

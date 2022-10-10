@@ -1,0 +1,145 @@
+<div class="class-table-container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6 PL-0 list-header-view">
+        <h2>Sessions</h2>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6 PR-0 text-right">
+        <button id="btnCreateClass" (click)="onCreateClassDialog()" class="remove-shadow" type="submit" mat-flat-button color="primary">
+          Create Session
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-body">
+    <table class="table" matSort mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th width="22%" mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header>Name</span>
+          <div class="form-control form-control--filter">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtSearchName" [formControl]="nameFilterField" type="text" autocomplete="off" matInput
+                placeholder="Search Name" />
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="grade">
+        <th width="22%" mat-header-cell *matHeaderCellDef>
+          <span>Grade</span>
+
+          <div class="form-control form-control--filter status-width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtSearchGrade" [formControl]="gradeFilterField" type="text" autocomplete="off" matInput
+                placeholder="Search Grade" />
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.gradeName }}
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="parentClassName">
+        <th width="22%" mat-header-cell *matHeaderCellDef>
+          <span>Class Name</span>
+
+          <div class="form-control form-control--filter status-width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtSearchParentClass" [formControl]="parentClassNameFilterField" type="text" autocomplete="off" matInput
+                placeholder="Search Class Name" />
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.parent_class_detail?.class_name | checkEmpty }}
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="teacher">
+        <th width="22%" mat-header-cell *matHeaderCellDef>
+          <span>Teacher</span>
+          <!-- 
+          <div class="form-control form-control--filter status-width">
+            <app-ss-select-search
+                  [formName]="classSearchForm"
+                  [selectConfig]="classSearchConfig"
+                  [selected]=""
+                  [dataList]="userList"
+                  (changSelectEvent)="
+                      onSelectChangeEvent(
+                          $event,
+                          'classFilterField'
+                      )
+                  "
+                  id="matSelectClass"
+              >
+              </app-ss-select-search>
+          </div> -->
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.teacherName }}
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef width="12%"></th>
+        <td mat-cell *matCellDef="let element; let i = index" class="text-right">
+          <div class="table-action">
+            <button [id]="'btnAction-'+i" class="action-button" mat-button [matMenuTriggerFor]="menu">
+              <mat-icon matTooltip="More Options" svgIcon="action" [id]="'iconTriggerMenu-' + i"></mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action">
+              <button [id]="'btnEdit-'+i" type="button" mat-menu-item [id]="'btnEdit-' + i" (click)="onEditClass(element.class_id)">
+                <span>Edit</span>
+              </button>
+              <button [id]="'btnView-'+i" type="button" mat-menu-item [id]="'btnView-' + i" (click)="onViewClass(element.class_id)">
+                <span>View</span>
+              </button>
+              <button type="button" mat-menu-item [id]="'btnEnable-' + i"
+                (click)="onEnableClick(!element.is_active,element.class_id)">
+                <span>{{!element.is_active ? "Enable" : "Disable"}}</span>
+              </button>
+              <!-- <button (click)="onAddStudentDialogOpen(element.class_id)" type="button" mat-menu-item [id]="'btnViewAddStudent-' + i">
+                <span>Add Student</span>
+              </button> -->
+              <button (click)="cloneClass(element.class_id,element.name)" type="button" mat-menu-item [id]="'btnViewCloneClass-' + i">
+                <span>Clone Session</span>
+              </button>
+              <button  *ngIf="element.parent_class_id" (click)="copyStudent(element.class_id)" type="button" mat-menu-item [id]="'btnViewCloneClass-' + i">
+                <span>Copy Students</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr [ngClass]="{'row-disabled': !row.is_active}" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <!-- <app-no-data *ngIf="!isLoadingResults && dataSource.length==0"></app-no-data> -->
+    <div *ngIf="!isLoadingResults && dataSource.length==0">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="no-class"></mat-icon>
+        <p>No sessions</p>
+        <span>There seems to be no sessions to show right now.</span>
+      </div>
+    </div>
+
+    <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+  </div>
+
+  <div class="table-footer">
+    <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber" (recordChange)="onChangePagination($event)"
+      [recordsPerPage]="recordsPerPage"></app-pagination>
+  </div>
+</div>

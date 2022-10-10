@@ -1,0 +1,118 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin: 9rem 0;
+    @include respond('phone') {
+        margin: 5rem 0;
+    }
+    &__left {
+        text-align: center;
+        @include respond('tab-port') {
+            margin-bottom: 2rem;
+        }
+        @include respond('phone') {
+            margin-bottom: 2rem;
+        }
+        img,
+        mat-icon {
+            @include square(18rem);
+            @include border-radius(50%);
+            margin-bottom: 3rem;
+            @include respond('phone') {
+                @include square(14rem);
+            }
+        }
+        button {
+            @include border-radius(2.5rem);
+            border-color: $primary-color-2 !important;
+            color: $primary-color;
+            // width: 16rem;
+            width: auto;
+            max-width: 18rem;
+            height: 5rem;
+            margin-bottom: 2rem;
+            line-height: 1.29;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+
+            span {
+                color: $primary-color;
+            }
+        }
+
+        span {
+            color: rgba($primary-color, 0.4);
+            display: inline-block;
+            font-size: 1.4rem;
+        }
+
+        .responsive-profile-img {
+            @include respond('tab-port') {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+            @include respond('phone') {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+            @include respond(iphone){
+                flex-direction: column;
+            }
+        }
+    }
+    &__right {
+        padding-left: 5rem;
+        @include respond('tab-port') {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+
+        @include respond('phone') {
+            padding-left: 1.5rem;
+        }
+
+        h3 {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 3.4rem;
+            line-height: 1.26;
+            margin-bottom: 4rem;
+        }
+        p {
+            color: rgba($primary-color, 0.6);
+            display: block;
+            font-size: 1.6rem;
+            line-height: 1.25;
+            margin-bottom: 4rem;
+        }
+        label {
+            color: $primary-color;
+            display: flex;
+            font-size: 1.4rem;
+            margin-right: 4rem;
+            .mat-radio-container {
+                .mat-radio-outer-circle,
+                .mat-radio-inner-circle {
+                    @include square(1.4rem);
+                }
+            }
+        }
+        .mat-radio-container {
+            @include square(1.4rem);
+        }
+
+        mat-radio-group {
+            padding-left: 0.1rem;
+        }
+
+        .mat-radio-group {
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+    }
+}

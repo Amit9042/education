@@ -1,0 +1,55 @@
+<div class="course-notes-container">
+    <div class="course-notes">
+        <div class="course-notes__create-notes">
+            <div class="col-md-11 PL-0">
+                <label>Create Note</label>
+                <div *ngIf="!isShowTextDescription">
+                    <div>
+                        <input (focus)="onFocusCourseNote()" type="text" placeholder="Create a new note">
+                    </div>
+                </div>
+
+                <div *ngIf="isShowTextDescription">
+                    <div class="course-notes__create-notes__time">
+                        <label>0:25</label>
+                        <quill-editor [placeholder]="'Note your learning...'"></quill-editor>
+                    </div>
+                    
+                    <div class="button-group text-right MT-2">
+                        <button (click)="onHideCourseDecription()" class="MR-1" type="button" id="btnCancel" mat-button>Cancel</button>
+                        <button mat-flat-button color="primary" type="submit" id="btnAdd">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div *ngFor="let i of [1,2,3]; let j=index;" class="course-notes__box">
+            <div class="row">
+                <div class="col-md-9 PL-0">
+                    <h4>1. Preparing to Pass the PMP <span>1. Section wise briefing</span> <small>(0:25)</small></h4>
+                </div>
+
+                <div class="col-md-3 PR-0 text-right">
+                    <a (click)="onEditTextDescription()" matTooltip="Edit" class="MR-1">
+                        <mat-icon svgIcon="edit-2"></mat-icon>
+                    </a>
+
+                    <a matTooltip="Delete" (click)="onConfirmationDialogOpen()">
+                        <mat-icon svgIcon="bin"></mat-icon>
+                    </a>
+                </div>
+            </div>
+
+            <p> I have been always dreaming to create the Trippy Parallel unverse visauls..but i couldnt able do.. i
+                always had a dream to do a
+                video with a Fantasy visuals.. but im soo weak in animation..but Visual Don Brother helped me alottt
+                with his clarity instructions
+                and clarifications of doubts in every stage.. thanks alot brother.. This classes are Very Veryyy Helpful
+                to improve my skills Visual
+                Don Brother helped me alottt with his clarity instructionsand clarifications of doubts in every stage..
+                thanks</p>
+        </div>
+    </div>
+</div>

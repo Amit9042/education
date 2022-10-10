@@ -1,0 +1,42 @@
+@import "../../../../../../../assets/scss/abstracts/abstracts";
+.auth-box {
+  margin: 0 auto;
+
+  &__data {
+    .logo {
+      .mat-icon {
+        width: 20rem;
+        height: auto;
+        margin: 2rem 0 4rem;
+      }
+    }
+  }
+}
+
+.signup-container { 
+  &.auth-container {
+    p {
+      @include respond("large-desktop") {
+        margin-bottom: 2rem;
+      }
+    }
+    .form-control {
+      @include respond("large-desktop") {
+        height: 10rem !important;
+      }
+    }
+  }
+
+  .bottom-link {
+    margin-top: 10rem;
+    @include respond("large-desktop") {
+      margin-top: 4rem !important;
+    }
+  }
+
+  // .mat-error {
+  //   @include respond("large-desktop") {
+  //     top: -0.3rem;
+  //   }
+  // }
+}

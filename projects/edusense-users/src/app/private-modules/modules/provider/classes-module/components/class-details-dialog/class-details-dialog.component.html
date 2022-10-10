@@ -1,0 +1,255 @@
+<div class="create-class-container">
+  <div class="create-class__head">
+    <a class="edusense-logo" id="lnkLogo">
+      <!-- <mat-icon svgIcon="logo_edu"></mat-icon> -->
+      <img src="assets/images/logo.png" />
+    </a>
+    <a id="lnkClose" (click)="onCloseDialog(false)">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="create-class__bottom" [ngClass]="{'select-class__bottom': isSelectClass }">
+    <h4 mat-dialog-title>{{isEditMode ? (studentCopy ? "Copy Student" : "Edit Session") : "Create Session"}}</h4>
+    <div class="auth-box">
+      <div class="auth-box__data">
+        <!-- FORM ONE -->
+        <div *ngIf="!isSelectClass">
+          <form [formGroup]="createClassForm" (ngSubmit)="onSubmitCreateClassForm(createClassForm)">
+
+            <!-- GRADE FIELD -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 xs-PR-0">
+                <div class="form-control">
+                  <app-ss-select-search id="matSelectGrade" [formName]="createClassForm"
+                    [selectConfig]="gradeSearchConfig" [selected]="classDetail?.selectedGrade" [dataList]="gradeList"
+                    (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                  </app-ss-select-search>
+                </div>
+              </div>
+
+              <!-- PARENT CLASS FIELD -->
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 xs-PL-0">
+                <div class="form-control">
+                  <app-ss-select-search id="matSelectParentClass" [formName]="createClassForm"
+                    [selectConfig]="parentClassSearchConfig" [selected]="classDetail?.selectedParentClass"
+                    [dataList]="parentClassList" (changSelectEvent)="onSelectChangeEvent($event, 'parent_class')">
+                  </app-ss-select-search>
+                </div>
+              </div>
+            </div>
+
+            <!-- NAME FIELD -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 xs-PR-0">
+                <div class="form-control">
+                  <mat-label>Session Name*</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <input id="txtName" formControlName="class_name" type="text" autocomplete="off" matInput
+                      placeholder="Enter session name" />
+                    <mat-error *ngIf="isRequiredField(formControls['class_name'])">
+                      {{ validationMsg.SESSION }}
+                    </mat-error>
+                    <mat-error *ngIf="isValidLength(formControls['class_name'])">
+                      {{ validationMsg.SESSION_LENGTH }}
+                    </mat-error>
+                    <mat-error *ngIf="isValidField(formControls['class_name'])">
+                      {{ validationMsg.SESSION_VALID }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 xs-PL-0">
+                <div class="form-control">
+                  <app-ss-select-search id="matSelectSubject" [formName]="createClassForm"
+                    [selectConfig]="subjectSearchConfig" [selected]="classDetail?.selectedSubject"
+                    [dataList]="subjectList" (changSelectEvent)="onSelectChangeEvent($event, 'subject')">
+                  </app-ss-select-search>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 PLR-0">
+                <div class="form-control">
+                  <app-ss-select-search [formName]="createClassForm" [selectConfig]="teacherSearchConfig"
+                    [selected]="classDetail?.selectedTeacher" [dataList]="userList"
+                    (changSelectEvent)="onSelectChangeEvent($event, 'user_id')" id="matSelectTeacher">
+                  </app-ss-select-search>
+                </div>
+              </div>
+            </div>
+
+            <!-- DESCRIPTION FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control-textarea">
+                  <mat-label>Description</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <textarea id="txtDescription" formControlName="description" type="text" autocomplete="off" matInput
+                      placeholder="Enter description"></textarea>
+                    <mat-error *ngIf="isValidLength(formControls['description'])">{{
+                            validationMsg.DESCRIPTION_LENGTH
+                          }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- START TIME & END TIME -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 xs-PR-0">
+                <div class="form-control">
+                  <mat-label>Start Time</mat-label>
+                  <!-- <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectTime" placeholder="Select Time"
+                      (selectionChange)="onSelectStartTime($event)" formControlName="start_time">
+                      <mat-option *ngFor="let time of startTimeSlotList" [value]="time.label">{{
+                              time.label
+                            }}</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <input type="text" placeholder="Select Time" aria-label="Select Time" matInput
+                      formControlName="start_time" [matAutocomplete]="startTime" />
+                    <mat-autocomplete #startTime="matAutocomplete">
+                      <mat-option *ngFor="let time of startTimeSlotList" (onSelectionChange)="onSelectStartTime($event)"
+                        [value]="time.label">
+                        {{time.label}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="isValidField(formControls['start_time'])">
+                      {{ validationMsg.START_TIME_VALID }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 xs-PL-0">
+                <div class="form-control">
+                  <mat-label>End Time</mat-label>
+                  <!-- <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectEndTime" placeholder="Select Time" formControlName="end_time">
+                      <mat-option *ngFor="let time of endTimeSlotList" [value]="time.label">{{
+                              time.label
+                            }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="true">{{
+                          validationMsg.END_TIME_VALID
+                        }}</mat-error>
+                  </mat-form-field> -->
+
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <input type="text" placeholder="Select Time" aria-label="Select Time" matInput
+                      formControlName="end_time" [matAutocomplete]="endTime">
+                    <mat-autocomplete #endTime="matAutocomplete">
+                      <mat-option *ngFor="let time of endTimeSlotList" [value]="time.label">
+                        {{time.label}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="true">{{
+                      validationMsg.END_TIME_VALID
+                    }}</mat-error>
+                    <mat-error *ngIf="isValidField(formControls['end_time'])">
+                      {{ validationMsg.VALID_END_TIME }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBJECT WITH MAT-AUTO-CHIPS -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 xs-PR-0">
+                <div class="form-control">
+                  <mat-label>Days</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectDay" placeholder="Select days" formControlName="days" multiple>
+                      <mat-option *ngFor="let day of daysList" [value]="day.id">
+                        {{day.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="createClassForm.errors?.endTimeGreater">
+                      {{ validationMsg.DAYS }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 xs-PL-0">
+                <div class="form-control">
+                  <mat-label>Time zone</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectTimeZone" placeholder="Select" formControlName="time_zone">
+                      <mat-option *ngFor="let timezone of allTimezones" [value]="timezone.timezone_id">
+                        {{timezone.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group button-absolute">
+              <!-- (click)="onNextClick()" to last button -->
+              <button type="button" id="btnCancel" (click)="onCloseDialog(false)" mat-button>Cancel</button>
+              <button type="submit" id="btnNext" mat-flat-button color="primary">{{(!classDetail || classDetail?.selectedParentClass) ? "Next" : "Update"}}</button>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="isSelectClass">
+          <form [formGroup]="selectClassForm" (ngSubmit)="onSubmitSelectClassForm(selectClassForm)">
+            <div class="select-class-container">
+              <mat-checkbox *ngIf="formArrayControls().length != 0" [checked]="getSelectAllValue()"
+                (change)="onSelectAll($event)" class="MT-3">Select all</mat-checkbox>
+              <div class="select-class-wrap">
+
+                <!-- FORM ARRAY -->
+                <div formArrayName="rowFields" *ngFor="
+                    let rowField of formArrayControls().controls;
+                    let i = index
+                ">
+                  <div [formGroupName]="i">
+                    <div class="select-class-details">
+                      <mat-checkbox formControlName="select_checkbox"></mat-checkbox>
+                      <img [src]="rowField.get('image').value" (error)="onError($event)" />
+                      <mat-icon *ngIf="false" svgIcon="providerProfile"></mat-icon>
+                      <div>
+                        <h6>{{rowField.get('name').value}}</h6>
+                        <p class="location">{{rowField.get('location').value}}</p>
+                        <p class="school">{{rowField.get('school').value}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END -->
+
+                <!-- NO DATA SECTION -->
+                <div *ngIf="formArrayControls().length == 0">
+                  <div class="no-content-found-wrapper">
+                    <mat-icon svgIcon="no-student"></mat-icon>
+                    <p>No student</p>
+                    <span>No students in class.</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="button-group-wrap">
+              <a *ngIf="!studentCopy" class="back-btn" (click)="onBacktoClassForm()">
+                <mat-icon svgIcon="back"></mat-icon>
+                Back
+              </a>
+              <div class="button-group">
+                <button type="button" id="btnCancel" (click)="onCloseDialog(false)" mat-button>Cancel</button>
+                <button mat-flat-button color="primary" type="submit" id="btnAdd">
+                  {{isEditMode ? (studentCopy ? "Copy" : "Update") : "Add" }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

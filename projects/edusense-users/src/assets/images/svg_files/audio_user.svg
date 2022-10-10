@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+  <g id="audioOn" transform="translate(0.335)">
+    <circle id="Ellipse_13" data-name="Ellipse 13" cx="35" cy="35" r="35" transform="translate(-0.335)" fill="#fff"/>
+    <g id="mic" transform="translate(25.517 20)">
+      <g id="Group_20971" data-name="Group 20971" transform="translate(4.135)">
+        <g id="Group_20970" data-name="Group 20970" transform="translate(0)">
+          <path id="Path_11339" data-name="Path 11339" d="M171.552,0a5.251,5.251,0,0,0-5.245,5.245V15.553a5.245,5.245,0,0,0,10.49.036V5.245A5.251,5.251,0,0,0,171.552,0Z" transform="translate(-166.307)" fill="none" stroke="#203061" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_20973" data-name="Group 20973" transform="translate(8.287 23.99)">
+        <g id="Group_20972" data-name="Group 20972">
+          <rect id="Rectangle_1791" data-name="Rectangle 1791" width="2.185" height="4.917" fill="#203061"/>
+        </g>
+      </g>
+      <g id="Group_20975" data-name="Group 20975" transform="translate(5.409 27.815)">
+        <g id="Group_20974" data-name="Group 20974" transform="translate(0)">
+          <path id="Path_11340" data-name="Path 11340" d="M194.955,474.628H189.2a1.093,1.093,0,0,0,0,2.185h5.755a1.093,1.093,0,0,0,0-2.185Z" transform="translate(-188.107 -474.628)" fill="#203061"/>
+        </g>
+      </g>
+      <g id="Group_20977" data-name="Group 20977" transform="translate(0 13.776)">
+        <g id="Group_20976" data-name="Group 20976">
+          <path id="Path_11341" data-name="Path 11341" d="M113.586,234.822a1.094,1.094,0,0,0-1.095,1.093v.874a7.19,7.19,0,0,1-14.38,0v-.874a1.095,1.095,0,0,0-2.19,0v.874a9.38,9.38,0,0,0,18.759,0v-.874A1.094,1.094,0,0,0,113.586,234.822Z" transform="translate(-95.922 -234.822)" fill="#203061"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

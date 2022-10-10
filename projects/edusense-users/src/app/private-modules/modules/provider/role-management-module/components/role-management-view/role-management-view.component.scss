@@ -1,0 +1,17 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.class-view-container {
+    .class-view__body {
+        box-shadow: none;
+        margin-bottom: 6rem;
+        &__view {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.small-text-right {
+    @include respond('phone') {
+        text-align: right;
+    }
+}

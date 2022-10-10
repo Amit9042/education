@@ -1,0 +1,128 @@
+<div class="create-course-container">
+  <div class="project-title">
+    <div class="edit-part" *ngIf="visibleTitleField">
+      <div class="row">
+        <div class="col-md-9">
+          <div>
+            <h3>{{ courseDetails?.title | checkEmpty }}</h3>
+          </div>
+        </div>
+
+        <div class="col-md-3 text-right">
+          <a matTooltip="Edit" class="edit-icon" (click)="onEditTitleName()">
+            <mat-icon svgIcon="title-edit"></mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-part" *ngIf="!visibleTitleField">
+      <div class="row">
+        <div class="col-md-9">
+          <div>
+            <input [formControl]="courseTitleFormControl" placeholder="Enter project name"/>
+          </div>
+        </div>
+
+        <div class="col-md-3 text-right">
+          <a matTooltip="Save" class="action-icon MR-1" (click)="onSaveTitle()">
+            <mat-icon svgIcon="save"></mat-icon>
+          </a>
+
+          <a matTooltip="Close" class="action-icon" (click)="onCloseTitle()">
+            <mat-icon svgIcon="cancel"></mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="create-course">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="create-course-position">
+          <h5>Create Course</h5>
+          <ul class="navigation-course">
+            <li>
+              <a [ngClass]="{'active': activeView === htmlView.OVERVIEW }" (click)="onChangeView('overview')">
+                <small
+                  [ngClass]="{'fill-form-tick' : (activeView === htmlView.CONTENT || activeView === htmlView.ADDITIONAL_INFO
+                  || activeView === htmlView.PREVIEW || activeView === htmlView.ENROLLMENT_COURSE || activeView === htmlView.ENROLLMENT_STUDENT)}">
+                  <mat-icon svgIcon="course-check"></mat-icon>
+                </small>
+                <span>Overview</span>
+              </a>
+            </li>
+            <li>
+              <a (click)="onChangeView('content')" [ngClass]="{'active': activeView === htmlView.CONTENT }">
+                <small [ngClass]="{'fill-form-tick' : (activeView === htmlView.ADDITIONAL_INFO || activeView === htmlView.PREVIEW
+                  || activeView === htmlView.ENROLLMENT_COURSE || activeView === htmlView.ENROLLMENT_STUDENT)}">
+                  <mat-icon svgIcon="course-check"></mat-icon>
+                </small>
+                <span>Content</span>
+              </a>
+            </li>
+            <li>
+              <a (click)="onChangeView('additional-info')"
+                 [ngClass]="{'active': activeView === htmlView.ADDITIONAL_INFO }">
+                <small
+                  [ngClass]="{'fill-form-tick' : (activeView === htmlView.PREVIEW || activeView === htmlView.ENROLLMENT_COURSE || activeView === htmlView.ENROLLMENT_STUDENT)}">
+                  <mat-icon svgIcon="course-check"></mat-icon>
+                </small>
+                <span>Additional Info</span>
+              </a>
+            </li>
+            <li>
+              <a (click)="onChangeView('preview')" [ngClass]="{'active': activeView === htmlView.PREVIEW }">
+                <small
+                  [ngClass]="{'fill-form-tick' : (activeView === htmlView.ENROLLMENT_COURSE || activeView === htmlView.ENROLLMENT_STUDENT)}">
+                  <mat-icon svgIcon="course-check"></mat-icon>
+                </small>
+                <span>Preview</span>
+              </a>
+            </li>
+            <li>
+              <a (click)="onChangeView('enrollment-course')"
+                 [ngClass]="{'active': activeView === htmlView.ENROLLMENT_COURSE}">
+                <small></small>
+                <span>Enrollment Course</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div *ngIf="activeView === htmlView.OVERVIEW">
+          <es-user-overview-course (onChangeStep)="onChangeView($event)" [courseId]="courseId"
+                                   (onCallCourseDetails)="getCourseDetails()"
+                                   [courseDetails]="courseDetails" [languageList]="languageList">
+          </es-user-overview-course>
+        </div>
+
+        <div *ngIf="activeView === htmlView.CONTENT">
+          <es-user-content-course (onChangeStep)="onChangeView($event)" [courseId]="courseId"></es-user-content-course>
+        </div>
+
+        <div *ngIf="activeView === htmlView.ADDITIONAL_INFO">
+          <es-user-additional-info-course (onChangeStep)="onChangeView($event)" [courseId]="courseId">
+          </es-user-additional-info-course>
+        </div>
+
+        <div *ngIf="activeView === htmlView.PREVIEW">
+          <es-user-preview-course (onChangeStep)="onChangeView($event)" [courseId]="courseId"></es-user-preview-course>
+        </div>
+
+        <div *ngIf="activeView === htmlView.ENROLLMENT_COURSE">
+          <es-user-enrollment-course (onChangeStep)="onChangeView($event)" [courseId]="courseId"
+                                     (emitUserData)="getUserData($event)"></es-user-enrollment-course>
+        </div>
+
+        <div *ngIf="activeView === htmlView.ENROLLMENT_STUDENT">
+          <es-user-enrollment-student-details (onChangeStep)="onChangeView($event)" [studentData]="enrolledStudentData">
+          </es-user-enrollment-student-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

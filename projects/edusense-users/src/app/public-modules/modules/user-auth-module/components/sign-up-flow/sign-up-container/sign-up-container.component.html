@@ -1,0 +1,23 @@
+<div *ngIf="activeView === htmlView.SIGN_UP_TYPE">
+  <app-sign-up-type (clickEvent)="onChangeView($event)"></app-sign-up-type>
+</div>
+
+<div class="row" *ngIf="!(activeView === htmlView.SIGN_UP_TYPE)">
+  <div class="col-md-6 PL-0 responsive-remove-img">
+    <div class="auth">
+      <img src="./assets/images/graphic.png" alt="" />
+    </div>
+  </div>
+  <div class="col-md-6 PLR-0">
+
+    <a class="edusense-logo" (click)="onHomePageUrl()" id="lnkLogo">
+      <mat-icon svgIcon="logo_edu"></mat-icon>
+    </a>
+
+    <app-signup *ngIf="activeView === htmlView.SIGN_UP_VIEW" (clickEvent)="onChangeView($event)"
+      (dataEvent)="onGetData($event)"></app-signup>
+
+    <app-otp *ngIf="activeView === htmlView.OTP_VIEW" (clickEvent)="onChangeView($event)" [email]="emailAddress">
+    </app-otp>
+  </div>
+</div>

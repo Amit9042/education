@@ -1,0 +1,64 @@
+@import '../../../assets/scss/abstracts/abstracts';
+
+.dialog-container {
+    width: 100rem;
+
+    @include respond('tablet') {
+        width: 68rem;
+    }
+
+    @include respond('phone') {
+        width: auto;
+    }
+
+    &__bottom {
+        padding: 4rem 4.3rem 4.8rem 3.6rem;
+
+        @include respond('phone') {
+            padding: 1.5rem;
+        }
+
+        .code-field {
+            align-items: center;
+            .form-control {
+                height: 10rem !important;
+            }
+            .mat-flat-button.mat-button-base.mat-primary {
+                min-width: 11.2rem;
+                max-width: 11.2rem;
+            }
+
+            button {
+                margin-left: 2.5rem;
+
+                @include respond('phone'){
+                    margin-left: 0;
+                }
+            }
+        }
+        .details-data {
+            padding: 1rem 0 0;
+            & > div {
+                margin-bottom: 0.8rem;
+            }
+            label,
+            span {
+                font-size: 1.8rem;
+                display: inline-block;
+                line-height: 1.28;
+            }
+            label {
+                color: $light-blue-color;
+                font-weight: bold;
+                width: 9.1rem;
+            }
+            span {
+                color: $primary-color;
+                font-weight: normal;
+            }
+        }
+        .button-group {
+            margin-top: 3.2rem;
+        }
+    }
+}

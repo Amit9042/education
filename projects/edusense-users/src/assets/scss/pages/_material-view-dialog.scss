@@ -1,0 +1,202 @@
+.view-material-dialog-container {
+    width: 130rem;
+    height: 64rem;
+
+    @include respond('regular-desktop') {
+        width: 75vw;
+    }
+
+    @media screen and (min-width: 1025px) and (max-width: 1279px) {
+        width: 75vw;
+    }
+
+    @include respond('tablet') {
+        width: 95vw;
+    }
+
+    @include respond('phone') {
+        width: 95vw;
+        height: 60vh;
+    }
+
+    iframe {
+        width: 100%;
+        height: 63.6rem;
+
+        @include respond('tablet') {
+            height: 63.6rem;
+        }
+
+        @include respond('phone') {
+            height: 59vh;
+        }
+    }
+
+    .video-container {
+        width: 100%;
+        height: 100%;
+        background-color: $grey-color-3;
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .mat-dialog-container {
+        background-color: transparent;
+
+        .document-view {
+            background-color: $white-color;
+            padding: 20px;
+            min-height: calc(100vh - 345px);
+            white-space: pre;
+        }
+    }
+}
+
+.pdf-material-dialog-container {
+    // width: 100rem;
+    // height: auto;
+    width: auto;
+    height: calc(100vh - 15rem);
+    margin-top: 15rem;
+    overflow-y: auto;
+    margin-bottom: 5rem;
+}
+
+.dialog-links {
+    background-image: linear-gradient(
+        to bottom,
+        rgba($black-color, 0.6),
+        rgba($black-color, 0.5) 54%,
+        rgba($black-color, 0)
+    );
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: fixed;
+    padding: 1.5rem 4rem;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 8rem;
+
+    @include respond('phone') {
+        padding: 1.5rem 1rem;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-icon {
+        color: $white-color !important;
+        height: 2.4rem;
+        width: 2.4rem;
+
+        @include respond('phone') {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &.action {
+            margin-left: 4rem;
+
+            @include respond('phone') {
+                margin-left: 1rem;
+            }
+
+            svg {
+                path {
+                    fill: $white-color;
+                }
+
+                #prefix__more_1_ {
+                    opacity: 1 !important;
+                }
+            }
+        }
+    }
+    &__file-name {
+        width: 40%;
+    }
+    &__page-count {
+        width: 40%;
+        p {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+    }
+
+    p {
+        margin-left: 2rem;
+
+        @include respond('phone') {
+            margin-left: 1rem;
+        }
+
+        .mat-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        color: $white-color;
+    }
+}
+
+.ng-swiper-content {
+    // max-width: 100rem;
+    height: calc(100vh - 25rem);
+    // position: relative;
+    @include respond('tab-port') {
+        height: calc(100vh - 12rem);
+    }
+    .previous {
+        position: absolute;
+        left: 5rem;
+        top: 50%;
+        @include respond('tab-port') {
+            left: 1rem;
+        }
+        @include respond('phone') {
+            background-color: rgba($black-color, 0.2);
+            left: 1rem;
+        }
+    }
+    .no-data-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: inherit;
+        width: 100rem;
+        mat-icon {
+            width: 22rem;
+            height: 21rem;
+        }
+    }
+    mat-icon {
+        @include border-radius(50%);
+        padding: 0.8rem;
+        height: 4.5rem;
+        width: 4.5rem;
+        &:hover {
+            background-color: rgba($white-color, 0.2);
+        }
+    }
+    .next {
+        position: absolute;
+        right: 5rem;
+        top: 50%;
+        @include respond('tab-port') {
+            right: 1rem;
+        }
+        @include respond('phone') {
+            background-color: rgba($black-color, 0.2);
+            right: 1rem;
+        }
+    }
+}
+

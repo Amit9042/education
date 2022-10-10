@@ -1,0 +1,15 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.create-class-container {
+    @include respond('phone') {
+        padding: 5rem 2rem !important;
+    }
+}
+
+.select-class{
+    &__bottom{
+        .select-class-wrap{
+            height: calc(100vh - 32rem);
+        }
+    }
+}

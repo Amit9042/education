@@ -1,0 +1,123 @@
+<div class="meeting-dialog-wrapper">
+    <div class="meeting-dialog__head">
+        <h4>{{isEditMode ? "Edit Recorded Session" : "Add Recorded Session"}}</h4>
+        <a (click)="onCloseDialog(false)" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="meeting-dialog__bottom MB-2">
+        <div class="auth-container create-class-container">
+            <div class="auth-box">
+                <div class="auth-box__data">
+                    <form [formGroup]="editRecordSessionForm"
+                        (ngSubmit)="onSubmitEditSessionForm(editRecordSessionForm)">
+
+                        <!-- TITLE FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>Title*</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input id="txtSession" formControlName="title" type="text" autocomplete="off"
+                                            matInput placeholder="Enter title" />
+                                        <mat-error *ngIf="isRequiredField(formControls['title'])">
+                                            {{ validationMsg.TITLE }}
+                                        </mat-error>
+                                        <mat-error *ngIf="isValidLength(formControls['title'])">
+                                            {{ validationMsg.TITLE_LENGTH }}
+                                        </mat-error>
+                                        <mat-error *ngIf="isValidField(formControls['title'])">
+                                            {{ validationMsg.TITLE_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GRADE FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search id="matSelectGrade" [formName]="editRecordSessionForm"
+                                        [selectConfig]="gradeSearchConfig" [selected]="selectedGrade" [dataList]="gradeList"
+                                        (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CLASS FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search id="matSelectClass" [formName]="editRecordSessionForm"
+                                        [selectConfig]="classSearchConfig" [selected]="selectedclass" [dataList]="classList"
+                                        (changSelectEvent)="onSelectChangeEvent($event, 'class')">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SUBJECT FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search id="matSelectSubject" [formName]="editRecordSessionForm"
+                                        [selectConfig]="subjectSearchConfig" [selected]="selectedsubject" [dataList]="subjectList"
+                                        (changSelectEvent)="onSelectChangeEvent($event, 'subject')">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TEACHER NAME FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search id="matSelectTeacher" [formName]="editRecordSessionForm"
+                                        [selectConfig]="teacherSearchConfig" [selected]="selectedTeacher" [dataList]="teacherList"
+                                        (changSelectEvent)="onSelectChangeEvent($event, 'teacher')">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- UPLOAD VIDEO BUTTON -->
+                        <div>
+                            <button *ngIf="uploadFile.length == 0" id="btnUploadVideo" (click)="onBrowseFile('upload')" mat-flat-button
+                                color="primary" type="button" class="upload-material">
+                                <mat-icon svgIcon="link"></mat-icon>
+                                <span>Upload file</span>
+                            </button>
+                            <mat-icon *ngIf="uploadFile.length == 0" class="ML-1 note-btn" matTooltipClass="mat-tooltip-class-here" svgIcon="info" matTooltip="{{filterTypeShow}}"></mat-icon>
+                            <input type="file" hidden id="upload" (change)="onFileUpload($event)" />
+                        </div>
+
+                        <!-- WHEN VIDEO IS ALREADY UPLOADED -->
+                        <div *ngIf="uploadFile.length > 0">
+                            <div class="file-name">
+                                <div class="file-name-details">
+                                <mat-icon svgIcon="video-file" class="file-icon"></mat-icon>
+                                <span>{{uploadFile[0].files[0].name}}</span>
+                                <a *ngIf="!isEditMode" (click)="uploadFile=[]">
+                                    <mat-icon svgIcon="close"></mat-icon>
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+
+
+                        <div class="button-group">
+                            <button id="btnCancel" type="button" (click)="onCloseDialog(false)"
+                                mat-button>Cancel</button>
+                            <button id="btnSave" mat-flat-button color="primary" type="submit">
+                                Upload
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

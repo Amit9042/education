@@ -1,0 +1,120 @@
+<div class="sidebar-drawer-wrapper notification-drawer-wrapper" (click)="$event.stopPropagation()" >
+    <div class="sidebar-drawer__top">
+        <div class="sidebar-drawer__top--head">
+            <h3>Notifications</h3>
+            <div>
+                <a
+                    class="mark-all-read" id="lnkMarkAllRead"
+                    *ngIf="
+                        viewNewNotifications.length > 0 ||
+                        viewEarlierNotifications.length > 0
+                    "
+                    (click)="markAsAllRead()"
+                >
+                    Mark all as read
+                </a>
+                <a (click)="onCloseDrawer()" id="lnkClose">
+                    <mat-icon svgIcon="close"></mat-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div
+        class="sidebar-drawer__bottom PL-0 PR-0 PT-0 PB-0"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
+        [scrollWindow]="false"
+    >
+        <!--FRONTEND DEVELOPMENT-->
+        <!--IF NO ANY NOTIFICATION COME THEN SHOW BELOW TAG-->
+        <div
+            *ngIf="
+                !viewNewNotifications.length && !viewEarlierNotifications.length
+            "
+        >
+            <div class="no-content-found-wrapper">
+                <mat-icon svgIcon="noNotification"></mat-icon>
+                <p>No Notification</p>
+                <span>It seems like you don't have any notifications</span>
+            </div>
+        </div>
+
+        <div
+            *ngIf="viewNewNotifications.length !== 0"
+            class="sidebar-drawer__bottom--panel"
+        >
+            <div class="sidebar-drawer__bottom--panel__title">
+                <span>New</span>
+            </div>
+            <ul>
+                <li *ngFor="let newNotification of viewNewNotifications, let i = index">
+                    <a
+                        class="notification" [id]="'lnkViewNotification-'+i"
+                        (click)="getRedirectUrl(newNotification)"
+                        [ngClass]="{
+                            'read-notification': newNotification.isRead
+                        }"
+                    >
+                        <div class="notification__icon">
+                            <mat-icon
+                                *ngIf="!newNotification.avatar"
+                                svgIcon="providerProfile"
+                            ></mat-icon>
+                            <img
+                                *ngIf="newNotification.avatar"
+                                [src]="newNotification.avatar"
+                                (error)="onError($event)"
+                            />
+                        </div>
+                        <div class="notification__body">
+                            <p [innerHTML]="newNotification.html"></p>
+                            <span class="notification__body--time">{{
+                                newNotification.date
+                            }}</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div
+            *ngIf="viewEarlierNotifications.length !== 0"
+            class="sidebar-drawer__bottom--panel"
+        >
+            <div class="sidebar-drawer__bottom--panel__title">
+                <span>Earlier</span>
+            </div>
+            <ul>
+                <li *ngFor="let erNotification of viewEarlierNotifications,  let i = index">
+                    <a [id]="'lnkEarlierNotification-'+i"
+                        class="notification"
+                        (click)="getRedirectUrl(erNotification)"
+                        [ngClass]="{
+                            'read-notification': erNotification.isRead
+                        }"
+                    >
+                        <div class="notification__icon">
+                            <mat-icon
+                                *ngIf="!erNotification.avatar"
+                                svgIcon="providerProfile"
+                            ></mat-icon>
+                            <img
+                                *ngIf="erNotification.avatar"
+                                [src]="erNotification.avatar"
+                                (error)="onError($event)"
+                            />
+                        </div>
+                        <div class="notification__body">
+                            <p [innerHTML]="erNotification.html"></p>
+                            <span class="notification__body--time">{{
+                                erNotification.date
+                            }}</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

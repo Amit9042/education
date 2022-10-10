@@ -1,0 +1,99 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.student-waiting-screen {
+    background-color: $grey-color-18;
+    background-image: linear-gradient(
+        to bottom,
+        rgba($black-color, 0.26),
+        rgba($black-color, 0) 19%,
+        rgba($black-color, 0) 79%,
+        rgba($black-color, 0.24)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 7.8rem);
+
+    @include respond('phone') {
+        height: calc(100vh - 15rem);
+    }
+
+    .student-screen {
+        font-family: $font-family-poppins;
+        color: $white-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        &__image {
+            border: 6px solid $sky-color-1;
+            width: 20rem;
+            height: 20rem;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+
+            img,
+            .mat-icon {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+
+            @include respond('tablet') {
+                width: 16rem;
+                height: 16rem;
+            }
+
+            @include respond('phone') {
+                border-width: 3px;
+                width: 10rem;
+                height: 10rem;
+            }
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 4.3rem;
+            margin-bottom: 1rem;
+
+            @include respond('tablet') {
+                font-size: 2.4rem;
+            }
+
+            @include respond('phone') {
+                font-size: 2rem;
+            }
+        }
+
+        span {
+            font-size: 1.8rem;
+            font-weight: normal;
+            margin-bottom: 6rem;
+
+            @include respond('tablet') {
+                font-size: 1.6rem;
+            }
+
+            @include respond('phone') {
+                font-size: 1.4rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        p {
+            font-size: 2.2rem;
+            font-weight: normal;
+            padding: 0;
+
+            @include respond('tablet') {
+                font-size: 1.8rem;
+            }
+
+            @include respond('phone') {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

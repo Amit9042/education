@@ -1,0 +1,105 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <div class="auth-box__data">
+      <div>
+        <h3>Head Teacher Info</h3>
+      </div>
+
+      <form
+        [formGroup]="personalInfoForm"
+        (ngSubmit)="onPersonalInfoFormSubmit(personalInfoForm)"
+      >
+        <div class="row">
+          <div class="col-md-6 PL-0 PR-05">
+            <div class="form-control">
+              <mat-label>First Name*</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  formControlName="provider_first_name"
+                  type="text"
+                  autocomplete="off"
+                  matInput
+                  placeholder="Enter first name"
+                  id="txtFirstName"
+                />
+                <mat-error *ngIf="isRequiredField(formControls['provider_first_name'])">{{
+                  validationMsg.FIRST_NAME
+                }}</mat-error>
+                <mat-error *ngIf="isValidLength(formControls['provider_first_name'])">{{
+                  validationMsg.FIRST_NAME_LENGTH
+                }}</mat-error>
+                <mat-error *ngIf="isValidField(formControls['provider_first_name'])">{{
+                  validationMsg.FIRST_NAME_VALID
+                }}</mat-error>
+                <!-- <mat-icon matSuffix svgIcon="user"></mat-icon> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 PR-0 PL-05">
+            <div class="form-control">
+              <mat-label>Last Name*</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  formControlName="provider_last_name"
+                  type="text"
+                  autocomplete="off"
+                  matInput
+                  placeholder="Enter last name"
+                  id="txtLastName"
+                />
+                <mat-error *ngIf="isRequiredField(formControls['provider_last_name'])">{{
+                  validationMsg.LAST_NAME
+                }}</mat-error>
+                <mat-error *ngIf="isValidLength(formControls['provider_last_name'])">{{
+                  validationMsg.LAST_NAME_LENGTH
+                }}</mat-error>
+                <mat-error *ngIf="isValidField(formControls['provider_last_name'])">{{
+                  validationMsg.LAST_NAME_VALID
+                }}</mat-error>
+                <!-- <mat-icon matSuffix svgIcon="user"></mat-icon> -->
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <!-- POSITION FIELD -->
+        <div class="row">
+          <div class="col-md-12 PLR-0">
+            <div class="form-control">
+              <mat-label>Position*</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  formControlName="provider_position"
+                  type="text"
+                  autocomplete="off"
+                  matInput
+                  placeholder="Enter position"
+                  id="txtPosition"
+                />
+                <mat-error *ngIf="isRequiredField(formControls['provider_position'])">{{
+                  validationMsg.POSITION
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" mat-flat-button color="primary" id="btnSubmit">
+            Submit
+          </button>
+          <button
+            (click)="onBack()"
+            class="ML-2 back"
+            type="button"
+            mat-stroked-button
+            color="accent"
+            id="btnBack"
+          >
+            Back
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

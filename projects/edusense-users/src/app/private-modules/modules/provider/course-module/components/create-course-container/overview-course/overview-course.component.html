@@ -1,0 +1,105 @@
+<div class="course-overview-container">
+  <h3>Overview</h3>
+
+  <div class="row MT-3">
+    <div class="col-md-6 PL-0">
+      <form [formGroup]="overviewCourseForm" (ngSubmit)="onSubmitCourseOverviewForm(overviewCourseForm)">
+        <div class="form-control-textarea">
+          <mat-label>Course Description</mat-label>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <textarea id="txtInstruction" formControlName="description" type="text" autocomplete="off" matInput
+                      placeholder="Course Description"></textarea>
+            <mat-error *ngIf="isValidLength(formControls['description'])">
+              {{ validationMsg.COURSE_DESCRIPTION_LENGTH }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-control">
+          <mat-label>Category</mat-label>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <input matInput id="txtCategory" autocomplete="off"
+                   formControlName="categoryInput" name="category" placeholder="Enter category" type="text"
+                   [matAutocomplete]="category"/>
+
+            <mat-autocomplete #category="matAutocomplete">
+              <mat-option *ngFor="let category of filteredCategory" value="{{ category.name }}"
+                          (onSelectionChange)="onSelectCategory(category)">
+                {{ category.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="form-control">
+          <mat-label>Sub Category</mat-label>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <input matInput id="txtSubCategory" autocomplete="off"
+                   formControlName="subCategoryInput" name="subCategory" placeholder="Enter sub category" type="text"
+                   [matAutocomplete]="subCategory"/>
+
+            <mat-autocomplete #subCategory="matAutocomplete">
+              <mat-option *ngFor="let sub of filteredSubCategory" value="{{ sub.name }}"
+                          (onSelectionChange)="onSelectSubCategory(sub)">
+                {{ sub.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="form-control">
+          <app-ss-select-search id="matSelectLanguage" [formName]="overviewCourseForm"
+                                [selected]="selectedLanguage"
+                                [selectConfig]="languageSearchConfig" [dataList]="languageList"
+                                (changSelectEvent)="onSelectChangeEvent($event, 'selectLanguage')">
+          </app-ss-select-search>
+        </div>
+
+        <div class="MB-3">
+          <button (click)="onBrowseFile('courseImg')" type="button" class="upload-course-image-button" tpye="button"
+                  mat-flat-button
+                  color="secondary">
+            <mat-icon svgIcon="course_image_icon"></mat-icon>
+            Upload Course Image
+          </button>
+
+          <input type="file" hidden id="courseImg"
+                 accept=".jpg, .png, .jpeg"
+                 #fileInput
+                 (click)="fileInput.value = null" value=""
+                 (change)="onFileUpload($event)">
+        </div>
+
+        <!-- Show image preview -->
+        <div class="file-section">
+          <div class="file-details" *ngIf="fileName">
+            <mat-icon svgIcon="course-img-placeholder"></mat-icon>
+            <span>{{ fileName }}</span>
+            <a *ngIf="!courseDetails?.cover_image" (click)="onCancelImage()">
+              <mat-icon svgIcon="close"></mat-icon>
+            </a>
+          </div>
+
+          <div class="preview-image">
+            <img [src]="imageUploadDetails"/>
+          </div>
+        </div>
+
+        <div>
+          <span class="primary-color"><b>Note:</b> 720x422 pixels; .jpg, .jpeg, or .png.</span>
+        </div>
+
+        <div class="button-group text-right MT-5 MB-5">
+          <button type="button" id="btnCancel" class="cancel-btn MR-2" mat-stroked-button (click)="onCourseList()">
+            Cancel
+          </button>
+          <button mat-flat-button color="primary" type="submit" id="btnAdd">
+            <span>Save & Next</span>
+            <mat-icon svgIcon="next"></mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

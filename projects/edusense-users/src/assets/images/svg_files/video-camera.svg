@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.5" height="14.426" viewBox="0 0 23.5 14.426">
+    <defs>
+        <style>
+            .cls-1-video{fill:none;stroke:#203061;stroke-width:1.5px}
+        </style>
+    </defs>
+    <g id="video-camera" transform="translate(.75 .75)">
+        <g id="Group_20979">
+            <g id="Group_20978">
+                <path id="Path_11342" d="M12.388 96.512H2.4A2.409 2.409 0 0 0 0 98.919v8.112a2.409 2.409 0 0 0 2.4 2.407h9.992a2.409 2.409 0 0 0 2.4-2.407v-8.112a2.393 2.393 0 0 0-2.404-2.407z" class="cls-1-video" transform="translate(0 -96.512)"/>
+            </g>
+        </g>
+        <g id="Group_20981" transform="translate(15.999 1.297)">
+            <g id="Group_20980">
+                <path id="Path_11343" d="M345.707 123.886a1.246 1.246 0 0 0-.413.168l-3.79 2.161v5.571l3.815 2.161a1.453 1.453 0 0 0 2.187-1.249v-7.42a1.458 1.458 0 0 0-1.799-1.392z" class="cls-1-video" transform="translate(-341.504 -123.847)"/>
+            </g>
+        </g>
+    </g>
+</svg>

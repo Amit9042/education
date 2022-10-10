@@ -1,0 +1,131 @@
+<div class="meeting-dialog-wrapper">
+    <div class="meeting-dialog__head">
+        <h4>{{data?.id ? 'Update' : 'Add'}} Practice Test</h4>
+        <a id="lnkClose" (click)="onCloseDialog(false)">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="meeting-dialog__bottom">
+        <div class="auth-container create-class-container">
+            <div class="auth-box">
+                <div class="auth-box__data">
+                    <form [formGroup]="addPracticeForm" (ngSubmit)="onAddPracticeFormSubmit(addPracticeForm)">
+
+                        <!-- PRACTICE NAME FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>Practice Name*</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input id="txtPracticeName" required type="text" autocomplete="off" matInput
+                                            formControlName="practice_name" placeholder="Enter practice name" />
+                                        <mat-error *ngIf="isRequiredField(formControls['practice_name'])">
+                                            {{ validationMsg.PRACTICE_NAME }}
+                                        </mat-error>
+                                        <mat-error *ngIf="isValidLength(formControls['practice_name'])">{{
+                                            validationMsg.PRACTICE_NAME_LENGTH
+                                          }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MAXIMUM QUESTION FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>Maximum Question?*</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input id="txtMaxQuestion" required type="text" autocomplete="off" matInput
+                                            formControlName="maximum_question" placeholder="Ex: 50" />
+                                        <mat-error *ngIf="isRequiredField(formControls['maximum_question'])">
+                                            {{ validationMsg.MAXIMUM_QUESTION }}
+                                        </mat-error>
+                                        <mat-error *ngIf="isValidLength(formControls['maximum_question'])">{{
+                                                validationMsg.MAXIMUM_QUESTION_LENGTH
+                                              }}</mat-error>
+                                        <mat-error *ngIf="isValidField(formControls['maximum_question'])">
+                                            {{ validationMsg.MAXIMUM_QUESTION_VALID }}
+                                        </mat-error>
+                                        <mat-error *ngIf="isValidNumber(formControls['maximum_question'])">
+                                            {{validationMsg.MAXIMUM_QUESTION_RANGE}}
+                                          </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CHAPTER FIELD -->
+                        <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                            <div class="form-control">
+                                <mat-label>Chapter</mat-label>
+                                <app-ss-select-search [formName]="addPracticeForm" [selectConfig]="chapterSearchConfig"
+                                    [selected]="selectedChapter" [dataList]="chapterList"
+                                    (changSelectEvent)="onSelectChangeEvent($event,'chapterMasterId')"
+                                    id="matSelectClass">
+                                </app-ss-select-search>
+                            </div>
+                        </div>
+
+                        <!-- DESCRIPTION FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                                <div class="form-control-textarea lenght-input">
+                                    <mat-label>Description</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <textarea id="txtDescription" type="text" autocomplete="off" matInput
+                                            formControlName="description" placeholder="Type description"></textarea>
+                                        <mat-error *ngIf="isValidLength(formControls['description'])">{{
+                                                validationMsg.DESCRIPTION_LENGTH_500
+                                              }}</mat-error>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CLASS FIELD -->
+                        <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                            <div class="form-control">
+                                <mat-label>Classes</mat-label>
+                                <app-ss-select-search [formName]="addPracticeForm" [selectConfig]="classSelectConfig"
+                                    [selected]="selectedClasses" [dataList]="parentClassList"
+                                    (changSelectEvent)="onSelectClassChangeEvent($event,'parentClassIds')"
+                                    id="matSelectClass">
+                                </app-ss-select-search>
+                            </div>
+                        </div>
+
+                        <div *ngIf="selectedFolderList.length">
+                            <div *ngFor="let chapter of selectedFolderList; let j=index;" class="add-practice">
+                                <!-- <span class="add-practice__number">{{chapter?.id}}</span> -->
+                                <mat-icon class="answer-chapter" svgIcon="chapter"></mat-icon>
+                                <span class="add-practice__select-sub">{{chapter?.title}}</span>
+                                <a [id]="'lnkRemove' + j">
+                                    <mat-icon svgIcon="close" matTooltip="Remove" (click)="removeChapter(chapter)">
+                                    </mat-icon>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                            <a id="lnkOpenQuestionBank" (click)="onQuestionBankDialogOpen()">
+                                <mat-icon svgIcon="question-bank"></mat-icon>* Select Folders
+                            </a>
+                        </div>
+
+
+                        <div class="button-group">
+                            <button id="btnCancel" type="button" (click)="onCloseDialog(false)"
+                                mat-button>Cancel</button>
+
+                            <button id="btnProceed" mat-flat-button color="primary" type="submit">
+                                Proceed
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

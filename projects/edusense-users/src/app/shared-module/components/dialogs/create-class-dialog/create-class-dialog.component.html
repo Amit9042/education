@@ -1,0 +1,188 @@
+<div class="meeting-dialog-wrapper">
+  <div class="meeting-dialog__head">
+    <h4>{{isEditMode ? "Edit Class" : "Create Class"}}</h4>
+    <a (click)="onCloseDialog(false)" id="lnkClose">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="createClassForm" (ngSubmit)="onSubmitCreateClassForm(createClassForm)">
+
+            <!-- NAME FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control">
+                  <mat-label>Name*</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <input id="txtName" formControlName="name" type="text" autocomplete="off" matInput placeholder="Enter name" />
+                    <mat-error *ngIf="isRequiredField(formControls['name'])">
+                      {{ validationMsg.NAME }}
+                    </mat-error>
+                    <mat-error *ngIf="isValidLength(formControls['name'])">
+                      {{ validationMsg.NAME_LENGTH }}
+                    </mat-error>
+                    <mat-error *ngIf="isValidField(formControls['name'])">
+                      {{ validationMsg.NAME_VALID }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- GRADE FIELD -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 xs-PR-0">
+                <div class="form-control">
+
+                  <app-ss-select-search id="matSelectGrade" [formName]="createClassForm" [selectConfig]="gradeSearchConfig"
+                    [selected]="classDetail?.selectedGrades" [dataList]="gradeList"
+                    (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                  </app-ss-select-search>
+                </div>
+              </div>
+
+
+              <!-- DAYS FIELD -->
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 xs-PL-0">
+                <div class="form-control">
+                  <mat-label>Days</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectDay" placeholder="Select" formControlName="days" multiple>
+                      <mat-option *ngFor="let day of daysList" [value]="day.id">
+                        {{day.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="isRequiredField(formControls['days'])">
+                      {{ validationMsg.DAYS }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 PLR-0">
+                <div class="form-control">
+              <!-- <mat-label>Teacher</mat-label>
+                   <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select placeholder="Select" formControlName="user_id">
+                      <mat-option *ngFor="let user of userList" [value]="user.user_id">
+                        {{user.first_name}} {{user.last_name}} - {{getRoleName(user?.user_role_link.role_id)}}</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                  <app-ss-select-search [formName]="createClassForm"
+                          [selectConfig]="teacherSearchConfig" [selected]="classDetail?.selectedTeacher" [dataList]="userList"
+                          (changSelectEvent)="onSelectChangeEvent($event, 'user_id')" id="matSelectTeacher">
+                  </app-ss-select-search>
+                </div>
+              </div>
+            </div>
+
+            <!-- DESCRIPTION FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control-textarea">
+                  <mat-label>Description</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <textarea id="txtDescription" formControlName="description" type="text" autocomplete="off" matInput
+                      placeholder="Enter description"></textarea>
+                    <mat-error *ngIf="isValidLength(formControls['description'])">{{
+                        validationMsg.DESCRIPTION_LENGTH
+                      }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- START TIME & END TIME -->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 xs-PR-0">
+                <div class="form-control">
+                  <mat-label>Start Time</mat-label>
+                  <!-- <mat-form-field appearance="outline" floatLabel="always">
+                    <input placeholder="Select Time" matInput [ngxTimepicker]="startTime" id="txtStartTime"
+                      formControlName="start_time" readonly [format]="12">
+                    <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                    <button type="button" mat-button class="clock-icon">
+                      <mat-icon id="iconOpenStartDate" (click)="startTime.open()" matSuffix svgIcon="clock"></mat-icon>
+                    </button>
+                  </mat-form-field> -->
+
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectTime" placeholder="Select Time" (selectionChange)="onSelectStartTime($event)" formControlName="start_time">
+                      <mat-option *ngFor="let time of startTimeSlotList" [value]="time.label">{{
+                          time.label
+                        }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 xs-PL-0">
+                <div class="form-control">
+                  <mat-label>End Time</mat-label>
+                  <!-- <mat-form-field appearance="outline" floatLabel="always">
+                    <input placeholder="Select Time" matInput [ngxTimepicker]="endTime" id="txtEndTime"
+                      formControlName="end_time" readonly [format]="12">
+                    <ngx-material-timepicker #endTime></ngx-material-timepicker>
+                    <button type="button" mat-button class="clock-icon">
+                      <mat-icon id="iconOpenEndDate" (click)="endTime.open()" matSuffix svgIcon="clock"></mat-icon>
+                    </button>
+                  </mat-form-field> -->
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectEndTime" placeholder="Select Time" formControlName="end_time">
+                      <mat-option *ngFor="let time of endTimeSlotList" [value]="time.label">{{
+                          time.label
+                        }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="true">{{
+                      validationMsg.END_TIME_VALID
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBJECT WITH MAT-AUTO-CHIPS -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control">
+                  <app-ss-select-search id="matSelectSubject" [formName]="createClassForm" [selectConfig]="subjectSearchConfig"
+                    [selected]="classDetail?.selectedSubjects" [dataList]="subjectList"
+                    (changSelectEvent)="onSelectChangeEvent($event, 'subject')">
+                  </app-ss-select-search>
+                  </div>
+              </div>
+            </div>
+
+            <!-- TIME ZONE FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control">
+                  <mat-label>Time zone</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectTimeZone" placeholder="Select" formControlName="time_zone">
+                      <mat-option *ngFor="let timezone of allTimezones" [value]="timezone.timezone_id">
+                        {{timezone.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="button-group">
+              <button type="button" id="btnCancel" (click)="onCloseDialog(false)" mat-button>Cancel</button>
+              <button mat-flat-button color="primary" type="submit" id="btnAdd">
+                {{isEditMode ? "Update" : "Add" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

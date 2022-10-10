@@ -1,0 +1,42 @@
+<div class="class-view-container">
+    <div class="class-view">
+        <div class="class-view__header">
+            <a (click)="onUserManagementList()" id="lnkBack">
+                <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+            </a>
+            <h2>User Management</h2>
+        </div>
+        <div class="class-view__body">
+            <div class="class-view__body__view">
+                <label>Name</label>
+                <span>{{userDetail?.first_name}} {{userDetail?.last_name}}</span>
+            </div>
+
+            <div class="class-view__body__view">
+                <label>Email</label>
+                <span>{{userDetail?.email}}</span>
+            </div>
+
+            <div class="class-view__body__view">
+                <label>Role</label>
+                <span>{{getRoleName(userDetail?.user_role_link.role_id)}}</span>
+            </div>
+            <div class="class-view__body__view" *ngIf="userDetail?.user_role_link.role_id == roleTeacher">
+                <label>Grades</label>
+                <ul *ngFor="let grade of userDetail?.grade;let i = index">
+                    <li>
+                        <span>{{grade?.grade?.alias}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="class-view__body__view" *ngIf="userDetail?.user_role_link.role_id == roleTeacher">
+                <label>Subjects</label>
+                <ul *ngFor="let subject of userDetail?.subject;let i = index">
+                    <li>
+                        <span>{{subject?.name}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

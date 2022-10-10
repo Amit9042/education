@@ -1,0 +1,23 @@
+@import '../../../assets/scss/abstracts/abstracts';
+
+.side-scroll-data {
+    max-height: calc(100vh - 27rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @include respond('regular-desktop') {
+        max-height: calc(100vh - 22rem);
+    }
+}
+
+.doubt-container {
+    &.side-doubt-list-container {
+        .waiting-room-container {
+            padding: 4rem 0 0 !important;
+        }
+    }
+}
+
+.meeting-room__body {
+    margin-bottom: 0.5rem;
+}

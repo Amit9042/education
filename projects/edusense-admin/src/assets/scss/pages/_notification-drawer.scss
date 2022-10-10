@@ -1,0 +1,125 @@
+.notification-drawer-wrapper {
+    .sidebar-drawer__bottom {
+        max-height: calc(100vh - 15rem);
+        overflow: auto;
+
+        @include respond('phone') {
+            max-height: calc(100vh - 21.5rem);
+        }
+    }
+    ul {
+        li {
+            display: block;
+            width: 100%;
+
+            .notification {
+                text-decoration: none;
+                display: flex;
+                flex-direction: row;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                padding: 2rem 2rem 1.6rem;
+                background: #f4f5f7;
+
+                @include respond('tablet') {
+                    padding: 1rem 1rem 0.6rem;
+                }
+
+                @include respond('phone') {
+                    padding: 1.5rem 1rem 1rem;
+                }
+
+                &.read-notification {
+                    background: #fff;
+                }
+
+                &__icon {
+                    mat-icon,
+                    img {
+                        width: 5rem;
+                        height: 5rem;
+                        border-radius: 50%;
+                        margin-right: 2rem;
+
+                        @include respond('tablet') {
+                            width: 3.5rem;
+                            height: 3.5rem;
+                            margin-right: 1rem;
+                        }
+
+                        @include respond('phone') {
+                            width: 3.5rem;
+                            height: 3.5rem;
+                            margin-right: 1rem;
+                        }
+                    }
+                }
+
+                &__body {
+                    &--time {
+                        color: rgba($black-color, 0.6);
+                        font-weight: normal;
+                        font-size: 1.6rem;
+                        line-height: 1.63;
+                        display: block;
+                    }
+
+                    p {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                        font-stretch: normal;
+                        font-style: normal;
+                        line-height: 1.44;
+                        letter-spacing: normal;
+                        text-align: left;
+                        text-transform: inherit;
+                        color: $blue-color-1;
+                        b {
+                            font-weight: bold;
+                            color: $blue-color;
+                        }
+
+                        @include respond('tablet') {
+                            font-size: 14px;
+                        }
+
+                        @include respond('phone') {
+                            font-size: 14px;
+                        }
+                    }
+
+                    span {
+
+                    }
+                }
+            }
+
+            &:last-child {
+                .notification {
+                    border: 0;
+                }
+            }
+        }
+    }
+
+    .notification-comming-soon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50rem;
+
+        .mat-icon {
+            width: 10rem;
+            height: 10rem;
+        }
+
+        p {
+            color: $blue-color;
+            font-size: 2.6rem;
+            font-weight: 500;
+            line-height: 2.69;
+            text-align: center;
+            text-transform: initial;
+        }
+    }
+}

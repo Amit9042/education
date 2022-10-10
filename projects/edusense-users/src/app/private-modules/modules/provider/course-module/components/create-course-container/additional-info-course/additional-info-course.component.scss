@@ -1,0 +1,13 @@
+.additional-info-course-container {
+    .additional-info-form {
+        &__section {
+            height: calc(100vh - 25rem);
+
+            .buttons {
+                position: absolute;
+                width: 100%;
+                bottom: 1.5rem;
+            }
+        }
+    }
+}

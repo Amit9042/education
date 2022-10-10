@@ -1,0 +1,180 @@
+<app-header></app-header>
+<div class="webpages-container providers-container">
+    <div class="section-group-container">
+        <div class="webpages-container__section MB-10">
+            <div class="content-left tablet-width">
+                <h1>
+                    Best Learning<br> Management 
+                    System<br> for the institutes
+                </h1>
+                <p>
+                    With EduSense, education institutes can easily conduct
+                    virtual classrooms, share study material with students,
+                    maintain attendance, organize exams and much more.
+                </p>
+            </div>
+            <div class="webpages-container__section__img-section">
+                <img src="./assets/images/providerPage.png" alt="" />
+            </div>
+        </div>
+
+        <!-- conduct live section  -->
+        <div class="webpages-container__section MB-10">
+            <div class="content content-left tablet-width">
+                <h3>
+                    Conduct<br />
+                    live sessions
+                </h3>
+                <p>
+                    Teachers can conduct live sessions using our virtual
+                    classrooms having the capacity of up to 150 students.
+                </p>
+            </div>
+            <div
+                class="webpages-container__section__img-section section-group-container--conduct-session-img"
+            >
+                <img src="./assets/images/joinSession.png" alt="" />
+            </div>
+        </div>
+
+        <!-- record-session  -->
+        <div class="webpages-container__section watch-reverse-session MB-10">
+            <div
+                class="webpages-container__section__img-section section-group-container--record-session-img"
+            >
+                <img src="./assets/images/recordedSession.png" alt="" />
+            </div>
+            <div class="content content-right">
+                <h3>
+                    Record sessions<br />
+                    for students
+                </h3>
+                <p>
+                    Educators can use the session recording feature so the
+                    students can revisit the lectures and learn at their own
+                    pace.
+                </p>
+            </div>
+        </div>
+
+        <!-- share-material  -->
+        <div class="webpages-container__section MB-10">
+            <div class="content content-left tablet-width">
+                <h3>
+                    Share study material
+                </h3>
+                <p>
+                    Teachers and professors can share their study material with
+                    their budding students. This material can be seen in the
+                    virtual classrooms for easy access.
+                </p>
+            </div>
+            <div
+                class="webpages-container__section__img-section section-group-container--share-material-img"
+            >
+                <img src="./assets/images/shareMaterial.png" alt="" />
+            </div>
+        </div>
+
+        <!-- institute conduct exam  -->
+        <div class="webpages-container__section watch-reverse-session MB-10">
+            <div
+                class="webpages-container__section__img-section section-group-container--conduct-exam-img"
+            >
+                <img src="./assets/images/conductExam.png" alt="" />
+            </div>
+            <div class="content content-right">
+                <h3>
+                    Organize exams
+                </h3>
+                <p>
+                    EduSense is not only about virtual classrooms and sharing
+                    study materials. With EduSense the institutes can also
+                    organize the exams virtually.
+                </p>
+            </div>
+        </div>
+
+        <!-- qa session  -->
+        <div class="webpages-container__section">
+            <div class="content content-left tablet-width">
+                <h3>
+                    Q & A Section
+                </h3>
+                <p>
+                    During the live sessions the students can raise hands for
+                    queries. Also, they can ask questions in a special dedicated
+                    section of questions and answers.
+                </p>
+            </div>
+            <div
+                class="webpages-container__section__img-section section-group-container--separateQa-section-img"
+            >
+                <img src="./assets/images/qaSession.png" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <!-- faculties  -->
+    <div
+        class="webpages-container__middle-section webpages-container__middle-section--faculties"
+    >
+        <h3>
+            Our fun loving <br />
+            professors who are part of EduSense
+        </h3>
+        <div class="webpages-container__middle-section__faculties-section">
+            <div class="faculty-info">
+                <img src="./assets/images/facultyOne.png" alt="" />
+                <h5>Gary Richard</h5>
+            </div>
+            <div class="faculty-info">
+                <img src="./assets/images/facultyTwo.png" alt="" />
+                <h5>Mary Stephen</h5>
+            </div>
+            <div class="faculty-info">
+                <img src="./assets/images/facultyThree.png" alt="" />
+                <h5>Sofie Green</h5>
+            </div>
+            <div class="faculty-info">
+                <img src="./assets/images/facultyFour.png" alt="" />
+                <h5>Richard Miller</h5>
+            </div>
+            <div class="faculty-info">
+                <img src="./assets/images/facultyFive.png" alt="" />
+                <h5>Anna Mcfield</h5>
+            </div>
+            <div class="faculty-info">
+                <img src="./assets/images/facultySix.png" alt="" />
+                <h5>Michael Messie</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQS  -->
+    <div
+        class="webpages-container__middle-section webpages-container__middle-section--faqs white-bg"
+    >
+        <h5>
+            FAQs
+        </h5>
+        <mat-accordion>
+            <mat-expansion-panel
+                *ngFor="let provider of providerFaqsList; let i = index"
+            >
+                <mat-expansion-panel-header
+                    collapsedHeight="102px"
+                    expandedHeight="102px"
+                >
+                    <mat-panel-title>
+                        {{ provider?.title }}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <p>{{ provider?.description }}</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
+<app-getting-started-contact-us [contactBtn]="false"></app-getting-started-contact-us>
+<app-footer></app-footer>

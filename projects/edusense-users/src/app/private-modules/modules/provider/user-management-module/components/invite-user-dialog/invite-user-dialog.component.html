@@ -1,0 +1,228 @@
+<div class="dialog-container">
+    <div class="dialog-container__head">
+        <h4>Invite User</h4>
+        <a (click)="onDialogClose(false)" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="dialog-container__bottom">
+        <form
+            [formGroup]="inviteUserForm"
+            (ngSubmit)="onSubmitInviteUserForm(inviteUserForm)"
+        >
+            <div
+                formArrayName="rowFields"
+                *ngFor="
+                    let rowField of formArrayControls().controls;
+                    let i = index
+                "
+            >
+                <div [formGroupName]="i">
+                    <!-- <div *ngFor="let i of [0, 1]; let i = index"> -->
+                    <div class="invite-user-field-flex">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12 PL-0 PR-2 small-pad-0">
+                                <div class="form-control">
+                                    <mat-label>First Name*</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <input
+                                            formControlName="first_name"
+                                            [id]="'txtFirstName-' + i"
+                                            type="text"
+                                            autocomplete="off"
+                                            matInput
+                                            placeholder="Enter first name"
+                                        />
+                                        <mat-error
+                                            *ngIf="
+                                                isRequiredField(
+                                                    rowField.get('first_name')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.FIRST_NAME }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidLength(
+                                                    rowField.get('first_name')
+                                                )
+                                            "
+                                        >
+                                            {{
+                                                validationMsg.FIRST_NAME_LENGTH
+                                            }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidField(
+                                                    rowField.get('first_name')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.FIRST_NAME_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12 PL-0 PR-2 tab-pad-0 small-pad-0">
+                                <div class="form-control">
+                                    <mat-label>Last Name*</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <input
+                                            formControlName="last_name"
+                                            [id]="'txtLastName-' + i"
+                                            type="text"
+                                            autocomplete="off"
+                                            matInput
+                                            placeholder="Enter last name"
+                                        />
+                                        <mat-error
+                                            *ngIf="
+                                                isRequiredField(
+                                                    rowField.get('last_name')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.LAST_NAME }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidLength(
+                                                    rowField.get('last_name')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.LAST_NAME_LENGTH }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidField(
+                                                    rowField.get('last_name')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.LAST_NAME_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12 PL-0 PR-2 small-pad-0">
+                                <div class="form-control">
+                                    <mat-label>Email Address*</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <input
+                                            formControlName="email"
+                                            [id]="'txtEmail-' + i"
+                                            type="text"
+                                            autocomplete="off"
+                                            matInput
+                                            placeholder="Enter email address"
+                                        />
+                                        <mat-error
+                                            *ngIf="
+                                                isRequiredField(
+                                                    rowField.get('email')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.EMAIL }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidLength(
+                                                    rowField.get('email')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.EMAIL_LENGTH }}
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="
+                                                isValidField(
+                                                    rowField.get('email')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.EMAIL_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12 PL-0 PR-2 tab-pad-0 small-pad-0">
+                                <div class="form-control">
+                                    <mat-label>Role*</mat-label>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                    >
+                                        <mat-select
+                                            formControlName="role"
+                                            placeholder="Select role"
+                                            [id]="'selectRole-' + i"
+                                        >
+                                            <mat-option *ngFor="
+                                            let role of roleList;" [value]="role.id"
+                                                >{{role.name}}</mat-option
+                                            >
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="
+                                                isRequiredField(
+                                                    rowField.get('role')
+                                                )
+                                            "
+                                        >
+                                            {{ validationMsg.ROLE }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
+                                *ngIf="formArrayControls().controls.length > 1"
+                                mat-icon-button
+                                (click)="removeRowFields(i)"
+                                [id]="'btnCancel-' + i"
+                            >
+                                <mat-icon
+                                    svgIcon="close"
+                                    matTooltip="Delete"
+                                ></mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                *ngIf="formArrayControls().controls.length < 10"
+                class="add-another-field"
+            >
+                <a (click)="addRowFields()" id="lnkAdd"
+                    ><mat-icon svgIcon="addField"></mat-icon> Add another</a
+                >
+            </div>
+
+            <div class="button-group">
+                <button id="btnCancel" (click)="onDialogClose(false)" type="button" mat-button>
+                    Cancel
+                </button>
+                <button id="btnInvite" mat-flat-button color="primary" [disabled]="inviteUserForm.invalid" type="submit">
+                    Invite
+                </button>
+            </div>
+        </form>
+        
+    </div>
+</div>

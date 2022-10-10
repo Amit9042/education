@@ -1,0 +1,37 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.height-box {
+    min-height: calc(100vh - 38rem);
+}
+
+.small-pad-0 {
+    @include respond('phone') {
+        padding: 0 !important;
+    }
+}
+
+.header__search-white {
+    @include respond('phone') {
+        margin-bottom: 2rem;
+    }
+}
+
+.class-view-container .class-view__body  .class-view__body__view {
+    @include respond('phone') {
+        flex-direction: column !important;
+        margin-bottom: 2.5rem !important;
+    }
+}
+
+.meeting-room__body {
+    @include respond('phone') {
+        padding: 2rem 1rem !important;
+    }
+}
+
+.phone-remove-btn {
+    @include respond('phone') {
+        text-align: left;
+        margin: 2rem 0 0 5rem;
+    }
+}

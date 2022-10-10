@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="11.719" viewBox="0 0 16 11.719">
+  <g id="open-menu" transform="translate(0 -68.5)">
+    <path id="Path_16117" data-name="Path 16117" d="M135,206.7h11.491v-3.2H135Zm.914-2.286h9.662v1.372h-9.662Z" transform="translate(-130.491 -130.741)" fill="#203061"/>
+    <path id="Path_16118" data-name="Path 16118" d="M1.6,203.5a1.6,1.6,0,1,0,1.6,1.6A1.6,1.6,0,0,0,1.6,203.5Zm0,2.286a.686.686,0,1,1,.686-.686A.687.687,0,0,1,1.6,205.786Z" transform="translate(0 -130.741)" fill="#203061"/>
+    <path id="Path_16119" data-name="Path 16119" d="M135,341.7h11.491v-3.2H135Zm.914-2.286h9.662v1.372h-9.662Z" transform="translate(-130.491 -261.482)" fill="#203061"/>
+    <path id="Path_16120" data-name="Path 16120" d="M1.6,338.5a1.6,1.6,0,1,0,1.6,1.6A1.6,1.6,0,0,0,1.6,338.5Zm0,2.286a.686.686,0,1,1,.686-.686A.687.687,0,0,1,1.6,340.786Z" transform="translate(0 -261.482)" fill="#203061"/>
+    <path id="Path_16121" data-name="Path 16121" d="M135,68.5v3.2h11.491V68.5Zm10.576,2.286h-9.662V69.414h9.662Z" transform="translate(-130.491)" fill="#203061"/>
+    <path id="Path_16122" data-name="Path 16122" d="M1.6,68.5a1.6,1.6,0,1,0,1.6,1.6A1.6,1.6,0,0,0,1.6,68.5Zm0,2.286a.686.686,0,1,1,.686-.686A.687.687,0,0,1,1.6,70.786Z" fill="#203061"/>
+  </g>
+</svg>

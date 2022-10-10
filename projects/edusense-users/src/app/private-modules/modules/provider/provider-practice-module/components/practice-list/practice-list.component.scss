@@ -1,0 +1,114 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.waiting-room-container {
+    background: none;
+    padding: 0 2.5rem;
+
+    @include respond('phone') {
+        padding: 0;
+    }
+
+    @include respond('tab-port') {
+        padding: 0;
+    }
+
+    .waiting-room {
+        &__top {
+            &--right {
+                background-color: $grey-color-3 !important;
+            }
+        }
+        .header {
+            &__search {
+                &--input {
+                    input {
+                        background-color: $grey-color-3 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.visitors-info {
+    margin-bottom: 0 !important;
+    cursor: pointer !important;
+}
+
+.visitor-details {
+    p {
+        small {
+            color: rgba($reddish-color, 0.6);
+            margin-left: 1.6rem;
+        }
+    }
+}
+
+.publish-color {
+    color: $orange-color;
+}
+
+.waiting-room__body.meeting-room__body {
+    padding: 0 !important;
+
+    @include respond('tab-port') {
+        margin: 1rem 0 1.5rem;
+    }
+}
+
+.waiting-room__body.meeting-room__body {
+    overflow-y: auto;
+    height: calc(100vh - 40rem);
+}
+
+@include respond('phone') {
+    .que-bank-ch-list-container__head {
+        display: block;
+        padding-bottom: 2rem;
+
+        &__right {
+            padding: 1rem 0 0 3rem;
+        }
+    }
+}
+
+.meeting-room {
+    min-height: auto !important;
+}
+
+.waiting-room-container.meeting-room-container {
+    margin: 2rem 2rem 0 2rem !important;
+}
+
+.chapter-practice {
+    opacity: 1 !important;
+    margin-bottom: 1rem;
+
+    .chapter {
+        opacity: 0.6;
+    }
+
+    .polymonials {
+        color: $black-color;
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+}
+
+.que-bank-ch-list-container__head {
+    padding-bottom: 2rem;
+    @include respond('tab-port') {
+        padding: 2rem 0 !important;
+    }
+}
+
+mat-icon[svgIcon='more'] {
+    @include square(2.4rem);
+    line-height: 2.4rem;
+}
+
+.no-practice-scroll-remove {
+    .no-content-found-wrapper {
+        min-height: calc(100vh - 41rem) !important;
+    }
+}

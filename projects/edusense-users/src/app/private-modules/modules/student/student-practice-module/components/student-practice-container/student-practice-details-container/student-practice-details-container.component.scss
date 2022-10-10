@@ -1,0 +1,61 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.select-question {
+    @include clearfix();
+
+    &__left {
+        width: 50rem;
+        float: left;
+        margin-top: 2rem;
+
+        @include respond('phone') {
+            width: 100%;
+        }
+
+        @include respond('tab-port') {
+            width: 100%;
+        }
+
+        @include respond('regular-desktop') {
+            width: 40rem;
+        }
+    }
+
+    &__right {
+        width: calc(100% - 50rem);
+        float: left;
+        margin-top: 2rem;
+
+        @include respond('phone') {
+            width: 100%;
+        }
+
+        @include respond('tab-port') {
+            width: 100%;
+        }
+
+        @include respond('regular-desktop') {
+            width: calc(100% - 40rem);
+        }
+    }
+}
+
+
+// AFTER NEW HEADER DESIGN HEIGHT CHANGES
+.question-details-container{
+    .question-details{
+        height: calc(100vh - 12.8rem) !important;
+    }
+}
+
+.question-list-container{
+    .question-list__body{
+        height: calc(100vh - 23rem) !important;
+    }
+}
+
+.question-list__body{
+    .no-content-found-wrapper{
+        min-height: calc(100vh - 43rem) !important;
+    }
+}

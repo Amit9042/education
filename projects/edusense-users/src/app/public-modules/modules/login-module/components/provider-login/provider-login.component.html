@@ -1,0 +1,67 @@
+<div class="auth-container login-form-container">
+        <div class="auth-box">
+          <div class="auth-box__data"> 
+            <div>
+              <h3>Login</h3>
+              <p>Login by entering email and password</p>
+            </div>
+  
+            <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm)">
+  
+              <div class="form-control">
+                <mat-label>Email*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input id="txtEmail" type="text" required formControlName="email" autocomplete="off" matInput
+                    placeholder="e.g demo123@example.com" />
+  
+                  <mat-error *ngIf="isRequiredField(formControls['email'])">
+                    {{ validationMsg.EMAIL }}
+                  </mat-error>
+                  <mat-error *ngIf="isValidField(formControls['email'])">
+                    {{ validationMsg.EMAIL_VALID }}
+                  </mat-error>
+                  <mat-error *ngIf="isValidLength(formControls['email'])">
+                    {{ validationMsg.EMAIL_LENGTH }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <div class="form-control">
+                <mat-label>Password*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input id="txtPassword" type="password" required formControlName="password" autocomplete="off" matInput
+                    placeholder="Enter your password" [type]="isHidePassword? 'password': 'text'" />
+                  <a id="lnkShowPassword" class="eye-icon" type="button" matSuffix (click)="isHidePassword = !isHidePassword
+                                            " [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
+                    <mat-icon *ngIf="!isHidePassword" svgIcon="hide" matTooltip="Hide"></mat-icon>
+                    <mat-icon *ngIf="isHidePassword" svgIcon="eye" matTooltip="Show"></mat-icon>
+                  </a>
+                  <mat-error *ngIf="isRequiredField(formControls['password'])">
+                    {{validationMsg.PASSWORD}}
+                  </mat-error>
+                  <mat-error *ngIf="isValidLength(formControls['password'])">
+                    {{validationMsg.PASSWORD_LENGTH}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <div class="forgot-password">
+                <p>
+                  <a (click)="onForgotPassword()" id="lnkForgotPassword">Forgot your password?</a>
+                </p>
+              </div>
+  
+              <div>
+                <button id="btnLogin" class="auth-green-button" type="submit" mat-flat-button color="primary">
+                  Login
+                </button>
+              </div>
+            </form>
+            <div class="row login-buttons">
+              <p class="bottom-link col-md-12 PL-0">
+                Don't you have a account <a (click)="onSignUp()" id="lnkSignUp">Create One</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>

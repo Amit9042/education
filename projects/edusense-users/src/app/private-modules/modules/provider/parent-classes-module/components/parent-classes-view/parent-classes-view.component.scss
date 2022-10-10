@@ -1,0 +1,30 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.height-box {
+    min-height: calc(100vh - 38rem);
+}
+
+.small-pad-0 {
+    @include respond('phone') {
+        padding: 0 !important;
+    }
+}
+
+.header__search-white {
+    @include respond('phone') {
+        margin-bottom: 2rem;
+    }
+}
+
+.meeting-room__body{
+    @include respond("phone"){
+        padding: 2rem 1rem;
+    }
+}
+
+.remove-btn-phone{
+    @include respond("phone"){
+        text-align: left;
+        margin: 2rem 0 3rem 5rem;
+    }
+}

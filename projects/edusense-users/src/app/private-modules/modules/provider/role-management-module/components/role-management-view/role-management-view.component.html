@@ -1,0 +1,33 @@
+<div class="class-view-container">
+    <div class="class-view">
+        <div class="class-view__header">
+            <a (click)="onRoleManagementList()" id="lnkBack">
+                <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+            </a>
+            <h2>Role Management</h2>
+        </div>
+        <div class="class-view__body">
+            <div class="class-view__body__view">
+                <label>Name</label>
+                <span>Provider Owner</span>
+            </div>
+        </div>
+        <div class="class-view__module-rights">
+            <h3>Module Rights :</h3>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12 PL-0">
+                    <div *ngFor="let info of [0, 1, 2, 3, 4, 5]; let i = index">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6 PL-0">
+                                <mat-checkbox  checked="true">Class Management</mat-checkbox>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 PR-0 small-text-right">
+                                <mat-checkbox>Material</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

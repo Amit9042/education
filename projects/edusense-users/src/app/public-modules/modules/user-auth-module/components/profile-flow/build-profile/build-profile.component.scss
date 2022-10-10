@@ -1,0 +1,63 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.location-details {
+    h2 {
+        color: $primary-color;
+        margin-bottom: 3rem;
+        font-size: 2rem;
+        span {
+            display: inline-block;
+            margin-left: 1.1rem;
+            mat-icon {
+                @include square(2rem);
+                vertical-align: bottom;
+            }
+        }
+    }
+}
+
+.mat-tooltip {
+    color: $white-color !important;
+    background-color: $black-color !important;
+    padding: 0.8rem 1.6rem !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+}
+
+.footer {
+    background-color: $white-color;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba($black-color, 0.11);
+    position: fixed;
+    text-align: center;
+    height: 10.5rem;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    @include respond('tab-port') {
+        position: unset;
+        text-align: left;
+    }
+    @include respond('phone') {
+        position: unset;
+        text-align: left;
+    }
+    .mat-flat-button.mat-button-base.mat-primary {
+        margin-left: -13rem;
+        @include respond('regular-desktop') {
+            margin-left: -17rem;
+        }
+
+        @include respond('tab-port') {
+            margin-left: 2rem;
+        }
+        @include respond('phone') {
+            margin-left: 1.5rem;
+        }
+    }
+}
+
+.profile-details-container {
+    margin-bottom: 4rem;
+}

@@ -1,0 +1,180 @@
+.form-control {
+    @include placeholder($placeholder-color, 1.6rem);
+    height: 12rem;
+
+    mat-datepicker-toggle {
+        .mat-icon-button {
+            position: absolute;
+            right: -1rem;
+            top: -1.7em;
+        }
+        .mat-button-ripple.mat-ripple,
+        .mat-button-focus-overlay {
+            display: none;
+        }
+    }
+
+    .mat-datepicker-toggle-default-icon {
+        height: 1.6rem !important;
+        width: 1.6rem !important;
+    }
+
+    .mat-form-field {
+        line-height: 1.25;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        // padding: 1.1em 0 0.9em 0;
+    }
+    .mat-form-field-infix {
+        border-top: 0;
+    }
+    mat-label {
+        color: $primary-color;
+        display: inline-block;
+        margin-bottom: 0;
+        font-size: 1.4rem;
+        line-height: 1.25;
+        font-weight: 600;
+    }
+    .mat-form-field-outline {
+        @include border-radius(0.8rem);
+        border: 2px solid $primary-color-2;
+        height: 5rem;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+        border-radius: 8px;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+        border: none;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        background-color: rgba($grey-color-10, 0.2);
+        color: $placeholder-color;
+    }
+
+    .mat-flat-button {
+        font-size: 2rem;
+    }
+
+    .mat-select-placeholder {
+        color: $placeholder-color;
+        font-size: 1.6rem;
+    }
+
+    .mat-chip-list-wrapper {
+        margin: -1rem -0.4rem;
+    }
+
+    mat-icon {
+        width: 1.1rem;
+    }
+    .mat-form-field-prefix,
+    .mat-form-field-suffix {
+        span {
+            color: $primary-color;
+            vertical-align: text-top;
+            font-size: 1.6rem;
+        }
+    }
+    .mat-select-arrow {
+        position: relative;
+        bottom: 0.3rem;
+        width: 1.2rem;
+        height: 2rem;
+        border: 0;
+        background: url('assets/images/svg_files/down.svg') no-repeat center;
+    }
+}
+
+.form-control-checkbox {
+    position: relative;
+
+    mat-checkbox {
+        position: absolute;
+        top: 5rem;
+        right: -4rem;
+    }
+}
+
+.form-control-textarea {
+    @include placeholder($placeholder-color, 1.6rem);
+    height: 14rem;
+
+    .mat-form-field-infix {
+        border-top: none;
+    }
+    mat-label {
+        color: $primary-color;
+        display: inline-block;
+        margin-bottom: 0;
+        font-size: 1.4rem;
+        line-height: 1.25;
+        font-weight: 600;
+    }
+    textarea {
+        resize: none !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: $placeholder-color;
+        background-color: rgba($grey-color-10, 0.2);
+    }
+    .mat-form-field-outline {
+        @include border-radius(0.8rem);
+        border: 2px solid $primary-color-2;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+        border-radius: 8px;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+        border: none;
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-prefix,
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+    width: 4rem;
+    line-height: 1;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end,
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 3px;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid.ng-untouched
+    .mat-form-field-outline-thick,
+.mat-form-field.mat-form-field-invalid .mat-form-field-label,
+.mat-form-field.mat-form-field-invalid
+    .mat-form-field-label
+    .mat-form-field-required-marker,
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+    .mat-form-field-outline-thick,
+.mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+    color: $placeholder-color !important;
+}
+
+.mat-warn .mat-input-element,
+.mat-form-field-invalid .mat-input-element {
+    caret-color: $placeholder-color !important;
+}
+
+.mat-select-arrow-wrapper {
+    color: $placeholder-color;
+    position: relative;
+    top: 0.8rem;
+}
+
+.mat-select-value {
+    position: relative;
+    // top: 0.2rem;
+    top: 0;
+}

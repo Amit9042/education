@@ -1,0 +1,49 @@
+<div class="about-details-container">
+    <div class="about-details">
+        <h3>About the Course</h3>
+
+        <div class="about-details__border">
+            <p>{{courseData?.description | placeNA}}</p>
+        </div>
+
+        <div class="about-details__skills">
+            <h3>Skills in the Course</h3>
+
+            <ng-container *ngIf="courseSkillList.length; else emptyBlock">
+                <ul>
+                    <ng-container *ngFor="let skill of courseSkillList">
+                        <li>
+                            <a>{{skill}}</a>
+                        </li>
+                    </ng-container>
+                </ul>
+            </ng-container>
+            <ng-template #emptyBlock>
+                <div class="about-details__border">
+                    <p>{{'' | placeNA}}</p>
+                </div>
+                <!-- {{'' | placeNA}} -->
+            </ng-template>
+        </div>
+
+        <div class="about-details__instructor">
+            <h3>About the Instructor</h3>
+
+            <div class="about-details__instructor__img">
+                <img *ngIf="courseData?.user?.avatar" [src]="courseData.user.avatar">
+                <mat-icon *ngIf="!(courseData?.user?.avatar)" svgIcon="profile"></mat-icon>
+            </div>
+
+            <div class="about-details__instructor__details">
+                <h4></h4>
+                <h5>{{courseData?.user?.first_name}}{{' '+courseData?.user?.last_name}}</h5>
+                <small><!-- University of California, San Diego --></small>
+                <small><!-- McMaster University --></small>
+            </div>
+
+            <p><!-- I'm a former Graduate Student (Educational Psychology) in Canada, and I'm passionate about statistic
+                and data. I've developed an expertise in SAS Base programming and beginner/intermediate statistics
+                largely through my schooling and partly self-study. --></p>
+        </div>
+    </div>
+</div>

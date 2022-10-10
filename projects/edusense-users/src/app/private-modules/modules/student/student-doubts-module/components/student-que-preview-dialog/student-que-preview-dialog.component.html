@@ -1,0 +1,17 @@
+<div class="meeting-dialog-wrapper que-preview-container">
+    <div class="que-preview-container__head">
+        <h4>{{data?.question}}</h4>
+    </div>
+    <div class="que-preview-container__bottom">
+        <es-user-student-question-view [questionDetail]="data"></es-user-student-question-view>
+        <div class="button-group">
+            <button type="button" (click)="onCloseDialog(false)" id="btnBack" mat-button>
+                Back
+            </button>
+
+            <button mat-flat-button color="primary" type="button" id="btnSubmit" (click)="askQuesstion()">
+                Submit
+            </button>
+        </div>
+    </div>
+</div>

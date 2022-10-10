@@ -1,0 +1,13 @@
+@import '../../../../../assets/scss/abstracts/abstracts';
+
+.xs-PR-0 {
+    @include respond('phone') {
+        padding-right: 0 !important;
+    }
+}
+
+.xs-PL-0 {
+    @include respond('phone') {
+        padding-left: 0 !important;
+    }
+}

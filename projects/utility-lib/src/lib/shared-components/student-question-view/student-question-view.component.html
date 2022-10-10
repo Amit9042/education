@@ -1,0 +1,17 @@
+<div class="que-preview-container__bottom__details">
+    <p *ngIf="questionDetail?.description">
+        {{questionDetail?.description}}
+    </p>
+    <div *ngIf="questionDetail?.images">
+        <div *ngFor="let image of questionDetail?.images">
+            <img [src]="image?.url" alt="" />
+            <p *ngIf="image?.description">{{image?.description}}</p>
+        </div>
+    </div>
+    <div *ngIf="questionDetail?.uploadedImages">
+        <div *ngFor="let image of questionDetail?.uploadedImages">
+            <img [src]="image?.url" alt="" />
+            <p *ngIf="image?.description">{{image?.description}}</p>
+        </div>
+    </div>
+</div>

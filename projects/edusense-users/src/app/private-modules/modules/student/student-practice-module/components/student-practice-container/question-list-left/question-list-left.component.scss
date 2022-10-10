@@ -1,0 +1,288 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.question-list-container {
+    .question-list {
+        &__header {
+            &__row {
+                @include clearfix();
+                background-color: rgba($primary-color, 0.08);
+                display: flex;
+                align-items: center;
+                padding: 0 2.5rem;
+                height: 10rem;
+
+                &__left {
+                    float: left;
+                    width: 5rem;
+
+                    a {
+                        mat-icon {
+                            margin-top: 0.2rem;
+                            @include square(2rem);
+                        }
+                    }
+                }
+
+                &__center {
+                    float: left;
+                    width: calc(100% - 5rem);
+
+                    h4 {
+                        @include elipsis(100%);
+                        color: $primary-color;
+                        font-size: 2rem;
+                        margin-bottom: 0.9rem;
+                    }
+
+                    span {
+                        color: $grey-color-12;
+                        font-size: 1.6rem;
+                    }
+                }
+
+                &__right {
+                    float: left;
+                    width: 6rem;
+
+                    button {
+                        @include square(4rem);
+                        background-color: rgba($primary-color, 0.1);
+                        float: right;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+
+                        mat-icon {
+                            @include square(1.6rem);
+                        }
+                    }
+                }
+            }
+
+            &__search {
+                background-color: rgba($primary-color, 0.08);
+                position: relative;
+                padding: 0 2rem 2rem 2rem;
+                height: 7.2rem;
+
+                mat-icon {
+                    @include square(2rem);
+                    color: $primary-color;
+                    opacity: 0.8;
+                    position: absolute;
+                    top: 1.6rem;
+                    left: 4rem;
+                }
+
+                input {
+                    background-color: $white-color;
+                    border: 0;
+                    border-radius: 1rem;
+                    height: 5.2rem;
+                    padding: 1rem 1rem 1rem 6rem;
+                    width: 100%;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            &__action {
+                @include clearfix();
+                background: #f0f4f8;
+                display: flex;
+                align-items: center;
+                height: 7rem;
+                padding: 0 1.5rem;
+                border-bottom: 1px solid $grey-color-7;
+
+                &__checkbox {
+                    float: left;
+                    width: 6rem;
+
+                    mat-icon {
+                        @include square(1rem);
+                        color: $black-color;
+                        margin-left: 1rem;
+                    }
+                }
+
+                &__title {
+                    float: left;
+                    width: calc(100% - 16rem);
+
+                    h5 {
+                        color: $primary-color;
+                        font-weight: 600;
+                        font-size: 2rem;
+                    }
+                }
+
+                &__filter {
+                    float: left;
+                    text-align: right;
+                    width: 10rem;
+                    padding-right: 1rem;
+
+                    a {
+                        position: relative;
+
+                        span {
+                            @include square(2rem);
+                            background-color: $reddish-color;
+                            color: $white-color;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: absolute;
+                            top: -3rem;
+                            right: -0.5rem;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            border-radius: 50%;
+                        }
+
+                        mat-icon {
+                            @include square(4rem);
+                        }
+                    }
+                }
+            }
+        }
+
+        &__body {
+            height: calc(100vh - 30rem);
+            background-color: #f0f4f8;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-bottom: 9rem;
+
+            @include respond('phone') {
+                padding-bottom: 0;
+            }
+
+            @include respond('tab-port') {
+                height: auto;
+                padding-bottom: 2rem;
+            }
+
+            &__list-type {
+                @include clearfix();
+
+                div {
+                    a {
+                        padding: 3rem 1.5rem;
+                        display: flex;
+
+                        &.active {
+                            background-color: #e6efeb !important;
+
+                            .question-list__body__list-type__count {
+                                color: $green-color-5;
+                                font-weight: 600;
+                            }
+                        }
+
+                        &:hover {
+                            background-color: #e6efeb;
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                &__checkbox {
+                    float: left;
+                    width: 3rem;
+                }
+
+                &__count {
+                    float: left;
+                    text-align: center;
+                    width: 3rem;
+                }
+
+                &__question {
+                    float: left;
+                    width: calc(100% - 6rem);
+
+                    p {
+                        color: $grey-color-14;
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+
+            &__box-type {
+                padding: 2rem;
+
+                li {
+                    position: relative;
+
+                    mat-checkbox {
+                        @include square(2rem);
+                        position: absolute;
+                        cursor: pointer;
+                        right: 2.2rem;
+                        top: 0.2rem;
+                        z-index: 2;
+                    }
+
+                    a {
+                        @include square(6rem);
+                        background-color: rgba($primary-color, 0.1);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 2rem;
+                        margin-bottom: 2rem;
+                        font-weight: 600;
+                        border-radius: 1rem;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+
+                        &.active {
+                            background: $primary-color;
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.bottom-bar-confirmation {
+    background-color: $green-color-5;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 8rem;
+    width: 100%;
+    padding: 0 10rem;
+    z-index: 999999999 !important;
+
+    span {
+        color: $white-color !important;
+        line-height: 8rem;
+    }
+}
+
+.loader-text {
+    text-align: center;
+    padding-top: 5rem;
+}
+
+.question-list__body__box-type .mat-checkbox.mat-accent {
+    opacity: 0 !important;
+}
+
+.question-list-spacing {
+    mat-radio-button {
+        display: block;
+        padding: 1rem 0;
+    }
+}

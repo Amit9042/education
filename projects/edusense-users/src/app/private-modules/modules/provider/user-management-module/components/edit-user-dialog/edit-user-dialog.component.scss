@@ -1,0 +1,21 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.dialog-container {
+    width: 63rem;
+
+    @include respond('phone') {
+        max-width: 95vw;
+        width: auto;
+        height: 90vh;
+
+        .small-pad-0 {
+            padding: 0 !important;
+        }
+    }
+    .form-control {
+        height: 11rem;
+    }
+    .button-group {
+        margin-top: 0;
+    }
+}

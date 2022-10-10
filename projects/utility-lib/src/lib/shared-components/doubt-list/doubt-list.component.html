@@ -1,0 +1,49 @@
+<div class="doubt-container" infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+
+    <!-- Doubt list  -->
+    <div *ngFor="let doubt of doubtList; let i = index">
+            <div class="doubt-container__list">
+                <div class="visitors-info__left">
+                    <div class="visitor-image">
+                        <mat-icon *ngIf="!doubt?.subject_id?.logo" svgIcon="defaultSubject"></mat-icon>
+                        <img *ngIf="doubt?.subject_id?.logo" [src]="doubt?.subject_id?.logo" (error)="onError($event)"/>
+                    </div>
+                    <div class="visitor-details">
+                        <span class="subject">{{doubt?.subject_id?.name}}</span>
+                        <a (click)="onQuestionAnswer(doubt)" [id]="'lnkQuesAns-'+i">
+                            {{doubt?.question}}
+                        </a>
+
+                        <!-- <p class="posted-by" *ngIf="doubt?.posted_by">Posted by <span>Shivani Maheta</span></p> -->
+
+
+                        <!-- BELOW P TAG COMES ONLY ON RECIEVD DOUBT LIST AT PROVIDER SIDE -->
+                        <p *ngIf="doubt?.grade_id && doubt?.from_user_obj" class="posted-by">
+                            <span class="provider-by">{{doubt?.grade_id?.alias}} Grade</span>
+                            Posted by <span>{{doubt?.from_user_obj?.first_name + ' ' + doubt?.from_user_obj?.last_name}}</span>
+                        </p>
+                        <!-- END -->
+
+                        <p *ngIf="doubt?.totalAns > 0" class="answered"><span>{{doubt?.totalAns}}</span> <span>&nbsp;</span> <span>{{doubt?.totalAns == 1 ? 'Answer' : 'Answers'}}</span></p>
+                        <p *ngIf="doubt?.totalAns === 0" class="unanswered">
+                            No Answer Yet
+                        </p>
+                    </div>
+                </div>
+                <div class="visitors-info__right flex-right">
+                    <!-- SHOW ONLY DATE WHEN LISTING IS FROM STUDENT SIDE  -->
+                    <p>{{doubt?.created_at | date: 'd MMMM y' }}</p>
+
+                    <!-- SHOW DATE WITH TIME WHEN LISTING IS FROM PROVIDER SIDE  -->
+                    <p *ngIf="false">21 May 2020, 10:00 PM</p>
+
+                    <!-- SHOW BOOKMARK ONLY WHEN LISTING IS FROM STUDENT SIDE  -->
+                    <a *ngIf="userType && userType === userTypeEnum.STUDENT" (click)="onBookMarkQuestion(doubt)">
+                        <mat-icon svgIcon="bookmark" *ngIf="!doubt?.isBookmarked" matTooltip=""></mat-icon>
+                        <mat-icon svgIcon="bookedMark" *ngIf="doubt?.isBookmarked" matTooltip=""></mat-icon>
+                    </a>
+                </div>
+            </div>
+    </div>
+</div>

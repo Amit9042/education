@@ -1,0 +1,23 @@
+.course-title-form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: calc(100vh - 20rem);
+    align-items: center;
+    width: 100%;
+
+    .course-title-form {
+        width: 50rem;
+        position: relative;
+        height: calc(100vh - 20rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .buttons {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    }
+}

@@ -1,0 +1,132 @@
+<div class="material-list selection-container">
+    <div class="material-list__header">
+        <div class="row bottom-small-2">
+            <div class="col-md-8 col-sm-8 col-xs-4 PL-0">
+                <div class="selection-header">
+                    <h2>Select your material</h2>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-8 PR-1 text-right">
+                <button (click)="onAddMaterialDialog()" type="submit" class="remove-shadow" mat-flat-button color="primary" id="btnAdd">
+                    Add Material
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6 PL-0">
+                <div class="header__search">
+                    <div class="header__search--input">
+                        <input id="txtSearch" [formControl]="nameFilterField" autocomplete="off" type="text" name="search"
+                            placeholder="Search..." id="searchTxt" />
+                        <mat-icon svgIcon="search"></mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 PL-0 small-pad-0">
+                <div class="form-control">
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-select id="matSelectType" placeholder="Type" [formControl]="types" multiple>
+                            <mat-select-trigger>
+                                {{(types.value && types.value.length) ? types.value[0].name : ''}}
+                                <span *ngIf="types.value?.length > 1" class="example-additional-selection">
+                                    (+{{ types.value.length - 1 }} More)
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let type of filterType" [value]="type">{{
+                                    type.name
+                                }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="selection-body">
+        <ul>
+            <li>
+                <a (click)="onGradeUrl()" id="lnkGrade">Grade ({{selectedGradeAndSubject.grade_name}})</a>
+            </li>
+            <li>
+                <a (click)="onSubjectUrl()" id="lnkSubject">Subject ({{selectedGradeAndSubject.subject_name}})</a>
+            </li>
+            <li>
+                <a class="active">Material</a>
+            </li>
+        </ul>
+
+
+        <div class="material-list__body" scrollWindow="true" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+            <div class="material-listing grade-wrapper">
+                <a (click)="
+                viewDownloadMaterial(
+                        material.material_id,
+                        material.original_file_name,
+                        material.file_content_type,
+                        material.material_type_id,
+                        material.file_path
+                    )"
+                    *ngFor="let material of materialList; let i = index" [ngClass]="{'tile-disabled': false}"
+                    class="material-listing__section" [id]="'lnkViewMaterial-'+i">
+                    <div class="material-listing__section--top">
+                        <div class="text-center">                        
+                            <mat-icon [svgIcon]="getFileIcon(material.file_content_type)" class="file-type"></mat-icon>
+                            <p class="file-subname">{{material.original_file_name}}</p>
+                        </div>
+                        <div class="material-action">
+                            <button mat-button class="action-button" [matMenuTriggerFor]="menu"
+                                (click)="$event.stopPropagation()">
+                                <mat-icon matTooltip="More Options" svgIcon="actionBtn" [id]="'iconTriggerMenu-' + i">
+                                </mat-icon>
+                            </button>
+
+                            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action"
+                                (click)="$event.stopPropagation()">
+                                <button (click)="onEditMaterial(material.material_id)" type="button" mat-menu-item [id]="'btnEdit-' + i">
+                                    <span>Edit</span>
+                                </button>
+
+                                <button (click)="onViewMaterial(material.material_id)" type="button" mat-menu-item [id]="'btnView-' + i">
+                                    <span>View</span>
+                                </button>
+
+                                <button type="button" mat-menu-item [id]="'btnEnable-' + i" (click)="
+                                    onEnableClick(!material.is_active, material.material_id)
+                                ">
+                                    <span>{{
+                                        !material.is_active ? 'Enable' : 'Disable'
+                                    }}</span>
+                                </button>
+
+                                <button (click)="onRemoveMaterial(material.material_id)" type="button" mat-menu-item [id]="'btnEdit-' + i">
+                                    <span>Remove</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+
+                    <div class="material-listing__section--bottom">
+                        <p class="file-name document-name">
+                            <span>{{material?.name}}</span>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NO DATA FOUND CONDITION IS : *ngIf="!isLoadingResults && materialList.length == 0" -->
+    <div *ngIf="!isLoadingResults && materialList.length == 0">
+            <div class="no-content-found-wrapper">
+                <mat-icon svgIcon="no_material_files"></mat-icon>
+                <p>No materials available</p>
+                <span>No material has been uploaded by the provider</span>
+            </div>
+        </div>
+
+    <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+</div>

@@ -1,0 +1,29 @@
+<div class="student-course-container">
+    <div class="student-course">
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                <div class="student-course__course-navigation">
+                    <ul>
+                        <ng-container *ngFor="let category of categoryList; let i=index">
+                            <li (click)="setCurrentTab(i)"><a [ngClass]="{'active': activeTabCategory === category.label}">{{category.label}}</a></li>
+                        </ng-container>
+                        <hr/>
+                        <li><a (click)="onShowCourseView(htmlView.MY_COURSE)"
+                                [ngClass]="{'active' : activeTabCategory === htmlView.MY_COURSE}">My Courses</a></li>
+                        <li><a (click)="onShowCourseView(htmlView.BOOKMARK_COURSE)"
+                                [ngClass]="{'active' : activeTabCategory === htmlView.BOOKMARK_COURSE}">Book Marked</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-xs-12 PB-3">
+                <es-user-student-course-list *ngIf="activeView === htmlView.ALL_COURSE" [categoryId]="categoryId"></es-user-student-course-list>
+
+                <es-user-student-my-courses *ngIf="activeView === htmlView.MY_COURSE"></es-user-student-my-courses>
+
+                <es-user-student-book-marked *ngIf="activeView === htmlView.BOOKMARK_COURSE">
+                </es-user-student-book-marked>
+            </div>
+        </div>
+    </div>
+</div>

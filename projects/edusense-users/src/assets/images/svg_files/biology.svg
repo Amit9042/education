@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <g id="biology" transform="translate(-1183 -359)">
+    <rect id="Rectangle_2546" data-name="Rectangle 2546" width="160" height="160" rx="40" transform="translate(1183 359)" fill="#ef9297" opacity="0.2"/>
+    <g id="biology-2" data-name="biology" transform="translate(1265.946 402.203) rotate(39)">
+      <path id="Path_15732" data-name="Path 15732" d="M37.982,60a4.146,4.146,0,0,0,4.146-4.146,27.467,27.467,0,0,0-6.154-17.3c-6.7-8.676-17.307-14.481-23.261-22.181A19.221,19.221,0,0,1,8.294,4.147,4.147,4.147,0,1,0,0,4.147a27.467,27.467,0,0,0,6.154,17.3c6.7,8.676,17.307,14.481,23.261,22.181a19.221,19.221,0,0,1,4.42,12.228A4.146,4.146,0,0,0,37.982,60Z" transform="translate(0 0)" fill="#ef9297"/>
+      <path id="Union_2" data-name="Union 2" d="M15.707,5.019A30.534,30.534,0,0,0,19.95,0h4.319a2.51,2.51,0,1,1,0,5.019Zm-13.2,0A2.51,2.51,0,1,1,2.511,0H13.38a2.51,2.51,0,1,1,0,5.019Z" transform="translate(7.679 12.648)" fill="#f9a2a7"/>
+      <path id="Path_15736" data-name="Path 15736" d="M13.375,5.02H2.51A2.51,2.51,0,0,1,2.51,0H13.375a2.51,2.51,0,0,1,0,5.02Z" transform="translate(18.57 12.653)" fill="#f9a2a7"/>
+      <path id="Path_15737" data-name="Path 15737" d="M16.472,5.02H2.51A2.51,2.51,0,0,1,2.51,0H16.472a2.51,2.51,0,1,1,0,5.02Z" transform="translate(4.569 52.555)" fill="#f9a2a7"/>
+      <path id="Path_15738" data-name="Path 15738" d="M2.51,0a2.51,2.51,0,1,0,0,5.02H7.145c.378-1.664-.009-2.527.54-5.02Z" transform="translate(4.569 52.555)" fill="#f9a2a7"/>
+      <path id="Path_15739" data-name="Path 15739" d="M16.471,5.02H2.51A2.51,2.51,0,0,1,2.51,0H16.472a2.51,2.51,0,0,1,0,5.02Z" transform="translate(18.586 52.555)" fill="#f9a2a7"/>
+      <path id="Union_4" data-name="Union 4" d="M13.406,5.02H2.514a2.51,2.51,0,1,1,0-5.02H24.269a2.51,2.51,0,1,1,0,5.021Z" transform="translate(7.672 42.334)" fill="#f9a2a7"/>
+      <g id="Group_22090" data-name="Group 22090" transform="translate(4.567 2.421)">
+        <path id="Union_3" data-name="Union 3" d="M25.314,5.019H2.511A2.51,2.51,0,1,1,2.511,0H30.489a2.51,2.51,0,1,1,0,5.019Z" transform="translate(0)" fill="#f9a2a7"/>
+      </g>
+      <path id="Path_15745" data-name="Path 15745" d="M4.146,60A4.146,4.146,0,0,1,0,55.854a27.467,27.467,0,0,1,6.154-17.3c6.7-8.676,17.307-14.481,23.261-22.181a19.221,19.221,0,0,0,4.42-12.228,4.147,4.147,0,0,1,8.294,0,27.467,27.467,0,0,1-6.154,17.3c-6.7,8.676-17.307,14.481-23.261,22.181a19.221,19.221,0,0,0-4.42,12.228A4.146,4.146,0,0,1,4.146,60Z" transform="translate(0.009 0)" fill="#eb7c82"/>
+    </g>
+  </g>
+</svg>

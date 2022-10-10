@@ -1,0 +1,19 @@
+<div class="dialog-links">
+  <div>
+    <a>
+      <mat-icon (click)="onCloseDialog()" id="lnkBack" matTooltip="Back" svgIcon="backArrow"></mat-icon>
+    </a>
+    <p>
+      <mat-icon [svgIcon]="getFileIcon(fileType)"></mat-icon>
+      {{materialName}}
+    </p>
+  </div>
+  <div>
+    <a (click)="donwload()" id="lnkDownload">
+      <mat-icon matTooltip="Download" svgIcon="download"></mat-icon>
+    </a>
+    <a id="lnkAction">
+      <mat-icon matTooltip="More Options" class="action" svgIcon="actionBtn"></mat-icon>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="webpages-container">
+    <div class="getting-started-section" *ngIf="!contactBtn">
+        <button type="button" id="btnGetStarted" mat-button class="round-button">
+            Get started
+        </button>
+
+        <p>
+            EduSense, the platform that provides you with all the
+            functionalities <br />
+            you need to run your own online academy!
+        </p>
+    </div>
+    <div class="contact-us-section flex-center" *ngIf="contactBtn">
+        <button (click)="onContactUs()" type="button" id="btnContactUs" mat-button class="round-button">
+            Contact Us
+        </button>
+    </div>
+</div>

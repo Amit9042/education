@@ -1,0 +1,27 @@
+<div class="assignment-view-container">
+  <div class="assignment-view-container__content">
+    <div class="assignment-view-container__content__head">
+      <a (click)="onBack()" id="lnkBack">
+        <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+      </a>
+      <div>
+        <h2>
+          {{assignmentDetail?.title | checkEmpty}}
+        </h2>
+        <p><span>{{assignmentDetail?.class?.name | checkEmpty}}</span></p>
+      </div>
+    </div>
+    <div class="assignment-view-container__content__tab-content">
+      <mat-tab-group>
+        <mat-tab label="Submitted work">
+          <es-user-assignment-submitted-work-view
+            [submissionDetail]="submissionDetail"></es-user-assignment-submitted-work-view>
+        </mat-tab>
+        <mat-tab label="Assignment">
+          <es-user-assignment-details-content-view
+            [assignmentDetails]="assignmentDetail"></es-user-assignment-details-content-view>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

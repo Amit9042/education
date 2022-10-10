@@ -1,0 +1,79 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.question-details-container {
+    .question-details {
+        padding: 4.4rem 9rem;
+        height: calc(100vh - #{$header-height});
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-bottom: 9rem;
+
+        @include respond('phone') {
+            padding: 2.4rem 0;
+        }
+
+        @include respond('tab-port') {
+            padding: 2.4rem 2rem;
+            height: 100vh;
+            margin-bottom: 2rem;
+        }
+
+        h5 {
+            color: $green-color;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control-label {
+            color: $primary-color;
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        &__box {
+            background: #f8f8fa;
+            padding: 3rem;
+            border-radius: 8px;
+
+            p {
+                color: $grey-color-14;
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
+
+            // .inner-html {
+            //     p {
+            //         img {
+            //             @include respond('phone') {
+            //                 max-width: 100% !important;
+            //             }
+            //         }
+            //     }
+            // }
+        }
+
+        &__answers {
+            min-height: 6rem;
+            background: #f8f8fa;
+            border-radius: 8px;
+            margin: 2rem 0 2rem 5rem;
+            position: relative;
+
+            p {
+                font-size: 1.6rem;
+                padding: 2rem;
+            }
+
+            mat-radio-button {
+                position: absolute;
+                top: 2rem;
+                left: -4rem;
+            }
+
+            &.question-checkbox-color {
+                margin: 2rem 0 !important;
+            }
+        }
+    }
+}

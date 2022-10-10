@@ -1,0 +1,178 @@
+<div class="dialog-container">
+    <div class="dialog-container__head">
+        <h4>Edit User</h4>
+        <a (click)="onDialogClose()" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="dialog-container__bottom">
+        <form
+            [formGroup]="editUserForm"
+            (ngSubmit)="onSubmitEditUserForm(editUserForm)"
+        >
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 PL-0 PR-1 small-pad-0">
+                    <div class="form-control">
+                        <mat-label>First Name*</mat-label>
+                        <mat-form-field
+                            appearance="outline"
+                            floatLabel="always"
+                        >
+                            <input
+                                formControlName="first_name"
+                                type="text"
+                                autocomplete="off"
+                                matInput
+                                placeholder="Enter first name"
+                                id="txtFname"
+                            />
+                            <mat-error
+                                *ngIf="
+                                    isRequiredField(formControls['first_name'])
+                                "
+                            >
+                                {{ validationMsg.FIRST_NAME }}
+                            </mat-error>
+                            <mat-error
+                                *ngIf="isValidLength(formControls['first_name'])"
+                            >
+                                {{ validationMsg.FIRST_NAME_LENGTH }}
+                            </mat-error>
+                            <mat-error
+                                *ngIf="isValidField(formControls['first_name'])"
+                            >
+                                {{ validationMsg.FIRST_NAME_VALID }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 PL-1 PR-0 small-pad-0">
+                    <div class="form-control">
+                        <mat-label>Last Name*</mat-label>
+                        <mat-form-field
+                            appearance="outline"
+                            floatLabel="always"
+                        >
+                            <input
+                                formControlName="last_name"
+                                type="text"
+                                autocomplete="off"
+                                matInput
+                                placeholder="Enter last name"
+                                id="txtLname"
+                            />
+                            <mat-error
+                                *ngIf="
+                                    isRequiredField(formControls['last_name'])
+                                "
+                            >
+                                {{ validationMsg.LAST_NAME }}
+                            </mat-error>
+                            <mat-error
+                                *ngIf="isValidLength(formControls['last_name'])"
+                            >
+                                {{ validationMsg.LAST_NAME_LENGTH }}
+                            </mat-error>
+                            <mat-error
+                                *ngIf="isValidField(formControls['last_name'])"
+                            >
+                                {{ validationMsg.LAST_NAME_VALID }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Email Address*</mat-label>
+                        <mat-form-field
+                            appearance="outline"
+                            floatLabel="always"
+                        >
+                            <input
+                                formControlName="email"
+                                type="text"
+                                autocomplete="off"
+                                matInput
+                                placeholder="Enter email address"
+                                id="txtEmail"
+                            />
+                            <mat-error
+                                *ngIf="isRequiredField(formControls['email'])"
+                            >
+                                {{ validationMsg.EMAIL }}
+                            </mat-error>
+                            <mat-error
+                                *ngIf="isValidLength(formControls['email'])"
+                            >
+                                {{ validationMsg.EMAIL_LENGTH }}
+                            </mat-error>
+                            <mat-error
+                                *ngIf="isValidField(formControls['email'])"
+                            >
+                                {{ validationMsg.EMAIL_VALID }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Role*</mat-label>
+                        <mat-form-field
+                            appearance="outline"
+                            floatLabel="always"
+                        >
+                            <mat-select
+                                formControlName="role"
+                                placeholder="Select role"
+                                id="matSelectRole"
+                            >
+                            <mat-option *ngFor="
+                            let role of roleList;" [value]="role.id"
+                                >{{role.name}}</mat-option
+                            >
+                            </mat-select>
+                            <mat-error
+                                *ngIf="isRequiredField(formControls['role'])"
+                            >
+                                {{ validationMsg.ROLE }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" *ngIf="formControls['role'].value == roleTeacher">
+
+                    <div class="col-md-6 PLR-0">
+                      <div class="form-control">
+      
+                        <app-ss-select-search [formName]="editUserForm" [selectConfig]="gradeSearchConfig"
+                          [selected]="userDetail?.grade" [dataList]="gradeList"
+                          (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                        </app-ss-select-search>
+                      </div>
+                    </div>
+                    <div class="col-md-6 PLR-0">
+                        
+                            <div class="form-control">
+                              <app-ss-select-search [formName]="editUserForm" [selectConfig]="subjectSearchConfig"
+                                [selected]="userDetail?.subject" [dataList]="subjectList"
+                                (changSelectEvent)="onSelectChangeEvent($event, 'subject')">
+                              </app-ss-select-search>
+                              </div>
+                          
+                    </div>
+                </div>
+            </div> 
+
+            <div class="button-group">
+                <button (click)="onDialogClose()" type="button" mat-button id="btnCancel">
+                    Cancel
+                </button>
+                <button mat-flat-button color="primary" type="submit" id="btnSave">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

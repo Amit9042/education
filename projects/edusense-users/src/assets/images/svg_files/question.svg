@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27.036" height="27.036" viewBox="0 0 27.036 27.036">
+    <defs>
+        <style>
+            .prefix__cls-2que{fill:#203061;stroke:#203061;stroke-width:.6px}
+        </style>
+    </defs>
+    <g id="prefix__question" transform="translate(.3 .3)" style="opacity:.6">
+        <g id="prefix__Group_22244" data-name="Group 22244">
+            <g id="prefix__Group_22243" data-name="Group 22243">
+                <path id="prefix__Path_15996" d="M223.035 343.22a1.386 1.386 0 0 0 0 2.772 1.386 1.386 0 1 0 0-2.772z" class="prefix__cls-2que" data-name="Path 15996" transform="translate(-210.222 -325.499)"/>
+                <path id="prefix__Path_15997" d="M187.567 140c-2.43 0-3.545 1.44-3.545 2.412a1.032 1.032 0 0 0 1.08 1.026c.972 0 .576-1.386 2.412-1.386.9 0 1.62.4 1.62 1.224 0 .972-1.008 1.53-1.6 2.034a3.3 3.3 0 0 0-1.206 2.736c0 .936.252 1.206.99 1.206.882 0 1.062-.4 1.062-.738a2.26 2.26 0 0 1 1.008-2.25c.486-.378 2.016-1.6 2.016-3.294s-1.533-2.97-3.837-2.97z" class="prefix__cls-2que" data-name="Path 15997" transform="translate(-174.521 -132.773)"/>
+                <path id="prefix__Path_15998" d="M13.218 0A13.211 13.211 0 0 0 0 13.218V25.4a1.033 1.033 0 0 0 1.033 1.033h12.185a13.218 13.218 0 0 0 0-26.433zm0 24.37H2.065V13.218A11.152 11.152 0 1 1 13.218 24.37z" class="prefix__cls-2que" data-name="Path 15998"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="chapter" transform="translate(-401 -274)">
+    <rect id="Rectangle_2391" data-name="Rectangle 2391" width="60" height="60" rx="10" transform="translate(401 274)" fill="#8cc178" opacity="0.2"/>
+    <g id="Group_22535" data-name="Group 22535">
+      <g id="book_2_" data-name="book (2)" transform="translate(350 291)">
+        <path id="Path_16169" data-name="Path 16169" d="M72.813,23.173A.813.813,0,0,1,72,22.36V3.354A3.358,3.358,0,0,1,75.354,0H89.888A.813.813,0,0,1,90.7.813v18.7a.813.813,0,0,1-1.626,0V1.626H75.354a1.73,1.73,0,0,0-1.728,1.728V22.36A.813.813,0,0,1,72.813,23.173Z" fill="#8cc178"/>
+        <path id="Path_16170" data-name="Path 16170" d="M89.888,375.318H75.659a3.659,3.659,0,0,1,0-7.318H89.888a.813.813,0,1,1,0,1.626H75.659a2.033,2.033,0,0,0,0,4.065H89.888a.813.813,0,1,1,0,1.626Z" transform="translate(0 -349.299)" fill="#8cc178"/>
+        <path id="Path_16171" data-name="Path 16171" d="M143.042,425.626H128.813a.813.813,0,0,1,0-1.626h14.229a.813.813,0,0,1,0,1.626Z" transform="translate(-53.154 -402.453)" fill="#8cc178"/>
+        <path id="Path_16172" data-name="Path 16172" d="M144.813,20.327a.813.813,0,0,1-.813-.813V.813a.813.813,0,0,1,1.626,0v18.7A.813.813,0,0,1,144.813,20.327Z" transform="translate(-68.341)" fill="#8cc178"/>
+      </g>
+      <rect id="Rectangle_2903" data-name="Rectangle 2903" width="6" height="1.6" rx="0.8" transform="translate(430 296)" fill="#8cc178"/>
+      <rect id="Rectangle_2904" data-name="Rectangle 2904" width="6" height="1.6" rx="0.8" transform="translate(430 300)" fill="#8cc178"/>
+      <rect id="Rectangle_2905" data-name="Rectangle 2905" width="6" height="1.6" rx="0.8" transform="translate(430 304)" fill="#8cc178"/>
+    </g>
+  </g>
+</svg>

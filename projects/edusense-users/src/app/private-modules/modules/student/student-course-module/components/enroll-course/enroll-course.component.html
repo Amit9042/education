@@ -1,0 +1,120 @@
+<div class="enroll-course-container">
+    <div class="enroll-course-banner" [ngStyle]="{  'background-image': coverImageURL  }">
+        <div class="enroll-course-banner__content">
+            <h3>{{courseData?.course?.title}}</h3>
+            <h4>{{courseData?.course?.user?.first_name + ' ' +courseData?.course?.user?.last_name}}</h4>
+            <div class="enroll-course-banner__content__duration">
+                <ul>
+                    <li>
+                        <label>{{courseData?.course?.total_duration | duration :
+                            durationPattern.HH_MM :suffixUnit.HR_M}} </label>
+                        <span>Course Duration</span>
+                    </li>
+
+                    <li>
+                        <label>{{courseData?.course?.total_enrollments | number:'':'en-IN'}}</label>
+                        <span>Enrolled Students</span>
+                    </li>
+
+                    <li>
+                        <label>{{courseData?.course?.updatedAt | date: 'dd MMMM yyyy'}}</label>
+                        <span>Last Updated on</span>
+                    </li>
+
+                    <li>
+                        <label>{{courseData?.course?.language?.name}}</label>
+                        <span>Language</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="enroll-course-banner__content__buttons">
+                <button *ngIf="true" class="enroll-btn" type="button" (click)="enrollIntoCourse()">
+                    {{courseData?.enrollment?.enrollment_id ? 'Go To Course': 'Enroll Now'}}</button>
+                <button class="bookmark-btn" type="button" (click)="bookmarkCourse()">
+                    {{courseData?.course?.is_bookmarked ? 'Book Marked' : 'BookMark'}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 PLR-0">
+            <div class="enroll-about-course">
+                <h4>About the Course</h4>
+                <p>{{courseData?.course?.description | placeNA}}</p>
+            </div>
+            <div class="enroll-about-course enroll-about-course__skills">
+                <h4>Skills gained from this Course</h4>
+                <ul *ngIf="courseData?.skills?.length; else emptyBlock">
+                    <li *ngFor="let skill of courseData.skills">
+                        <a>{{skill}}</a>
+                    </li>
+                </ul>
+                <ng-template #emptyBlock>
+                    <div class="">
+                        <p>{{'' | placeNA}}</p>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="enroll-course-content">
+                <h4>Course Content</h4>
+                <div *ngFor="let section of courseData?.sections; let i=index;"
+                    class="enroll-course-content__content-scroll">
+                    <div class="enroll-course-content__content-scroll__content-details">
+                        <div class="enroll-course-content__content-scroll__content-details__title">
+                            <div class="row">
+                                <div class="col-md-8 PLR-0">
+                                    <h3>{{i+1}}. {{section.title}}</h3>
+                                </div>
+                                <div class="col-md-4 PL-0 text-right">
+                                    <small>
+                                        {{section?.total_lecture_duration ? (section.total_lecture_duration | duration
+                                        : durationPattern.MM :
+                                        suffixUnit.MIN) : ''}}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngFor="let lecture of section?.lectures; let li=index;"
+                        class="enroll-course-content__content-scroll__content-details__body">
+                        <ul>
+                            <li>
+                                <a [ngClass]="{'active': false}">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <ng-container [ngSwitch]="lecture?.lecture_content?.content_type">
+                                                <mat-icon *ngSwitchCase="contentType.VIDEO" svgIcon="VIDEO"></mat-icon>
+                                                <mat-icon *ngSwitchCase="contentType.TEXT" svgIcon="DESCRIPTION">
+                                                </mat-icon>
+                                                <mat-icon *ngSwitchCase="contentType.YOUTUBE_LINK" svgIcon="LINK">
+                                                </mat-icon>
+                                                <mat-icon *ngSwitchCase="contentType.FILE" svgIcon="FILES"></mat-icon>
+                                                <!-- <mat-icon *ngSwitchDefault svgIcon=""></mat-icon> -->
+                                            </ng-container>
+                                            <span>{{lecture?.title}}</span>
+                                        </div>
+
+                                        <div class="col-md-3 PL-0 text-right">
+                                            <div>
+                                                <!-- <mat-icon svgIcon="check"></mat-icon> -->
+                                                <small
+                                                    *ngIf="contentType.VIDEO === lecture?.lecture_content?.content_type">{{lecture?.lecture_content?.content_duration
+                                                    | duration :durationPattern.MM : suffixUnit.MIN}}</small>
+                                                <small
+                                                    *ngIf="contentType.TEXT === lecture?.lecture_content?.content_type && lecture?.lecture_content?.content_duration">{{lecture?.lecture_content?.content_duration
+                                                    | duration :durationPattern.MM : suffixUnit.MIN}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

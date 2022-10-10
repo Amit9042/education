@@ -1,0 +1,155 @@
+<form>
+    <div class="question-list-container">
+        <div class="question-list">
+            <div class="question-list__header">
+                <div class="question-list__header__row">
+                    <div class="question-list__header__row__left">
+                        <a id="lnkBack" (click)="onBack()" matTooltip="Back">
+                            <mat-icon svgIcon="backArrow"></mat-icon>
+                        </a>
+                    </div>
+
+                    <div class="question-list__header__row__center">
+                        <h4>{{selectedGradeAndSubject?.practiceDetails?.name}}</h4>
+                        <span>{{selectedGradeAndSubject?.subject_name}} &bull; Grade
+                            {{selectedGradeAndSubject?.grade_name}}</span>
+                    </div>
+
+                    <div class="question-list__header__row__right text-right">
+                        <button id="btnMoreActions" type="button" mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon svgIcon="down"></mat-icon>
+                        </button>
+
+                        <mat-menu class="list-of-question-bank" #menu="matMenu" xPosition="before">
+                            <button id="btnListQuestionBank" type="button"
+                                (click)="searchFolder(selectedGradeAndSubject.practiceDetails.chapterIds)"
+                                mat-menu-item>
+                                <mat-icon svgIcon="chapter"></mat-icon>
+                                <span class="list-of-question-bank__name">All</span>
+                            </button>
+                            <button id="btnListQuestionBank"
+                                *ngFor="let chapter of selectedGradeAndSubject.practiceDetails.chapters; let j = index;"
+                                type="button" (click)="searchFolder([chapter.id])" mat-menu-item>
+                                <!-- <span class="list-of-question-bank__count">{{chapter?.id}}</span> -->
+                                <mat-icon svgIcon="chapter"></mat-icon>
+                                <span class="list-of-question-bank__name">{{chapter?.title}}</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+
+                <div class="question-list__header__search">
+                    <mat-icon svgIcon="search"></mat-icon>
+                    <input id="searchBox" type="text" placeholder="Search" [formControl]="searchTitle" />
+                </div>
+
+                <div class="question-list__header__action">
+                    <div matTooltip="Select All" class="question-list__header__action__checkbox">
+                        <mat-checkbox
+                            [disabled]="selectedGradeAndSubject?.practiceDetails?.published || !showMoreOptions()"
+                            id="checkSelectAll" [formControl]="checkSelectAll" (click)="selectAll()" [value]="true">
+                        </mat-checkbox>
+                        <mat-icon svgIcon="dropdown"></mat-icon>
+                    </div>
+                    <div class="question-list__header__action__title">
+                        <h5>Question List</h5>
+                    </div>
+                    <div class="question-list__header__action__filter">
+                        <a id="lnkViewChange" (click)="onToggleView()">
+                            <mat-icon *ngIf="isListView" matTooltip="Grid View" svgIcon="tileViewOut"></mat-icon>
+                            <mat-icon *ngIf="!isListView" matTooltip="List View" svgIcon="list"></mat-icon>
+                        </a>
+                        <a id="lnkFilter" [matMenuTriggerFor]="menuFilter" class="ML-1" matTooltip="Filter">
+                            <mat-icon svgIcon="filter-round"></mat-icon>
+                        </a>
+
+                        <mat-menu #menuFilter="matMenu" class="filter-menu-dropdown" xPosition="before">
+                            <div>
+                                <label class="filter-main-label">Difficulty Level</label>
+                                <mat-checkbox (change)="onSelectMenuDifficulty($event, diff?.id)"
+                                    *ngFor="let diff of difficultyLevelList">{{diff?.value}}</mat-checkbox>
+                            </div>
+                            <div class="MT-3">
+                                <label class="filter-main-label">Question Type</label>
+                                <mat-checkbox (change)="onSelectMenuQueType($event, type?.id)"
+                                    *ngFor="let type of questionTypeList">{{type?.value}}</mat-checkbox>
+                            </div>
+
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-list__body">
+                <div *ngIf="isListView" class="question-list__body__list-type">
+                    <div *ngFor="let ques of filterQuestions(questionList); let i=index"
+                        (click)="onQuestionClick(ques,i+1,i-1 >= 0 ? i-1 : -1)">
+                        <a [id]="'lnkQuestion' + i" [ngClass]="{'active' : isSelectedQuestion(ques)}">
+                            <div class="question-list__body__list-type__checkbox">
+                                <mat-checkbox
+                                    [disabled]="selectedGradeAndSubject?.practiceDetails?.published || !showMoreOptions()"
+                                    [checked]="ques?.isChecked" (change)="togglePerOne(ques)"
+                                    [id]="'checkQuestion' + i">
+                                </mat-checkbox>
+                            </div>
+                            <!-- <div class="question-list__body__list-type__count">
+                                {{i + 1 }}.
+                            </div> -->
+                            <div class="question-list__body__list-type__question">
+                                <p>
+                                    {{getQuestionForDisplay(ques?.question)}}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div *ngIf="!isListView" class="question-list__body__box-type">
+                    <ul>
+                        <li (click)="onQuestionClick(ques, j+1, j-1 >= 0 ? j-1 : -1)"
+                            *ngFor="let ques of filterQuestions(questionList); let j = index;">
+                            <a [id]="'lnkQuestionBox' + j" [ngClass]="{'active' : isSelectedQuestion(ques)}">
+                                {{j + 1}}
+                            </a>
+                            <mat-checkbox
+                                [disabled]="selectedGradeAndSubject?.practiceDetails?.published || !showMoreOptions()"
+                                [checked]="ques?.isChecked" (change)="togglePerOne(ques)" [id]="'checkQuestionBox' + j">
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- FRONTEND DEVELOPER
+                BELOW DESIGN FOR NO DATA -->
+                <div *ngIf="!questionList.length && !isLoadingResults" class="no-content-found-wrapper">
+                    <mat-icon svgIcon="no-questions"></mat-icon>
+                    <p>No Question Available</p>
+                    <span>Currently you don't have any questions in your
+                        practice</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="selectQuestionArray.length && showMoreOptions()" class="bottom-bar-confirmation">
+        <div class="row">
+            <div class="col-md-6">
+                <span>{{selectQuestionArray.length}} Questions Selected</span>
+            </div>
+            <div class="col-md-6 text-right" *ngIf="!selectedGradeAndSubject?.practiceDetails?.published">
+                <button id="btnClear" class="bottom-bar-confirmation__clear" type="button"
+                    (click)="clearAllQuestions()">Clear</button>
+                <button id="btnSubmit" class="bottom-bar-confirmation__submit" type="button"
+                    (click)="addQuestionToPractise()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FRONTEND DEVELOPER
+    Loading Text -->
+    <div *ngIf="false" class="loader-text">
+        <span>Loading...</span>
+    </div>
+</form>

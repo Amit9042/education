@@ -1,0 +1,185 @@
+<div class="class-table-container">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6 PL-0 list-header-view">
+                <h2>Student Practice Reports</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-body attendance-list-body">
+        <table class="table" matSort mat-table [dataSource]="practiceListData">
+
+            <!-- student name column -->
+            <ng-container matColumnDef="username">
+                <th width="15%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Student Name</span>
+
+                    <div class="form-control form-control--width">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input id="txtStudentName" type="text" autocomplete="off" matInput
+                                placeholder="Search name" [formControl]="studentNameFilterField" />
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.userName }}
+                </td>
+            </ng-container>
+
+            <!-- contact number column -->
+            <ng-container matColumnDef="contactNumber">
+                <th width="12%" mat-header-cell *matHeaderCellDef>
+                    <span>Contact Number</span>
+
+                    <div class="form-control form-control--width">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input id="txtSearchNumber" type="text" autocomplete="off" matInput
+                                placeholder="Search number" [formControl]="contactNumberFilterField"/>
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.contactNumber }}
+                </td>
+            </ng-container>
+
+
+            <!-- grade column  -->
+            <ng-container matColumnDef="gradeAlias">
+                <th width="10%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Grade</span>
+
+                    <div class="form-control form-control--width">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input id="txtSearchGrade" type="text" autocomplete="off" matInput
+                                placeholder="Search grade"[formControl]="gradeFilterField" />
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.gradeAlias }}
+                </td>
+            </ng-container>
+
+            <!-- subject column -->
+            <ng-container matColumnDef="subjectName">
+                <th width="10%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Subject</span>
+                    <div class="form-control form-control--width">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input id="txtSearchSubject" type="text" autocomplete="off" matInput
+                                placeholder="Search subject" [formControl]="subjectFilterField" />
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.subjectName }}
+                </td>
+            </ng-container>
+
+            <!--practice name column -->
+            <ng-container matColumnDef="practiceName">
+                <th width="13%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Practice Name</span>
+                    <div class="form-control form-control--width">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input id="txtSearchPractice" type="text" autocomplete="off" matInput
+                                placeholder="Search practice name" [formControl]="practiceNameFilterField" />
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.practiceName }}
+                </td>
+            </ng-container>
+
+
+
+            <!-- date time column -->
+            <ng-container matColumnDef="finishedAt">
+                <th width="15%" mat-header-cell *matHeaderCellDef>
+                    <span>Date & Time</span>
+                    <div class="form-control form-control--width">
+                        <mat-form-field class="clear-date" appearance="outline" floatLabel="always">
+                            <input matInput [matDatepicker]="date" placeholder="Select date & time" 
+                                [formControl]="dateFilterField" readonly/>
+                            <mat-datepicker-toggle matSuffix [for]="date">
+                                <mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #date disabled="false"></mat-datepicker>
+                            <a *ngIf="dateFilterField.value" (click)="onClearDateFilter()">
+                                <mat-icon svgIcon="close" matTooltip="clear"></mat-icon>
+                            </a>
+                        </mat-form-field>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.finishedAt | date: 'dd-MM-yyyy HH:mm:ss' }}
+                </td>
+            </ng-container>
+
+            <!-- Total marks column -->
+            <ng-container matColumnDef="totalMarks">
+                <th width="10%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Total Marks</span>
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.totalMarks }}
+                </td>
+            </ng-container>
+
+             <!-- Obtain marks column -->
+             <ng-container matColumnDef="obtainMarks">
+                <th width="10%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Obtain Marks</span>
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.obtainMarks }}
+                </td>
+            </ng-container>
+
+
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef width="5%"></th>
+                <td mat-cell *matCellDef="let element; let i = index" class="text-right">
+                    <div class="table-action">
+                        <button [id]="'btnAction-' + i" class="action-button" mat-button [matMenuTriggerFor]="menu">
+                            <mat-icon matTooltip="More Options" svgIcon="action" [id]="'iconTriggerMenu-' + i">
+                            </mat-icon>
+                        </button>
+
+                        <mat-menu #menu="matMenu" xPosition="before" [overlapTrigger]="false" class="class-action">
+                            <button [id]="'btnView-' + i" type="button" mat-menu-item [id]="'btnView-' + i"
+                                (click)="openViewStudentPracticeReport(element)">
+                                <span>View</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr [ngClass]="{ 'row-disabled': false }" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <div *ngIf="!practiceListData.length">
+            <div class="no-content-found-wrapper">
+                <mat-icon svgIcon="noStudentPracticeReport"></mat-icon>
+                <p>No Student Practice Reports</p>
+                <span>There seems to be no student practice right now</span>
+            </div>
+        </div>
+
+        <app-data-loading *ngIf="false"></app-data-loading>
+    </div>
+
+    <div class="table-footer">
+        <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+            (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+    </div>
+</div>

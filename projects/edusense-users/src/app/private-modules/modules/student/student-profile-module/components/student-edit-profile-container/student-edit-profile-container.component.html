@@ -1,0 +1,28 @@
+<div class="profile-container edit-profile-details-container">
+
+  <div class="profile-details__header align-center">
+    <div class="profile-details__header--image">
+      <!-- <img *ngIf="!imageUploadDetails" src="assets/images/student_picture.jpg" /> -->
+      <img *ngIf="imageUploadDetails" [src]="imageUploadDetails" (error)="onError($event)"/>
+      <mat-icon *ngIf="!imageUploadDetails" svgIcon="studentProfile"></mat-icon>
+    </div>
+    <div class="profile-details__header--details">
+      <div>
+        <button type="button" mat-stroked-button id="btnChangeProfile" (click)="onBrowseFile('profilePicture')">
+          Change Profile Picture
+        </button>
+        <input type="file" hidden id="profilePicture" accept="image/jpeg,image/png,image/jpg"
+          (change)="onFileUpload($event)" />
+      </div>
+      <span class="note">PNG, JPG, JPEG Max 5 MB</span>
+    </div>
+  </div>
+
+  <div class="profile-details__body edit-profile-details__body">
+    <mat-tab-group>
+      <mat-tab label="Student Detail">
+        <app-student-details-edit-profile [userProfileDetail]="userDetail" [uploadedImage]="uploadeImage"></app-student-details-edit-profile>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

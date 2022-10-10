@@ -1,0 +1,48 @@
+<div class="meeting-dialog-wrapper">
+    <div class="meeting-dialog__head">
+        <h4>Select Folder</h4>
+        <a id="lnkCloseDialog" (click)="onCloseDialog(data?.chapters)">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="meeting-dialog__bottom">
+        <div class="auth-container create-class-container">
+            <div class="auth-box">
+                <div class="auth-box__data">
+                    <form>
+                        <div *ngFor="let folder of folderList; let i = index;">
+                            <div class="add-practice">
+                                <div class="add-practice__flex">
+                                    <mat-checkbox [checked]="isSelectedFolder(folder)"
+                                        (change)="onSelectFolder($event,folder)" [id]="'checkPractice' + i"
+                                        class="MR-2"></mat-checkbox>
+                                    <!-- <span class="add-practice__number">{{folder.id}}</span> -->
+                                    <mat-icon class="add-practice__answer-chapter" svgIcon="chapter"></mat-icon>
+                                    <span class="add-practice__select-sub">{{folder?.title}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!folderList.length && !isLoadingResults">
+                            <div class="no-content-found-wrapper no-folder-spacing">
+                                <mat-icon svgIcon="Nofolderavailable"></mat-icon>
+                                <p>No Folder Available</p>
+                                <span>You don't have any folder yet</span>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button id="btnCancel" type="button" (click)="onCloseDialog(data?.chapters)"
+                                mat-button *ngIf="folderList.length">Cancel</button>
+
+                            <button id="btnAdd" mat-flat-button color="primary" type="button"
+                                (click)="onAddFolder(selectedFolderArray)" *ngIf="folderList.length">
+                                Add
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

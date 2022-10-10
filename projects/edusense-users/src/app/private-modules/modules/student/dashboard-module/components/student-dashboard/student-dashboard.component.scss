@@ -1,0 +1,10 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.dashboard {
+    display: flex;
+    height: calc(100vh - 100px);
+    align-items: center;
+    justify-content: center;
+    @include respond('phone') {
+        height: calc(100vh - 150px);
+    }
+}

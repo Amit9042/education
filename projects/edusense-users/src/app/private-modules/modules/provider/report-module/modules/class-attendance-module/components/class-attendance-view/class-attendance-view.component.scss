@@ -1,0 +1,33 @@
+@import '../../../../../../../../../assets/scss/abstracts/abstracts';
+.class-view-container .class-view__body div label {
+    min-width: 15rem;
+}
+
+
+a {
+    &.class-view__details__data {
+        border: 1px solid transparent;
+        border-left: 2px solid rgba(0, 0, 0, 0.16);
+        @include respond('tab-port') {
+            border-top: 1px solid rgba(0, 0, 0, 0.16) !important;
+            border-left:none !important;
+        }
+        @include respond('phone') {
+            border-top: 1px solid rgba(0, 0, 0, 0.16) !important;
+            border-left:none !important;
+        }
+        &:hover {
+            border: 1px solid rgba(0, 0, 0, 0.16);
+            border-left: 2px solid rgba(0, 0, 0, 0.16);
+            text-decoration: none;
+            @include respond('tab-port') {
+                border-left:none !important;
+                border: 1px solid rgba(0, 0, 0, 0.16)  !important;
+            }
+            @include respond('phone') {
+                border-left:none !important;
+                border: 1px solid rgba(0, 0, 0, 0.16)  !important;
+            }
+        }
+    }
+}

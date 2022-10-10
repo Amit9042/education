@@ -1,0 +1,213 @@
+<app-header></app-header>
+
+<div class="webpages-container home-page-container MT-92">
+    <!-- slider section -->
+    <div class="webpages-container__section MB-20 sm-MB-0 xs-MB-0">
+        <div class="tablet-width-30 webpages-container__section--content">
+            <h2>Conduct virtual classrooms with <span> EduSense</span></h2>
+            <p>
+                Teach online with video conferencing, manage courses, share
+                material and more.
+            </p>
+        </div>
+        <div class="webpages-container__section__swiper">
+            <swiper [config]="config">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="./assets/images/homePageOne.png" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./assets/images/homePageTwo.png" alt="" />
+                    </div>
+                </div>
+
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </swiper>
+        </div>
+    </div>
+
+    <!-- with edusense section  -->
+    <div class="webpages-container__section MB-20">
+        <div class="content content-left tablet-width-30">
+            <h3>
+                A new approach<br />
+                to Education
+            </h3>
+            <p>
+                With Edusense, teachers can conduct live video sessions, create
+                multiple virtual classrooms, answer student queries, get
+                automated attendance and many more such features.
+            </p>
+        </div>
+        <div class="webpages-container__section__background flex-row">
+            <p class="inside withBlue">
+                Record live sessions which can be shared to students for
+                revising the lessons taught during a class.
+            </p>
+            <div class="flex-column tablet-2MLR">
+                <p class="inside withPink">
+                    With 2-way interaction between students and teachers, Q&A
+                    sessions can be conducted productively.
+                </p>
+                <p class="inside withYellow">
+                    Teachers can share special study material for students to
+                    understand the sessions better.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edusense flexibility  -->
+    <div class="webpages-container__middle-section">
+        <h4>
+            Our cloud-based services with versatile<br> pricing are trusted by
+        </h4>
+
+        <div class="flex-center tablet-block">
+            <div
+                class="webpages-container__section__box-card blue-box flex-center"
+            >
+                <p>Kindergartens, Schools and Tuition Classes</p>
+            </div>
+            <div
+                class="webpages-container__section__box-card pink-box flex-center"
+            >
+                <p>Universities and Colleges</p>
+            </div>
+            <div
+                class="webpages-container__section__box-card yellow-box flex-center"
+            >
+                <p>Freelance Tutors, Consultants, Coaches, Mentors etc</p>
+            </div>
+        </div>
+        <div class="flex-center tablet-block">
+            <div
+                class="webpages-container__section__box-card purple-box flex-center"
+            >
+                <p>Vocational Training Centres and Big Tutoring Organisation</p>
+            </div>
+            <div
+                class="webpages-container__section__box-card sky-box flex-center"
+            >
+                <p>Corporations</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- virtual classroom  -->
+    <div
+        class="webpages-container__section webpages-container__section--virtual-classroom"
+    >
+        <div class="webpages-container__section__background MR-0 flex-row">
+            <div class="flex-column MR-5 tablet-right-0">
+                <p class="inside withPinkRectangle">
+                    Create an unlimited number of live interactive online
+                    sessions, 24/7
+                </p>
+                <p class="inside withYellowRectanle">
+                    Pay no extra or hidden fees – only an affordable monthly
+                    price per student
+                </p>
+            </div>
+            <div class="flex-column tablet-2MLR">
+                <p class="inside withBlueSquare">
+                    Work simultaneously with up to 150 learners per session
+                </p>
+                <p class="inside withDarkPinkSquare">
+                    Take full control of your tutoring environment
+                </p>
+            </div>
+        </div>
+        <div class="content content-right">
+            <h3>
+                Virtual Classrooms
+            </h3>
+            <p>
+                These classrooms can easily enroll upto 150 students in one
+                session.
+            </p>
+        </div>
+    </div>
+
+    <!-- LMS  -->
+    <div class="webpages-container__middle-section">
+        <div class="webpages-container__middle-section__header">
+            <h4>
+                Learning Management System
+            </h4>
+            <p>
+                A platform for managing your Classes, Material, Student’s Doubt,
+                Parent’s Meeting.
+            </p>
+        </div>
+
+        <div class="flex-center tablet-block">
+            <div
+                class="webpages-container__section__box-card blue-box flex-center"
+            >
+                <p>Create and manage your lectures and users from any device</p>
+            </div>
+            <div
+                class="webpages-container__section__box-card yellow-box flex-center"
+            >
+                <p>
+                    Keep all records of Doubts, Material, and training in one
+                    place
+                </p>
+            </div>
+        </div>
+        <div class="flex-center tablet-block">
+            <div
+                class="webpages-container__section__box-card pink-box flex-center"
+            >
+                <p>
+                    Manage and take Virtual sessions one - to - one and with
+                    multiple students in one class
+                </p>
+            </div>
+            <div
+                class="webpages-container__section__box-card sky-box flex-center"
+            >
+                <p>
+                    Solve Doubts by sharing the same with teachers in single
+                    click
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- app download  -->
+    <div
+        class="webpages-container__section webpages-container__download-app-section"
+    >
+        <div class="webpages-container__download-app-section__left">
+            <h3>Download the EduSense App</h3>
+            <p>
+                Start creating the live sessions with EduSense mobile app Now!
+            </p>
+            <div>
+                <h5>Get the link to download the app</h5>
+                <div class="MB-4">
+                    <input placeholder="Enter phone number" type="input" />
+                    <button mat-icon-button type="button">
+                        <mat-icon svgIcon="goButton"></mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div>
+                <a href="https://play.google.com/store/apps/details?id=com.ss.learningsense" id="lnkAndroid" target="_blank"><mat-icon svgIcon="android"></mat-icon></a>
+                <a href="https://apps.apple.com/in/app/edusense/id1512650937" id="lnkIos" target="_blank"><mat-icon svgIcon="ios"></mat-icon></a>
+            </div>
+        </div>
+        <div class="webpages-container__download-app-section__right">
+            <img src="assets/images/appImageOne.png" alt="" />
+            <img src="assets/images/appImageTwo.png" alt="" />
+        </div>
+    </div>
+</div>
+<app-getting-started-contact-us
+    [contactBtn]="false"
+></app-getting-started-contact-us>
+
+<app-footer></app-footer>

@@ -1,0 +1,44 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.assignment-list-container {
+    &__body {
+        padding: 12.5rem 0 0;
+        @include respond('phone') {
+            padding: 18.5rem 0 0;
+        }
+        &__list {
+            position: relative;
+            &:hover {
+                background-color: rgba($primary-color, 0.02);
+                .more-option-edit-button {
+                    display: block;
+                }
+            }
+            .flex-between {
+                width: 75%;
+                @include respond('tab-port') {
+                    width: 100%;
+                }
+                @include respond('phone') {
+                    width: 100%;
+                }
+            }
+
+            .more-option-edit-button {
+                position: absolute;
+                display: none;
+                right: 4rem;
+                top: 3.6rem;
+                mat-icon{
+                    @include square(2.4rem);
+                }
+            }
+
+            h3 {
+                @include respond('phone') {
+                    white-space: normal;
+                    word-break: break-all;
+                }
+            }
+        }
+    }
+}

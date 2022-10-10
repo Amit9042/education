@@ -1,0 +1,127 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.student-course-discussion-container {
+    .course-discussion {
+        padding-top: 5rem;
+
+        &__details {
+            @include clearfix();
+            margin-bottom: 2.5rem;
+
+            &__image {
+                float: left;
+                width: 7rem;
+
+                img,
+                mat-icon {
+                    @include square(5rem);
+                }
+            }
+
+            &__content {
+                float: left;
+                width: calc(100% - 7rem);
+
+                h4 {
+                    color: $black-color;
+                    position: relative;
+                    font-weight: bold;
+                    font-size: 1.8rem;
+                    margin-bottom: 1.5rem;
+
+                    small {
+                        color: $grey-color-32;
+                        position: absolute;
+                        top: 4px;
+                        font-size: 1.2rem;
+                        margin-left: 0.5rem;
+                    }
+                }
+
+                p {
+                    color: $black-color-2;
+                    font-weight: normal;
+                    font-size: 1.6rem;
+
+                    line-height: 1.28;
+                }
+
+                ul {
+                    padding-top: 1.5rem;
+
+                    li {
+                        margin-right: 2rem;
+
+                        a {
+                            span {
+                                color: $light-gray-color-10;
+                                font-size: 1.4rem;
+                                font-weight: bold;
+                                margin-left: 0.5rem;
+                            }
+
+                            mat-icon {
+                                @include square(1.2rem);
+                                vertical-align: top;
+                            }
+
+                            mat-icon[svgIcon='like'] {
+                                display: inline-block;
+                            }
+
+                            mat-icon[svgIcon='dis-like'] {
+                                display: none;
+                            }
+
+                            .chat-icon {
+                                position: relative;
+                                top: 2px;
+                            }
+
+                            &:hover {
+                                text-decoration: none;
+
+                                span {
+                                    color: $primary-color;
+                                }
+                            }
+
+                            &.active {
+                                mat-icon[svgIcon='like'] {
+                                    display: none;
+                                }
+
+                                mat-icon[svgIcon='dis-like'] {
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                input {
+                    border: 1px solid $primary-color-2;
+                    border-radius: 3px;
+                    width: 80%;
+                    padding: 1rem;
+                }
+            }
+        }
+
+        &__history {
+            position: relative;
+            padding-left: 7rem;
+
+            &::before {
+                background-color: $grey-color-33;
+                position: absolute;
+                top: 0;
+                left: 2.4rem;
+                height: 100%;
+                width: 4px;
+                border-radius: 3px;
+                content: '';
+            }
+        }
+    }
+}

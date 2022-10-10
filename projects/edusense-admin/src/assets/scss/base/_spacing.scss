@@ -1,0 +1,146 @@
+// ---------------------------------------------------------------------------------------------
+// ===================================  Class for Margin and Padding  ======================================
+// ---------------------------------------------------------------------------------------------
+
+$directions: (top, left, right, bottom);
+$spaceList: (0, 1, 2, 3, 4, 5, 6, 7, 9, 10);
+@each $space in $spaceList {
+    @each $direction in $directions {
+        .M#{to_upper_case(str_slice($direction,0,1))}-#{$space} {
+            margin-#{$direction}: #{$space}rem !important;
+        }
+
+        .P#{to_upper_case(str_slice($direction,0,1))}-#{$space} {
+            padding-#{$direction}: #{$space}rem !important;
+        }
+    }
+}
+
+.PLR-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.PL-05 {
+    padding-left: 0.5rem !important;
+}
+
+.PR-05 {
+    padding-right: 0.5rem !important;
+}
+
+.MT-25 {
+    margin-top: 2.5rem !important;
+}
+
+.ML-25 {
+    margin-left: 2.5rem !important;
+}
+
+.md-PB-1 {
+    @include respond('large-desktop') {
+        padding-bottom: 1rem !important;
+    }
+}
+
+.md-PB-2 {
+    @include respond('large-desktop') {
+        padding-bottom: 2rem !important;
+    }
+}
+
+.MB-20 {
+    margin-bottom: 20rem;
+}
+
+.sm-PR-0 {
+    @include respond('tab-port') {
+        padding-right: 0 !important;
+    }
+}
+
+.xs-PR-0 {
+    @include respond('phone') {
+        padding-right: 0 !important;
+    }
+}
+
+.sm-PL-0 {
+    @include respond('tab-port') {
+        padding-left: 0 !important;
+    }
+}
+
+.xs-PL-0 {
+    @include respond('phone') {
+        padding-left: 0 !important;
+    }
+}
+.MT-92 {
+    margin-top: 9.2rem;
+}
+
+.MB-30 {
+    margin-bottom: 30rem;
+}
+
+.MR-20 {
+    margin-right: 20rem;
+}
+
+.MB-35 {
+    margin-bottom: 35rem;
+}
+
+.MB-22 {
+    margin-bottom: 22rem;
+}
+
+.MB-19 {
+    margin-bottom: 19rem;
+}
+
+.MB-25 {
+    margin-bottom: 25rem;
+}
+
+.MT-30 {
+    margin-top: 30rem;
+}
+
+.sm-MT-25 {
+    @include respond('tab-port') {
+        margin-top: 25rem;
+    }
+}
+
+.sm-MT-15 {
+    @include respond('tab-port') {
+        margin-top: 15rem;
+    }
+}
+
+.xs-PT-10 {
+    @include respond('phone') {
+        margin-top: 10rem;
+    }
+}
+
+.sm-MB-0 {
+    @include respond('tab-port') {
+        margin-bottom: 0;
+    }
+}
+
+.xs-MB-0 {
+    @include respond('phone') {
+        margin-bottom: 0;
+    }
+}
+
+.xs-MT-10{
+    @include respond('phone') {
+        margin-top: 10rem;
+    }
+}
+

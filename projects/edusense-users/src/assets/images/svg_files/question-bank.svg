@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="20" viewBox="0 0 15 20">
+    <defs>
+        <style>
+            .prefix__cls-1_question-bank{fill:#203061}
+        </style>
+    </defs>
+    <g id="prefix__list" transform="translate(-64)">
+        <g id="prefix__Group_22221" data-name="Group 22221" transform="translate(66.504 7.505)">
+            <g id="prefix__Group_22220" data-name="Group 22220">
+                <path id="prefix__Path_16048" d="M132.827 192.191a.625.625 0 0 0-.883 0l-2.052 2.053-.805-.807a.623.623 0 0 0-.881.881l1.247 1.247a.617.617 0 0 0 .44.183.626.626 0 0 0 .441-.182l2.493-2.493a.624.624 0 0 0 0-.882z" class="prefix__cls-1_question-bank" data-name="Path 16048" transform="translate(-128.024 -192.008)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_22223" data-name="Group 22223" transform="translate(66.504 12.508)">
+            <g id="prefix__Group_22222" data-name="Group 22222">
+                <path id="prefix__Path_16049" d="M132.827 320.191a.625.625 0 0 0-.883 0l-2.052 2.053-.805-.805a.623.623 0 0 0-.881.881l1.247 1.247a.625.625 0 0 0 .881 0l2.493-2.493a.624.624 0 0 0 0-.883z" class="prefix__cls-1_question-bank" data-name="Path 16049" transform="translate(-128.024 -320.008)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_22225" data-name="Group 22225" transform="translate(72.758 8.752)">
+            <g id="prefix__Group_22224" data-name="Group 22224">
+                <path id="prefix__Path_16050" d="M291.116 224h-2.493a.623.623 0 0 0 0 1.247h2.493a.623.623 0 0 0 0-1.247z" class="prefix__cls-1_question-bank" data-name="Path 16050" transform="translate(-288 -224)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_22227" data-name="Group 22227" transform="translate(72.758 13.753)">
+            <g id="prefix__Group_22226" data-name="Group 22226">
+                <path id="prefix__Path_16051" d="M291.116 352h-2.493a.623.623 0 0 0 0 1.247h2.493a.623.623 0 0 0 0-1.247z" class="prefix__cls-1_question-bank" data-name="Path 16051" transform="translate(-288 -352)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_22229" data-name="Group 22229" transform="translate(64)">
+            <g id="prefix__Group_22228" data-name="Group 22228">
+                <path id="prefix__Path_16052" d="M77.75 2.5h-2.5v-.625a.625.625 0 0 0-.625-.625h-1.356a1.876 1.876 0 0 0-3.537 0h-1.357a.625.625 0 0 0-.625.625V2.5h-2.5A1.252 1.252 0 0 0 64 3.75v15A1.252 1.252 0 0 0 65.25 20h12.5A1.252 1.252 0 0 0 79 18.75v-15a1.252 1.252 0 0 0-1.25-1.25zM69 2.5h1.25a.625.625 0 0 0 .625-.625.625.625 0 1 1 1.25 0 .625.625 0 0 0 .625.625H74v1.25h-5zm8.75 16.25h-12.5v-15h2.5v.625a.625.625 0 0 0 .625.625h6.25a.625.625 0 0 0 .625-.625V3.75h2.5z" class="prefix__cls-1_question-bank" data-name="Path 16052" transform="translate(-64)"/>
+            </g>
+        </g>
+    </g>
+</svg>

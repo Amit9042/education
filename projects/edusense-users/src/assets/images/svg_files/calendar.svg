@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__calendar" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#004e81}
+        </style>
+    </defs>
+    <g id="prefix__Group_1552" data-name="Group 1552">
+        <g id="prefix__Group_1551" data-name="Group 1551">
+            <path id="prefix__Path_11289" d="M279 280.4a1.564 1.564 0 0 0 1.563 1.563h1.837a1.564 1.564 0 0 0 1.563-1.562v-1.836A1.564 1.564 0 0 0 282.4 277h-1.836a1.564 1.564 0 0 0-1.564 1.563zm1.563-1.836h1.837v1.836h-1.837z" class="prefix__cls-1" data-name="Path 11289" transform="translate(-268.102 -266.18)"/>
+            <ellipse id="prefix__Ellipse_19" cx=".5" cy="1" class="prefix__cls-1" data-name="Ellipse 19" rx=".5" ry="1" transform="translate(15 7)"/>
+            <circle id="prefix__Ellipse_20" cx="1" cy="1" r="1" class="prefix__cls-1" data-name="Ellipse 20" transform="translate(11 7)"/>
+            <path id="prefix__Path_11290" d="M19.219 13.75a.781.781 0 0 0 .781-.781V4.688a3.129 3.129 0 0 0-3.125-3.125h-1.016V.781a.781.781 0 0 0-1.562 0v.781h-3.555V.781a.781.781 0 0 0-1.562 0v.781H5.664V.781a.781.781 0 0 0-1.564 0v.781h-.975A3.129 3.129 0 0 0 0 4.688v12.187A3.129 3.129 0 0 0 3.125 20h13.75A3.129 3.129 0 0 0 20 16.875a.781.781 0 0 0-1.562 0 1.564 1.564 0 0 1-1.562 1.563H3.125a1.564 1.564 0 0 1-1.562-1.562V4.688a1.564 1.564 0 0 1 1.562-1.563H4.1v.781a.781.781 0 0 0 1.563 0v-.781H9.18v.781a.781.781 0 0 0 1.563 0v-.781H14.3v.781a.781.781 0 0 0 1.563 0v-.781h1.016a1.564 1.564 0 0 1 1.563 1.563v8.281a.781.781 0 0 0 .777.781z" class="prefix__cls-1" data-name="Path 11290"/>
+            <circle id="prefix__Ellipse_21" cx=".5" cy=".5" r=".5" class="prefix__cls-1" data-name="Ellipse 21" transform="translate(4 15)"/>
+            <ellipse id="prefix__Ellipse_22" cx=".5" cy="1" class="prefix__cls-1" data-name="Ellipse 22" rx=".5" ry="1" transform="translate(4 7)"/>
+            <ellipse id="prefix__Ellipse_23" cx=".5" cy="1" class="prefix__cls-1" data-name="Ellipse 23" rx=".5" ry="1" transform="translate(4 11)"/>
+            <circle id="prefix__Ellipse_24" cx="1" cy="1" r="1" class="prefix__cls-1" data-name="Ellipse 24" transform="translate(7 11)"/>
+            <circle id="prefix__Ellipse_25" cx="1" cy="1" r="1" class="prefix__cls-1" data-name="Ellipse 25" transform="translate(7 7)"/>
+            <ellipse id="prefix__Ellipse_26" cx="1" cy=".5" class="prefix__cls-1" data-name="Ellipse 26" rx="1" ry=".5" transform="translate(7 15)"/>
+        </g>
+    </g>
+</svg>

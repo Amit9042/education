@@ -1,0 +1,122 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.waiting-room-container {
+    background: none;
+    padding: 0 2.5rem;
+
+    @include respond('phone') {
+        padding: 0 0 2rem 0;
+    }
+
+    @include respond('tab-port') {
+        padding: 0;
+    }
+
+    .waiting-room {
+        &__top {
+            &--right {
+                background-color: $grey-color-3 !important;
+            }
+        }
+        .header {
+            &__search {
+                &--input {
+                    input {
+                        background-color: $grey-color-3 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.visitor-details {
+    .green {
+        color: $green-color-5;
+
+        small {
+            color: rgba($black-color, 0.6);
+            margin-left: 1.6rem;
+        }
+    }
+
+    .name-create {
+        display: block;
+    }
+
+    .gray {
+        color: $placeholder-color !important;
+
+        small {
+            color: rgba($black-color, 0.6);
+            margin-left: 1.6rem;
+        }
+    }
+
+    .time-date-student {
+        color: $primary-color !important;
+        font-style: italic;
+    }
+
+    .total-question {
+        color: $light-blue-color-2 !important;
+    }
+}
+
+.visitors-info {
+    cursor: pointer;
+    margin-bottom: 0 !important;
+}
+
+.que-bank-ch-list-container__head__right__bookmark-btn {
+    background-color: rgba($primary-color, 0.1) !important;
+
+    .mat-button-wrapper {
+        color: $primary-color !important;
+    }
+
+    &:hover {
+        background-color: rgba($primary-color, 0.1) !important;
+        color: $primary-color !important;
+        box-shadow: none !important;
+    }
+}
+
+.waiting-room__body.meeting-room__body {
+    overflow-y: auto;
+    height: calc(100vh - 42rem);
+    padding: 0 !important;
+   
+
+    @include respond('tab-port') {
+        margin: 1rem 1.5rem 1.5rem;
+    }
+}
+
+.complete-question-bank {
+    &:hover {
+        cursor: default;
+    }
+
+    .mat-icon[svgIcon='rightArrow'] {
+        display: none;
+    }
+}
+
+@include respond('phone') {
+    .student-provider-pracitce-list.meeting-room .visitors-info {
+        padding: 2rem 1rem;
+    }
+
+    .que-bank-ch-list-container__head {
+        padding-bottom: 2rem;
+    }
+}
+
+.practice-list-spacing{
+    padding-bottom: 3rem;
+}
+
+.student-practice-list-bottom-spacing{
+    margin-bottom: 0;
+}

@@ -1,0 +1,43 @@
+<div class="assignment-details-container">
+  <!-- <h5>Instruction</h5> -->
+  <p>{{submissionDetail?.description | checkEmpty}}</p>
+  <div>
+    <div class="assignment-details-container__data">
+      <label>Start date</label>
+      <span>{{submissionDetail?.provider_assignment?.start_date | date: 'dd MMM yyyy'}}</span>
+    </div>
+    <div class="assignment-details-container__data">
+      <label>Submitted on</label>
+      <span>{{submissionDetail?.created_at | date: 'dd MMM yyyy'}}</span>
+    </div>
+    <div class="assignment-details-container__data">
+      <label>Teacher:</label>
+      <span>{{submissionDetail?.provider_assignment?.createdBy?.first_name + ' ' +
+      submissionDetail?.provider_assignment?.createdBy?.last_name}}</span>
+    </div>
+  </div>
+  <div class="assignment-details-container__pdf-view">
+    <div
+      *ngFor="let assignment of submissionDetail?.student_assignment_attachments; let i = index">
+      <a (click)="viewDownloadMaterial(assignment.student_attachment_id,
+                        assignment.file_name,
+                        assignment.file_content_type,
+                        assignment.file_path, i+1)" id="lnkViewDownloadMaterial" class="flex-left">
+        <mat-icon
+          [svgIcon]="getIcon(assignment?.file_content_type)"
+        ></mat-icon>
+        <span>{{ assignment?.file_name }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="MT-4" *ngIf="submissionDetail?.check_status > 1">
+    <div class="assignment-details-container__data ">
+      <label>Mark</label>
+      <span>{{getAssignmentStatus(submissionDetail)}}</span>
+    </div>
+    <div class="assignment-details-container__data">
+      <label>Remark</label>
+      <span>{{submissionDetail?.remarks | checkEmpty}}</span>
+    </div>
+  </div>
+</div>

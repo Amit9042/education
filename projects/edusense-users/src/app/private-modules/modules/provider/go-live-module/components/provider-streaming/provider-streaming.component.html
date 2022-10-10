@@ -1,0 +1,11 @@
+<div *ngIf="classStreamingDetails">
+  <app-streaming [channelName]="classStreamingDetails?.channel_name" [meetingToken]="classStreamingDetails?.meeting_token"
+    [userDetails]="userDetails" [isProvider]="true" (endStreaming)="onClassEnd()" (handRaise)="onStudentHandRaiseReq()"
+    (classJoin)="onClassJoined()">
+  </app-streaming>
+</div>
+<div class="join-class-details" *ngIf="!classStreamingDetails">
+  <label>
+    Class details not found. Please restart the class.
+  </label>
+</div>

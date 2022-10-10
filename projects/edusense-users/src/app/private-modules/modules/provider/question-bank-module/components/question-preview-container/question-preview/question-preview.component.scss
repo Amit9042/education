@@ -1,0 +1,15 @@
+@import "../../../../../../../../assets/scss/abstracts/abstracts";
+
+.select-question{
+    @include clearfix();
+
+    &__left{
+        width: 50rem;
+        float: left;
+    }
+
+    &__right{
+        width: calc(100% - 50rem);
+        float: left;
+    }
+}

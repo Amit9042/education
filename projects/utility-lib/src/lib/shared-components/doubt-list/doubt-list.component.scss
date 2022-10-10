@@ -1,0 +1,14 @@
+@import '../../../assets/scss/abstracts/abstracts';
+.doubt-container {
+    padding: 0 2.5rem;
+    height: calc(100vh - 26rem);
+    overflow-y: auto;
+
+    // @include respond('regular-desktop') {
+    //     height: calc(100vh - 20rem);
+    // }
+
+    @include respond('phone') {
+        padding: 0 2rem;
+    }
+}

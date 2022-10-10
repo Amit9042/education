@@ -1,0 +1,117 @@
+<div class="student-course-list-container">
+    <div class="student-course__course-details">
+        <h2>All Courses</h2>
+        <es-user-student-course-filters [parentCategoryId]="categoryId"
+            (filterParamChangedEvent)="setFilterParams($event)"></es-user-student-course-filters>
+    </div>
+
+    <!-- <div *ngFor="let i of [1,2,3,4]; let j = index"> -->
+    <!--AA <div class="student-course__student-course-title">
+            <div class="row">
+                <div class="col-md-9 col-xs-12 PL-0">
+                    <h3>Enhance your business skills from our Business Courses</h3>
+                </div>
+
+                <div class="col-md-3 col-xs-12 xs-text-left xs-PL-0 text-right">
+                    <a (click)="onSeeAllStudentCourses()">See All</a>
+                </div>
+            </div>
+        </div> -->
+
+    <!--  <div>
+        <a (click)="onStudentCourseDeatilsOpen()" class="student-course__large-course-box">
+            <div class="row">
+                <div class="col-md-6 PLR-0">
+                    <div class="student-course__large-course-box__left">
+                        <img src="assets/images/group.png" />
+                    </div>
+                </div>
+
+                <div class="col-md-6 PL-0 xs-PR-0">
+                    <div class="student-course__large-course-box__right">
+                        <h3>Management Psychology: How To Develop And Use Emotional Intelligence</h3>
+                        <p>The goal of the course is to help organizations increase their sales and workplace
+                            mental
+                            health by developing and applying emotional intelligence!</p>
+
+                        <div class="student-course__large-course-box__right__profile-details">
+                            <div class="student-course__large-course-box__right__profile-details__image">
+                                <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+                                <img *ngIf="true" src="assets/images/chris.png" />
+                            </div>
+
+                            <div class="student-course__large-course-box__right__profile-details__details">
+                                <label>David Hedley</label>
+                                <span>Educational Psychology</span>
+                            </div>
+                        </div>
+
+                        <div class="student-course__large-course-box__right__footer">
+                            <div class="row">
+                                <div class="col-md-6 PL-0">
+                                    <small>3hr 20m</small>
+                                </div>
+
+                                <div class="col-md-6 PR-0 text-right">
+                                    <a>
+                                        <mat-icon *ngIf="true" svgIcon="bookmark"></mat-icon>
+                                        <mat-icon *ngIf="false" svgIcon="bookedMark"></mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div> -->
+
+    <div>
+        <a class="student-course__course-box">
+            <div class="row" *ngIf="allCourseList.length">
+                <div *ngFor="let course of allCourseList | paginate: { itemsPerPage: recordsPerPage, currentPage: pageNumber+1, totalItems: totalElements }; let i=index;"
+                    class="col-md-3 PL-0">
+                    <div class="student-course__course-box__details">
+                        <img *ngIf="course?.cover_image " (click)="routeToEnrollpage(course.course_id)"
+                            [src]="course.cover_image" />
+                        <div class="student-course__course-box__details__no-data" *ngIf="!course?.cover_image"
+                            (click)="routeToEnrollpage(course.course_id)">
+                            <mat-icon svgIcon="course-no-image-list"></mat-icon>
+                            <small>No cover image available</small>
+                        </div>
+                        <div class="student-course__course-box__details__content">
+                            <small>{{course.total_duration | duration : durationPattern.HH_MM :
+                                suffixUnit.HR_M}}</small>
+                            <h4 (click)="routeToEnrollpage(course.course_id)">
+                                {{(course.title|checkEmpty) | ellipsis : 45}}</h4>
+                            <div class="student-course__course-box__details__content__footer">
+                                <img *ngIf="course?.user?.avatar " [src]="course.user.avatar" />
+                                <mat-icon *ngIf="!course?.user?.avatar" svgIcon="profile"></mat-icon>
+                                <label>{{course.user?.first_name}}&nbsp;{{course.user?.last_name}}</label>
+                                <a>
+                                    <mat-icon *ngIf="!course.is_bookmarked" svgIcon="bookmark"
+                                        (click)="bookmarkCourse(i, course.course_id)"></mat-icon>
+                                    <mat-icon *ngIf="course.is_bookmarked" svgIcon="bookedMark"
+                                        (click)="bookmarkCourse(i, course.course_id)"></mat-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <div *ngIf="!isLoadingResult && !allCourseList.length">
+            <div class="no-content-found-wrapper course-no-content-found-wrapper">
+                <mat-icon svgIcon="all-courses"></mat-icon>
+                <p>No Course Available</p>
+                <span>No course has been uploaded till now.</span>
+            </div>
+        </div>
+
+        <div class="paginator-section">
+            <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true"></pagination-controls>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

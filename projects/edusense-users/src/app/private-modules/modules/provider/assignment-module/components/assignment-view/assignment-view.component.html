@@ -1,0 +1,26 @@
+<div class="assignment-view-container">
+  <div class="assignment-view-container__content">
+    <div class="assignment-view-container__content__head">
+      <a (click)="onBack()">
+        <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+      </a>
+      <div class="width-100">
+        <h2>
+          {{assignmentDetails?.title | checkEmpty}}
+        </h2>
+        <p><span>{{assignmentDetails?.class?.name | checkEmpty}}</span></p>
+      </div>
+    </div>
+    <div class="assignment-view-container__content__tab-content">
+      <mat-tab-group>
+        <mat-tab label="Submissions" *ngIf="submissionList.length > 0">
+          <es-user-assignment-submission-list-view [submissionList]="submissionList"></es-user-assignment-submission-list-view>
+        </mat-tab>
+        <mat-tab label="Details">
+          <es-user-assignment-details-content-view
+            [assignmentDetails]="assignmentDetails"></es-user-assignment-details-content-view>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

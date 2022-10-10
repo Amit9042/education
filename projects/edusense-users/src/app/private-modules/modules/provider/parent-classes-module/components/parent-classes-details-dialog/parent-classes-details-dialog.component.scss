@@ -1,0 +1,7 @@
+@import "../../../../../../../assets/scss/abstracts/abstracts";
+
+.xs-P2 {
+    @include respond('phone') {
+        padding: 2rem !important;
+    }
+}

@@ -1,0 +1,18 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.pad-left-0{
+    @include respond('phone'){
+        padding-left: 0 !important;
+    }
+}
+
+.pad-right-0{
+    @include respond('phone'){
+        padding-right: 0 !important;
+    }
+}
+
+mat-checkbox{
+    font-size: 1.4rem;
+    margin-bottom:1rem;
+}

@@ -1,0 +1,433 @@
+.student-course {
+    &__course-details {
+        h2 {
+            color: $blue-color-3;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+
+            @include respond('phone') {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+                padding-top: 3rem;
+            }
+        }
+
+        small {
+            color: $blue-color-3;
+            font-size: 1.4rem;
+        }
+
+        .form-control-course {
+            @include placeholder($primary-color, 1.6rem);
+            height: 7rem;
+
+            .mat-form-field-appearance-outline .mat-form-field-prefix {
+                width: 2.5rem !important;
+            }
+
+            .mat-form-field-outline {
+                border: transparent;
+            }
+
+            .mat-form-field-flex {
+                background-color: $white-color;
+                border-radius: 1rem;
+            }
+
+            .mat-select-value-text {
+                span {
+                    color: $grey-color-12;
+                    font-size: 1.6rem;
+                }
+            }
+
+            .mat-form-field-flex {
+                height: 5rem;
+            }
+
+            .mat-form-field-appearance-outline .mat-form-field-infix {
+                padding: 0.8em 0 1em 0;
+            }
+
+            .search-icon {
+                @include square(1.5rem);
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
+
+    &__course-box {
+        padding-top: 5rem;
+        display: block;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &__details {
+            background-color: $white-color;
+            box-shadow: 0.5px 0.9px 7px 0 rgba(144, 144, 144, 0.21);
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+
+            img {
+                width: 100%;
+                height: 16rem;
+                border-radius: 1rem 1rem 0 0rem;
+            }
+
+            &__content {
+                padding: 1rem;
+
+                small {
+                    color: $primary-color-5;
+                    font-weight: bold;
+                    font-size: 1.4rem;
+                }
+
+                h4 {
+                    color: $primary-color;
+                    font-weight: bold;
+                    line-height: 1.28;
+                    font-size: 1.8rem;
+                    margin-top: 1rem;
+                    height: 5rem;
+                }
+
+                h6 {
+                    color: $grey-color-12;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-top: 1rem;
+                }
+
+                &__footer {
+                    padding-top: 2rem;
+
+                    mat-icon,
+                    img {
+                        @include square(4rem);
+                        display: inline-block;
+                        vertical-align: middle;
+                        border-radius: 50%;
+                    }
+
+                    label {
+                        color: $black-color-5;
+                        display: inline-block;
+                        width: calc(100% - 7rem);
+                        font-size: 1.2rem;
+                        padding-left: 1rem;
+                    }
+
+                    a {
+                        display: inline-block;
+                        width: 3rem;
+
+                        mat-icon {
+                            @include square(2rem);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__courses-tags {
+        padding-top: 2rem;
+
+        ul {
+            li {
+                a {
+                    background-color: $primary-color-3;
+                    color: $primary-color;
+                    display: block;
+                    margin-bottom: 1rem;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    padding: 1rem;
+                    border-radius: 0.6rem;
+                    margin-right: 1rem;
+
+                    &.active {
+                        background-color: $primary-color;
+                        color: $white-color;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &__large-course-box {
+        padding-top: 3rem;
+        text-decoration: none;
+        display: block;
+
+        @include respond('phone') {
+            padding-top: 2rem;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &__left {
+            img {
+                vertical-align: middle;
+                width: 100%;
+                height: 35rem;
+                border-radius: 1rem 0 0 1rem;
+
+                @include respond('phone') {
+                    height: auto;
+                    border-radius: 1rem;
+                }
+            }
+        }
+
+        &__right {
+            background-color: $white-color;
+            position: relative;
+            height: 100%;
+            border-radius: 0 1rem 1rem 0;
+            box-shadow: 0.5px 0.9px 7px 0 rgba(144, 144, 144, 0.21);
+            padding: 3rem;
+
+            @include respond('phone') {
+                border-radius: 1rem;
+                margin-top: 1rem;
+                padding: 1rem;
+            }
+
+            h3 {
+                color: $primary-color;
+                font-weight: bold;
+                font-size: 2.4rem;
+                line-height: 1.25;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                color: $grey-color-12;
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            &__profile-details {
+                // @include clearfix();
+                padding-top: 2rem;
+
+                &__image {
+                    display: inline-block;
+                    width: 5rem;
+
+                    mat-icon,
+                    img {
+                        @include square(4rem);
+                        vertical-align: bottom;
+                    }
+
+                    img {
+                        border-radius: 50%;
+                    }
+                }
+
+                &__details {
+                    display: inline-block;
+                    width: calc(100% - 5rem);
+
+                    label {
+                        color: $black-color-5;
+                        display: block;
+                        font-size: 1.6rem;
+                    }
+
+                    span {
+                        color: $grey-color-37;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+            &__footer {
+                position: absolute;
+                width: 90%;
+                bottom: 3rem;
+                left: 3rem;
+
+                small {
+                    color: $primary-color;
+                    font-weight: bold;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0.5rem;
+                }
+
+                a {
+                    mat-icon {
+                        @include square(2rem);
+                        position: relative;
+                        left: 1.5rem;
+                        top: 2px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__student-course-title {
+        padding-top: 2rem;
+
+        @include respond('phone') {
+            padding-top: 0;
+        }
+
+        h3 {
+            color: $blue-color-3;
+            font-weight: bold;
+            font-size: 2.4rem;
+
+            @include respond('phone') {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        a {
+            color: $blue-color-3;
+            font-weight: bold;
+            font-size: 1.8rem;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.student-course-details {
+    &__tabs-descriptions {
+        .mat-tab-label {
+            color: $grey-color-12;
+            font-size: 1.8rem;
+            font-weight: normal;
+            min-width: 6rem !important;
+            padding: 0;
+            margin-right: 5rem;
+        }
+
+        .mat-tab-label-active {
+            opacity: 1 !important;
+
+            .mat-tab-label-content {
+                color: $primary-color !important;
+                font-weight: bold;
+            }
+        }
+
+        &__tabs-categories {
+            .mat-tab-body-content {
+                padding-left: 0.5rem;
+            }
+
+            &__bookmark-save {
+                .mat-flat-button.mat-button-base.mat-primary {
+                    background-color: $primary-color-3;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 3.5rem;
+                    min-width: 10rem;
+                    border-radius: 1rem;
+                    z-index: 1;
+
+                    span {
+                        color: $primary-color !important;
+                        font-size: 1.4rem !important;
+                        font-weight: 600 !important;
+                    }
+
+                    &:hover {
+                        background-color: $primary-color-3 !important;
+                        box-shadow: none !important;
+                    }
+                }
+
+                button.mat-primary:focus {
+                    background-color: $primary-color-3 !important;
+                    box-shadow: none !important;
+                }
+            }
+        }
+    }
+}
+
+// .mat-option.mat-focus-indicator.contains-mat-select-search.mat-option-disabled {
+//     min-height: 6em !important;
+// }
+
+.course-notes-container {
+    .mat-flat-button.mat-button-base.mat-primary,
+    .mat-button {
+        min-width: 10rem;
+        height: 5rem;
+    }
+
+    .mat-button {
+        span {
+            color: $primary-color;
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.student-course-discussion-container {
+    li {
+        a {
+            &:hover {
+                path {
+                    fill: $primary-color !important;
+                }
+            }
+
+            &.active {
+                &:hover {
+                    path {
+                        fill: $green-color !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.student-course-details-container {
+    .active-icon {
+        ul {
+            li {
+                a {
+                    &.active {
+                        .col-md-9 {
+                            mat-icon {
+                                path {
+                                    fill: $white-color;
+                                    stroke: $white-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .pdfViewer.removePageBorders .page{
+        margin: 0 !important;
+    }
+}

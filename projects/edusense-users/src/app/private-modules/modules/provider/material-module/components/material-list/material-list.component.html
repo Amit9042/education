@@ -1,0 +1,155 @@
+<div class="material-list">
+    <div class="material-list__header">
+        <div class="row">
+            <div class="col-md-4 PL-1">
+                <div class="header__search">
+                    <div class="header__search--input">
+                        <input [formControl]="nameFilterField" autocomplete="off" type="text" name="search"
+                            placeholder="Search..." id="searchTxt" />
+                        <mat-icon svgIcon="search"></mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 PL-0">
+                <div class="form-control">
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-select placeholder="Grade" [formControl]="grades" multiple>
+                            <mat-select-trigger>
+                                {{
+                                    grades.value && grades.value.length > 0
+                                        ? (grades?.value)[0]
+                                              .provider_material_grade_detail
+                                              .name
+                                        : ''
+                                }}
+                                <span *ngIf="grades?.value?.length > 1" class="example-additional-selection">
+                                    (+{{ grades.value.length - 1 }} More)
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let grade of gradeList" [value]="grade">{{
+                                    grade?.provider_material_grade_detail.name
+                                }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2 PL-0">
+                <div class="form-control">
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-select placeholder="Subjects" [formControl]="subjects" multiple>
+                            <mat-select-trigger>
+                                {{
+                                    subjects.value && subjects.value.length > 0
+                                        ? (subjects?.value)[0]
+                                              .provider_material_subject_detail
+                                              .name
+                                        : ''
+                                }}
+                                <span *ngIf="subjects.value?.length > 1" class="example-additional-selection">
+                                    (+{{ subjects.value.length - 1 }} More)
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let subject of subjectList" [value]="subject">
+                                {{
+                                    subject.provider_material_subject_detail
+                                        .name
+                                }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-md-4 PR-1 text-right">
+                <button (click)="onAddMaterialDialog()" type="submit" mat-flat-button color="primary">
+                    Add Material
+                </button>
+            </div>
+        </div>
+
+        <div class="material-list__body" scrollWindow="true" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+            <div class="material-listing">
+                <a (click)="
+                    viewDownloadMaterial(
+                        material.material_id,
+                        material.original_file_name,
+                        material.file_content_type
+                    )
+                " [ngClass]="{'tile-disabled': !material.is_active}" class="material-listing__section"
+                    *ngFor="let material of materialList; let i = index">
+                    <div class="material-listing__section--top">
+                        <!-- {{material.file_content_type}} -->
+                        <mat-icon [svgIcon]="getFileIcon(material.file_content_type)" class="file-type"></mat-icon>
+                        <div class="material-action">
+                            <button mat-button class="action-button" [matMenuTriggerFor]="menu"
+                                (click)="$event.stopPropagation()">
+                                <mat-icon matTooltip="More Options" svgIcon="actionBtn" [id]="'iconTriggerMenu-' + i">
+                                </mat-icon>
+                            </button>
+
+                            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action"
+                                (click)="$event.stopPropagation()">
+                                <button type="button" mat-menu-item [id]="'btnEdit-' + i"
+                                    (click)="onEditMaterial(material.material_id)">
+                                    <span>Edit</span>
+                                </button>
+                                <button type="button" mat-menu-item [id]="'btnView-' + i"
+                                    (click)="onViewMaterial(material.material_id)">
+                                    <span>View</span>
+                                </button>
+                                <button type="button" mat-menu-item [id]="'btnEnable-' + i" (click)="
+                                    onEnableClick(
+                                        !material.is_active,
+                                        material.material_id
+                                    )
+                                ">
+                                    <span>{{
+                                    !material.is_active ? 'Enable' : 'Disable'
+                                }}</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+
+                    <div class="material-listing__section--bottom">
+                        <p class="file-name">
+                            <!-- FOLLOWING ICONS BASED ON FILE TYPE -->
+                            <!-- <mat-icon svgIcon="getFileIcon(material.file_content_type)"></mat-icon> -->
+                            <!-- <mat-icon svgIcon="getFileIcon(material.file_content_type)" class="file-type"></mat-icon> -->
+                            <!-- <mat-icon *ngIf="false" svgIcon="pdf" class="file-type"></mat-icon> -->
+                            <!-- <mat-icon *ngIf="false" svgIcon="jpg" class="file-type"></mat-icon> -->
+
+                            <span>{{ material.original_file_name }}</span>
+                        </p>
+                        <p class="student-name">{{ material.name }}</p>
+                        <ul>
+                            <li>
+                                <label>Subject: </label>
+                                <span>{{
+                                material.provider_material_subject_detail.name
+                            }}</span>
+                            </li>
+                            <li>
+                                <label>Grade: </label>
+                                <span>{{
+                                material.provider_material_grade_detail.name
+                            }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- <app-no-data *ngIf="!isLoadingResults && materialList.length == 0"></app-no-data> -->
+
+        <div *ngIf="!isLoadingResults && materialList.length == 0">
+            <div class="no-content-found-wrapper">
+                <mat-icon svgIcon="no_material_files"></mat-icon>
+                <p>No materials available</p>
+                <span>No material has been uploaded by the provider</span>
+            </div>
+        </div>
+
+        <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+    </div>

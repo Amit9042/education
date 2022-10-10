@@ -1,0 +1,60 @@
+<div class="student-book-marked-container">
+    <div class="student-course__course-details">
+        <h2>Book Marked</h2>
+        <es-user-student-course-filters [parentCategoryId]="null" (filterParamChangedEvent)="setFilterParams($event)">
+        </es-user-student-course-filters>
+        <div>
+            <a class="student-course__course-box">
+                <div class="row" *ngIf="bookMarkedCourses.length">
+                    <div *ngFor="let course of bookMarkedCourses | paginate: { itemsPerPage: recordsPerPage, currentPage: pageNumber+1, totalItems: totalElements };  let i=index;"
+                        class="col-md-3 PL-0">
+                        <div class="student-course__course-box__details">
+                            <img *ngIf="course?.cover_image" (click)="routeToEnrollmentPage(course.course_id)"
+                                [src]="course.cover_image" />
+                            <div *ngIf="!course?.cover_image" style='
+                            background-color: rgba(219, 220, 221, 0.3);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: column;
+                            min-width: 100%;
+                            max-width: 100%;
+                            height: 16rem;
+                            border-top-left-radius: 1rem;
+                            border-top-right-radius: 1rem;
+                            ' (click)="routeToEnrollmentPage(course.course_id)">
+                                <mat-icon svgIcon="course-no-image-list"></mat-icon>
+                                <small>No cover image available</small>
+                            </div>
+                            <div class="student-course__course-box__details__content">
+                                <small>{{course?.total_duration | duration : durationPattern.HH_MM :
+                                    suffixUnit.HR_M}}</small>
+                                <h4 (click)="routeToEnrollmentPage(course.course_id)">
+                                    {{(course.title | checkEmpty) | ellipsis: 45}}</h4>
+                                <div class="student-course__course-box__details__content__footer">
+                                    <img *ngIf="course?.avatar" [src]="course.avatar" />
+                                    <mat-icon *ngIf="!course?.avatar" svgIcon="profile"></mat-icon>
+                                    <label>{{course.first_name}}&nbsp;{{course.last_name}}</label>
+                                    <a>
+                                        <mat-icon svgIcon="bookedMark" (click)="removeBookmark(i, course.course_id)">
+                                        </mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div *ngIf="!isLoadingResult && !bookMarkedCourses.length">
+            <div class="no-content-found-wrapper course-no-content-found-wrapper">
+                <mat-icon svgIcon="bookmark-courses"></mat-icon>
+                <p>No bookmarks yet</p>
+                <span>All the courses you have bookmarked will show up here.</span>
+            </div>
+        </div>
+        <div class="paginator-section">
+            <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true"></pagination-controls>
+        </div>
+    </div>
+</div>

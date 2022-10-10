@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <g id="prefix__physics" transform="translate(-.08)">
+        <rect id="prefix__Rectangle_2391" width="60" height="60" fill="#8cc178" data-name="Rectangle 2391" opacity="0.2" rx="30" transform="translate(.08)"/>
+        <g id="prefix__file" transform="translate(21.081 18.117)">
+            <path id="prefix__nation" fill="#8cc178" stroke="#8cc178" stroke-width="0.5px" d="M28.689 11.83l3.851-5.064a.768.768 0 0 0 .079-.818.794.794 0 0 0-.712-.448H15.291a.777.777 0 0 0-.791.791V29.5h1.582V18.159h15.825a.777.777 0 0 0 .712-.448.762.762 0 0 0-.079-.818zm-12.607 4.747V7.082H30.3l-3.244 4.273a.791.791 0 0 0 0 .949l3.244 4.273z" transform="translate(-14.5 -5.617)"/>
+        </g>
+    </g>
+</svg>

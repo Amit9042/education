@@ -1,0 +1,63 @@
+<div class="que-bank-ch-list-container">
+    <div class="que-bank-ch-list-container__head">
+        <div class="que-bank-ch-list-container__head__left">
+            <a id="lnkBack" (click)="onBack()">
+                <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+            </a>
+            <!-- <mat-icon svgIcon="maths"></mat-icon> -->
+            <img *ngIf="selectedGradeAndSubject.subject_logo" [src]="selectedGradeAndSubject?.subject_logo"
+                (error)="onError($event)" />
+            <div>
+                <label>{{selectedGradeAndSubject?.subject_name}}</label>
+                <span>Grade {{selectedGradeAndSubject?.grade_name}}</span>
+            </div>
+        </div>
+        <div class="que-bank-ch-list-container__head__right">
+            <button id="btnChaptorDialog" (click)="openAddChapterDialog()" class="remove-shadow" type="submit" mat-flat-button
+                color="primary">
+                Add Folder
+            </button>
+        </div>
+    </div>
+    <div>
+        <div class="que-bank-ch-list-container__body">
+            <div class="header__search">
+                <div class="header__search--input">
+                    <input id="txtSearch" [formControl]="searchTitle" type="text" name="search" autocomplete="off"
+                        placeholder="Search..." id="inputSearch" />
+                    <mat-icon svgIcon="search"></mat-icon>
+                </div>
+            </div>
+
+            <div class="que-bank-ch-list-container__body__scroll">
+                <a (click)="onSelectFolder(folder)" *ngFor="let folder of folderList; let i = index">
+                    <div class="que-bank-ch-list-container__body__data">
+                        <div class="que-bank-ch-list-container__body__data__img">
+                            <!-- <span>{{i+1}}</span> -->
+                            <mat-icon svgIcon="chapter"></mat-icon>
+                        </div>
+                        <div class="que-bank-ch-list-container__body__data__content">
+                            <label>{{folder?.title}}</label>
+                            <span>{{folder?.description}}</span>
+                        </div>
+                        <mat-icon svgIcon="rightArrow"></mat-icon>
+                    </div>
+                </a>
+            </div>
+
+            <div *ngIf="!folderList.length">
+                <div class="no-content-found-wrapper">
+                    <mat-icon svgIcon="noQuestionBank"></mat-icon>
+                    <p>No Folder</p>
+                    <span>There seems to be no Folder to show right now.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="que-bank-ch-list-container__footer">
+            <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+                (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.doubt-container {
+    .meeting-room {
+        &__body {
+            height: calc(100vh - 19rem) !important;
+            margin-top: unset !important;
+            margin-bottom: unset !important;
+            // overflow-y: auto;
+        }
+    }
+}
+
+
+.back-header {
+    margin-bottom: 3rem;
+    @include respond('phone') {
+        margin-top: 2rem;
+    }
+}
+.no-content-found-wrapper {
+    mat-icon {
+        height: 12.1rem;
+    }
+}
+

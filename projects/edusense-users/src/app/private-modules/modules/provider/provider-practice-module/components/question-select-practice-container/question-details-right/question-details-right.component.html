@@ -1,0 +1,99 @@
+<div *ngIf="!getNoDataFound()">
+    <form>
+        <div class="question-details-container">
+            <div class="question-details">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>{{ selectedQues?.number }} of {{ totalQuestions }}</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="form-control-label">Question Type</span>
+                        <div class="form-control question-details-border">
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <input readonly matInput placeholder="search"
+                                    [value]="getQuestionTypeNameById(questionDetail?.type)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <span class="form-control-label">Difficulty Leval</span>
+                        <div class="form-control question-details-border">
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <input readonly matInput placeholder="search" [value]="questionDetail?.difficulty">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <span class="form-control-label">Marks</span>
+                        <div class="form-control question-details-border">
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <input readonly matInput placeholder="search" [value]="questionDetail?.score">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="form-control-label">Question</span>
+                        <div class="question-details__box image-inner-html">
+                            <p class="inner-html" [innerHTML]="convertMarkDownToHtml(questionDetail?.question)"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <div [ngClass]="{'question-checkbox-color' : questionDetail?.type === questionType.MULTI}"
+                                class="question-details__answers"
+                                *ngFor="let option of questionDetail?.questionAnswer; let j = index;">
+                                <mat-radio-group [disabled]="true" *ngIf="questionDetail?.type !== questionType.MULTI">
+                                    <mat-radio-button [checked]="option.correct" name="answerList"
+                                        [value]="'radioAnswer' + j" [id]="'radioAnswer' + j" [disabled]="true">
+                                    </mat-radio-button>
+                                    <p [innerHTML]="convertMarkDownToHtml(option?.content)"></p>
+                                </mat-radio-group>
+
+                                <div *ngIf="questionDetail?.type === questionType.MULTI">
+                                    <!-- <mat-checkbox [checked]="isOptionRight(option, true)" [disabled]="true">
+                                    </mat-checkbox>
+                                    <p [innerHTML]="convertMarkDownToHtml(option?.content)"></p> -->
+
+                                    <p class="question-details__answers__checkbox-question">
+                                        <mat-checkbox [checked]="isOptionRight(option, true)" [disabled]="true">
+                                            <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                                        </mat-checkbox>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mozila-bottom-spacing">
+                        <span class="form-control-label">Solution</span>
+                        <div class="question-details__box image-inner-html">
+                            <p class="inner-html" [innerHTML]="convertMarkDownToHtml(questionDetail?.solution)"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- FRONTEND DEVELOPER
+BELOW DESIGN FOR NO DATA -->
+<div *ngIf="getNoDataFound()" class="no-content-found-wrapper">
+    <mat-icon svgIcon="no-questions"></mat-icon>
+    <p>No Question Available</p>
+    <span>Currently you don't have any questions in your
+        practice</span>
+</div>

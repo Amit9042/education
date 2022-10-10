@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="14.688" viewBox="0 0 20 14.688">
+    <defs>
+        <style>
+            .prefix__cls-2{fill:#203061}
+        </style>
+    </defs>
+    <g id="prefix__pay" transform="translate(0 -68)" style="opacity:.8">
+        <g id="prefix__Group_20916" data-name="Group 20916" transform="translate(0 68)">
+            <g id="prefix__Group_20915" data-name="Group 20915">
+                <path id="prefix__Path_11315" d="M17.656 68H2.344A2.346 2.346 0 0 0 0 70.344v10a2.346 2.346 0 0 0 2.344 2.344h15.312A2.346 2.346 0 0 0 20 80.344v-10A2.346 2.346 0 0 0 17.656 68zm.781 12.344a.782.782 0 0 1-.781.781H2.344a.782.782 0 0 1-.781-.781V73.7h16.875zm0-8.984H1.563v-1.016a.782.782 0 0 1 .781-.781h15.312a.782.782 0 0 1 .781.781z" class="prefix__cls-2" data-name="Path 11315" transform="translate(0 -68)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_20918" data-name="Group 20918" transform="translate(3 75.085)">
+            <g id="prefix__Group_20917" data-name="Group 20917">
+                <path id="prefix__Rectangle_1668" d="M0 0H11V1.695H0z" class="prefix__cls-2" data-name="Rectangle 1668"/>
+            </g>
+        </g>
+    </g>
+</svg>

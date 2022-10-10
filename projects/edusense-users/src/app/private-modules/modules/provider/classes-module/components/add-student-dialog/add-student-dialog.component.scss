@@ -1,0 +1,27 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.grade-tag {
+    color: rgba($primary-color, 0.7);
+    position: absolute;
+    right: 1rem;
+    height: 2.2rem;
+    font-size: 1rem;
+    background: #f2f3f6;
+    line-height: 2.2rem;
+    min-width: 7.6rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin-top: 1.2rem;
+    font-weight: 600;
+}
+
+mat-checkbox {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.xs-P2 {
+    @include respond('phone') {
+        padding: 2rem !important;
+    }
+}

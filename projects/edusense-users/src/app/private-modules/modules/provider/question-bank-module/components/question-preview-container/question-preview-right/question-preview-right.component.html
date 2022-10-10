@@ -1,0 +1,128 @@
+<div class="student-question-list">
+    <div class="back-header">
+        <a (click)="onBack()" id="lnkBack">
+            <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+        </a>
+        <h3>Preview</h3>
+    </div>
+    <div class="question-details-container">
+        <form>
+            <div class="question-details">
+                
+                <div>
+                    <div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="question-details__box">
+                                    <p>Which of the following statement is true? <br /><br />
+
+                                        I. 222 is even<br /><br />
+
+                                        II. 332 is odd</p>
+
+                                    <div class="question-details__box__img">
+                                        <img src="assets/images/questionImage.png" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <!-- For single answer selection -->
+                                    <div [ngClass]="{'right-answer': false, 'wrong-answer': false, 'selected-answer' : false}"
+                                        class="question-details__answers" *ngFor="let i of [1,2,3,4]; let j = index;">
+                                        <p>
+                                            <mat-radio-group>
+                                                <mat-radio-button name="answerList" [value]="'radioAnswer' + j" 
+                                                    [id]="'radioAnswer' + j">
+                                                    Answer {{j + 1}}
+                                                </mat-radio-button>
+                                                <img src="assets/images/option_img.png" alt="">
+                                            </mat-radio-group>
+
+                                            <mat-icon *ngIf="false" svgIcon="closeIcon"></mat-icon>
+                                            <mat-icon svgIcon="rightIcon"></mat-icon>
+                                        </p>
+                                    </div>
+
+                                    <!-- For multiple answer selection -->
+                                    <div [ngClass]="{'right-answer': false, 'wrong-answer': false, 'selected-answer' : false}"
+                                        class="question-details__answers" *ngFor="let i of [1,2,3,4]; let j = index;">
+                                        <p>
+                                            <mat-checkbox>
+                                                The standard Lorem Ipsum passage, used sinc
+                                            </mat-checkbox>
+
+                                            <mat-icon svgIcon="closeIcon"></mat-icon>
+                                            <mat-icon *ngIf="false" svgIcon="rightIcon"></mat-icon>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="question-details__box question-details__box--solution">
+                                    <span class="form-control-label">Solution</span>
+
+                                    <img src="assets/images/questionImage.png">
+
+                                    <p>Follow BODMAS rule to solve this question as per order given below, <br /><br />
+
+                                        Step-1: Parts of an equation enclosed in ‘Brackets’ must be solved first.
+                                        <br /><br />
+
+                                        Step-2: Any mathematical ‘Of’ or ‘Exponent’ must be solved next.<br /><br />
+
+                                        Step-3: Next, the parts of the equation that contain ‘Division’ and
+                                        ‘Multiplication’ are
+                                        calculated. <br /><br />
+
+                                        Step-4: Last but not least, the parts of the equation that contain ‘Addition’
+                                        and
+                                        ‘Subtraction’ should be calculated. <br /><br />
+
+                                        Given expression: <br /><br />
+
+                                        √1444.03 × √2499.99 ÷ 19.08 = ? <br /><br />
+
+                                        ⇒ (√1444 × √2500) ÷ 19 = ? <br /><br />
+
+                                        ⇒ (38 × 50) ÷ 19 = ? <br /><br />
+
+                                        ⇒ ? = 100 </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="question-details__bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" mat-stroked-button color="primary" class="border-btn">Back</button>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button type="submit" mat-flat-button
+                                        color="primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- FRONTEND DEVELOPER
+BELOW DESIGN FOR NO DATA -->
+<div *ngIf="false" class="no-content-found-wrapper">
+    <mat-icon svgIcon="no-questions"></mat-icon>
+    <p>No Question Available</p>
+    <span>Currently you don't have any questions in your
+        practice</span>
+</div>

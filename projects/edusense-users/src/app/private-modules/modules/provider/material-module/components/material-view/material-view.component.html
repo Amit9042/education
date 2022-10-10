@@ -1,0 +1,59 @@
+<div class="class-view-container">
+  <div class="class-view">
+    <div class="class-view__header">
+      <a (click)="onMaterialList()">
+        <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+      </a>
+      <h2>Material</h2>
+    </div>
+    <div class="class-view__body material-view">
+
+
+      <div class="block class-view__body__view">
+        <!-- WHEN THERE IS A FILE -->
+        <div *ngIf="true" class="material-view--icon">
+          <mat-icon [svgIcon]="getFileIcon(curruntMaterial?.file_content_type)"></mat-icon>
+        </div>
+
+        <!-- WHEN THERE IS A VIDEO -->
+        <div *ngIf="false" class="material-view--icon" [ngClass]="{'material-video': true}">
+          <video width="280" height="160" controls>
+            <source
+              src=""
+              type="video/mp4">
+          </video>
+          <a>
+            <mat-icon svgIcon="play"></mat-icon>
+          </a>
+        </div>
+
+        <p class="file-name">{{curruntMaterial?.original_file_name}}</p>
+      </div>
+
+      <div class="class-view__body__view">
+        <label>Name</label>
+        <span>{{curruntMaterial?.name}}</span>
+      </div>
+      <div class="class-view__body__view">
+        <label>Grade </label>
+        <ul>
+          <li>
+            <span>{{curruntMaterial?.provider_material_grade_detail.name}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="class-view__body__view">
+        <label>Subject</label>
+        <ul>
+          <li>
+            <span>{{curruntMaterial?.provider_material_subject_detail.name}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="class-view__body__view" *ngIf="curruntMaterial?.material_type_id == materialType.Youtube">
+        <label>Link</label>
+            <span>{{curruntMaterial?.file_path}}</span>
+      </div>
+    </div>
+  </div>
+</div>

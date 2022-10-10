@@ -1,0 +1,37 @@
+<div class="edit-profile-details-container">
+    <div class="profile-details__header small-pad-5">
+        <div class="profile-details__header--image">
+            <img *ngIf="userData.user.avatar" [src]="userData.user.avatar" (error)="onError($event)"/>
+            <mat-icon *ngIf="!userData.user.avatar" svgIcon="profile"></mat-icon>
+        </div>
+        <div class="profile-details__header--details">
+            <!-- <span>school</span> -->
+            <h2>{{userName}}</h2>
+            <button id="btnEdit" (click)="onEditProfileDetails()" type="button" mat-stroked-button>
+                Edit Profile
+            </button>
+        </div>
+
+        <div class="school-code">
+            <mat-chip-list>
+                <mat-chip>Code: {{userData.provider_code}}</mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+
+
+    <div class="profile-details__body">
+        <mat-tab-group>
+            <!-- PROVIDER VIEW -->
+            <mat-tab label="Provider Detail">
+                <app-provider-view-profile></app-provider-view-profile>
+            </mat-tab>
+
+            <!-- PERSONAL VIEW -->
+            <mat-tab label="Personal detail">
+                <app-personal-view-profile *ngIf="isOwner"></app-personal-view-profile>
+                <app-personal-view-profile-other *ngIf="!isOwner"></app-personal-view-profile-other>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,0 +1,291 @@
+<div class="profile-container">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmitProfileForm(profileForm)">
+        <div class="row">
+            <div class="col-md-3 profile-container__left">
+                <!-- <img src="./assets/images/student_profile.png" *ngIf="!imageUploadDetails" alt="" /> -->
+                <img [src]="imageUploadDetails" *ngIf="imageUploadDetails" alt="" />
+                <mat-icon svgIcon="studentProfile" *ngIf="!imageUploadDetails"></mat-icon>
+                <div>
+                    <button type="button" *ngIf="uploadeImage.length" mat-stroked-button id="btnChangeProfile-1"
+                        (click)="onBrowseFile('profilePicture')">
+                        Change Profile Picture
+                    </button>
+                    <button type="button" *ngIf="!uploadeImage.length" mat-stroked-button id="btnChangeProfile-2"
+                        (click)="onBrowseFile('profilePicture')">
+                        Upload Profile Picture
+                    </button>
+                    <input type="file" hidden id="profilePicture" accept="image/jpeg,image/png,image/jpg"
+                        (change)="onFileUpload($event)" />
+                </div>
+                <span>PNG, JPG, JPEG Max 5 MB</span>
+            </div>
+
+            <div class="col-md-9 profile-container__right">
+                <div>
+                    <h3>Build your profile</h3>
+                </div>
+                <mat-radio-group formControlName="gender" id="radioGender" aria-label="Select an option">
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                    <mat-error *ngIf="isRequiredField(formControls['gender'])">
+                        {{ validationMsg.GENDER }}</mat-error>
+                </mat-radio-group>
+
+                <div class="form-container">
+                    <div class="profile-details-container">
+                        <!-- INSTITUTE FIELD -->
+                        <div class="row">
+                            <div class="col-md-6 PL-0 PR-05 sm-PR-0 xs-PR-0">
+                                <div class="form-control">
+                                    <mat-label>First Name*</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input formControlName="first_name" txtFirstName id="" type="text"
+                                            autocomplete="off" matInput placeholder="Enter first name" />
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['first_name']
+                                                )
+                                            ">{{ validationMsg.FIRST_NAME }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                                isValidLength(
+                                                    formControls['first_name']
+                                                )
+                                            ">{{
+                                                validationMsg.FIRST_NAME_LENGTH
+                                            }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                                isValidField(
+                                                    formControls['first_name']
+                                                )
+                                            ">{{
+                                                validationMsg.FIRST_NAME_VALID
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6 PR-0 PL-05 sm-PL-0 xs-PL-0">
+                                <div class="form-control">
+                                    <mat-label>Last Name*</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input formControlName="last_name" id="txtLastName" type="text"
+                                            autocomplete="off" matInput placeholder="Enter last name" />
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['last_name']
+                                                )
+                                            ">{{ validationMsg.LAST_NAME }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                                isValidLength(
+                                                    formControls['last_name']
+                                                )
+                                            ">{{
+                                                validationMsg.LAST_NAME_LENGTH
+                                            }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                                isValidField(
+                                                    formControls['last_name']
+                                                )
+                                            ">{{
+                                                validationMsg.LAST_NAME_VALID
+                                            }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>Mobile Number*</mat-label>
+                                    <div class="row">
+                                        <div class="col-md-2 PLR-0">
+                                            <app-ss-select-search [formName]="profileForm" [selectConfig]="countryCodeSearchConfig"
+                                                [selected]="selectedCountry" [dataList]="countryCodeList"
+                                                (changSelectEvent)="onSelectChangeEvent($event, 'countryCode')">
+                                            </app-ss-select-search>
+                                        </div>
+                                        <div class="col-md-10 PR-0">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input formControlName="mobileNumber" id="txtMobileNumber" type="text"
+                                            autocomplete="off" matInput placeholder="Mobile Number" />
+                                        <!-- <span matPrefix>+91</span> -->
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['mobileNumber']
+                                                )
+                                            ">
+                                            {{
+                                                validationMsg.MOBILE_NUMBER
+                                            }}</mat-error>
+                                        <mat-error *ngIf="
+                                                isValidLength(
+                                                    formControls['mobileNumber']
+                                                )
+                                            ">
+                                            {{
+                                                validationMsg.MOBILE_NUMBER_LENGTH
+                                            }}</mat-error>
+                                        <mat-error *ngIf="
+                                                isValidField(
+                                                    formControls['mobileNumber']
+                                                )
+                                            ">
+                                            {{
+                                                validationMsg.MOBILE_NUMBER_VALID
+                                            }}</mat-error>
+                                    </mat-form-field>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GRADE FIELD -->
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search id="matSelectGrade" [formName]="profileForm"
+                                        [selectConfig]="gradeSearchConfig" [selected]="" [dataList]="gradeList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent($event, 'grade')
+                                        ">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>Email Address</mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input formControlName="email" id="txtInput" type="text" autocomplete="off"
+                                            matInput placeholder="Enter email address" />
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['email']
+                                                )
+                                            ">{{
+                                                validationMsg.EMAIL
+                                            }}</mat-error>
+                                        <mat-error *ngIf="
+                                                isValidLength(
+                                                    formControls['email']
+                                                )
+                                            ">{{
+                                                validationMsg.EMAIL_LENGTH
+                                            }}</mat-error>
+                                        <mat-error *ngIf="
+                                                isValidField(
+                                                    formControls['email']
+                                                )
+                                            ">{{
+                                                validationMsg.EMAIL_VALID
+                                            }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>College/Tution/Institute
+                                        Name</mat-label>
+                                    <mat-form-field appearance="outline">
+                                        <input formControlName="school_name" id="txtInstituteName" type="text"
+                                            autocomplete="off" matInput placeholder="Type College/Tution/Institute" />
+                                        <mat-error *ngIf="
+                                                isValidLength(
+                                                    formControls['school_name']
+                                                )
+                                            ">{{
+                                                validationMsg.COLLEGE_NAME_LENGTH
+                                            }}</mat-error>
+                                        <mat-error *ngIf="
+                                                isValidField(
+                                                    formControls['school_name']
+                                                )
+                                            ">{{
+                                                validationMsg.COLLEGE_NAME_VALID
+                                            }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 PL-0 sm-PR-0 xs-PR-0">
+                                <div class="form-control">
+                                    <app-ss-select-search [formName]="profileForm" id="matSelectCountry"
+                                        [selectConfig]="countrySearchConfig" [selected]="" [dataList]="countryList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent(
+                                                $event,
+                                                'country'
+                                            )
+                                        ">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 PR-0 sm-PL-0 xs-PL-0">
+                                <div class="form-control">
+                                    <app-ss-select-search [formName]="profileForm" id="matSelectState"
+                                        [selectConfig]="stateSearchConfig" [selected]="" [dataList]="stateList"
+                                        (changSelectEvent)="
+                                            onSelectChangeEvent($event, 'state')
+                                        ">
+                                    </app-ss-select-search>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <div class="form-control">
+                                    <mat-label>City*</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input type="text" placeholder="Select city" id="txtCity" aria-label="Number"
+                                            matInput formControlName="cityInput" autocomplete="new-city"
+                                            [matAutocomplete]="city" />
+
+                                        <mat-autocomplete #city="matAutocomplete">
+                                            <mat-option *ngFor="
+                                                    let city of filteredCities
+                                                " (onSelectionChange)="
+                                                    changeCity(city)
+                                                " [value]="city.city_name">
+                                                <span>{{
+                                                    city.city_name
+                                                }}</span>
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['cityInput']
+                                                )
+                                            ">
+                                            {{ validationMsg.CITY }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 PLR-0">
+                                <button mat-flat-button color="primary" id="btnSubmit" type="submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

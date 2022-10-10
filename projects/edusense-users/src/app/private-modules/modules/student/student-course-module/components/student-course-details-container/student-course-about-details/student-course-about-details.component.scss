@@ -1,0 +1,105 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.about-details-container {
+    .about-details {
+        padding-top: 2rem;
+        min-height: 60rem;
+        
+        h3 {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            padding-top: 3rem;
+        }
+
+        &__border {
+            border-bottom: 1px solid $grey-color-29;
+
+            p {
+                color: $black-color-6;
+                font-weight: normal;
+                font-size: 1.6rem;
+                line-height: 1.75;
+                padding-bottom: 2rem;
+            }
+        }
+
+        &__skills {
+            border-bottom: 1px solid $grey-color-29;
+
+            ul {
+                li {
+                    a {
+                        background-color: $primary-color-3;
+                        color: $primary-color;
+                        display: inline-block;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        padding: 1rem;
+                        border-radius: 1rem;
+                        margin-right: 1rem;
+                        margin-bottom: 3rem;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__instructor {
+            border-bottom: 1px solid $grey-color-29;
+
+            &__img {
+                display: inline-block;
+                width: 15rem;
+
+                img,
+                mat-icon {
+                    @include square(12rem);
+                    border-radius: 50%;
+                }
+            }
+
+            &__details {
+                vertical-align: top;
+                display: inline-block;
+                width: calc(100% - 15rem);
+
+                h4,
+                h5 {
+                    color: $primary-color;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                }
+
+                h4 {
+                    font-size: 2rem;
+                }
+
+                h5 {
+                    font-size: 1.6rem;
+                }
+
+                small {
+                    color: $grey-color-30;
+                    font-weight: normal;
+                    display: block;
+                    font-size: 1.4rem;
+                    margin-bottom: 1rem;
+                }
+            }
+
+            p {
+                color: $black-color-6;
+                font-weight: normal;
+                line-height: 1.75;
+                font-size: 1.6rem;
+                margin-top: 2rem;
+                padding-bottom: 2rem;
+            }
+        }
+    }
+}

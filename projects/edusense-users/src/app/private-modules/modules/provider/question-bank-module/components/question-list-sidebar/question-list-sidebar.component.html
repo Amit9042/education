@@ -1,0 +1,91 @@
+<div class="question-sidebar-wrap">
+    <div class="sidebar-top">
+        <div class="sidebar-top__chapter-info">
+            <a id="lnkBack" (click)="onBackToList()">
+                <mat-icon svgIcon="backArrow" matTooltip="Back"></mat-icon>
+            </a>
+            <h5>{{selectedGradeAndSubject?.folder}}</h5>
+        </div>
+        <div class="sidebar-top__grade-info">
+            <ul>
+                <li>{{selectedGradeAndSubject?.subject_name}}</li>
+                <li>Grade {{selectedGradeAndSubject?.grade_name}}</li>
+            </ul>
+        </div>
+
+        <div class="sidebar-top__search-bar waiting-room-container">
+            <div class="waiting-room__top">
+                <div class="header__search header__search-white">
+                    <div class="header__search--input">
+                        <input autocomplete="off" type="text" id="txtSearch" name="search" placeholder="Search..."
+                            [formControl]="searchTitle" id="searchTxt" />
+                        <mat-icon svgIcon="search"></mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-bottom">
+        <div class="sidebar-bottom__top">
+            <p>Question List</p>
+            <div class="filter-icons">
+                <a (click)="onGridSelection()">
+                    <mat-icon [svgIcon]="ifGridSelected ? 'listItem' : 'que-grid'"></mat-icon>
+                </a>
+                <a [matMenuTriggerFor]="filterClick">
+                    <mat-icon svgIcon="que-filter"></mat-icon>
+                    <span class="filter-count" *ngIf="filterDifficulty.length > 0 || filterQueType.length > 0">
+                        {{filterDifficulty.length + filterQueType.length}}</span>
+                </a>
+                <mat-menu #filterClick="matMenu" class="filter-options" xPosition="before">
+                    <div>
+                        <label>Difficulty Level</label>
+                        <mat-checkbox (change)="onSelectMenuDifficulty($event, diff?.id)"
+                            *ngFor="let diff of difficultyLevelList">{{diff?.value}}</mat-checkbox>
+                    </div>
+                    <div class="MT-3">
+                        <label>Question Type</label>
+                        <mat-checkbox (change)="onSelectMenuQueType($event, type?.id)"
+                            *ngFor="let type of questionTypeList">{{type?.value}}</mat-checkbox>
+                    </div>
+
+                </mat-menu>
+            </div>
+        </div>
+        <div class="sidebar-bottom__bottom" infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+            <div *ngIf="ifFilterSelected">
+                <!--   DEVELOPER: PLACE ngFor LOOP IN BELOW <a> TAG  -->
+                <a class="sidebar-bottom__bottom--ques-list" (click)="onQuestionClick(ques,i+1,i-1 >= 0 ? i-1 : -1)"
+                    [ngClass]="{active: isSelectedQuestion(ques)}" *ngFor="let ques of questionList; let i=index">
+                    <span class="count">{{i+1}}</span>
+                    <p>{{getQuestionForDisplay(ques?.question)}}
+                    </p>
+                    <button class="que-action" *ngIf="showMoreOptions()" [matMenuTriggerFor]="deleteQue">
+                        <mat-icon svgIcon="actionBtn"></mat-icon>
+                    </button>
+                    <mat-menu #deleteQue="matMenu" class="delete-question">
+                        <button mat-menu-item (click)="onDeleteQuestion(ques)">Delete Question</button>
+                    </mat-menu>
+                </a>
+            </div>
+
+            <div *ngIf="ifGridSelected">
+                <div class="grid-formation" *ngIf="questionList.length">
+                    <a (click)="onQuestionClick(ques, j+1, j-1 >= 0 ? j-1 : -1)" class="grid-count"
+                        [ngClass]="{active: isSelectedQuestion(ques)}"
+                        *ngFor="let ques of questionList; let j = index; ">{{j + 1}}</a>
+                </div>
+            </div>
+            <!-- FRONTEND DEVELOPER
+            BELOW DESIGN FOR NO DATA -->
+            <div *ngIf="!questionList.length && !isLoadingResults" class="no-content-found-wrapper">
+                <mat-icon svgIcon="no-questions"></mat-icon>
+                <p>No Question Available</p>
+                <span>Currently you don't have any questions in your
+                    practice</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+@import '../../../../../../../../../assets/scss/abstracts/abstracts';
+.class-attendance-list-container {
+    &.class-table-container {
+        .table-body {
+            height: calc(100vh - 24.5rem);
+            @include respond('regular-desktop') {
+                height: calc(100vh - 23.5rem);
+            }
+            th {
+                span {
+                    // padding: 0 1rem;
+                }
+            }
+
+            td {
+                // @include respond('regular-desktop') {
+                //     font-size: 1.4rem;
+                // }
+            }
+        }
+        .page-header {
+            padding: 2rem 3rem 1rem 2rem;
+        }
+
+        .no-content-found-wrapper {
+            .mat-icon {
+                @include respond('regular-desktop') {
+                    width: 14rem;
+                }
+            }
+            p {
+                @include respond('regular-desktop') {
+                    font-size: 2.2rem;
+                }
+            }
+            span {
+                @include respond('regular-desktop') {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+}
+
+.no-content-found-wrapper {
+    span {
+        max-width: 45rem;
+    }
+}

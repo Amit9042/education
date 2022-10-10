@@ -1,0 +1,46 @@
+<div class="dialog-container">
+  <div class="dialog-container__head">
+    <h4>Edit Email Address</h4>
+    <a (click)="onCloseDialog()"><mat-icon svgIcon="close" id="lnkClose"></mat-icon></a>
+  </div>
+  <div class="dialog-container__bottom">
+    <form
+      [formGroup]="editEmailForm"
+      (ngSubmit)="onSubmitEditEmailForm(editEmailForm)"
+    >
+      <div class="row">
+        <div class="col-md-12 PLR-0">
+          <div class="form-control">
+            <mat-label>Email*</mat-label>
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input
+                formControlName="email"
+                type="text"
+                autocomplete="off"
+                matInput
+                placeholder="Enter email"
+                id="txtEmail"
+              />
+              <mat-error *ngIf="isRequiredField(formControls['email'])">{{
+                validationMsg.EMAIL
+              }}</mat-error>
+              <mat-error *ngIf="isValidLength(formControls['email'])">{{
+                validationMsg.EMAIL_LENGTH
+              }}</mat-error>
+              <mat-error *ngIf="isValidField(formControls['email'])">{{
+                validationMsg.EMAIL_VALID
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button (click)="onCloseDialog()" mat-button type="button" id="btnCancel">Cancel</button>
+        <button mat-flat-button color="primary" id="btnSubmit"  (click)="openEmailOtpDialog()" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

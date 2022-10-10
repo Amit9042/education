@@ -1,0 +1,13 @@
+<div class="no-record-found">
+    <!-- <mat-icon svgIcon="noSearchResult"></mat-icon> -->
+    <div *ngIf="!message" class="no-record-found__text">
+        <h4>Sorry, No result found</h4>
+        <p>What you searched was unfortunately <br />
+            not found or doesn't exist.</p>
+    </div>
+    <div *ngIf="message" class="no-record-found__text">
+        <h4>{{message}}</h4>
+        <p>{{smallText}}</p>
+    </div>
+
+</div>

@@ -1,0 +1,61 @@
+<div class="course-list-container">
+  <div class="course-list">
+    <div class="course-list__header">
+      <div class="row">
+        <div class="col-md-8">
+          <h4>Courses</h4>
+          <div class="course-list__search">
+            <input type="text" placeholder="Search" [formControl]="searchControl"/>
+            <mat-icon svgIcon="search"></mat-icon>
+          </div>
+        </div>
+        <div class="col-md-4 text-right">
+          <button (click)="onCreateCourse()" type="button" mat-flat-button color="primary">
+            Create Course
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-body">
+    <div
+      *ngFor="let course of courseList | paginate: { itemsPerPage: recordsPerPage, currentPage: page, totalItems: totalElements }; let j = index"
+      class="course-body__box">
+      <a (click)="onEditCourse(course)">
+        <div class="course-body__banner">
+          <img *ngIf="course?.cover_image" [src]="course?.cover_image"/>
+          <!-- <mat-icon *ngIf="!(course?.cover_image_thumb)" svgIcon="course-placeholder"></mat-icon> -->
+          <div *ngIf="!(course?.cover_image)" class="course-body__banner__no-cover-image">
+            <mat-icon svgIcon="course-no-image-list"></mat-icon>
+            <small>No cover image available</small>
+          </div>
+        </div>
+        <div class="course-body__details">
+          <small>{{ getTotalDuration(course?.total_duration) }}</small>
+          <b>{{ (course?.title | checkEmpty) | ellipsis : 45 }}</b>
+          <div class="course-body__details--review-status">
+            <small>{{ course?.total_enrollments.toLocaleString('en-IN', { minimumFractionDigits: 0 }) | checkEmpty }}
+              enrollments</small>
+            <label class="drafted" *ngIf="course?.status === 1">Drafted</label>
+            <label class="published" *ngIf="course?.status === 2">Published</label>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div *ngIf="!isLoadingResults && courseList.length === 0">
+      <div class="no-content-found-wrapper course-no-content-found-wrapper">
+        <mat-icon svgIcon="course-list-not-found"></mat-icon>
+        <p>No course has been created yet.</p>
+        <span>The courses will appear over here once they get created.</span>
+      </div>
+    </div>
+
+    <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+  </div>
+
+  <div class="paginator-section">
+    <pagination-controls (pageChange)="onPageChange($event)" autoHide="true"></pagination-controls>
+  </div>
+</div>

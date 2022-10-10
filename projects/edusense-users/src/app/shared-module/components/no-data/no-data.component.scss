@@ -1,0 +1,29 @@
+@import '../../../../assets/scss/abstracts/abstracts';
+
+.no-record-found {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 16rem);
+    padding: 7rem 0;
+
+    &__text {
+        mat-icon {
+            @include square(15rem);
+            margin-bottom: 3rem;
+        }
+
+        h4 {
+            // color: $secondary-color;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            color: rgba($black-color, 0.8);
+            font-size: 1.8rem;
+            line-height: 2.4rem;
+        }
+    }
+}

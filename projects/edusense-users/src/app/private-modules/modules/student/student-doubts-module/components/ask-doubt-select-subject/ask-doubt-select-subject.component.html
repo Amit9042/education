@@ -1,0 +1,43 @@
+<div class="selection-container doubt-container">
+    <div class="selection-header">
+        <div class="back-header">
+            <mat-icon id="iconBack" (click)="onBack()" svgIcon="back" matTooltip="Back"></mat-icon>
+            <h2>Select Subject</h2>
+        </div>
+        <div class="selection-dropdown">
+            <div class="form-control">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectSubject" placeholder="Subject" [formControl]="subjects" multiple>
+                        <mat-option *ngFor="let subject of subjectList" [value]="subject">{{
+                            subject.subject_master.name
+                            }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="selection-body" *ngIf="subjectList.length">
+        <div class="grade-wrapper subject-wrapper">
+            <div class="subject-wrap" *ngFor="let subject of filteredSubject; let i = index">
+                <a (click)="onAddQuestionDialog(subject)" class="grades subjects" [id]="'lnkSubject-'+i">
+                    <mat-icon *ngIf="!subject.subject_master?.logo" svgIcon="defaultSubject"></mat-icon>
+                    <img *ngIf="subject.subject_master.logo" [src]="subject.subject_master.logo" (error)="onError($event)"/>
+                </a>
+                <h6>{{subject.subject_master.name}}</h6>                
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!subjectList.length">
+        <div class="no-content-found-wrapper">
+            <mat-icon svgIcon="noSubject"></mat-icon>
+            <p>No subject available</p>
+            <p *ngIf="isNotAdmitted">{{notAdmittedMsg}}</p>
+        </div>
+    </div>
+
+    <app-data-loading *ngIf="false"></app-data-loading>
+</div> 

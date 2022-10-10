@@ -1,0 +1,51 @@
+<div class="selection-container">
+    <div class="selection-header">
+        <h2>Choose your grade</h2>
+        <div class="selection-dropdown">
+            <div class="form-control">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectGrade" placeholder="Grade" [formControl]="grades" multiple>
+                        <mat-select-trigger>
+                            {{grades.value && grades.value.length ? grades.value[0].grade.name : ''}}
+                            <span *ngIf="grades.value?.length > 1" class="example-additional-selection">
+                                (+{{ grades.value.length - 1 }} More)
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let grade of gradeList" [value]="grade">{{
+                                grade.grade.alias
+                            }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="selection-body">
+        <ul>
+            <li>
+                <a class="active">Grade</a>
+            </li>
+        </ul>
+
+        <div class="grade-wrapper row">
+            <div *ngFor="let grade of filteredGrade; let i = index; " class="MR-4">
+                <a class="grades" [ngClass]="{active: isGradeSelected}" (click)="onSubjectSelection(grade?.grade_id,grade?.grade.alias)" [id]="'lnkGrade-'+i">
+                    <span>{{grade.grade.name}}</span>
+                    <h6>Grade {{grade.grade.alias}}</h6>
+                    <!-- <p>5 Subjects</p> -->
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!gradeList.length">
+        <div class="no-content-found-wrapper">
+            <mat-icon svgIcon="noSubject"></mat-icon>
+            <p>No grade available</p>
+        </div>
+    </div>
+
+    <app-data-loading *ngIf="false"></app-data-loading>
+</div>

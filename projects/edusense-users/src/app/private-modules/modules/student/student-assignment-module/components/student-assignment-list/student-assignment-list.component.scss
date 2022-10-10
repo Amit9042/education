@@ -1,0 +1,44 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.assignment-list-container {
+    .date-picker-spacing {
+        display: inline-block;
+        height: 5rem;
+        width: 20rem;
+    }
+    &__body {
+        padding: 19.5rem 0 0;
+        @include respond('regular-desktop') {
+            padding: 14.5 0 0;
+        }
+        @include respond('tab-port') {
+            padding: 24.5rem 0 0;
+        }
+        a {
+            text-decoration: none;
+        }
+        &__list {
+            position: relative;
+            padding: 1.5rem 15rem 1.5rem 1.5rem;
+            @include respond('phone') {
+                padding: 1.5rem;
+            }
+            &:hover {
+                background-color: rgba($primary-color, 0.02);
+                a {
+                    mat-icon {
+                        display: inline-block;
+                        position: absolute;
+                        height: 1.4rem;
+                        right: 4rem;
+                        top: 45%;
+                    }
+                }
+            }
+            a {
+                mat-icon {
+                    display: none;
+                }
+            }
+        }
+    }
+}

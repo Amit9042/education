@@ -1,0 +1,45 @@
+<div class="profile-container edit-profile-details-container">
+
+    <div class="profile-details__header align-center">
+        <div class="profile-details__header--image">
+            <img *ngIf="imageUploadDetails" [src]="imageUploadDetails" (error)="onError($event)"/>
+            <mat-icon *ngIf="!imageUploadDetails" svgIcon="profile"></mat-icon>
+        </div>
+        <div class="profile-details__header--details">
+            <div>
+                <button id="btnChangeProfile" type="button" mat-stroked-button (click)="onBrowseFile('profilePicture')">
+                    Change Profile Picture 
+                </button>
+                <input id="txtFileUpload" type="file" hidden id="profilePicture" accept="image/jpeg,image/png,image/jpg"
+                    (change)="onFileUpload($event)" />
+            </div>
+            <span class="note">PNG, JPG, JPEG Max 5 MB</span>
+        </div>
+    </div>
+
+
+
+
+    <div class="profile-details__body edit-profile-details__body">
+        <mat-tab-group>
+            <!-- PROVIDER DETAILS -->
+            <mat-tab *ngIf="isProviderDetails" label="Provider Detail">
+                <app-provider-details-profile [uploadeImage]="uploadeImage"></app-provider-details-profile>
+            </mat-tab>
+
+            <!-- LOCATION DETAILS -->
+            <mat-tab *ngIf="isLocationDetails" label="Location Detail">
+                <app-location-details-profile [uploadeImage]="uploadeImage"></app-location-details-profile>
+
+            </mat-tab>
+
+            <!-- PERSONAL DETAILS -->
+            <mat-tab label="Personal detail">
+                <app-personal-details-profile *ngIf="isOwner" [uploadeImage]="uploadeImage"></app-personal-details-profile>
+                <app-personal-details-profile-other *ngIf="!isOwner" [uploadeImage]="uploadeImage"></app-personal-details-profile-other>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+
+</div>

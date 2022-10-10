@@ -1,0 +1,123 @@
+.table {
+    width: 100%;
+
+    thead {
+        th {
+            vertical-align: top;
+        }
+    }
+
+    tbody {
+        tr {
+            &:hover {
+                background: rgba(#dce9ff, 0.3);
+            }
+        }
+    }
+}
+
+.page-header {
+    h4 {
+        margin-top: 1rem;
+    }
+}
+
+.page-body {
+    height: calc(100vh - 26rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    table {
+        thead {
+            tr {
+                th {
+                    color: $grey-color-4;
+                    font-size: 1.8rem;
+                    font-weight: 600;
+
+                    &:first-child {
+                        padding-left: 2.4rem !important;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                height: 5.9rem;
+
+                td {
+                    color: rgba($black-color, 0.8);
+                    font-size: 1.8rem;
+                    font-weight: 600;
+
+                    &:first-child {
+                        padding-left: 2.4rem !important;
+
+                        img {
+                            @include square(3.7rem);
+                            margin-right: 1rem;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.table tbody tr:hover .hover-action {
+    opacity: 1;
+}
+
+.action {
+    position: relative;
+    right: 0;
+}
+
+.hover-action {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: -26rem;
+    top: 0;
+    padding: 0 !important;
+    opacity: 0;
+    bottom: 0;
+
+    .btn-active {
+        color: rgba($black-color, 0.8);
+        background-color: $grey-color-5;
+        height: 4.1rem;
+        font-size: 1.8rem;
+        font-weight: 6s00;
+    }
+}
+
+.date-picker {
+    .mat-input-element {
+        cursor: pointer !important;
+    }
+}
+
+.page-footer {
+    @include transition();
+    left: calc(#{$large-sidebar-width} + 1rem);
+    width: calc(100% - #{$large-sidebar-width} - 2rem);
+    background: $white-color;
+    position: fixed;
+    bottom: 1.3rem;
+    height: 6.5rem;
+    border-top: 1px solid rgba($black-color, 0.15);
+
+    .custom-pagination-section {
+        position: relative;
+        margin-top: 1.3rem;
+        left: 2rem;
+    }
+}
+
+
+table{
+    border-collapse: collapse;
+}

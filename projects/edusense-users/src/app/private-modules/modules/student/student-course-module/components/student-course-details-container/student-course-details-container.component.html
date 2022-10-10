@@ -1,0 +1,140 @@
+<div class="student-course-details-container">
+    <div class="student-course-details">
+        <div class="student-course-details__content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="student-course-details__content__project-management">
+                        <h1>{{courseData?.title}}</h1>
+                        <div [ngSwitch]="type">
+                            <div *ngSwitchCase="contentType.VIDEO">
+                                <video *ngIf="lectureDetail?.lecture_content?.content_path" class="video-width" controls
+                                    [poster]="lectureDetail?.lecture_content?.content_preview"
+                                    [currentTime]="videoLoadTime" (timeupdate)="videoEvent($event)">
+                                    <source [src]="lectureDetail.lecture_content.content_path" [type]="'video/mp4'">
+                                </video>
+                            </div>
+                            <div *ngSwitchCase="contentType.FILE">
+                                <pdf-viewer *ngIf="lectureDetail?.lecture_content?.content_path" class="video-width file-content"
+                                    [src]="lectureDetail.lecture_content.content_path" [render-text]="true"
+                                    ></pdf-viewer>
+                            </div>
+                            <div *ngSwitchCase="contentType.TEXT">
+                                <div class="video-width text-content"
+                                    [innerHTML]="lectureDetail?.lecture_content?.description">
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="contentType.YOUTUBE_LINK">
+                                <iframe *ngIf="youtubeUrl" class="video-width" [src]="youtubeUrl" frameborder="0"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="student-course-details__content__course-content">
+                        <h1>Course Content</h1>
+
+                        <div class="student-course-details__content__course-content__content-scroll">
+                            <div *ngFor="let content of contentList; let sIndex=index;"
+                                class="student-course-details__content__course-content__content-scroll__content-details">
+                                <div
+                                    class="student-course-details__content__course-content__content-scroll__content-details__title">
+                                    <div class="row">
+                                        <div class="col-md-8 PLR-0">
+                                            <h3>{{sIndex+1}}.&nbsp;{{content.title}}</h3>
+                                        </div>
+
+                                        <div class="col-md-4 PL-0 text-right">
+                                            <small>{{content.completedCourse}} / {{content.total_lectures}} &nbsp; 
+                                                {{content?.total_lecture_duration ? '| '+getDuration(content.total_lecture_duration): ''}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="student-course-details__content__course-content__content-scroll__content-details__body active-icon">
+                                    <ul>
+                                        <li *ngFor="let lecture of content?.lectures; let lindex=index;"
+                                            (click)="selectLecture(lecture.lecture_id, sIndex, lindex)">
+                                            <a [ngClass]="{'active' : lectureId === lecture.lecture_id}">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <ng-container
+                                                            [ngSwitch]="lecture?.lecture_content?.content_type">
+                                                            <mat-icon *ngSwitchCase="contentType.VIDEO" svgIcon="VIDEO">
+                                                            </mat-icon>
+                                                            <mat-icon *ngSwitchCase="contentType.TEXT"
+                                                                svgIcon="DESCRIPTION"></mat-icon>
+                                                            <mat-icon *ngSwitchCase="contentType.YOUTUBE_LINK"
+                                                                svgIcon="LINK"></mat-icon>
+                                                            <mat-icon *ngSwitchCase="contentType.FILE" svgIcon="FILES">
+                                                            </mat-icon>
+                                                            <!-- <mat-icon *ngSwitchDefault svgIcon=""></mat-icon> -->
+                                                        </ng-container>
+                                                        <span>{{lecture.title}}</span>
+                                                    </div>
+
+                                                    <div class="col-md-3 PL-0 text-right">
+                                                        <ng-container>
+                                                            <!-- *ngIf="lecture?.lecture_content?.content_type === contentType.VIDEO || lecture?.lecture_content?.content_type === contentType.TEXT"> -->
+                                                            <small *ngIf="contentType.VIDEO === lecture?.lecture_content?.content_type">{{getDuration(lecture?.lecture_content?.content_duration)}}</small>
+                                                            <small *ngIf="contentType.TEXT === lecture?.lecture_content?.content_type && lecture?.lecture_content?.content_duration">{{getDuration(lecture?.lecture_content?.content_duration)}}</small>
+                                                            <mat-icon svgIcon="check" [ngClass]="{'no-icon' : !lecture?.student_lecture?.is_completed}">
+                                                            </mat-icon>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="student-course-details__tabs-descriptions">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="student-course-details__tabs-descriptions__tabs-categories">
+                        <mat-tab-group>
+                            <mat-tab label="About">
+                                <es-user-student-course-about-details *ngIf="courseData" [courseData]="courseData" [courseSkillList]="courseSkillList">
+                                </es-user-student-course-about-details>
+                            </mat-tab>
+
+                            <!-- <mat-tab label="Notes">
+                                <es-user-student-course-notes-details></es-user-student-course-notes-details>
+                            </mat-tab>
+
+                            <mat-tab label="Discussion">
+                                <es-user-student-course-discussion-details></es-user-student-course-discussion-details>
+                            </mat-tab> -->
+
+                            <mat-tab label="Resources">
+                                <es-user-student-course-resources-details [enrollmentId]="enrollmentId"
+                                    [lectureId]="lectureId"></es-user-student-course-resources-details>
+                            </mat-tab>
+                        </mat-tab-group>
+
+                        <div class="student-course-details__tabs-descriptions__tabs-categories__bookmark-save">
+                            <button mat-flat-button color="primary" (click)="bookmarkCourse()">
+                                <mat-icon [svgIcon]="courseData?.is_bookmarked ? 'bookedMark': 'bookmark'">
+                                </mat-icon>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- <es-user-student-other-courses-details></es-user-student-other-courses-details> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

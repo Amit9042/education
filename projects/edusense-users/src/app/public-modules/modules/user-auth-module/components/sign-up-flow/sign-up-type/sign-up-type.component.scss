@@ -1,0 +1,132 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.sign-up-type-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+
+    h2 {
+        color: $primary-color;
+        font-size: 3.4rem;
+        margin-bottom: 3.8rem;
+
+        @include respond('phone') {
+            font-size: 2.8rem;
+            text-align: center;
+        }
+    }
+
+    .sign-up-type-box {
+        width: 33rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+
+        &__type {
+            margin-right: 3rem;
+
+            h5 {
+                color: $primary-color;
+                text-align: center;
+                font-size: 1.8rem;
+                margin-top: 1rem;
+                font-weight: normal;
+            }
+        }
+
+        &__type > div {
+            @include square(14rem);
+            border: 2px solid rgba($primary-color, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            border-radius: 0.8rem;
+
+            &::before {
+                @include square(16px);
+                position: absolute;
+                content: '';
+                border-radius: 50%;
+                border: 2px solid rgba($primary-color, 0.5);
+                top: 8px;
+                left: 8px;
+            }
+
+            &.active {
+                &:after {
+                    @include square(10px);
+                    position: absolute;
+                    content: '';
+                    border-radius: 50%;
+                    background: $green-color-5;
+                    top: 13px;
+                    left: 13px;
+                }
+
+                &:before {
+                    border-color: $green-color-5;
+                }
+            }
+
+            &:hover {
+                background: rgba($green-color-5, 0.08);
+            }
+
+            &.active {
+                border-color: $green-color-5;
+                background: rgba($green-color-5, 0.08);
+            }
+
+            mat-icon {
+                @include square(5.2rem);
+                opacity: 0.5;
+            }
+        }
+    }
+
+    button {
+        width: 30rem;
+        margin-top: 4rem;
+    }
+}
+
+input[hidden] {
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 5;
+    display: block;
+}
+
+.edusense-logo {
+    .mat-icon {
+        position: fixed;
+        left: calc(50% - 4rem);
+        transform: translateX(-50%);
+        top: 15rem;
+        width: 20rem;
+        @include respond('regular-desktop') {
+            top: 8rem;
+        }
+
+        @include respond('tablet') {
+            width: 18rem;
+            top: 10rem;
+        }
+
+        @include respond('phone') {
+            width: 14rem;
+            top: 5rem;
+            left: 50%;
+        }
+    }
+}

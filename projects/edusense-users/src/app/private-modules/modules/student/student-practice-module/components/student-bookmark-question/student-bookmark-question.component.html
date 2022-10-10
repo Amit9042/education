@@ -1,0 +1,224 @@
+<div class="select-question__left">
+  <form>
+    <div class="question-list-container">
+      <div class="question-list">
+        <div class="question-list__header">
+          <div class="question-list__header__row">
+            <div class="question-list__header__row__left">
+              <a (click)="onBack()" matTooltip="Back">
+                <mat-icon svgIcon="backArrow"></mat-icon>
+              </a>
+            </div>
+
+            <div class="question-list__header__row__center">
+              <h4>Bookmarked Question</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-list__body">
+
+          <div class="question-list__body__practice-filter">
+            <p>Filter By Practice</p>
+          </div>
+
+          <div *ngFor="let practice of bookmarkedPracticeList; let j=index;" class="question-list__body__practice-list">
+            <ul>
+              <li>
+                <mat-checkbox (change)="onCheckedStatusChangePractice($event, practice)"
+                  [checked]="getPracticeCheckedStatus(practice)"></mat-checkbox>
+                <p>{{practice?.name | checkEmpty}}</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- FRONTEND DEVELOPER
+              BELOW DESIGN FOR NO DATA -->
+          <div *ngIf="bookmarkedPracticeList.length === 0" class="no-content-found-wrapper">
+            <mat-icon svgIcon="no-questions"></mat-icon>
+            <p>No Question Available</p>
+            <span>Currently you don't have any questions in your
+              practice</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="false" class="bottom-bar-confirmation">
+      <div class="row">
+        <div class="col-md-6">
+          <span>12 Questions Selected</span>
+        </div>
+        <div class="col-md-6 text-right">
+          <button class="bottom-bar-confirmation__clear" type="button">Clear</button>
+          <button class="bottom-bar-confirmation__submit" type="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRONTEND DEVELOPER
+        Loading Text -->
+    <div *ngIf="false" class="loader-text">
+      <span>Loading...</span>
+    </div>
+  </form>
+</div>
+
+<div class="select-question__right">
+  <div class="student-question-list">
+    <div class="question-details-container">
+      <div class="question-details">
+        <div *ngFor="let question of questionList; let j=index;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="question-details__box">
+                <span class="question-details__box__box-number">{{j + 1}}</span>
+                <div class="question-details__box__bookmark">
+                  <a (click)="onUnmarkQuestion(question)">
+                    <mat-icon *ngIf="!isBookMarked" matTooltip="Bookmark Question" svgIcon="bookmark">
+
+                    </mat-icon>
+
+                    <mat-icon *ngIf="isBookMarked" matTooltip="Unmark Question" svgIcon="bookmarked">
+
+                    </mat-icon>
+                  </a>
+                </div>
+                <p class="inner-html" [innerHTML]="convertMarkDownToHtml(question?.question)"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <!-- For single answer selection -->
+              <div *ngIf="question?.type !== questionType.MULTI">
+                <div [ngClass]="{'right-answer': option?.correct, 'default-answer' : !(option?.correct)}"
+                  class="question-details__answers" *ngFor="let option of question?.questionAnswer; let j = index;">
+                  <p>
+                    <mat-radio-group>
+                      <mat-radio-button [disabled]="true" [checked]="option?.correct" [value]="option.answerId"
+                        [id]="'radioAnswer' + j">
+                        <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                      </mat-radio-button>
+                    </mat-radio-group>
+
+                    <mat-icon *ngIf="option?.correct" svgIcon="rightIcon"></mat-icon>
+                  </p>
+                </div>
+              </div>
+
+              <!-- For multiple answer selection -->
+              <div *ngIf="question?.type === questionType.MULTI">
+                <div [ngClass]="{'right-answer': option?.correct, 'default-answer' : !(option?.correct)}"
+                  class="question-details__answers" *ngFor="let option of question?.questionAnswer; let j = index;">
+                  <p>
+                    <mat-checkbox [disabled]="true" [checked]="option.correct">
+                      <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                    </mat-checkbox>
+
+                    <mat-icon *ngIf="option?.correct" svgIcon="rightIcon">
+                    </mat-icon>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="question-details__box question-details__box--solution">
+                <span class="form-control-label">Solution</span>
+                <p [innerHTML]="convertMarkDownToHtml(question?.solution)"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="questionList?.length === 0" class="no-content-found-wrapper student-bookmark-no-data">
+          <mat-icon svgIcon="no-questions"></mat-icon>
+          <p>No Question Available</p>
+          <span>Currently you don't have any questions in your
+            practice</span>
+        </div>
+
+        <!--<div class="row">
+          <div class="col-md-12">
+            <div class="question-details__box">
+              <span class="question-details__box__box-number">2.</span>
+              <div class="question-details__box__bookmark">
+                <a (click)="onBookMarkToggle()">
+                  <mat-icon *ngIf="!isBookMarked" matTooltip="Bookmark Question" svgIcon="bookmark">
+
+                  </mat-icon>
+
+                  <mat-icon *ngIf="isBookMarked" matTooltip="Unmark Question" svgIcon="bookmarked">
+
+                  </mat-icon>
+                </a>
+              </div>
+              <div class="question-details__box__img">
+                <img src="assets/images/questionImage.png"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div>
+              &lt;!&ndash; For single answer selection &ndash;&gt;
+              <div class="question-details__answers" *ngFor="let i of [1,2,3,4]; let j = index;">
+                <p>
+                  <mat-radio-group>
+                    <mat-radio-button>
+                      Answer 1
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                  <mat-icon *ngIf="false" svgIcon="closeIcon"></mat-icon>
+                  <mat-icon svgIcon="rightIcon"></mat-icon>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="question-details__box question-details__box&#45;&#45;solution">
+              <span class="form-control-label">Solution</span>
+
+              <div src="assets/images/questionImage.png">
+
+                <p>Follow BODMAS rule to solve this question as per order given below, <br/><br/>
+
+                  Step-1: Parts of an equation enclosed in ‘Brackets’ must be solved first.
+                  <br/><br/>
+
+                  Step-2: Any mathematical ‘Of’ or ‘Exponent’ must be solved next.<br/><br/>
+
+                  Step-3: Next, the parts of the equation that contain ‘Division’ and ‘Multiplication’
+                  are
+                  calculated. <br/><br/>
+
+                  Step-4: Last but not least, the parts of the equation that contain ‘Addition’ and
+                  ‘Subtraction’ should be calculated. <br/><br/>
+
+                  Given expression: <br/><br/>
+
+                  √1444.03 × √2499.99 ÷ 19.08 = ? <br/><br/>
+
+                  ⇒ (√1444 × √2500) ÷ 19 = ? <br/><br/>
+
+                  ⇒ (38 × 50) ÷ 19 = ? <br/><br/>
+
+                  ⇒ ? = 100 </p>
+              </div>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</div>

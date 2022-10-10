@@ -1,0 +1,27 @@
+<div class="broadcast-details-container">
+    <div class="broadcast-details">
+        <form [formGroup]="broadcastDetailsForm" (ngSubmit)="onSubmitBroadcastDetailsForm(broadcastDetailsForm)">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>Broadcast</h2>
+                    <div>
+                        <label>Broadcast Message</label>
+                        <mat-form-field floatLabel="never" appearance="outline">
+                            <textarea matInput placeholder="Enter broadcast message"
+                                formControlName="broadcast_message" required></textarea>
+                            <mat-error *ngIf="isRequiredField(formControls['broadcast_message'])">
+                                {{ validationMsg.BROADCAST_MESSAGE }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidLength(formControls['broadcast_message'])">
+                                {{ validationMsg.BROADCAST_MESSAGE_LENGTH }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button type="submit" mat-flat-button color="warn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

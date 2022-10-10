@@ -1,0 +1,48 @@
+<div class="sidebar-drawer-wrapper notification-drawer-wrapper" (click)="$event.stopPropagation()">
+    <div class="sidebar-drawer__top">
+        <div class="sidebar-drawer__top--head">
+            <h3>Notifications</h3>
+            <div>
+                <a class="mark-all-read" id="lnkMarkAllRead" *ngIf="true" (click)="markAsAllRead()">
+                    Mark all as read
+                </a>
+                <a (click)="onCloseDrawer()" id="lnkClose">
+                    <mat-icon svgIcon="close"></mat-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-drawer__bottom PL-0 PR-0 PT-0 PB-0">
+        <!--FRONTEND DEVELOPMENT-->
+        <!--IF NO ANY NOTIFICATION COME THEN SHOW BELOW TAG-->
+        <div *ngIf="false">
+            <div class="no-content-found-wrapper">
+                <mat-icon svgIcon="noNotification"></mat-icon>
+                <p>No Notification</p>
+                <span>It seems like you don't have any notifications</span>
+            </div>
+        </div>
+
+        <div *ngIf="true" class="sidebar-drawer__bottom--panel">
+            <div class="sidebar-drawer__bottom--panel__title">
+                <span>New</span>
+            </div>
+            <ul>
+                <li *ngFor="let i of [0,1,2,3,4,5]; let j = index">
+                    <a class="notification" [id]="'lnkViewNotification-'+j" [ngClass]="{
+                            'read-notification': true
+                        }">
+                        <div class="notification__icon">
+                            <mat-icon *ngIf="false" svgIcon="providerProfile"></mat-icon>
+                            <img *ngIf="true" src="../../../assets/images/user.png" />
+                        </div>
+                        <div class="notification__body">
+                            <p>notification message will be displayed here</p>
+                            <span class="notification__body--time">25-05-2020</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

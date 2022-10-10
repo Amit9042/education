@@ -1,0 +1,47 @@
+<div class="dialog-container">
+    <div class="dialog-container__head">
+        <h4>Student Request</h4>
+        <a (click)="onCloseDialog(false)">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+</div>
+
+<div class="waiting-room__body meeting-room__body">
+    <div *ngIf="true">
+        <div *ngFor="let info of [0, 1, 2, 3, 4, 5]; let i = index" class="visitors-info">
+            <div class="row align-center">
+                <div class="col-md-9 PLR-0">
+                    <div class="visitors-info__left">
+                        <div class="visitor-image">
+                            <img src="assets/images/user.png" *ngIf="true" />
+                            <mat-icon *ngIf="false" svgIcon="providerProfile"></mat-icon>
+                        </div>
+                        <div class="visitor-details">
+                            <h4>DPS School</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 PLR-0">
+                    <div class="visitors-info__right">
+                        <button *ngIf="true" mat-flat-button  class="reject-btn">Reject</button>
+
+                        <!-- BUTTON TEXT WOULD COME AS "Accept" OR  "Close" BASED ON REQUIREMENT -->
+                        <button (click)="onCloseDialog(false)" type="button" class="accept-button"
+                            mat-flat-button color="primary">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="no-records-found" *ngIf="false">
+        <div class="no-records">
+            <mat-icon svgIcon="userProfilePlaceholder"></mat-icon>
+            <p>
+                No Opd data found
+            </p>
+            <span>Opd data is not available</span>
+        </div>
+    </div>
+</div>

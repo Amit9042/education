@@ -1,0 +1,52 @@
+.timepicker {
+  &__header {
+    background-color: $grey-color-3 !important;
+  }
+
+  input {
+    color: $primary-color !important;
+    font-weight: 500 !important;
+  }
+
+  &-dial__time {
+    span {
+      color: $primary-color !important;
+      font-weight: 600 !important;
+    }
+  }
+
+  &__actions {
+    div {
+      &:last-child {
+        .timepicker-button {
+          background-color: $primary-color !important;
+          span {
+            color: $white-color !important;
+          }
+        }
+      }
+    }
+  }
+
+  &-dial__item {
+    color: $primary-color !important;
+    font-weight: 500 !important;
+
+    &_active {
+      font-weight: bold !important;
+    }
+  }
+
+  .clock-face__number > span.active,
+  .clock-face__clock-hand {
+    background-color: $primary-color !important;
+  }
+
+  &-button {
+    color: $primary-color !important;
+  }
+
+  .clock-face__clock-hand_minute:before {
+    border-color: $primary-color !important;
+  }
+}

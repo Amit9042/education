@@ -1,0 +1,63 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmitProfileForm(profileForm)" class="MB-5">
+    <div class="location-details">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 PL-0 small-pad-right-0">
+                <div class="form-control">
+                    <app-ss-select-search id="matSelectCountry" [formName]="profileForm" [selectConfig]="countrySearchConfig" [selected]="selectedData?.selectedCountry"
+                        [dataList]="countryList" (changSelectEvent)="
+                  onSelectChangeEvent($event, 'country')
+                ">
+                    </app-ss-select-search>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 PR-0 small-pad-left-0">
+                <div class="form-control">
+                    <app-ss-select-search id="matSelectState" [formName]="profileForm" [selectConfig]="stateSearchConfig" [selected]="selectedData?.selectedState"
+                        [dataList]="stateList" (changSelectEvent)="
+                  onSelectChangeEvent($event, 'state')
+                ">
+                    </app-ss-select-search>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control">
+                    <mat-label>City*</mat-label>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                      <input id="txtCity" type="text" placeholder="Select city" aria-label="Number" matInput [matAutocomplete]="city"
+                        autocomplete="new-city" formControlName="cityInput" />
+                      <mat-error *ngIf="isRequiredField(formControls['cityInput'])">
+                        {{ validationMsg.CITY }}</mat-error>
+                    </mat-form-field>
+                    <mat-autocomplete #city="matAutocomplete">
+                      <mat-option *ngFor="let city of filteredCities" (onSelectionChange)="changeCity(city)"
+                        [value]="city.city_name">
+                        <span>{{ city.city_name }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control-textarea">
+                    <mat-label>Address</mat-label>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <textarea id="txtAddress" formControlName="address" type="text" autocomplete="off" matInput
+                            placeholder="Type address"></textarea>
+                        <mat-error *ngIf="isValidLength(formControls['address'])">
+                            {{ validationMsg.ADDRESS_LENGTH }}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-details__footer">
+        <button mat-flat-button color="primary" type="submit" id="btnSave">
+            Save
+        </button>
+        <button (click)="onViewProfile()" type="button" mat-button id="btnCancel">Cancel</button>
+    </div>
+</form>

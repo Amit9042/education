@@ -1,0 +1,41 @@
+@-moz-document url-prefix() {
+    .reset-password-container {
+        .mat-form-field-infix {
+            top: -0.9rem;
+        }
+    }
+
+    .que-bank-ch-list-container {
+        &__body {
+            margin-bottom: 18rem !important;
+        }
+    }
+
+    .streaming-component-container {
+        .streaming-container {
+            &__body {
+                &--online-users {
+                    .online-user-list {
+                        .online-user {
+                            margin-right: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    table {
+        border-collapse: unset !important;
+    }
+    .mozila-bottom-spacing {
+        margin-bottom: 9rem !important;
+    }
+    .dialog-container {
+        &__bottom {
+            padding-bottom: 0 !important;
+            .button-group {
+                padding-bottom: 4.5rem;
+            }
+        }
+    }
+}

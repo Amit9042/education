@@ -1,0 +1,170 @@
+<div class="student-question-list" *ngIf="questionDetail">
+  <div class="question-details-container">
+    <form>
+      <div class="question-details">
+        <div class="row">
+          <div class="col-md-12">
+            <h5>{{selectedQuestionNumber}} of {{totalQuestions}} <span *ngIf="!isViewPractice"> | {{clockDisplay}}</span>
+            </h5>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="question-details__box">
+                  <div class="question-details__box__bookmark" *ngIf="answerSubmitted">
+                    <a (click)="onBookMarkToggle(isBookMarked, questionDetail?.questionId)">
+                      <mat-icon *ngIf="!isBookMarked" matTooltip="Bookmark Question" svgIcon="bookmark">
+                      </mat-icon>
+
+                      <mat-icon *ngIf="isBookMarked" matTooltip="Unmark Question" svgIcon="bookmarked">
+                      </mat-icon>
+                    </a>
+                  </div>
+                  <p class="inner-html" [innerHTML]="convertMarkDownToHtml(questionDetail?.question)"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="!answerSubmitted">
+              <div class="col-md-12">
+                <div>
+                  <!-- For single answer selection -->
+                  <div *ngIf="questionDetail?.type !== questionType.MULTI">
+                    <mat-radio-group [formControl]="singleAnswer">
+                      <div class="question-details__answers"
+                        *ngFor="let option of questionDetail?.questionAnswer; let j = index;">
+                        <p>
+                          <mat-radio-button name="answerList" [value]="option.answerId" [id]="'radioAnswer' + j">
+                            <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                          </mat-radio-button>
+                        </p>
+                      </div>
+                    </mat-radio-group>
+                  </div>
+                  <!-- For multiple answer selection -->
+                  <div *ngIf="questionDetail?.type === questionType.MULTI">
+                    <div class="question-details__answers"
+                      *ngFor="let option of questionDetail?.questionAnswer; let j = index;">
+                      <p>
+                        <mat-checkbox (change)="onAnswerChange($event, option)" [value]="option.answerId">
+                          <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                        </mat-checkbox>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" *ngIf="answerSubmitted">
+              <div class="col-md-12">
+                <div>
+                  <!-- For single answer selection -->
+                  <div *ngIf="questionDetail?.type !== questionType.MULTI">
+
+                    <div
+                      [ngClass]="{'right-answer': isCorrectAnswer(option?.answerId), 'wrong-answer': !isCorrectAnswer(option?.answerId) && isCheckedAnswer(option?.answerId), 'selected-answer' : false}"
+                      class="question-details__answers"
+                      *ngFor="let option of questionDetail?.questionAnswer; let j = index;">
+                      <p>
+                        <mat-radio-group>
+                          <mat-radio-button [disabled]="true" name="answerList" [checked]="isCheckedAnswer(option?.answerId)"
+                            [value]="option.answerId" [id]="'radioAnswer' + j">
+                            <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                          </mat-radio-button>
+                          <mat-icon *ngIf="!isCorrectAnswer(option?.answerId) && isCheckedAnswer(option?.answerId)"
+                            svgIcon="closeIcon"></mat-icon>
+                          <mat-icon *ngIf="isCorrectAnswer(option?.answerId)" svgIcon="rightIcon"></mat-icon>
+                        </mat-radio-group>
+                      </p>
+                    </div>
+
+                  </div>
+                  <!-- For multiple answer selection -->
+                  <div *ngIf="questionDetail?.type === questionType.MULTI">
+                    <div
+                      [ngClass]="{'right-answer': isCorrectAnswer(option?.answerId), 'wrong-answer': !isCorrectAnswer(option?.answerId) && isCheckedAnswer(option?.answerId), 'selected-answer' : false}"
+                      class="question-details__answers"
+                      *ngFor="let option of questionDetail?.questionAnswer; let j = index;">
+                      <p>
+                        <mat-checkbox [disabled]="true" [checked]="isCheckedAnswer(option?.answerId)"
+                          (change)="onAnswerChange($event, option)" [value]="option.answerId">
+                          <span [innerHTML]="convertMarkDownToHtml(option?.content)"></span>
+                        </mat-checkbox>
+                        <mat-icon *ngIf="!isCorrectAnswer(option?.answerId) && isCheckedAnswer(option?.answerId)"
+                          svgIcon="closeIcon">
+                        </mat-icon>
+                        <mat-icon *ngIf="isCorrectAnswer(option?.answerId)" svgIcon="rightIcon">
+                        </mat-icon>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="answerSubmitted" class="row MT-3">
+              <div class="col-md-12 text-center">
+                <a (click)="onViewSolution()" class="view-solution">
+                  View Solution
+                </a>
+              </div>
+            </div>
+
+            <div *ngIf="answerSubmitted && isViewSolution" class="row">
+              <div class="col-md-12">
+                <div class="question-details__box question-details__box--solution">
+                  <span class="form-control-label">Solution</span>
+                  <p class="inner-html" [innerHTML]="convertMarkDownToHtml(questionDetail?.solution)"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="question-details__bottom">
+              <div class="row">
+                <div class="col-md-6 col-xs-6 col-sm-6 sm-PL-0">
+                  <button *ngIf="selectedQuestionNumber > 1" type="button" mat-stroked-button color="primary"
+                    class="border-btn" (click)="onPreviousClick()">Previous
+                  </button>
+                </div>
+                <div class="col-md-6 col-xs-6 col-sm-6 sm-PR-0 text-right">
+                  <button *ngIf="selectedAnswer.length && !answerSubmitted" (click)="onSubmitEmitFn(false)"
+                    type="submit" mat-flat-button color="primary">Submit
+                  </button>
+
+                  <button *ngIf="!selectedAnswer.length && !answerSubmitted && !isViewPractice" type="button" mat-stroked-button
+                    color="primary" class="border-btn" (click)="onSubmitEmitFn(true)">Skip
+                  </button>
+
+                  <button *ngIf="(answerSubmitted || isViewPractice) && selectedQuestionNumber < totalQuestions" type="button"
+                    mat-flat-button color="primary" (click)="onNextClick()">Next
+                  </button>
+
+                  <button *ngIf="answerSubmitted && showResult" type="button" mat-flat-button color="primary"
+                    (click)="viewResult()">Result
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FRONTEND DEVELOPER
+BELOW DESIGN FOR NO DATA -->
+<div *ngIf="!questionDetail" class="question-details-no-data-student">
+  <div class="no-content-found-wrapper">
+    <mat-icon svgIcon="no-questions"></mat-icon>
+    <p>No Question Available</p>
+    <span>Currently you don't have any questions in your
+      practice</span>
+  </div>
+</div>

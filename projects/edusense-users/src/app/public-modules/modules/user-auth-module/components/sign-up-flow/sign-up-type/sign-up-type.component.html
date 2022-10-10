@@ -1,0 +1,33 @@
+<a class="edusense-logo" (click)="onHomePageUrl()" id="lnkLogo">
+  <mat-icon svgIcon="logo_edu"></mat-icon>
+</a>
+
+<div class="sign-up-type-container">
+  <h2>Which one you are?</h2>
+  <div class="sign-up-type-box">
+    <div class="sign-up-type-box__type">
+      <!-- @TODO: -->
+      <!-- FRONTEND DEVELOPER -->
+      <!-- IN BELOW TAG I HAVE ADDED active CLASS THAT WILL COME WHEN CLICKED ON ANY BOX -->
+      <div [ngClass]="{'active' : isTypeProvider}">
+        <input id="txtSignupProvider" (change)="onSignUpTypeChange($event)" name="signUpType" [value]="signUpTypeEnum.PROVIDER" type="radio" hidden />
+        <mat-icon svgIcon="signup-provider"></mat-icon>
+      </div>
+      <h5>Provider</h5>
+    </div>
+
+    <div class="sign-up-type-box__type MR-0">
+      <!-- @TODO: -->
+      <!-- FRONTEND DEVELOPER -->
+      <!-- IN BELOW TAG I HAVE ADDED active CLASS THAT WILL COME WHEN CLICKED ON ANY BOX -->
+      <div [ngClass]="{'active': !isTypeProvider}">
+        <input id="txtSignupStudent" (change)="onSignUpTypeChange($event)" id="2" name="signUpType" [value]="signUpTypeEnum.STUDENT" type="radio" hidden />
+        <mat-icon svgIcon="signup-student"></mat-icon>
+      </div>
+      <h5>Student</h5>
+    </div>
+  </div>
+  <button id="btnNext" class="auth-green-button" type="button" (click)="onSelectSignUpType()" mat-flat-button color="primary">
+    Next
+  </button>
+</div>

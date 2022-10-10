@@ -1,0 +1,64 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.student-course-resources-container {
+    .course-resources {
+        padding-top: 5rem;
+        min-height: 60rem;
+
+        h4 {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        &__box {
+            display: block;
+            margin-top: 4rem;
+
+            &__body {
+                background-color: $gray-color-34;
+                border: 1px solid rgba(32, 48, 97, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height: 17rem;
+                border-radius: 6px 6px 0 0;
+
+                .icon-width {
+                    @include square(5rem);
+                    margin-bottom: 0.8rem;
+                }
+
+                small {
+                    color: $grey-color-12;
+                    display: block;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                }
+            }
+
+            &__footer {
+                border: 1px solid $primary-color-2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-top: none;
+                border-radius: 0 0 6px 6px;
+                padding: 2rem;
+
+                h5 {
+                    @include elipsis(95%);
+                    color: $primary-color;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 1.6rem;
+                }
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}

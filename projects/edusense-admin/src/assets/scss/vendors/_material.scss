@@ -1,0 +1,395 @@
+@import '~@angular/material/theming';
+@include mat-core();
+$mat-test: (
+    50: #e8eaf6,
+    100: #c5cae9,
+    200: #9fa8da,
+    300: #7986cb,
+    400: #5c6bc0,
+    500: #193a6f,
+    600: #3949ab,
+    700: #303f9f,
+    800: #283593,
+    900: #1a237e,
+    A100: #8c9eff,
+    A200: #536dfe,
+    A400: #3d5afe,
+    A700: #304ffe,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $light-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text
+    )
+);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$candy-app-primary: mat-palette($mat-test);
+$candy-app-accent: mat-palette($candy-app-primary, 500);
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+$custom-typography: mat-typography-config(
+    $font-family: unquote('Muli, sans-serif')
+);
+@include angular-material-typography($custom-typography);
+.mat-form-field {
+    width: 100%;
+    font-size: 1.8rem;
+}
+/*LOGIN FLOW & FORGOT PASSWORD FLOW SCSS*/
+
+.app-section {
+    .mat-horizontal-content-container {
+    }
+    .mat-checkbox-background,
+    .mat-checkbox-frame,
+    .mat-checkbox-inner-container {
+        @include square(2.6rem);
+        border-radius: 50%;
+    }
+    .mat-checkbox-label {
+        position: relative;
+        font-size: 1.8rem;
+        top: 0.1rem;
+    }
+    .mat-checkbox-inner-container {
+        margin-right: 2rem;
+    }
+    .mat-checkbox-background {
+        svg {
+            @include square(2rem);
+            margin: 0 auto;
+            top: 0.3rem;
+        }
+    }
+}
+/*USER AUTH FLOW*/
+
+.app-section {
+    .mat-horizontal-stepper-header-container {
+        display: none !important;
+    }
+}
+/*IN WHOLE APPLICATION*/
+
+* {
+    .mat-menu-panel {
+        min-height: auto !important;
+    }
+    .mat-dialog-container {
+        padding: 0 !important;
+        box-shadow: none;
+    }
+    .mat-checkbox-frame {
+        border-color: rgba($black-color, 0.4);
+    }
+    .mat-button.cdk-keyboard-focused .mat-button-focus-overlay,
+    .mat-button.cdk-program-focused .mat-button-focus-overlay,
+    .mat-flat-button.cdk-keyboard-focused .mat-button-focus-overlay,
+    .mat-flat-button.cdk-program-focused .mat-button-focus-overlay,
+    .mat-stroked-button.cdk-keyboard-focused .mat-button-focus-overlay,
+    .mat-stroked-button.cdk-program-focused .mat-button-focus-overlay {
+        opacity: 0 !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+        border-radius: 4px 0 0 4px !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline-end {
+        border-radius: 0 4px 4px 0 !important;
+    }
+    .mat-form-field-appearance-outline
+        .mat-form-field-outline-thick
+        .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline
+        .mat-form-field-outline-thick
+        .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline
+        .mat-form-field-outline-thick
+        .mat-form-field-outline-start {
+        border-width: 1px !important;
+    }
+    .mat-option-text {
+        color: rgba($black-color, 0.8) !important;
+        font-size: 1.6rem !important;
+        font-weight: 400 !important;
+    }
+    .mat-slide-toggle-thumb-container {
+        cursor: pointer !important;
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+    padding: 0 !important;
+    margin-top: 3px !important;
+}
+
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+    background: rgba($primary-color, 0.08) !important;
+}
+
+form {
+    .form-control {
+        // .mat-form-field-type-mat-select {
+        //     .mat-form-field-infix {
+        //         padding: 0.8em 0 0.8em 0 !important;
+        //         height: 5rem;
+        //         line-height: 2.8rem;
+        //     }
+        // }
+
+        // mat-select {
+        //     .mat-select-placeholder {
+        //         font-size: 2rem !important;
+        //     }
+        // }
+    }
+}
+
+.mat-select-search-clear {
+    mat-icon {
+        display: none;
+    }
+}
+
+.login-validation {
+    .mat-error {
+        font-weight: normal;
+        position: relative;
+        font-size: 1.6rem;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.mat-error {
+    font-weight: normal;
+    position: relative;
+    font-size: 1.2rem;
+    bottom: 0;
+    left: 0;
+}
+
+mat-datepicker-toggle {
+    mat-icon {
+        width: 1.8rem !important;
+    }
+}
+
+.page-body {
+    td.mat-cell,
+    th.mat-header-cell {
+        border-bottom-color: rgba($black-color, 0.08);
+    }
+}
+
+.white-snackbar {
+    background: $black-color;
+    color: $white-color;
+    font-weight: 600;
+
+    span {
+        font-size: 1.8rem;
+    }
+
+    .mat-button-wrapper {
+        color: $white-color;
+    }
+}
+
+tr.mat-header-row {
+    height: 3.5rem !important;
+}
+
+.doctor-room-container {
+    .mat-form-field-appearance-outline .mat-form-field-suffix {
+        top: 0.6rem;
+        right: 7.5rem;
+        span {
+            color: $white-color;
+            line-height: 1.42;
+        }
+    }
+    .mat-input-element {
+        height: 4rem;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        height: 7rem;
+    }
+}
+
+.mat-autocomplete-panel {
+    &.height-class {
+        max-height: 30rem;
+        // left: 0.6rem;
+        top: 0.6rem;
+        padding: 0.8rem;
+    }
+}
+.invitation-meeting-dialog-container {
+    .mat-form-field-appearance-outline .mat-form-field-flex {
+        padding-right: 0;
+    }
+}
+
+.doctor-room-container {
+    .form-control .mat-form-field-appearance-outline .mat-form-field-outline {
+        background-color: rgba($primary-color, 0.06);
+        color: $primary-color;
+        border: none;
+    }
+}
+
+.location-details {
+    .form-control {
+        .mat-form-field-suffix .mat-icon {
+            position: absolute;
+            right: 1rem;
+            bottom: -0.4rem;
+            width: 1.2rem;
+        }
+    }
+}
+
+.chat-container {
+    .chat-footer {
+        .mat-form-field-appearance-outline .mat-form-field-infix {
+            padding: 0.5em 0 1em;
+        }
+        input {
+            @include border-radius(2.8rem);
+        }
+        .mat-form-field-outline {
+            border-radius: 2.8rem;
+        }
+    }
+}
+
+.profile-details-container {
+    .mat-form-field-appearance-outline .mat-form-field-suffix {
+        width: 2rem;
+    }
+}
+
+.sidenav-container.mat-drawer-container.mat-drawer-transition {
+    // z-index: 99999999999 !important;
+    z-index: 999 !important;
+}
+
+.mobile-no-edit {
+    .mat-form-field-suffix {
+        right: 2rem;
+    }
+}
+
+.image-preview-modal__close {
+    .close0 {
+        fill: #fff;
+    }
+}
+
+.class-view-container {
+    .class-view {
+        &__module-rights {
+            mat-checkbox {
+                &:hover {
+                    .mat-checkbox-background {
+                        background-color: rgba($primary-color, 0.1);
+                        border: none;
+                    }
+                }
+                .mat-checkbox-background {
+                    background-color: rgba($primary-color, 0.1);
+                    border: none;
+                }
+                .mat-checkbox-frame {
+                    border: 2px solid rgba($primary-color, 0.1);
+                }
+                .mat-checkbox-checkmark-path {
+                    stroke: rgba($primary-color, 0.8) !important;
+                }
+            }
+        }
+    }
+}
+
+.auth-box {
+    .mat-form-field-appearance-outline .mat-form-field-suffix {
+        @include respond('phone') {
+            // right: -1.5rem;
+            width: 2.5rem;
+        }
+    }
+}
+
+.mat-slide-toggle-thumb {
+    height: 2rem !important;
+    width: 2rem !important;
+}
+
+.mat-slide-toggle-bar {
+    width: 3.6rem !important;
+    height: 1.4rem !important;
+}
+
+.mat-slide-toggle-thumb-container {
+    height: 2rem !important;
+    width: 2rem !important;
+    left: 0 !important;
+    @include respond('regular-desktop') {
+        left: -0.3rem !important;
+    }
+}
+.broadcast-details {
+    .mat-form-field-appearance-outline {
+        .mat-form-field-outline {
+            background-color: rgba($primary-color, 0.06);
+            border-radius: 0.8rem;
+            border: none;
+        }
+
+        .mat-form-field-outline-start,
+        .mat-form-field-outline-gap,
+        .mat-form-field-outline-end {
+            border: none;
+        }
+
+        .mat-form-field-infix {
+            padding: 0.2em 0 1em 0;
+        }
+    }
+
+    textarea {
+        height: 12rem;
+    }
+
+    .mat-flat-button.mat-warn {
+        background-color: $primary-color !important;
+        width: 10rem;
+        height: 5rem;
+        border-radius: 0.8rem;
+
+        span {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+    }
+}
+
+textarea {
+    resize: none !important;
+}

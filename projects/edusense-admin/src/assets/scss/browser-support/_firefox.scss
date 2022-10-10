@@ -1,0 +1,10 @@
+@-moz-document url-prefix() {
+    .reset-password-container {
+        .mat-form-field-infix {
+            top: -0.9rem;
+        }
+    }
+    table{
+        border-collapse: unset !important;
+    }
+}

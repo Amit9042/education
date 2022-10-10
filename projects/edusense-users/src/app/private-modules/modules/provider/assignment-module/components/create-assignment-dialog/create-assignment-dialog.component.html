@@ -1,0 +1,279 @@
+<div class="meeting-dialog-wrapper create-assignment-dialog">
+  <div class="meeting-dialog__head">
+    <h4>Create Assignment</h4>
+    <a (click)="onCloseDialog(false)" id="lnkClose">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form
+            [formGroup]="createAssignmentForm"
+            (ngSubmit)="
+                            onSubmitCreateAssignmentForm(createAssignmentForm)
+                        "
+          >
+            <div class="scroll-data">
+              <div class="row">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                >
+                  <div class="form-control">
+                    <mat-label>Title*</mat-label>
+                    <mat-form-field
+                      appearance="outline"
+                      floatLabel="always"
+                    >
+                      <input
+                        id="txtTitle"
+                        formControlName="title"
+                        type="text"
+                        autocomplete="off"
+                        matInput
+                        placeholder="Enter title"
+                      />
+                      <mat-error
+                        *ngIf="
+                                                    isRequiredField(
+                                                        formControls['title']
+                                                    )
+                                                "
+                      >
+                        {{ validationMsg.TITLE }}
+                      </mat-error>
+                      <mat-error
+                        *ngIf="
+                                                    isValidLength(
+                                                        formControls['title']
+                                                    )
+                                                "
+                      >
+                        {{ validationMsg.TITLE_LENGTH }}
+                      </mat-error>
+                      <mat-error
+                        *ngIf="
+                                                    isValidField(
+                                                        formControls['title']
+                                                    )
+                                                "
+                      >
+                        {{ validationMsg.TITLE_VALID }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                >
+                  <div class="form-control-textarea">
+                    <mat-label>Instruction</mat-label>
+                    <mat-form-field
+                      appearance="outline"
+                      floatLabel="always"
+                    >
+                                            <textarea
+                                              id="txtInstruction"
+                                              formControlName="instructions"
+                                              type="text"
+                                              autocomplete="off"
+                                              matInput
+                                              placeholder="Enter instruction"
+                                            ></textarea>
+                      <mat-error
+                        *ngIf="
+                                                    isValidLength(
+                                                        formControls[
+                                                            'instructions'
+                                                        ]
+                                                    )
+                                                "
+                      >
+                        {{
+                        validationMsg.INSTRUCTION_LENGTH
+                        }}
+                      </mat-error>
+                      <mat-error
+                        *ngIf="
+                                                    isValidField(
+                                                        formControls[
+                                                            'instructions'
+                                                        ]
+                                                    )
+                                                "
+                      >
+                        {{
+                        validationMsg.INSTRUCTION_VALID
+                        }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                >
+                  <div class="form-control">
+                    <app-ss-select-search
+                      [formName]="createAssignmentForm"
+                      [selectConfig]="classSearchConfig"
+                      [dataList]="classList"
+                      [selected]="selectedClass"
+                      (changSelectEvent)="
+                                                onSelectChangeEvent(
+                                                    $event,
+                                                    'classId'
+                                                )
+                                            "
+                      id="matSelectClass"
+                    >
+                    </app-ss-select-search>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                >
+                  <div class="form-control">
+                    <mat-label>Start date*</mat-label>
+                    <mat-form-field
+                      appearance="outline"
+                      floatLabel="always"
+                    >
+                      <input
+                        matInput
+                        formControlName="startDate"
+                        [matDatepicker]="startDate"
+                        placeholder="Date"
+                        id="txtStartDate"
+                        (click)="startDate.open()"
+                        [min]="currentDate"
+                        readonly
+                      />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="startDate"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker
+                        #startDate
+                      ></mat-datepicker>
+                      <mat-error
+                        *ngIf="isRequiredField(formControls['startDate'])"
+                      >
+                        {{ validationMsg.START_DATE }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                >
+                  <div class="form-control">
+                    <mat-label>Submission Date*</mat-label>
+                    <mat-form-field
+                      appearance="outline"
+                      floatLabel="always"
+                    >
+                      <input
+                        matInput
+                        formControlName="submissionDate"
+                        [matDatepicker]="submissionDate"
+                        placeholder="Date"
+                        id="txtSubmissionDate"
+                        (click)="submissionDate.open()"
+                        [min]="formControls['startDate'].value"
+                        readonly
+                      />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="submissionDate"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker
+                        #submissionDate
+                      ></mat-datepicker>
+                      <mat-error
+                        *ngIf="isRequiredField(formControls['submissionDate'])"
+                      >
+                        {{ validationMsg.END_DATE }}
+                      </mat-error>
+                      <mat-error
+                        *ngIf="formControls['submissionDate'].hasError('matDatepickerMin')"
+                      >
+                        {{ validationMsg.END_DATE_MIN }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row upload-section">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                >
+                  <button
+                    (click)="onBrowseFile('uploadImage')"
+                    type="button"
+                    id="btnUpload"
+                    mat-flat-button
+                  >
+                    <mat-icon
+                      svgIcon="attachment"
+                    ></mat-icon>
+                    Upload material
+                  </button>
+                  <input
+                    type="file"
+                    hidden
+                    id="uploadImage"
+                    (click)="clearValue($event)"
+                    accept=".pdf, .jpg, .txt, .ppt, .pptx, .xls, .xlsx, .png, .jpeg, .doc, .docx, .mp3, .wav, .wma,
+                     .mp4, .avi, .mov, .flv, .webm, .mpg, .mpeg, .wmv"
+                    (change)="onFileUpload($event)"
+                  />
+
+                  <div class="upload-view">
+                    <div
+                      class="flex-left"
+                      *ngFor="let image of materialArray;let i = index"
+                    >
+                      <mat-icon [svgIcon]="getIcon(image['extension'])"></mat-icon>
+                      <span>{{image.name}}</span>
+                      <a class="flex-center" (click)="onRemoveFile(image['attachmentId'], image['isAttached'])">
+                        <mat-icon
+                          svgIcon="close"
+                          matTooltip="Remove"
+                        ></mat-icon>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button
+                mat-flat-button
+                color="primary"
+                type="submit"
+                id="btnAdd"
+              >
+                Publish
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

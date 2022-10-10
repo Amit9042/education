@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.982" height="34" viewBox="0 0 21.982 34">
+    <defs>
+        <style>
+            .prefix__cls-2speed{fill:#f2b255}
+        </style>
+    </defs>
+    <g id="prefix__bolt" transform="translate(-40.361)">
+        <path id="prefix__Path_15822" fill="#ffc674" d="M159.669 0h11.32a.611.611 0 0 1 .541.895l-6.979 13.33a.651.651 0 0 0 .658.948l9.618-1.211a.5.5 0 0 1 .434.826l-17.041 19.1a.315.315 0 0 1-.528-.327l5.135-12.889a.483.483 0 0 0-.586-.642l-7.886 2.332a.739.739 0 0 1-.931-.869l4.459-20.067A1.828 1.828 0 0 1 159.669 0z" data-name="Path 15822" transform="translate(-113.046)"/>
+        <g id="prefix__Group_22091" data-name="Group 22091" transform="translate(44.621)">
+            <path id="prefix__Path_15823" d="M239.09.894l-6.979 13.33a.651.651 0 0 0 .659.948l4.123-.519a.641.641 0 0 1 .062-.429l6.979-13.33a.611.611 0 0 0-.542-.894h-4.844a.611.611 0 0 1 .542.894z" class="prefix__cls-2speed" data-name="Path 15823" transform="translate(-230.071)"/>
+            <path id="prefix__Path_15824" d="M224.383 176.31l-4.284.54a.49.49 0 0 1-.126.286L210.5 187.76l-3.249 8.154a.315.315 0 0 0 .528.327l17.041-19.1a.5.5 0 0 0-.437-.831z" class="prefix__cls-2speed" data-name="Path 15824" transform="translate(-207.223 -162.348)"/>
+        </g>
+    </g>
+</svg>

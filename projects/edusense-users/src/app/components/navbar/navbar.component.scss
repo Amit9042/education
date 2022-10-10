@@ -1,0 +1,24 @@
+@import "../../../assets/scss/abstracts/abstracts";
+
+.file-upload-notification {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+::ng-deep {
+    .mat-tooltip-class-here {
+        white-space: pre-line;
+    }
+}
+
+.profile-view-phone {
+    @include respond('phone') {
+        line-height: 2rem !important;
+    }
+}
+
+.dropdown-list{
+    a{
+        margin-bottom:0 !important;
+    }
+}

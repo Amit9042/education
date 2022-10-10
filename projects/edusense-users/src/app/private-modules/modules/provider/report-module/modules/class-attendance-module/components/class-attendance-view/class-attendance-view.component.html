@@ -1,0 +1,206 @@
+<div class="class-view-container">
+  <div class="class-view">
+    <div class="class-view__header">
+      <a (click)="onAttendanceList()" id="lnkClassList">
+        <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+      </a>
+      <h2>Session Attendance Details</h2>
+    </div>
+    <div class="class-view__details">
+      <div class="class-view__details__class-head">
+        <img *ngIf="attendanceDetails?.teacher_avatar_thumbnail" [src]="attendanceDetails?.teacher_avatar_thumbnail"
+             alt="">
+        <mat-icon *ngIf="!(attendanceDetails?.teacher_avatar_thumbnail)" svgIcon="studentProfile"></mat-icon>
+        <div>
+          <h3>{{attendanceDetails?.teacher_name | checkEmpty}}</h3>
+          <p>Teacher</p>
+        </div>
+      </div>
+      <div class="class-view__details__data">
+        <label>Session name</label>
+        <span>{{attendanceDetails?.class_name | checkEmpty}}</span>
+      </div>
+      <div class="class-view__details__data">
+        <label>Start Time</label>
+        <span>{{attendanceDetails?.session_started_at | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      </div>
+      <div class="class-view__details__data">
+        <label>End Time</label>
+        <span>{{attendanceDetails?.session_ended_at | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      </div>
+      <div class="class-view__details__data">
+        <label>Duration</label>
+        <span>{{getDuration(attendanceDetails?.duration)}}</span>
+      </div>
+      <a class="class-view__details__data" (click)="onGetAttendedStudentList(2)">
+        <label>Total</label>
+        <span>{{attendanceDetails?.total_student | checkEmpty}}</span>
+      </a>
+      <a class="class-view__details__data" (click)="onGetAttendedStudentList(1)">
+        <label>Present</label>
+        <span>{{attendanceDetails?.present_student | checkEmpty}}</span>
+      </a>
+      <a class="class-view__details__data" (click)="onGetAttendedStudentList(0)">
+        <label>Absent</label>
+        <span>{{attendanceDetails?.absent_student | checkEmpty}}</span>
+      </a>
+    </div>
+    <!-- <div class="class-view__body">
+      <div>
+        <label>Class Name</label>
+        <span>{{attendanceDetails?.class_name | checkEmpty}}</span>
+      </div>
+      <div>
+        <label>Teacher</label>
+        <span>{{attendanceDetails?.teacher_name | checkEmpty}}</span>
+      </div>
+      <div>
+        <label>Start Time</label>
+        <span>{{attendanceDetails?.session_started_at | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      </div>
+      <div>
+        <label>End Time</label>
+        <span>{{attendanceDetails?.session_ended_at | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      </div>
+      <div>
+        <label>Duration</label>
+        <span>{{getDuration(attendanceDetails?.duration)}}</span>
+      </div>
+      <div>
+        <label>Total Student</label>
+        <span>{{attendanceDetails?.total_student | checkEmpty}}</span>
+      </div>
+      <div>
+        <label>Present Student</label>
+        <span>{{attendanceDetails?.present_student | checkEmpty}}</span>
+      </div>
+      <div>
+        <label>Absent Student</label>
+        <span>{{attendanceDetails?.absent_student | checkEmpty}}</span>
+      </div>
+
+    </div> -->
+    <div class="class-view__bottom">
+      <h2>Attendance</h2>
+      <div class="waiting-room-container meeting-room-container">
+        <div class="waiting-room meeting-room">
+          <div class="waiting-room__top">
+            <div class="row align-center">
+              <div class="col-md-6 col-sm-6 col-xs-12 xs-PLR-0 small-pad-0">
+                <div class="row">
+                  <div class="col-md-10 col-sm-12 col-xs-12 PLR-0">
+                    <div class="header__search header__search-white">
+                      <div class="header__search--input">
+                        <input id="txtSearch" type="text" autocomplete="off"
+                               placeholder="Search..." [formControl]="searchByName"/>
+                        <mat-icon svgIcon="search"></mat-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="waiting-room__body meeting-room__body height-box class-table-container">
+
+            <div class="attendance-table-body" [ngClass]="{ 'table-body': attendedStudentsList.length !== 0}"
+                 infiniteScroll [scrollWindow]="false"
+                 (scrolled)="onScroll()">
+              <table class="table attendance-table" matSort mat-table [dataSource]="attendedStudentsList">
+
+                <!-- student column -->
+                <ng-container matColumnDef="student">
+                  <th width="30%" mat-header-cell *matHeaderCellDef>
+                    <span mat-sort-header>Student</span>
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div class="visitors-info">
+                      <div class="row align-center">
+                        <div class="visitors-info__left">
+                          <div class="visitor-image">
+                            <img *ngIf="element?.user_details?.avatar_thumbnail"
+                                 [src]="element?.user_details?.avatar_thumbnail"/>
+                            <mat-icon *ngIf="!(element?.user_details?.avatar_thumbnail)"
+                                      svgIcon="studentProfile"></mat-icon>
+                          </div>
+                          <div class="visitor-details">
+                            <h4>{{ element?.user_details?.student_name }}
+                            </h4>
+                            <p class="location">
+                              {{element?.student_details?.student_city?.city_name}}
+                              , {{element?.student_details?.student_state?.state_name}},
+                              {{element?.student_details?.student_country?.country_name}}
+                            </p>
+                            <p class="visit-type">{{element?.student_details?.school_name | checkEmpty}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </td>
+                </ng-container>
+
+                <!-- duration column -->
+                <ng-container matColumnDef="duration">
+                  <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Duration</span>
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ getDuration(element?.duration) }}
+                    <a (click)="onSessionHistory(element)" *ngIf="element?.duration !== 0">
+                      <mat-icon svgIcon="info_1"></mat-icon>
+                    </a>
+                  </td>
+                </ng-container>
+
+                <!-- present column -->
+                <ng-container matColumnDef="present">
+                  <th width="10%" mat-header-cell *matHeaderCellDef>
+                    <span>Status</span>
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ (element?.is_present === 0) ? 'Absent' : 'Present' }}
+                  </td>
+                </ng-container>
+
+                <!-- reason column -->
+                <!-- <ng-container matColumnDef="reason">
+                  <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Absent Reason</span>
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element?.absent_reason_id | checkEmpty }}
+                  </td>
+                </ng-container> -->
+
+                <!-- remarks column -->
+                <!-- <ng-container matColumnDef="remarks">
+                  <th width="20%" mat-header-cell *matHeaderCellDef>
+                    <span>Remarks</span>
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="PR-1">
+                    {{ element?.remarks | checkEmpty }}
+                  </td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+            </div>
+
+            <div *ngIf="!isLoadingResults && attendedStudentsList.length===0" class="no-records-found">
+              <div class="no-content-found-wrapper">
+                <mat-icon svgIcon="no-student"></mat-icon>
+                <p>No students Available </p>
+                <span>No students in class</span>
+              </div>
+            </div>
+            <div class="loader-data" *ngIf="isLoadingResults">
+              <label>Loading...</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

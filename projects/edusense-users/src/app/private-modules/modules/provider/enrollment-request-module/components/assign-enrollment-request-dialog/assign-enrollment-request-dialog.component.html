@@ -1,0 +1,70 @@
+<div class="meeting-dialog-wrapper enrollment-request-dialog-container">
+  <div class="meeting-dialog__head">
+    <h4>Enrollment Request</h4>
+    <a (click)="onCloseDialog(false)" id="lnkClose">
+      <mat-icon svgIcon="close" matTooltip="Close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="assignEnrollmentForm" (ngSubmit)="onSubmitAssignEnrollmentForm(assignEnrollmentForm)">
+            <div class="text-center user-details-basic">
+              <img *ngIf="enrllDetail?.user_details?.avatar_thumbnail" [src]="enrllDetail?.user_details?.avatar_thumbnail" />
+              <mat-icon *ngIf="!enrllDetail?.user_details?.avatar_thumbnail" svgIcon="providerProfile"></mat-icon>
+              <span>{{enrllDetail?.user_details?.first_name + " " + enrllDetail?.user_details?.last_name}}</span>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 pad-right-0">
+                <div class="form-control">
+                  <!-- <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectGrade" formControlName="grade" placeholder="Select grade" (selectionChange)="getParentClassList($event)">
+                      <mat-option *ngFor="let grade of gradelist" [value]="grade.grade_id">{{grade.alias}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="isRequiredField(formControls['grade'])">
+                      {{validationMsg.GRADE}}</mat-error>
+                  </mat-form-field> -->
+                  <app-ss-select-search id="matSelectGrade" [formName]="assignEnrollmentForm"
+                  [selectConfig]="gradeSearchConfig" [selected]="" [dataList]="gradelist"
+                  (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                </app-ss-select-search>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 PR-0 pad-left-0">
+                <div class="form-control">
+                  <!-- <mat-label>Assign Parent Class*</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectClass" formControlName="parent_class_ids" placeholder="Select Parent Class" multiple>
+                      <mat-option *ngFor="let class of parentClassList" [value]="class.parent_class_id">{{class.class_name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="isRequiredField(formControls['parent_class_ids'])">{{ validationMsg.ASSIGN_CLASS }}
+                    </mat-error>
+                  </mat-form-field> -->
+                  <app-ss-select-search id="matSelectParentClass" [formName]="assignEnrollmentForm"
+                    [selectConfig]="parentClassSearchConfig" [selected]="" [dataList]="parentClassList"
+                    (changSelectEvent)="onSelectChangeEvent($event, 'parent_class')">
+                  </app-ss-select-search>
+                </div>
+                <div>
+                  <mat-checkbox formControlName="assign_session">Assign all the session of the above <br>mentioned classes</mat-checkbox>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button id="btnCancel" (click)="onCloseDialog(false)" type="button" mat-button>
+                Cancel
+              </button>
+              <button id="btnAssign" mat-flat-button color="primary" type="submit">
+                Assign
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

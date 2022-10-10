@@ -1,0 +1,12 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.class-view-container {
+    .class-view {
+        &__body {
+            &__view {
+                @include respond('phone') {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

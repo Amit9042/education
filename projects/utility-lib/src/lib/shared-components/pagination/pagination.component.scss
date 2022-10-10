@@ -1,0 +1,149 @@
+@import "../../../assets/scss/abstracts/abstracts";
+
+.custom-pagination-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // margin-right: 2rem;
+  
+  .text-page {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 4rem;
+    margin-right: 1rem;
+
+    @include respond('tablet'){
+      font-size: 1.2rem;
+    }
+  }
+
+  &__show-row {
+    // @include hideInMobile();
+    display: inline-block;
+    margin-right: 1rem;
+
+    .custom-icon {
+      background: $white-color;
+      position: relative;
+      vertical-align: top;
+      z-index: 1;
+      height: 4rem !important;
+      display: inline-block;
+      border-radius: 0.5rem;
+
+      &:after {
+        height: 1rem;
+        width: 1.2rem;
+        background-size: 1rem;
+        position: absolute;
+        content: "";
+        right: 0.8rem;
+        top: 1.6rem;
+        background: url("./../../../assets/images/svg_files/down.svg") no-repeat;
+        z-index: -1;
+      }
+    }
+
+    select {
+      font-family: $font-family;
+      border: 1px solid rgba($black-color, 0.2);
+      background: transparent;
+      width: 7rem;
+      height: 4rem;
+      padding: 1rem;
+      cursor: pointer;
+      border-radius: 0.3rem;
+      font-size: 1.6rem;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      text-align: left;
+
+      @include respond('tablet'){
+        width: 6rem;
+        font-size: 1.4rem;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__go-to {
+    // @include hideInMobile();
+    display: inline-block;
+    margin-right: 2rem;
+
+    input {
+      font-family: $font-family;
+      background: $white-color;
+      border: 1px solid rgba($black-color, 0.2);
+      vertical-align: top;
+      border-radius: 0.3rem;
+      width: 5rem;
+      height: 4rem;
+      padding: 0.5rem;
+      font-size: 1.6rem;
+      text-align: center;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__details {
+    display: inline-block;
+    margin-right: 1rem;
+
+    @include respond('tablet'){
+      margin-right: 0.5rem;
+    }
+  }
+
+  &__next-prev {
+    display: inline-block;
+
+    button {
+      position: relative;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+
+    .previous-next {
+      background: $grey-color-3;
+      @include square(3rem);
+      line-height: 3rem;
+      border-radius: 3px;
+      border: 0.1rem solid #c7cfd4;
+
+      &:hover {
+        background: $grey-color-3;
+      }
+
+      &--next {
+        margin-left: 1rem;
+
+        @include respond('tablet'){
+          margin-left: 0.5rem;
+        }
+      }
+
+      mat-icon {
+        color: $black-color;
+        width: 1.2rem;
+        line-height: 3rem;
+        position: relative;
+        top: -3px;
+      }
+    }
+  }
+}

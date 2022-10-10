@@ -1,0 +1,19 @@
+@import "../../../../../../../assets/scss/abstracts/abstracts";
+
+::ng-deep {
+    .mat-tooltip-class-here {
+     white-space: pre-line;
+    }
+   }
+
+   .xs-P2{
+       @include respond("phone"){
+           padding: 2rem !important;
+       }
+   }
+
+   mat-icon{
+       &.note-btn{
+           @include square(2.4rem);
+       }
+   }

@@ -1,0 +1,57 @@
+<div class="selection-container">
+    <div class="selection-header">
+        <h2>Choose your subject</h2>
+        <div class="selection-dropdown">
+            <div class="form-control">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select id="matSelectSubject" placeholder="Subject" [formControl]="subjects" multiple>
+                        <mat-select-trigger>
+                            {{subjects.value && subjects.value.length ? subjects.value[0].name : ''}}
+                            <span *ngIf="subjects.value?.length > 1" class="example-additional-selection">
+                                (+{{ subjects.value.length - 1 }} More)
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let subject of subjectList" [value]="subject">{{
+                            subject.name
+                            }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="selection-body">
+        <ul>
+            <li>
+                <a (click)="onGradeUrl()" id="lnkGrade">Grade ({{practiceFilterData.grade_name}})</a>
+            </li>
+            <li>
+                <a id="lnkSubject" class="active">Subject</a>
+            </li>
+        </ul>
+
+        <div class="grade-wrapper subject-wrapper">
+            <div class="subject-wrap" *ngFor="let subject of filteredSubject; let j = index; ">
+                <a [id]="'lnkSubjectName' + j"
+                    (click)="onPracticeListOpen(subject?.subject_id,subject?.name, subject?.logo)"
+                    class="grades subjects">
+                    <mat-icon *ngIf="!subject.logo" svgIcon="defaultSubject"></mat-icon>
+                    <img *ngIf="subject.logo" [src]="subject?.logo" (error)="onError($event)" />
+                </a>
+                <h6>{{subject.name}}</h6>
+                <!-- <p>10 Practice</p> -->
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div *ngIf="!subjectList.length" class="no-content-found-wrapper">
+            <mat-icon svgIcon="noSubject"></mat-icon>
+            <p>No subject available</p>
+        </div>
+    </div>
+
+    <app-data-loading *ngIf="false"></app-data-loading>
+</div>

@@ -1,0 +1,30 @@
+<div class="other-course-details-container">
+    <div class="other-course-details">
+        <h3>Other Courses</h3>
+
+        <a *ngFor="let i of [1,2,3,4,5]; let j=index;"
+            class="other-course-details__boxes">
+            <div class="other-course-details__boxes__img">
+                <img src="assets/images/course-banner.png">
+            </div>
+    
+            <div class="other-course-details__boxes__details">
+                <h4>Advanced Malware Analysis: Ransomware</h4>
+                <small>David Hedley</small>
+    
+                <div
+                    class="other-course-details__boxes__details__bottom">
+                    <div class="row">
+                        <div class="col-md-6 PL-0">
+                            <span>2hr 40m</span>
+                        </div>
+    
+                        <div class="col-md-6 text-right PR-0">
+                            <mat-icon svgIcon="bookmark"></mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

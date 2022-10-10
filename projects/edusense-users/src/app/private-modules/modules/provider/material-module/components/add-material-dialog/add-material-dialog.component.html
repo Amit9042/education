@@ -1,0 +1,132 @@
+<div class="meeting-dialog-wrapper">
+  <div class="meeting-dialog__head">
+    <h4>{{isEditMode ? "Update Material" : "Add Material"}}</h4>
+    <a (click)="onCloseDialog(false)">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom xs-P2">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="addMaterialForm" (ngSubmit)="onSubmitAddMaterialForm(addMaterialForm)">
+
+            
+
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12 PL-0 pad-right-0 xs-PR-0">
+                <div class="form-control">
+                  <app-ss-select-search [formName]="addMaterialForm" [selectConfig]="gradeSearchConfig"
+                    [selected]="selectedGrades" [dataList]="gradeList"
+                    (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                  </app-ss-select-search>
+                </div>
+              </div>
+              
+                <div class="col-md-6 col-sm-6 col-xs-12 PR-0 pad-left-0 xs-PL-0">
+                  <div class="form-control">
+                    <app-ss-select-search [formName]="addMaterialForm" [selectConfig]="subjectSearchConfig"
+                      [selected]="selectedSubjects" [dataList]="subjectList"
+                      (changSelectEvent)="onSelectChangeEvent($event, 'subject')">
+                    </app-ss-select-search>
+                  </div>
+                </div>
+              
+            </div>
+
+
+            <!-- SUBJECT WITH MAT-AUTO-CHIPS -->
+            
+
+            <div class="row">
+              <div class="col-md-12 PLR-0">
+              <div class="form-control">
+            <mat-label>Material Type*</mat-label>
+            <mat-form-field appearance="outline" floatLabel="always">
+              <mat-select id="matSelectTimeZone" (selectionChange)="onMaterialTypeChange($event)" placeholder="Select" formControlName="material_type_id">
+                <mat-option *ngFor="let type of materialType | keyvalue" [value]="type.value">{{type.key}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+              </div>
+              </div>
+            </div>
+
+            <!-- NAME FIELD -->
+            <div class="row" *ngIf="isEditMode || formControls['material_type_id'].value == 2">
+              <div class="col-md-12 PLR-0">
+                <div class="form-control">
+                  <mat-label>Name*</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <input formControlName="name" type="text" autocomplete="off" matInput placeholder="Enter name" />
+                    <mat-error *ngIf="isRequiredField(formControls['name'])">
+                      {{ validationMsg.NAME }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="formControls['material_type_id'].value == 2">
+                <div class="col-md-12 PLR-0">
+                  <div class="form-control">
+                    <mat-label>Link*</mat-label>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                      <input formControlName="file_path" type="text" autocomplete="off" matInput placeholder="Enter link" />
+                      <mat-error *ngIf="isRequiredField(formControls['file_path'])">
+                          {{ validationMsg.LINK }}
+                      </mat-error>
+                      <mat-error *ngIf="isValidField(formControls['file_path'])">
+                          {{ validationMsg.LINK_VALID }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                
+              </div>
+
+            
+            <!-- UPLOAD ATTACHEMNT BUTTON -->
+            <div *ngIf="formControls['material_type_id'].value == 1">
+              <div *ngIf="uploadMaterialFile.length == 0">
+                <button (click)="onBrowseFile('upload')" mat-flat-button
+                  color="primary" type="button" class="upload-material">
+                  <mat-icon svgIcon="link"></mat-icon>
+                  <span>Upload material</span>
+                </button>
+                <mat-icon class="ML-1 note-btn" matTooltipClass="mat-tooltip-class-here" svgIcon="info" matTooltip="{{filterTypeShow}}"></mat-icon>
+                <input multiple type="file" hidden id="upload" (change)="onFileUpload($event)" />
+              </div>
+
+              <!-- WHEN ATTACHMENT IS ALREADY UPLOADED -->
+              <div *ngIf="uploadMaterialFile.length > 0">
+                <div class="file-name">
+                  <div class="file-name-details"  *ngFor="let file of uploadMaterialFile[0]?.files;let i = index">
+                  <mat-icon [svgIcon]="getFileIcon(uploadMaterialFile[0].files[0].type)" class="file-icon"></mat-icon>
+                  <span>{{file.name}}</span>
+                  <a *ngIf="!isEditMode" (click)="removeFiles(i)">
+                    <mat-icon svgIcon="close"></mat-icon>
+                  </a>
+                </div>
+                </div>
+              </div>
+            </div>
+            
+              
+
+            <div class="button-group">
+              <button type="button" (click)="onCloseDialog(false)" mat-button>Cancel</button>
+
+              <!--BELOW  BUTTON TEXT WOULD COME AS "ADD" OR "UPDATE"  BASED ON add material OR edit material DIALOG -->
+              <button mat-flat-button color="primary" type="submit">
+                {{isEditMode ? "Update" : "Add"}}
+              </button>
+            </div>
+            
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

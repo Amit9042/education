@@ -1,0 +1,292 @@
+// --------------------------------------------------------------------------------------
+// ================================== Mixin common methods  =============================
+// --------------------------------------------------------------------------------------
+
+//
+// Clearfix
+//
+@mixin clearfix {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+//
+// Background color mixin
+//
+@mixin bgClr($backgroundColor, $color, $borderColor) {
+    background-color: $backgroundColor;
+    border-color: $borderColor;
+    color: $color;
+}
+
+//
+// height-width mixin
+//
+@mixin square($size) {
+    height: $size;
+    width: $size;
+}
+
+//
+// Progress bar color
+//
+@mixin progressBarClr($backgroundColor) {
+    .mat-progress-bar-buffer {
+        background-color: lighten($backgroundColor, 25%);
+    }
+    .mat-progress-bar-fill {
+        &::after {
+            background-color: $backgroundColor !important;
+        }
+    }
+}
+
+/*form field focus*/
+@mixin focus($color) {
+    &:focus {
+        border-color: $color;
+
+        & + label {
+            color: $color;
+
+            &::before {
+                color: $color;
+            }
+        }
+    }
+}
+
+/*borders*/
+@mixin border($color) {
+    border: 0.1rem solid $color;
+}
+
+//
+// Border Radius mixin
+//
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+//
+// Elipsis mixin
+//
+@mixin elipsis($width) {
+    width: $width;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+//
+// Item Align mixins
+//
+@mixin align($align, $justify) {
+    align-self: $align;
+    text-align: $justify;
+}
+
+//
+// Nth child For loop Mixin
+//
+@mixin forLoopNthChild($start, $end, $arrayName) {
+    @for $i from $start through $end {
+        &:nth-child(#{$i}) {
+            a {
+                color: nth($arrayName, $i);
+            }
+        }
+    }
+}
+
+//
+// Conditional Media Query mixin
+//
+
+@mixin respond($breakPoint) {
+    @if $breakPoint == iphone {
+        @media (max-width: 320px) {
+            // 37.5 em
+            @content;
+        }
+    }
+
+    @if $breakPoint == phone {
+        @media (max-width: 600px) {
+            @content;
+        }
+    }
+
+    @if $breakPoint == tab-port {
+        @media (min-width: 600px) and (max-width: 1024px) {
+            // 56.25 em
+            @content;
+        }
+    }
+
+    @if $breakPoint == tablet {
+        @media (min-width: 768px) and (max-width: 1024px) {
+            // 56.25 em
+            @content;
+        }
+    }
+
+    @if $breakPoint == small-desktop {
+        @media (min-width: 1025px) and (max-width: 1279px) {
+            @content;
+        }
+    }
+
+    @if $breakPoint == regular-desktop {
+        @media (min-width: 1280px) and (max-width: 1440px) {
+            @content;
+        }
+    }
+
+    @if $breakPoint == medium-desktop {
+        @media (min-width: 1441px) and (max-width: 1600px) {
+            @content;
+        }
+    }
+
+    @if $breakPoint == large-desktop {
+        @media (max-width: 1900px) {
+            @content;
+        }
+    }
+}
+
+//
+// placeholder mixin
+//
+@mixin placeholder($color, $size) {
+    ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: $color;
+        font-size: $size;
+    }
+    ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: $color;
+        font-size: $size;
+    }
+    :-ms-input-placeholder {
+        /* IE 10+ */
+        color: $color;
+        font-size: $size;
+    }
+    :-moz-placeholder {
+        /* Firefox 18- */
+        color: $color;
+        font-size: $size;
+    }
+}
+
+/*placeholder*/
+@mixin placeholder-color($color) {
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: $color !important;
+    }
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+        /* Firefox 19+ */
+        color: $color !important;
+    }
+    input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder {
+        /* IE 10+ */
+        color: $color !important;
+        font-weight: 600 !important;
+    }
+    input:placeholder,
+    textarea:placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $color !important;
+        opacity: 1; /* Firefox */
+    }
+}
+
+@mixin placeholder-size($size) {
+    ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        font-size: $size;
+    }
+    ::-moz-placeholder {
+        /* Firefox 19+ */
+        font-size: $size;
+    }
+    :-ms-input-placeholder {
+        /* IE 10+ */
+        font-size: $size;
+    }
+    :-moz-placeholder {
+        /* Firefox 18- */
+        font-size: $size;
+    }
+}
+
+@mixin modalOuterWidth {
+    max-width: 100vw !important;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+@mixin modalInnerWidth {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+@mixin position-values(
+    $position,
+    $top,
+    $left,
+    $height,
+    $width,
+    $backgrond: ''
+) {
+    position: $position;
+    top: $top;
+    left: $left;
+    height: $height;
+    width: $width;
+    background: $backgrond;
+}
+
+/*transition*/
+@mixin transition {
+    -webkit-transition: 0.3s all ease-in;
+    -moz-transition: 0.3s all ease-in;
+    -o-transition: 0.3s all ease-in;
+    transition: 0.3s all ease-in;
+}
+
+// text-selection
+@mixin textSelectionNone {
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+@mixin positionvalues($position, $top, $left, $height, $width, $backgtound) {
+    position: $position;
+    top: $top;
+    left: $left;
+    height: $height;
+    width: $width;
+    background: $backgtound;
+}

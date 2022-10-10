@@ -1,0 +1,48 @@
+<div class="chat-container">
+  <div class="chat-container__head">
+    <h4>Chat</h4>
+    <a (click)="onCloseChat()">
+      <mat-icon svgIcon="close" matTooltip="Close"></mat-icon>
+    </a>
+  </div>
+  <div class="chat-container__bottom">
+    <div class="chat-container__bottom--body">
+      <div *ngFor="let info of [0, 1, 2, 3, 4, 5]; let i = index">
+        <div class="chat-container__bottom-left">
+          <div><img src="./assets/images/student_picture.jpg" alt="" /></div>
+          <div class="chat-message">
+            <h4>Samuel Groth<span>·</span><span>12:10 PM</span></h4>
+
+            <p>
+              There are many variations of passages of Lorem Ipsum available,
+              but the majority
+            </p>
+          </div>
+        </div>
+        <div class="chat-container__bottom-right">
+          <!-- <div><img src="./assets/images/student_picture.jpg" alt="" /></div> -->
+          <div class="chat-message">
+            <h4><span>12:10 PM</span></h4>
+            <p>
+              The standard chunk of Lorem
+            </p>
+            <p>
+              The standard chunk of Lorem
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-footer">
+    <div class="chat-footer__input">
+      <input placeholder="Send a message everyone" />
+      <button mat-icon-button class="mat-left">
+        <mat-icon svgIcon="smileys" matTooltip="Emoji"></mat-icon>
+      </button>
+      <button mat-icon-button class="mat-right">
+        <mat-icon svgIcon="interface" matTooltip="Send"></mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

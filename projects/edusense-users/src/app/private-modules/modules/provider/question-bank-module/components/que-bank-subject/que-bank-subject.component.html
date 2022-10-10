@@ -1,0 +1,55 @@
+<div class="selection-container">
+    <div class="selection-header">
+        <h2>Choose your subject</h2>
+        <div class="selection-dropdown">
+            <div class="form-control">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select placeholder="Subject" [formControl]="subjects" multiple>
+                        <mat-select-trigger>
+                            {{subjects.value && subjects.value.length ? subjects.value[0].name : ''}}
+                            <span *ngIf="subjects.value?.length > 1" class="example-additional-selection">
+                                (+{{ subjects.value.length - 1 }} More)
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let subject of subjectList" [value]="subject">{{
+                            subject.name
+                            }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="selection-body">
+        <ul>
+            <li>
+                <a (click)="onGradeUrl()">Grade ({{questionBankFilterData.grade_name}})</a>
+            </li>
+            <li>
+                <a class="active">Subject</a>
+            </li>
+        </ul>
+
+        <div class="grade-wrapper subject-wrapper">
+            <div class="subject-wrap" *ngFor="let subject of filteredSubject; let i = index; ">
+                <a class="grades subjects" (click)="onChapterSelection(subject?.subject_id,subject?.name,subject?.logo)"
+                    [id]="'lnkSubject-'+i">
+                    <mat-icon *ngIf="!subject.logo" svgIcon="defaultSubject"></mat-icon>
+                    <img *ngIf="subject.logo" [src]="subject?.logo" (error)="onError($event)" />
+                </a>
+                <h6>{{subject.name}}</h6>
+                <!-- <p>{{subject.material_count}} {{subject.material_count > 1 ? 'Materials' : 'Material'}}</p> -->
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!filteredSubject.length">
+        <div class="no-content-found-wrapper">
+            <mat-icon svgIcon="noSubject"></mat-icon>
+            <p>No subject available</p>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,57 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.assignment-view-container {
+    background-color: $white-color;
+    justify-content: left;
+    margin: 0 4.4rem;
+    padding: 0 6rem;
+    @include respond('tab-port') {
+        margin: 0;
+        padding: 3rem;
+    }
+    @include respond('phone') {
+        margin: 0;
+        padding: 0 1rem;
+    }
+    &__content {
+        &__head {
+            background-color: $white-color;
+            border-bottom: 1px solid rgba($primary-color, 0.2);
+            position: fixed;
+            width: calc(100% - 28rem);
+            margin-bottom: 0;
+            padding: 6.4rem 0 3rem;
+            z-index: 2;
+            @include respond('tab-port') {
+                width: calc(100% - 14rem);
+                padding: 0 0 3rem;
+            }
+            @include respond('phone') {
+                width: calc(100% - 2rem);
+                padding: 2rem 0 3rem;
+            }
+        }
+        &__footer {
+            // margin-top: 9rem;
+            margin-bottom: 3rem;
+            @include respond('tab-port') {
+                margin-top: 4rem;
+            }
+            @include respond('phone') {
+                margin-top: 4rem;
+            }
+        }
+    }
+    .assignment-details-container {
+        padding: 4rem 0;
+        max-height: unset;
+        height: unset;
+        @include respond('phone') {
+            padding: 0;
+        }
+        &__data {
+            label {
+                width: 20rem;
+            }
+        }
+    }
+}

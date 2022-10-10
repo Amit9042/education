@@ -1,0 +1,9 @@
+@import "../../../../../assets/scss/abstracts/abstracts";
+
+.confirmation-dialog-container {
+  width: 50rem;
+
+  @include respond ('phone'){
+    width: 100%;
+  }
+}

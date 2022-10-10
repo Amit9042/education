@@ -1,0 +1,65 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.other-course-details-container {
+    .other-course-details {
+        h3 {
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        &__boxes {
+            box-shadow: 0.5px 0.9px 7px 0 rgba(144, 144, 144, 0.21);
+            display: block;
+            border-radius: 0 1rem 1rem 0;
+            margin-bottom: 2rem;
+            width: 80%;
+
+            &__img {
+                display: inline-block;
+                width: 16rem;
+
+                img {
+                    width: 100%;
+                    vertical-align: bottom;
+                    border-radius: 1rem 0 0 1rem;
+                }
+            }
+
+            &__details {
+                vertical-align: top;
+                display: inline-block;
+                width: calc(100% - 16rem);
+                padding: 1rem 1rem 0 1rem;
+
+                h4 {
+                    color: $primary-color;
+                    font-weight: bold;
+                    font-size: 1.4rem;
+                    line-height: 1.29;
+                    height: 4rem;
+                }
+
+                small {
+                    color: $grey-color-12;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                }
+
+                &__bottom {
+                    margin-top: 2rem;
+
+                    span {
+                        color: $primary-color;
+                        font-weight: bold;
+                        font-size: 1.2rem;
+                    }
+
+                    mat-icon {
+                        @include square(1.5rem);
+                    }
+                }
+            }
+        }
+    }
+}

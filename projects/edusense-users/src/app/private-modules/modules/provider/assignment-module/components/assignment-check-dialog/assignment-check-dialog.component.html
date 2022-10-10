@@ -1,0 +1,74 @@
+<div class="meeting-dialog-wrapper assignment-check-dialog-container">
+  <div class="meeting-dialog__head">
+    <h4>Checking</h4>
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="createAssignmentForm" (ngSubmit)="onSubmitCreateAssignmentForm(createAssignmentForm)">
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0 MB-2">
+                <mat-label>Mark*</mat-label>
+                <mat-radio-group formControlName="action">
+                  <mat-radio-button value="1">Complete</mat-radio-button>
+                  <mat-radio-button value="2">Incomplete</mat-radio-button>
+                  <mat-radio-button value="3">Partially complete
+                    <!-- ENABLE WHILE SELECT PARTIALLY COMPLETED -->
+                    <div class="form-control">
+                      <mat-form-field [floatLabel]="'never'" appearance="outline">
+                        <input matInput type="text" id="txtPercentage" autocomplete="off" placeholder="%"
+                          formControlName="completionPercentage">
+                        <mat-error *ngIf="isRequiredField(formControls['completionPercentage'])">
+                          {{ validationMsg.PERCENTAGE }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidNumber(formControls['completionPercentage'])">
+                          {{validationMsg.PERCENTAGE_RANGE}}
+                        </mat-error>
+                        <mat-error *ngIf="isValidField(formControls['completionPercentage'])">
+                          {{ validationMsg.PERCENTAGE_VALID }}
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control-textarea">
+                  <mat-label>Remark</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <textarea id="txtRemark" formControlName="remarks" type="text" autocomplete="off" matInput
+                      placeholder="Enter remark"></textarea>
+                    <!-- <mat-error *ngIf="isRequiredField(formControls['remarks'])">
+                      {{validationMsg.REMARK}}
+                    </mat-error> -->
+                    <mat-error *ngIf="isValidLength(formControls['remarks'])">
+                      {{validationMsg.REMARK_LENGTH}}
+                    </mat-error>
+                    <mat-error *ngIf="isValidField(formControls['remarks'])">
+                      {{ validationMsg.REMARK_VALID }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="button-group">
+              <button mat-flat-button color="primary" type="submit" id="btnAdd">
+                Submit
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

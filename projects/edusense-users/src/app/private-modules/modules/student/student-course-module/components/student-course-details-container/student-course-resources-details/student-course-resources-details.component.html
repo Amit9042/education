@@ -1,0 +1,31 @@
+<div class="student-course-resources-container">
+    <div class="course-resources">
+        <div class="row">
+            <!-- <div *ngFor="let i of [1,2]; let j=index;" class="col-md-4">
+                <a (click)="onDocumentDownload()" class="course-resources__box">
+                    <div class="course-resources__box__body">
+                        <mat-icon class="icon-width" *ngIf="j === 0" svgIcon="file-format"></mat-icon>
+                        <mat-icon class="icon-width" *ngIf="j === 1" svgIcon="jpg"></mat-icon>
+                        <small>result.pdf</small>
+                    </div>
+                    <div class="course-resources__box__footer">
+                        <h5>Chemistry document</h5>
+                    </div>
+                </a>
+            </div> -->
+            <div *ngFor="let resource of resourceList; let i=index;" class="col-md-4">
+                <a (click)="resourceDownload(i)" class="course-resources__box">
+                    <div class="course-resources__box__body">
+                        <mat-icon class="icon-width" [svgIcon]="getFileIcon(resource?.content_mime_type)"></mat-icon>
+                    </div> 
+                    <div class="course-resources__box__footer">
+                        <h5>{{resource.title}}</h5>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="!resourceList.length">
+                <span>{{'' | placeNA}}</span>
+            </div>
+        </div>
+    </div>
+</div>

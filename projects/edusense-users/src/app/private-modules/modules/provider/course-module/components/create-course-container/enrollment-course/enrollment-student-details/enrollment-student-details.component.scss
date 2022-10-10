@@ -1,0 +1,174 @@
+@import '../../../../../../../../../assets/scss/abstracts/abstracts';
+
+.enrollment-student-course-container {
+    .enrollment-student-course {
+        margin-top: 2rem;
+        a {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.13;
+            color: $black-color-2;
+            text-decoration: none;
+
+            span {
+                color: $green-color;
+            }
+        }
+
+        &__section {
+            margin: 2rem 0;
+
+            &--header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                h4 {
+                    font-size: 2rem;
+                    font-weight: bold;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1.25;
+                    letter-spacing: normal;
+                    text-align: left;
+                    color: #203061;
+                }
+            }
+
+            &--body {
+                margin-top: 1.8rem;
+                border: 1px solid #dedede;
+                border-radius: 0.6rem;
+
+                &--panel {
+                    .panel-header {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-between;
+                        border-bottom: 1px solid #d1d4d8;
+
+                        &__left {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            width: 100%;
+                            justify-content: space-between;
+                            box-sizing: border-box;
+                            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+
+                            .mat-icon {
+                                vertical-align: bottom;
+                                margin-right: 0.8rem;
+                            }
+
+                            span {
+                                font-size: 2rem;
+                                font-weight: bold;
+                                line-height: 1.25;
+                                color: #203061;
+                            }
+
+                            span.time {
+                                font-size: 1.6rem;
+                                line-height: 1.28;
+                                color: $green-color !important;
+                                font-weight: 500;
+                            }
+
+                            &__text-width {
+                                float: left;
+                                width: 75%;
+
+                                mat-icon {
+                                    display: inline-block;
+                                    width: 4rem;
+                                    vertical-align: top !important;
+                                    position: relative;
+                                    top: 3px;
+                                }
+
+                                span {
+                                    display: inline-block;
+                                    width: calc(100% - 5rem);
+                                }
+                            }
+
+                            &__date-time-width {
+                                float: left;
+                                width: 25%;
+                            }
+                        }
+
+                        &__right {
+                            width: 5%;
+                            box-sizing: border-box;
+                            padding: 1.5rem;
+                            text-align: center;
+                            border-left: 1px solid #d1d4d8;
+
+                            a {
+                                display: inline-block;
+
+                                .mat-icon {
+                                    width: 1.5rem;
+                                    height: 1.5rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .panel-content {
+                        padding: 1rem 1.5rem 1rem 4.5rem;
+                        background-color: #f7f7f7;
+                        border-bottom: 1px solid #d1d4d8;
+                        display: none;
+
+                        &.content-expand {
+                            display: block;
+                        }
+
+                        &__video {
+                            display: flex;
+                            flex-direction: row;
+
+                            img {
+                                width: 11.5rem;
+                                height: 8.6rem;
+                                margin-right: 1.2rem;
+                                border-radius: 1rem;
+                            }
+
+                            span {
+                                font-size: 1.8rem;
+                                font-weight: bold;
+                                line-height: 1.28;
+                                color: #203061;
+                            }
+                        }
+
+                        &__file {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            margin-top: 1.5rem;
+
+                            .mat-icon {
+                                width: 2.8rem;
+                                height: 2.8rem;
+                            }
+
+                            span {
+                                font-size: 1.6rem;
+                                font-weight: 600;
+                                line-height: 1.25;
+                                color: #585e6b;
+                                padding-left: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

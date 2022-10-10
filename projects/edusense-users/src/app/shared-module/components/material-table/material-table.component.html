@@ -1,0 +1,287 @@
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 PL-0">
+            <h2>{{ tableConfig?.name }}</h2>
+        </div>
+        <div class="col-md-6 PR-0 text-right">
+            <button
+                *ngIf="onShowClearSearch()"
+                type="button"
+                class="filter-button"
+                mat-flat-button
+                color="accent"
+                id="btnClear"
+                (click)="onClearFilter()"
+            >
+                Clear
+            </button>
+
+            <button
+                *ngIf="tableConfig?.addRecordLabel"
+                (click)="onAddRecord()"
+                class="ML-2"
+                mat-flat-button
+                type="button"
+                color="primary"
+                id="btnAdd"
+            >
+                <mat-icon svgIcon="add"></mat-icon>
+                {{ tableConfig?.addRecordLabel }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <table class="table" mat-table matSort [dataSource]="records">
+        <ng-container
+            *ngFor="let column of tableConfig.columns; let i = index"
+            [matColumnDef]="column?.columnName"
+        >
+            <th [width]="column?.width" mat-header-cell *matHeaderCellDef>
+                <div mat-sort-header [disabled]="!column?.sort">
+                    {{ column?.displayName }}
+                </div>
+                <div>
+                    <div
+                        class="form-control form-control--filter"
+                        [ngClass]="{
+                            'status-width': column?.filter?.type === 'dropdown'
+                        }"
+                    >
+                        <div *ngIf="column?.filter?.type === 'text'">
+                            <mat-form-field
+                                [ngClass]="column?.filter?.class"
+                                appearance="outline"
+                                floatLabel="always"
+                            >
+                                <input
+                                    type="text"
+                                    matInput
+                                    autocomplete="off"
+                                    [formControl]="
+                                        searchControls[
+                                            column?.filter?.controlName
+                                        ]
+                                    "
+                                    [placeholder]="column?.filter?.placeholder"
+                                    [id]="column?.filter?.id"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngIf="column?.filter?.type === 'dropdown'">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                [id]="column?.filter?.id"
+                            >
+                                <mat-select
+                                    [placeholder]="column?.filter?.placeholder"
+                                    [formControl]="
+                                        searchControls[
+                                            column?.filter?.controlName
+                                        ]
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let option of column?.filter
+                                                ?.options;
+                                            let i = index
+                                        "
+                                        [value]="option.value"
+                                        >{{ option?.name }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngIf="column?.filter?.type === 'dropdownMulti'">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                [id]="column?.filter?.id"
+                            >
+                                <mat-select
+                                    [placeholder]="column?.filter?.placeholder"
+                                    multiple
+                                    [formControl]="
+                                        searchControls[
+                                            column?.filter?.controlName
+                                        ]
+                                    "
+                                >
+                                    <mat-option
+                                        (click)="
+                                            onSelectAll(allSelected, column)
+                                        "
+                                        #allSelected
+                                        value="mat-option-all"
+                                        >All</mat-option
+                                    >
+
+                                    <mat-option
+                                        (click)="onSelect(allSelected, column)"
+                                        [value]="
+                                            getColumnValue(
+                                                option,
+                                                column?.metadata?.key
+                                            )
+                                        "
+                                        *ngFor="
+                                            let option of column?.filter
+                                                ?.options
+                                        "
+                                        >{{
+                                            getColumnValue(
+                                                option,
+                                                column?.metadata?.value
+                                            )
+                                        }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let element"
+                [ngClass]="{ action: column?.type === columnType.ACTION }"
+            >
+                <div
+                    id="lnkName"
+                    [ngClass]="{ 'image-data': column?.image }"
+                    *ngIf="
+                        !(
+                            column?.type === columnType.ACTION ||
+                            column?.type === columnType.STATUS
+                        )
+                    "
+                >
+                    <span *ngIf="column?.image">
+                        <span *ngIf="column?.type !== columnType.LINK">
+                            <img
+                                *ngIf="column?.image?.keyPath"
+                                [src]="
+                                    getColumnValue(
+                                        element,
+                                        column?.image?.keyPath
+                                    )
+                                "
+                            />
+                            <mat-icon
+                                *ngIf="!column?.image?.keyPath"
+                                [svgIcon]="column?.image?.placeholder"
+                            ></mat-icon>
+                        </span>
+                        <span *ngIf="column?.type === columnType.LINK">
+                            <a (click)="onColumnClick(column, element)">
+                                <img
+                                    *ngIf="column?.image?.keyPath"
+                                    [src]="
+                                        getColumnValue(
+                                            element,
+                                            column?.image?.keyPath
+                                        )
+                                    "
+                                />
+                                <mat-icon
+                                    *ngIf="!column?.image?.keyPath"
+                                    [svgIcon]="column?.image?.placeholder"
+                                >
+                                </mat-icon>
+                            </a>
+                        </span>
+                    </span>
+
+                    <span *ngIf="column?.type === columnType.LINK">
+                        <a (click)="onColumnClick(column, element)">{{
+                            getColumnValue(element, column?.keyName)
+                                | checkEmpty
+                        }}</a>
+                    </span>
+
+                    <span
+                        *ngIf="
+                            !column?.type || column?.type === columnType.LABEL
+                        "
+                    >
+                        {{
+                            getColumnValue(element, column?.keyName)
+                                | checkEmpty
+                        }}
+                    </span>
+
+                    <span *ngIf="column?.type === columnType.DATE">
+                        {{
+                            dateFormat(
+                                getColumnValue(element, column?.keyName),
+                                column?.dateFormat
+                            ) | checkEmpty
+                        }}
+                    </span>
+                </div>
+
+                <div
+                    *ngIf="column?.type === columnType.STATUS"
+                    [class]="getClassForStatusType(element[column?.keyName])"
+                >
+                    {{ statusType[element[column?.keyName]] }}
+                </div>
+
+                <div
+                    *ngIf="column?.type === columnType.ACTION"
+                    class="hover-action"
+                >
+                    <span
+                        *ngFor="
+                            let button of column?.metadata?.buttons;
+                            let i = index
+                        "
+                    >
+                        <button
+                            *ngIf="
+                                button?.displayfn
+                                    ? button?.displayfn(element)
+                                    : true
+                            "
+                            [class]="button.class"
+                            mat-flat-button
+                            type="button"
+                            [id]="button.id"
+                            (click)="onActionChange(button.action, element)"
+                        >
+                            {{
+                                button.label
+                                    ? button.label
+                                    : button?.displayBtnLabel &&
+                                      button?.displayBtnLabel(element)
+                            }}
+                        </button>
+                    </span>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+    </table>
+
+    <div *ngIf="emptyList()">
+        <app-no-data></app-no-data>
+    </div>
+</div>
+
+<div class="page-footer" [ngClass]="{ 'display-none': emptyList() }">
+    <mat-paginator
+        #paginator
+        [length]="totalRecords"
+        [pageSize]="recordsPerPage"
+        [pageSizeOptions]="pageSizeOption"
+        (page)="onChangePagination($event)"
+    >
+    </mat-paginator>
+</div>

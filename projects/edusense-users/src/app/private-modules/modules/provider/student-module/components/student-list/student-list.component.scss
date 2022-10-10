@@ -1,0 +1,44 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.form-control {
+    input {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+    }
+}
+
+button {
+    &.action-button {
+        min-width: 4rem !important;
+        width: 4rem !important;
+        border-radius: 50%;
+        height: 4rem !important;
+        margin: 0;
+        padding: 0 0.5rem;
+        mat-icon {
+            @include square(3rem);
+        }
+    }
+}
+
+.meeting-room {
+    min-height: calc(100vh - 19.5rem);
+    @include respond('tab-port') {
+        min-height: calc(100vh - 15rem);
+    }
+    @include respond('phone') {
+        min-height: calc(100vh - 18.5rem);
+    }
+}
+
+.small-margin-2 {
+    @include respond('tablet') {
+        margin-bottom: 2rem;
+    }
+
+    @include respond('phone') {
+        margin-bottom: 2rem;
+    }
+}

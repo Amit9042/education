@@ -1,0 +1,117 @@
+<div class="meeting-dialog-wrapper add-que-dialog-container">
+    <div class="meeting-dialog__head">
+        <h4 *ngIf="data.subject">Add Question - <span>{{subjectName}}</span></h4>
+        <h4 *ngIf="data.detail">Edit Question - <span>{{subjectName}}</span></h4>
+        <a (click)="onCloseDialog()" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="meeting-dialog__bottom">
+        <div class="auth-container create-class-container">
+            <div class="auth-box">
+                <div class="auth-box__data">
+                    <form [formGroup]="askQuestionForm" (ngSubmit)="onSubmitAskQuestionForm(askQuestionForm)">
+                        <div class="scroll-data">
+                            <!-- YOUR QUESTION FIELD-->
+                            <div class="row">
+                                <div class="col-md-12 PLR-0">
+                                    <div class="form-control-textarea">
+                                        <mat-label>Your Question*</mat-label>
+                                        <mat-form-field appearance="outline" floatLabel="always">
+                                            <textarea formControlName="question" type="text" autocomplete="off" matInput
+                                                placeholder="Enter your question" id="txtQuestions"></textarea>
+                                            <mat-error *ngIf="isRequiredField(formControls['question'])">
+                                                {{ validationMsg.QUESTION }}
+                                            </mat-error>
+                                            <mat-error *ngIf="isValidLength(formControls['question'])">
+                                                {{validationMsg.QUESTION_LENGTH}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 PLR-0">
+                                    <mat-label>Description</mat-label>
+                                    <div class="form-control-description">                                        
+                                        <div class="form-control-textarea">
+                                            <mat-form-field appearance="outline" floatLabel="always">
+                                                <textarea formControlName="description" type="text" autocomplete="off"
+                                                    matInput placeholder="Enter description" id="txtDescription"
+                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="8"> </textarea>
+                                                <mat-icon (click)="onBrowseFile('doubtImage')" svgIcon="photo"
+                                                    matTooltip="upload image"></mat-icon>
+                                                <input type="file" hidden id="doubtImage" multiple
+                                                    (change)="onFileUpload($event)" />
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="upload-image-description">
+                                            <div formArrayName="imageDesc">
+                                                <ul>
+                                                    <li
+                                                        *ngFor="let image of imageDescFormArray.controls; let i = index">
+                                                        <span>&lt;</span>
+                                                        <span>{{i+1}}</span>
+                                                        <span>&gt;</span>
+                                                        <input type="text" [id]="'imgDesc-'+i" formControlName="{{i}}"
+                                                            placeholder="Enter description for image {{i+1}}" />
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="upload-image" *ngIf="selectedImage.length">
+                                            <p *ngFor="let image of selectedImage; let i = index">
+                                                <span>[{{i + 1}}] {{image.files[0].name}}
+                                                    <mat-icon [id]="'iconRemove-'+i" svgIcon="remove"
+                                                        matTooltip="remove" (click)="onRemoveImage(i)">
+                                                    </mat-icon>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <mat-error class="position-fix" *ngIf="isValidLength(formControls['description'])">
+                                        {{validationMsg.DESCRIPTION_LENGTH}}
+                                    </mat-error>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 PLR-0">
+                                    <div class="form-control">
+                                        <app-ss-select-search [formName]="askQuestionForm"
+                                            [selectConfig]="gradeSearchConfig" [selected]="selectedGrades"
+                                            [dataList]="gradeList"
+                                            (changSelectEvent)="onSelectChangeEvent($event, 'grade')"
+                                            id="matSelectGrade">
+                                        </app-ss-select-search>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 PLR-0">
+                                    <div class="form-control">
+                                        <app-ss-select-search [formName]="askQuestionForm"
+                                            [selectConfig]="teacherSearchConfig" [selected]="selectedTeachers" [dataList]="teacherList"
+                                            (changSelectEvent)="onSelectChangeEvent($event, 'teacher')"
+                                            id="matSelectTeacher">
+                                        </app-ss-select-search>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" (click)="onPreviewQuestion()" id="btnPreview" [ngClass]="{active: !askQuestionForm.valid}"
+                                mat-button [disabled]="!askQuestionForm.valid">Preview</button>
+
+                            <button id="btnSubmit" mat-flat-button color="primary" type="submit">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

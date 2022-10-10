@@ -1,0 +1,110 @@
+<form [formGroup]="formGroup">
+  <div class="question-list-container">
+    <div class="question-list">
+      <div class="question-list__header">
+        <div class="question-list__header__row">
+          <div class="question-list__header__row__left">
+            <a (click)="onBack()" matTooltip="Back">
+              <mat-icon svgIcon="backArrow"></mat-icon>
+            </a>
+          </div>
+
+          <div class="question-list__header__row__center">
+            <h4>{{practiceDetails?.practiseName | checkEmpty}}</h4>
+            <!--<span>{{subject?.name | checkEmpty}} &bull; Grade 6</span>-->
+            <span>{{subject?.name | checkEmpty}}</span>
+          </div>
+        </div>
+
+        <div class="question-list__header__action">
+          <div class="question-list__header__action__checkbox">
+          </div>
+          <div class="question-list__header__action__title">
+            <h5>Question List</h5>
+          </div>
+          <div class="question-list__header__action__filter">
+
+
+            <a [matMenuTriggerFor]="menuFilter" class="ML-1" matTooltip="Filter">
+              <mat-icon svgIcon="filter-round"></mat-icon>
+              <span *ngIf="questionStatusArray?.length > 0">{{questionStatusArray?.length}}</span>
+            </a>
+
+            <mat-menu class="filter-menu-dropdown" xPosition="before" #menuFilter="matMenu">
+
+              <div class="question-list-spacing">
+                <mat-radio-group (change)="onChangeStatus($event)">
+                  <mat-radio-button [value]="" id="radioAll">All</mat-radio-button>
+                  <mat-radio-button class="filter-menu-dropdown__radio--orange" [value]="questionStatus.SKIP"
+                                    id="radioSkipped">Skipped
+                  </mat-radio-button>
+                  <mat-radio-button class="filter-menu-dropdown__radio--green" [value]="questionStatus.CORRECT"
+                                    id="radioCorrect">Correct
+                  </mat-radio-button>
+                  <mat-radio-button class="filter-menu-dropdown__radio--red" [value]="questionStatus.WRONG"
+                                    id="radioWrong">Wrong
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-list__body" infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]="2"
+           [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+
+        <div formArrayName="questions" *ngFor="let question of formGroupArray.controls; let i = index">
+          <div [formGroupName]="i">
+
+            <div class="question-list__body__box-type">
+              <ul class="student-question-list">
+                <li
+                  *ngFor="let question of studentQuestionList; let j = index "
+                  (click)="onClickPreviousQuestion(question)">
+                  <mat-checkbox formControlName="chkSelectQue"></mat-checkbox>
+                  <a [ngClass]="{'disabled-question' : false, 'active' : questionDetail?.questionId === question?.questionId,
+                      'red-question' : question?.status === questionStatus.WRONG && (questionStatusArray.length === 0 || isIncludedStatus(questionStatus.WRONG)),
+                       'green-question' : question?.status === questionStatus.CORRECT && (questionStatusArray.length === 0 || isIncludedStatus(questionStatus.CORRECT)),
+                        'orange-question': question?.status === questionStatus.SKIP && (questionStatusArray.length === 0 || isIncludedStatus(questionStatus.SKIP)),
+                         'blue-question': question?.status === questionStatus.PARTIAL_CORRECT && (questionStatusArray.length === 0 || isIncludedStatus(questionStatus.PARTIAL_CORRECT))}">
+                    {{question?.questionSequence}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- FRONTEND DEVELOPER
+        BELOW DESIGN FOR NO DATA -->
+        <div *ngIf="studentQuestionList?.length === 0" class="no-content-found-wrapper">
+          <mat-icon svgIcon="no-questions"></mat-icon>
+          <p>No Question Available</p>
+          <span>Currently you don't have any questions in your
+                        practice</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="false" class="bottom-bar-confirmation">
+    <div class="row">
+      <div class="col-md-6">
+        <span>12 Questions Selected</span>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="bottom-bar-confirmation__clear" type="button">Clear</button>
+        <button class="bottom-bar-confirmation__submit" type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRONTEND DEVELOPER
+  Loading Text -->
+  <div *ngIf="false" class="loader-text">
+    <span>Loading...</span>
+  </div>
+</form>

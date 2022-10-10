@@ -1,0 +1,25 @@
+<div class="edit-profile-details-container">
+  <div class="profile-details__header">
+    <div class="profile-details__header--image">
+      <!-- <img *ngIf="!studentDetail.avatar_thumbnail" src="assets/images/student_picture.jpg" /> -->
+      <img *ngIf="studentDetail?.avatar_thumbnail" [src]="studentDetail?.avatar_thumbnail" (error)="onError($event)" />
+      <mat-icon *ngIf="!studentDetail?.avatar_thumbnail" svgIcon="studentProfile"></mat-icon>
+    </div>
+    <div class="profile-details__header--details">
+      <span>Student</span>
+      <h2>{{studentDetail?.first_name + ' ' + studentDetail?.last_name}}</h2>
+      <button (click)="onEditStudentProfile()" id="btnEditProfile" type="button" mat-stroked-button>
+        Edit Profile
+      </button>
+    </div>
+  </div>
+
+
+  <div class="profile-details__body">
+    <mat-tab-group>
+      <mat-tab label="Student Detail">
+        <app-student-details-view-profile [profileDetail]="profileDetail"></app-student-details-view-profile>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+@import '../../../assets/scss/abstracts/abstracts';
+
+.see-more-less{
+    span{
+        color: $primary-color;
+        margin-top: 1rem;
+        font-size: 1.6rem;
+    }
+}
+
+.action-button{
+    mat-icon{
+        @include square(2.4rem);
+        line-height: 3.6rem;
+    }
+}

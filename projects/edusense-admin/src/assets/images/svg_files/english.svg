@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <g id="english" transform="translate(-983 -359)">
+    <path id="Path_15731" data-name="Path 15731" d="M40,0h80a40,40,0,0,1,40,40v80a40,40,0,0,1-40,40H40A40,40,0,0,1,0,120V40A40,40,0,0,1,40,0Z" transform="translate(983 359)" fill="#8181be" opacity="0.2"/>
+    <g id="english-2" data-name="english" transform="translate(1037.224 409.476)">
+      <path id="Path_15746" data-name="Path 15746" d="M0,0H7.023V58.413H0Z" transform="translate(44.383 1.587)" fill="#fcfcfe"/>
+      <g id="Group_22073" data-name="Group 22073" transform="translate(0 0)">
+        <path id="Rectangle_2548" data-name="Rectangle 2548" d="M12.513,0H47.548V60H12.513A12.506,12.506,0,0,1,0,47.5v-35A12.506,12.506,0,0,1,12.513,0Z" fill="#8181be"/>
+        <path id="Rectangle_2551" data-name="Rectangle 2551" d="M4.17,0H47.548V13.581H9.593A9.53,9.53,0,0,1,0,4.115H0A4.143,4.143,0,0,1,4.17,0Z" transform="translate(0 46.419)" fill="#bebee1" opacity="0.9"/>
+        <path id="Path_15801" data-name="Path 15801" d="M20,48Z" transform="translate(27.548 12)" fill="#627fd6" opacity="0.3"/>
+      </g>
+      <text id="A" transform="translate(17.415 23.643)" fill="#e6e6f2" font-size="14" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">A</tspan></text>
+      <rect id="Rectangle_2553" data-name="Rectangle 2553" width="15" height="2" transform="translate(17.071 32.942)" fill="#e6e6f2"/>
+    </g>
+  </g>
+</svg>

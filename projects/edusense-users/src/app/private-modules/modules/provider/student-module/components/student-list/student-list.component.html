@@ -1,0 +1,149 @@
+<div class="waiting-room-container meeting-room-container">
+    <div class="waiting-room meeting-room">
+        <form
+            [formGroup]="studentSearchForm"
+        >
+            <div class="waiting-room__top">
+                <div class="row align-center">
+                    <div class="col-md-7 col-sm-12 col-xs-12 PLR-0 small-margin-2">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6 col-xs-6">
+                                <div
+                                    class="header__search header__search-white"
+                                >
+                                    <div class="header__search--input">
+                                        <input
+                                            type="text"
+                                            [formControl]="nameFilterField"
+                                            name="search"
+                                            placeholder="Search..."
+                                            id="inputSearch"
+                                            autocomplete="off"
+                                        />
+                                        <mat-icon svgIcon="search"></mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 padding-right-zero PL-0">
+                                <div class="waiting-room__top--right padding-0">
+                                    <div class="form-control student-search-class">
+                                        <!-- <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-select [formControl]="gradeFilterField" placeholder="Grade">
+                      <mat-option value="0">
+                        All
+                      </mat-option>
+                      <mat-option value="1">
+                        Grade
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                  
+                                        <app-ss-select-search
+                                            [formName]="studentSearchForm"
+                                            [selectConfig]="parentClassSearchConfig"
+                                            [selected]=""
+                                            [dataList]="parentClassList"
+                                            (changSelectEvent)="
+                                                onSelectChangeEvent(
+                                                    $event,
+                                                    'parentFilter'
+                                                )
+                                            "
+                                            id="matSelectClass"
+                                        >
+                                        </app-ss-select-search>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <app-pagination
+                            [totalElements]="totalElements"
+                            [rowNumber]="rowNumber"
+                            (recordChange)="onChangePagination($event)"
+                            [recordsPerPage]="recordsPerPage"
+                        ></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <div class="waiting-room__body meeting-room__body">
+      <div *ngIf="true">
+        <div *ngFor="let stud of dataSource; let i = index">
+          <div class="visitors-info">
+            <div class="row align-center">
+              <div class="col-md-9 col-sm-9 col-xs-9">
+                <div class="visitors-info__left">
+                  <div class="visitor-image">
+                    <img [src]="stud?.user_details.avatar_thumbnail" (error)="onError($event)" />
+                    <mat-icon
+                      *ngIf="false"
+                      svgIcon="studentProfile"
+                    ></mat-icon>
+                  </div>
+                  <div class="visitor-details">
+                    <h4>{{stud?.user_details.first_name}} {{stud?.user_details.last_name}}</h4>
+                    <p class="location">{{getLocation(i)}}</p>
+
+                                        <p class="time-date">
+                                            <span>{{
+                                                stud?.school_name
+                                            }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                <div class="visitors-info__right">
+                                    <button
+                                        class="action-button"
+                                        mat-button
+                                        [matMenuTriggerFor]="beforeMenu"
+                                        [id]="'btnAction-'+i"
+                                    >
+                                        <mat-icon
+                                            svgIcon="more"
+                                            matTooltip="More Options"
+                                        ></mat-icon>
+                                    </button>
+                                    <mat-menu
+                                        #menu="matMenu"
+                                        #beforeMenu="matMenu"
+                                        xPosition="before"
+                                    >
+                                        <div>
+                                            <button
+                                                (click)="
+                                                    detailPage(
+                                                        stud?.user_details?.user_uuid
+                                                    )
+                                                "
+                                                mat-menu-item
+                                                class="view-student"
+                                                [id]="'btnViewStudent-'+i"
+                                            >
+                                                <span>View profile</span>
+                                            </button>
+                                        </div>
+                                    </mat-menu>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!isLoadingResults && dataSource.length==0">
+                <div class="no-content-found-wrapper">
+                    <mat-icon svgIcon="no-student"></mat-icon>
+                    <p>No student</p>
+                    <span>No students have enrolled.</span>
+                </div>
+            </div>
+
+            <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+        </div>
+    </div>
+</div>

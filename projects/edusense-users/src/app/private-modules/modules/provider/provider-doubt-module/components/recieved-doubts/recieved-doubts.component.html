@@ -1,0 +1,82 @@
+<div class="doubt-container partition-design-container">
+    <div class="row">
+        <div class="col-md-9 PL-0 col-xs-12 xs-PLR-0">
+            <div class="waiting-room-container meeting-room-container">
+                <div class="waiting-room meeting-room">
+                    <div class="back-header">
+                        <h3>Recieved Doubts</h3>
+                    </div>
+                    <div class="doubt-container__header row bottom-margin">
+                        <div class="col-md-12">
+                            <div class="doubt-container__header__field col-md-4 col-sm-3 PL-0 col-xs-6 xs-PL-0 xs-PR-05">
+                                <input type="text" name="search" placeholder="Search..." id="inputSearch"
+                                    autocomplete="off" [formControl]="questionFilterField" />
+                                <mat-icon svgIcon="search"></mat-icon>
+                            </div>
+                            <div
+                                class="doubt-container__header__material-field col-md-2 col-sm-3 PL-0 col-xs-6 xs-PR-0 xs-PL-05">
+                                <div class="form-control">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-select id="matSelectSubject" placeholder="Subject"
+                                            [formControl]="subjectFilterField" [compareWith]="compareSubjects">
+                                            <mat-option value="All">All</mat-option>
+                                            <mat-option *ngFor="let subject of subjectList"
+                                                [value]="subject?.subject_id">
+                                                {{subject?.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div
+                                class="doubt-container__header__material-field col-md-2 col-sm-3 PL-0 col-xs-6 xs-PL-0 xs-PR-05">
+                                <div class="form-control">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-select id="matSelectSubject" placeholder="Grade"
+                                            [formControl]="gradeFilterField">
+                                            <mat-option value="All">All</mat-option>
+                                            <mat-option *ngFor="let grade of gradeList" [value]="grade?.grade_id">
+                                                {{grade?.grade?.alias}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="doubt-container__header__material-field col-md-2 col-sm-3 PL-0 col-xs-6  xs-PR-0 xs-PL-05">
+                                <div class="form-control form-control--date">
+                                    <mat-form-field class="clear-date" appearance="outline" floatLabel="always">
+                                        <input matInput [matDatepicker]="date" placeholder="Date"
+                                            [formControl]="dateFilterField"/>
+                                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                                        <mat-datepicker #date disabled="false"></mat-datepicker>
+                                        <a *ngIf="dateFilterField.value" (click)="onClearDateFilter()"><mat-icon svgIcon="close" matTooltip="clear"></mat-icon></a>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body top-margin">
+                <div *ngSwitchCase="viewType.Data">
+                    <es-user-doubt-list [doubtList]="receivedDoubtList" [userType]="userType.PROVIDER"
+                        (quesClick)="onQuestionAnswer($event)" (scroll)="onScroll($event)"></es-user-doubt-list>
+                </div>
+                <div *ngSwitchCase="viewType.NoData">
+                    <div class="no-content-found-wrapper">
+                        <mat-icon svgIcon="noDoubts"></mat-icon>
+                        <p>Doubts Not Found!</p>
+                        <span>There are no doubts yet.</span>
+                    </div>
+                </div>
+
+                <div class="loader-data" *ngSwitchCase="viewType.Loading">
+                    <label>Loading...</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 xs-PLR-0 left-border PLR-0">
+            <es-user-side-doubt-list [allDoubtList]="allDoubtsList" [lable]="linkLable" [title]="title"
+                (linkClick)="onViewAllDoubts($event)" (quesClick)="onQuestionAnswer($event)">
+            </es-user-side-doubt-list>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.subject-name {
+    display: inline;
+}
+
+.pad-0-phone {
+    @include respond('phone') {
+        padding-left: 0 !important;
+        // margin-bottom: 2rem;
+        padding-right: 0 !important;
+    }
+}
+.clear-button {
+    border: 1px solid $grey-color-3;
+    height: 5rem;
+    min-width: 18rem;
+    border-radius: 0.8rem;
+
+    @include respond('phone') {
+        height: 4.5rem;
+        min-width: 12rem;
+    }
+}
+
+.text-right-mob {
+    @include respond('phone') {
+        text-align: right !important;
+        margin-bottom: 2rem;
+    }
+}
+
+.record-session-spacing {
+    padding: 1.5rem 1rem;
+}

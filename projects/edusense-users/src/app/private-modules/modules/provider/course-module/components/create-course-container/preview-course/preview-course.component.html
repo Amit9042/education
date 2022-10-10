@@ -1,0 +1,96 @@
+<div class="preview-course-container">
+  <div class="preview-course">
+    <h3>Preview</h3>
+
+    <div class="preview-course__section" *ngFor="let section of coursePreviewDetails; let i = index">
+      <div class="preview-course__section--header">
+        <h4>Section {{ i + 1 }} - {{ section?.title }}</h4>
+      </div>
+
+      <div class="preview-course__section--body">
+        <div class="preview-course__section--body--panel" *ngFor="let lecture of section.lectures; let j = index">
+          <div class="panel-header">
+            <div class="panel-header__left">
+              <div>
+                <mat-icon
+                  *ngIf="lecture?.lecture_content?.content_type === contentType.VIDEO"
+                  svgIcon="VIDEO"></mat-icon>
+                <mat-icon
+                  *ngIf="lecture?.lecture_content?.content_type === contentType.YOUTUBE_LINK"
+                  svgIcon="LINK"></mat-icon>
+                <mat-icon
+                  *ngIf="lecture?.lecture_content?.content_type === contentType.TEXT"
+                  svgIcon="DESCRIPTION"></mat-icon>
+                <mat-icon
+                  *ngIf="lecture?.lecture_content?.content_type === contentType.FILE"
+                  svgIcon="FILES"></mat-icon>
+                <span>{{ lecture?.title | checkEmpty }}</span>
+              </div>
+              <div *ngIf="lecture?.lecture_content?.content_duration">
+                <span class="time">{{ getDuration(lecture?.lecture_content?.content_duration) }}</span>
+              </div>
+            </div>
+
+            <div class="panel-header__right">
+              <a (click)="onTogglePanel(i, j)">
+                <mat-icon svgIcon="dropdown"></mat-icon>
+              </a>
+            </div>
+          </div>
+
+          <div class="panel-content" [ngClass]="{'content-expand': i === parentIndex && j === currentIndex}">
+            <div class="panel-content__video" *ngIf="lecture?.lecture_content?.content_type === contentType.VIDEO">
+              <a
+                (click)="onClickVideo(lecture?.lecture_content?.content_path, lecture?.lecture_content?.content_mime_type)">
+                <img *ngIf="lecture?.lecture_content?.content_preview" [src]="lecture?.lecture_content?.content_preview"
+                     alt="">
+                <mat-icon *ngIf="!lecture?.lecture_content?.content_preview"
+                          svgIcon="no-cover-image"></mat-icon>
+              </a>
+            </div>
+
+            <div class="panel-content__video MT-1"
+                 *ngIf="lecture?.lecture_content?.content_type === contentType.YOUTUBE_LINK">
+              <mat-icon svgIcon="YOUTUBE"
+                        (click)="onClickYoutubeVideo(lecture?.lecture_content?.content_path)"></mat-icon>
+            </div>
+
+            <div class="panel-content__video MT-1" *ngIf="lecture?.lecture_content?.content_type === contentType.FILE">
+              <mat-icon svgIcon="FILETYPEBG" (click)="onClickFile(lecture?.lecture_content?.content_path)"></mat-icon>
+            </div>
+
+            <div class="preview-course-content" *ngIf="lecture?.lecture_content?.content_type === contentType.TEXT">
+              <div [innerHTML]="lecture?.lecture_content?.description"></div>
+            </div>
+
+            <div class="panel-content__file" *ngFor="let resource of lecture?.resources">
+              <mat-icon [svgIcon]="getIcon(resource?.content_mime_type)"></mat-icon>
+              <a (click)="saveFile(resource)" [download]="resource?.content_path"><span>{{ resource?.title | checkEmpty }}</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row buttons">
+      <div class="col-md-3 PL-0 MB-2">
+        <div class="button-group">
+          <button type="button" (click)="onPreviewStep()" id="btnPrev" class="cancel-btn MR-2" mat-stroked-button>
+            <mat-icon svgIcon="prev"></mat-icon>
+            <span>Previous</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-9 PR-0 text-right MB-2">
+        <div class="button-group">
+          <button mat-flat-button (click)="onPublicCourse()" color="primary" type="submit" id="btnAdd"
+                  *ngIf="courseDetails?.unsaved_changes">
+            <span>Publish</span>
+            <mat-icon svgIcon="next"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

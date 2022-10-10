@@ -1,0 +1,19 @@
+.profile-container {
+    margin: 0 !important;
+    display: block !important;
+}
+
+.profile-container__right {
+    padding-left: 0 !important;
+}
+
+.mobile-prefix {
+    top: -0.25rem;
+    position: relative;
+}
+
+.pen-icon {
+    .mat-icon {
+        width: 1.6rem;
+    }
+}

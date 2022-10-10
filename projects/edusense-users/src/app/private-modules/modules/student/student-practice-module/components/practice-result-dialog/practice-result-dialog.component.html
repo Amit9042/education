@@ -1,0 +1,60 @@
+<div class="meeting-dialog-wrapper">
+    <div class="meeting-dialog__head">
+        <h4>{{data.practiseName}}</h4>
+        <a id="lnkClose" (click)="onCloseDialog(false)">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+
+    <div class="meeting-dialog__body">
+        <div class="row meeting-dialog__body__result">
+            <div class="col-md-5">
+                <div class="meeting-dialog__body__question-round">
+                    <b>{{data?.totalQuestion}}</b>
+                    <span>Total Question</span>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="meeting-dialog__body__question-details">
+                    <h5>Marks: {{data?.totalScore}} / {{data?.totalMarks}}</h5>
+                    <p><b>Correct</b> <span>&#8208;&#8208;&#8208;&#8208;&#8208;</span>
+                        <small>{{data?.correctAnswer}}</small></p>
+                    <p><b>Wrong</b> <span>&#8208;&#8208;&#8208;&#8208;&#8208;</span>
+                        <small>{{data?.wrongAnswer}}</small></p>
+                    <p><b>Skipped</b> <span>&#8208;&#8208;&#8208;&#8208;&#8208;</span>
+                        <small>{{data?.skippedAnswer}}</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="meeting-dialog__body__result-space">
+            <div class="meeting-dialog__body__result-space__result-practice">
+                <div class="meeting-dialog__body__result-space__result-practice__time-speed">
+                    <mat-icon svgIcon="clock-green"></mat-icon>
+                    <label>{{data?.totalTimeSpent}} Secs</label>
+                    <span>Time Spent</span>
+                </div>
+
+                <div class="meeting-dialog__body__result-space__result-practice__time-speed">
+                    <mat-icon svgIcon="target"></mat-icon>
+                    <label>{{data?.accurracy}}%</label>
+                    <span>Accuracy</span>
+                </div>
+
+                <div class="meeting-dialog__body__result-space__result-practice__time-speed">
+                    <mat-icon svgIcon="bolt"></mat-icon>
+                    <label>{{data?.speed}} Sec/Q</label>
+                    <span>Speed</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right meeting-dialog__body__result-footer-section">
+            <button mat-dialog-close mat-stroked-button color="primary" class="border-btn"
+                (click)="onCloseDialog(false)">Cancel</button>
+
+            <button mat-flat-button color="primary" (click)="onCloseDialog(true)">Ok</button>
+        </div>
+    </div>
+</div>

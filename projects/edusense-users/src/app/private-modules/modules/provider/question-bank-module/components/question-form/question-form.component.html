@@ -1,0 +1,529 @@
+<form [formGroup]="questionBankForm" *ngIf="!preview"  (ngSubmit)="onSubmitQuestionBankForm(questionBankForm, false)">
+    <div class="question-bank-wrap">
+        <div class="question-list">
+            <div class="question-add-more">
+                <h2>{{ selectedQues?.number }} of {{ totalQuestionLength }}</h2>
+                <div *ngIf="selectedQues && selectedQues?.questionId && showMoreOptions()">
+                    <button mat-button [matMenuTriggerFor]="addQuesMenu" class="PL-0" type="button">
+                        <mat-icon svgIcon="que-add"></mat-icon>
+                        <p>Add Question</p>
+                    </button>
+                    <mat-menu #addQuesMenu="matMenu" class="question-type-menu">
+                        <button (click)="addNewQuestion(type?.id, true)" mat-menu-item [value]="type?.id"
+                            *ngFor="let type of questionTypeList">
+                            {{ type?.value }}
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="question-box">
+                        <a class="remove-question" *ngIf="selectedQues && selectedQues?.questionId && showMoreOptions()"
+                            (click)="onDeleteQuestion()">
+                            <mat-icon matTooltip="Delete" svgIcon="bin"></mat-icon>
+                        </a>
+                        <div class="question-box-top">
+                            <div class="question-box-top__select-box">
+                                <div class="form-control type-selection">
+                                    <mat-label>Question Type</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-select id="matSelectType" placeholder="Select question type"
+                                            formControlName="ques_type">
+                                            <mat-option [value]="type?.id" *ngFor="
+                                                    let type of questionTypeList
+                                                ">
+                                                {{ type?.value }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['ques_type']
+                                                )
+                                            ">
+                                            {{ validationMsg.QUESTION_TYPE }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-control medium-selection">
+                                    <mat-label>Difficulty Level</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-select id="matSelectMedium" placeholder="Select difficulty level"
+                                            formControlName="difficulty_level">
+                                            <mat-option [value]="diff?.id" *ngFor="
+                                                    let diff of difficultyLevelList
+                                                ">
+                                                {{ diff?.value }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls[
+                                                        'difficulty_level'
+                                                    ]
+                                                )
+                                            ">
+                                            {{ validationMsg.DIFFICULTY_LEVEL }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-control marks-selection">
+                                    <mat-label>Marks</mat-label>
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <input autocomplete="off" type="text" id="txtSearch" name="mark"
+                                            placeholder="Type marks" formControlName="marks" matInput />
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    formControls['marks']
+                                                )
+                                            ">
+                                            {{ validationMsg.MARKS }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                                isValidField(
+                                                    formControls['marks']
+                                                )
+                                            ">
+                                            {{ validationMsg.MARKS_VALID }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <!-- QUESTION FIELD -->
+                            <div class="MB-2">
+                                <mat-label>Question</mat-label>
+                                <md-editor name="Content" [upload]="doUpload" [preRender]="preRender"
+                                    [postRender]="postRender" [height]="'25rem'" [mode]="mode"
+                                    formControlName="question" [options]="question" required #mdEditorRef
+                                    (onEditorLoaded)="onEditorLoaded($event, 'question')">
+                                </md-editor>
+                                <label class="custom-file-upload" *ngIf="showMoreOptions()">
+                                    <span>
+                                        <input id="questionfileUpload" type="file" accept=".png, .jpg, .jpeg" (change)="
+                                        doUpload($event, 'question')
+                                            " />
+                                        Attach file by dragging & droping,
+                                        selection or passing them.
+                                    </span>
+                                    <!-- For upload image loading -->
+                                    <span *ngIf="false">
+                                        <mat-icon svgIcon="loading"></mat-icon>
+                                        Loading file...
+                                    </span>
+                                </label>
+
+                                <div class="editor-error-msg-section">
+                                    <mat-error *ngIf="
+                                            isRequiredField(
+                                                formControls['question']
+                                            )
+                                        ">
+                                        {{ validationMsg.QUESTION }}
+                                    </mat-error>
+                                    <mat-error *ngIf="
+                                    isValidLength(
+                                        formControls['question']
+                                    )
+                                ">
+                                {{ validationMsg.QUESTION_LENGTH_5000 }}
+                            </mat-error>
+                                </div>
+                            </div>
+
+                            <!-- QUESTION WITH RADIO BUTTON -->
+                            <div class="multiple-choice-type multiple-select-type" *ngIf="isSingleType">
+                                <div formArrayName="options" *ngFor="
+                                        let option of optionArrayFormControls()
+                                            .controls;
+                                        let j = index
+                                    ">
+                                    <div [formGroupName]="j" class="question-box-top-fields">
+                                        <div class="form-control">
+                                            <mat-radio-group formControlName="correct" [disabled]="!showMoreOptions()"
+                                                name="radio-button">
+                                                <mat-radio-button value="{{ j }}" (change)="
+                                                        radioChange($event, j)
+                                                    " name="radio">
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                            <md-editor class="option-editor" name="Content" [upload]="doUpload"
+                                                [preRender]="preRender" [postRender]="postRender" [height]="'6rem'"
+                                                [mode]="mode" formControlName="content" [options]="radio_option"
+                                                (onEditorLoaded)="onEditorLoaded($event, 'option'+j)" required
+                                                #mdEditorRef>
+                                            </md-editor>
+
+                                        </div>
+                                        <div class="hover-content" *ngIf="showMoreOptions()">
+                                            <a (click)="
+                                                    onBrowseFile(
+                                                        'fileUpload' + j
+                                                    )
+                                                ">
+                                                <mat-icon svgIcon="photo"></mat-icon>
+                                            </a>
+                                            <input hidden [id]="'fileUpload' + j" type="file" accept=".png, .jpg, .jpeg"
+                                                (change)="
+                                                    doUpload(
+                                                        $event, 'option'+j
+                                                    )
+                                                " />
+                                            <a (click)="removeOptionsFields(j)" *ngIf="
+                                            optionArrayFormControls()
+                                                .controls.length > 2
+                                        ">
+                                                <mat-icon svgIcon="close"></mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="editor-error-msg-section">
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    option.get('content')
+                                                )
+                                            ">
+                                            {{ validationMsg.OPTION }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                        isValidLength(
+                                                    option.get('content')
+                                                )
+                                            ">
+                                            {{ validationMsg.OPTION_LENGTH_1000}}
+                                        </mat-error>
+                                    </div>
+                                </div>
+
+                                <!-- ADD MORE OPTION -->
+                                <a class="add-more" (click)="onAddOptions()" *ngIf="showMoreOptions() &&
+                                        optionArrayFormControls().controls
+                                            .length < 6
+                                    ">
+                                    Add more
+                                </a>
+                            </div>
+
+                            <!--  QUESTION WITH CHECKBOX  -->
+                            <div class="multiple-choice-type multiple-select-type" *ngIf="isMultiType">
+                                <div formArrayName="options" *ngFor="
+                                        let checkbox_option of optionArrayFormControls()
+                                            .controls;
+                                        let j = index
+                                    ">
+                                    <div [formGroupName]="j" class="question-box-top-fields">
+                                        <div class="form-control">
+                                            <mat-checkbox formControlName="correct" [disabled]="!showMoreOptions()">
+                                            </mat-checkbox>
+                                            <md-editor class="option-editor" name="Content" [upload]="doUpload"
+                                                [preRender]="preRender" [postRender]="postRender" [height]="'6rem'"
+                                                [mode]="mode" formControlName="content" [options]="radio_option"
+                                                (onEditorLoaded)="onEditorLoaded($event, 'option'+j)" required
+                                                #mdEditorRef>
+                                            </md-editor>
+                                        </div>
+                                        <div class="hover-content" *ngIf="showMoreOptions()">
+                                            <a (click)="
+                                                    onBrowseFile(
+                                                        'fileUpload' + j
+                                                    )
+                                                ">
+                                                <mat-icon svgIcon="photo"></mat-icon>
+                                            </a>
+                                            <input hidden [id]="'fileUpload' + j" type="file" accept=".png, .jpg, .jpeg"
+                                                (change)="
+                                                    doUpload(
+                                                        $event, 'option'+j
+                                                    )
+                                                " />
+                                            <a (click)="removeOptionsFields(j)" *ngIf="
+                                            optionArrayFormControls()
+                                                .controls.length > 2
+                                        ">
+                                                <mat-icon svgIcon="close"></mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="editor-error-msg-section">
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    checkbox_option.get(
+                                                        'content'
+                                                    )
+                                                )
+                                            ">
+                                            {{ validationMsg.OPTION }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                        isValidLength(
+                                                    checkbox_option.get(
+                                                        'content'
+                                                    )
+                                                )
+                                            ">
+                                            {{ validationMsg.OPTION_LENGTH_1000 }}
+                                        </mat-error>
+
+                                    </div>
+                                </div>
+
+                                <!-- ADD MORE OPTION -->
+                                <a class="add-more" (click)="onAddOptions()" *ngIf="showMoreOptions() &&
+                                        optionArrayFormControls().controls
+                                            .length < 6
+                                    ">
+                                    Add more
+                                </a>
+                            </div>
+                            <!-- END -->
+
+                            <!-- IF QUE. TYPE IS TRUE/FALSE QUESTION -->
+                            <div class="multiple-choice-type true-false-type" *ngIf="isBooleanType">
+                                <div formArrayName="options" *ngFor="
+                                        let singleOption of optionArrayFormControls()
+                                            .controls;
+                                        let j = index
+                                    ">
+                                    <div [formGroupName]="j" class="question-box-top-fields">
+                                        <div class="form-control">
+                                            <mat-radio-group [disabled]="!showMoreOptions()" formControlName="correct"
+                                                name="radio-button">
+                                                <mat-radio-button value="{{ j }}" (change)="
+                                                        radioChange($event, j)
+                                                    " [name]="'radio-' + j">
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                            <md-editor class="option-editor" name="Content" [upload]="doUpload"
+                                                [preRender]="preRender" [postRender]="postRender" [height]="'6rem'"
+                                                [mode]="mode" formControlName="content" [options]="radio_option"
+                                                (onEditorLoaded)="onEditorLoaded($event, 'option'+j)" required
+                                                #mdEditorRef>
+                                            </md-editor>
+                                        </div>
+                                        <div class="hover-content" *ngIf="showMoreOptions()">
+                                            <a (click)="
+                                                    onBrowseFile(
+                                                        'fileUpload' + j
+                                                    )
+                                                ">
+                                                <mat-icon svgIcon="photo"></mat-icon>
+                                            </a>
+                                            <input hidden [id]="'fileUpload' + j" type="file" accept=".png, .jpg, .jpeg"
+                                                (change)="
+                                                    doUpload(
+                                                        $event, 'option'+j
+                                                    )
+                                                " />
+                                            <a (click)="removeOptionsFields(j)" *ngIf="
+                                                    optionArrayFormControls()
+                                                        .controls.length > 2
+                                                ">
+                                                <mat-icon svgIcon="close"></mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="editor-error-msg-section">
+                                        <mat-error *ngIf="
+                                                isRequiredField(
+                                                    singleOption.get(
+                                                        'content'
+                                                    )
+                                                )
+                                            ">
+                                            {{ validationMsg.OPTION }}
+                                        </mat-error>
+                                        <mat-error *ngIf="
+                                                isValidLength(
+                                                    singleOption.get(
+                                                        'content'
+                                                    )
+                                                )
+                                            ">
+                                            {{ validationMsg.OPTION_LENGTH_1000 }}
+                                        </mat-error>
+                                    </div>
+                                </div>
+                                <!-- ADD MORE OPTION -->
+                                <a class="add-more" (click)="onAddOptions()" *ngIf="showMoreOptions() &&
+                                        optionArrayFormControls().controls
+                                            .length < 3
+                                    ">
+                                    Add more
+                                </a>
+                            </div>
+
+                            <!-- SOLUTION FIELD -->
+                            <mat-label>Solution</mat-label>
+                            <md-editor name="Content" [upload]="doUpload" [preRender]="preRender"
+                                [postRender]="postRender" [height]="'25rem'" [mode]="mode" formControlName="solution"
+                                [options]="options" (onEditorLoaded)="onEditorLoaded($event, 'solution')" #mdEditorRef>
+                            </md-editor>
+                            <label class="custom-file-upload" *ngIf="showMoreOptions()">
+                                <input id="solutionfileUpload" type="file" accept=".png, .jpg, .jpeg"
+                                    (change)="doUpload($event, 'solution')" />
+                                Attach file by dragging & droping, selection or
+                                passing them.
+                            </label>
+                            <mat-error *ngIf="isValidLength(formControls['solution'])">
+                                {{ validationMsg.SOLUTION_LENGTH_5000 }}
+                            </mat-error>
+                        </div>
+
+                        <div class="question-box-bottom">
+                            <div class="question-box-bottom__left">
+                                <mat-checkbox formControlName="showSolution" class="MR-2">Show Solution
+                                </mat-checkbox>
+                                <!-- <mat-checkbox *ngIf="isMultiType" formControlName="partialCredit">Give Partial Credit
+                                </mat-checkbox> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group MB-2">
+            <div class="button-group__width">
+                <div class="previous-button">
+                    <button [ngClass]="{
+                            'btn-border': selectedQues?.prevQuestionId?.questionId
+                        }" [disabled]="!selectedQues?.prevQuestionId?.questionId" (click)="onPreviousClick()"
+                        mat-flat-button id="btnPrevious" type="button">
+                        <mat-icon svgIcon="backArrow"></mat-icon>
+                        Prevoius
+                    </button>
+                </div>
+                <div>
+
+                    <button class="btn-border" id="btnSave" mat-button type="button" (click)="onPreview()">
+                        Preview
+                    </button>
+                    <!-- <button class="btn-border" id="btnSave" mat-button type="submit">
+                        Save
+                    </button> -->
+                    <button mat-flat-button color="primary" id="btnSubmit" class="remove-shadow" type="button"
+                        *ngIf="showMoreOptions()" (click)="onSubmitQuestionBankForm(questionBankForm, true)">
+                        Save & Add New
+                        <mat-icon svgIcon="nextArrow" class="next-arrow"></mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FRONTEND DEVELOPER
+BELOW DESIGN FOR NO DATA -->
+    <div *ngIf="false" class="no-content-found-wrapper">
+        <mat-icon svgIcon="no-questions"></mat-icon>
+        <p>No Question Available</p>
+        <span>Currently you don't have any questions in your
+            practice</span>
+    </div>
+</form>
+
+<div class="student-question-list" [ngClass]="{'display-none': !preview}">
+    <div class="back-header">
+        <a (click)="onBack()" id="lnkBack">
+            <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+        </a>
+        <h3>Preview</h3>
+    </div>
+    <div class="question-details-container">
+        <form>
+            <div class="question-details">
+
+                <div>
+                    <div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="question-details__box">
+                                    <p [innerHTML]="convertMarkDownToHtml(previewContent?.question)"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <!-- For single answer selection -->
+                                    <div *ngIf="previewContent?.quesType !== questionType.MULTI">
+                                        <div [ngClass]="{'right-answer': isOptionRight(option), 'wrong-answer': false, 'selected-answer' : isOptionRight(option)}"
+                                            class="question-details__answers"
+                                            *ngFor="let option of previewContent?.options; let j = index;">
+                                            <p>
+                                                <mat-radio-group [disabled]="true">
+                                                    <mat-radio-button [checked]="isOptionRight(option)"
+                                                        name="answerList" [value]="'radioAnswer' + j"
+                                                        [id]="'radioAnswer' + j" [disabled]="true">
+                                                    </mat-radio-button>
+                                                    <p [innerHTML]="convertMarkDownToHtml(option?.content)"></p>
+                                                </mat-radio-group>
+
+                                                <mat-icon *ngIf="!isOptionRight(option)" svgIcon="closeIcon">
+                                                </mat-icon>
+                                                <mat-icon *ngIf="isOptionRight(option)" svgIcon="rightIcon">
+                                                </mat-icon>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- For multiple answer selection -->
+                                    <div *ngIf="previewContent?.quesType === questionType.MULTI">
+                                        <div [ngClass]="{'right-answer': isOptionRight(option, true), 'wrong-answer': false, 'selected-answer' : false}"
+                                            class="question-details__answers"
+                                            *ngFor="let option of previewContent?.options; let j = index;">
+                                            <p>
+                                                <mat-checkbox [checked]="isOptionRight(option, true)"
+                                                    [disabled]="true">
+                                                    <p [innerHTML]="convertMarkDownToHtml(option?.content)"></p>
+                                                </mat-checkbox>
+                                                <mat-icon *ngIf="!isOptionRight(option, true)" svgIcon="closeIcon">
+                                                </mat-icon>
+                                                <mat-icon *ngIf="isOptionRight(option, true)" svgIcon="rightIcon">
+                                                </mat-icon>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12  mozila-bottom-spacing">
+                                <div class="question-details__box question-details__box--solution"
+                                    *ngIf="previewContent?.showSolution">
+
+                                    <span class="form-control-label">Solution</span>
+                                    <p [innerHTML]="convertMarkDownToHtml(previewContent?.solution)"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="question-details__bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" mat-stroked-button color="primary" class="border-btn"
+                                        (click)="onBack()">Back</button>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <!-- <button type="button" mat-flat-button color="primary"
+                                        type="submit">Save</button> -->
+                                    <button mat-flat-button color="primary" id="btnSubmit" type="submit"
+                                        *ngIf="showMoreOptions()"
+                                        (click)="onSubmitQuestionBankForm(questionBankForm, false)">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

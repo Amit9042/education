@@ -1,0 +1,73 @@
+<div class="auth-container login-form-container">
+    <div class="auth-box">
+        <div class="auth-box__data">
+            <div>
+                <h3>Login</h3>
+                <p>Login by entering mobile number and password</p>
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm)">
+
+                <div class="form-control MB-1">
+                    <mat-label>Mobile Number*</mat-label>
+                    <div class="row">
+                        <div class="col-md-2 PLR-0">
+                            <app-ss-select-search [formName]="loginForm" [selectConfig]="countryCodeSearchConfig"
+                                [selected]="selectedCountry" [dataList]="countryCodeList"
+                                (changSelectEvent)="onCountryCodeSelectChangeEvent($event, 'countryCode')">
+                            </app-ss-select-search>
+                        </div>
+                        <div class="col-md-10 PR-0">
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <input formControlName="contact_number" id="txtMobile" type="text" autocomplete="off"
+                                    matInput placeholder="Mobile Number" />
+                                <mat-error *ngIf="isRequiredField(formControls['contact_number'])">
+                                    {{ validationMsg.MOBILE_NUMBER }}</mat-error>
+                                <mat-error *ngIf="isValidLength(formControls['contact_number'])">
+                                    {{ validationMsg.MOBILE_NUMBER_LENGTH }}</mat-error>
+                                <mat-error *ngIf="isValidField(formControls['contact_number'])">
+                                    {{ validationMsg.MOBILE_NUMBER_VALID }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <mat-label>Password*</mat-label>
+                    <mat-form-field appearance="outline">
+                        <input type="password" id="txtPassword" required formControlName="password" autocomplete="off"
+                            matInput placeholder="Enter your password" [type]="isHidePassword? 'password': 'text'" />
+                        <a class="eye-icon" type="button" matSuffix (click)="isHidePassword = !isHidePassword
+                                        " [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
+                            <mat-icon *ngIf="!isHidePassword" svgIcon="hide" matTooltip="Hide"></mat-icon>
+                            <mat-icon *ngIf="isHidePassword" svgIcon="eye" matTooltip="Show"></mat-icon>
+                        </a>
+                        <mat-error *ngIf="isRequiredField(formControls['password'])">
+                            {{validationMsg.PASSWORD}}
+                        </mat-error>
+                        <mat-error *ngIf="isValidLength(formControls['password'])">
+                            {{validationMsg.PASSWORD_LENGTH}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="forgot-password">
+                    <p>
+                        <a (click)="onForgotPassword()" id="lnkForgotPassword">Forgot your password?</a>
+                    </p>
+                </div>
+
+                <div>
+                    <button class="auth-green-button" id="btnLogin" type="submit" mat-flat-button color="primary">
+                        Login
+                    </button>
+                </div>
+            </form>
+            <div class="row login-buttons">
+                <p class="bottom-link col-md-12 PL-0">
+                    Don't you have a account <a (click)="onSignUp()" id="lnkCreateOne">Create One</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

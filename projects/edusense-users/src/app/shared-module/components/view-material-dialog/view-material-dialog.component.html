@@ -1,0 +1,50 @@
+<div class="dialog-links">
+  <div class="dialog-links__file-name">
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon matTooltip="Back" svgIcon="backArrow"></mat-icon>
+    </a>
+    <p>
+      <mat-icon [svgIcon]="getFileIcon(fileType)"></mat-icon>
+      {{materialName}}
+    </p>
+  </div>
+  <div class="dialog-links__page-count" *ngIf="showSlider">
+    <p><span>{{currentNumber}}</span> of <span>{{totalNumber}}</span></p>
+  </div>
+  <div>
+    <a *ngIf="!isYoutube" (click)="download()" id="lnkDownload">
+      <mat-icon matTooltip="Download" svgIcon="download"></mat-icon>
+    </a>
+    <a id="lnkAction" *ngIf="showOptions">
+      <mat-icon matTooltip="More Options" class="action" svgIcon="actionBtn"></mat-icon>
+    </a>
+  </div>
+</div>
+
+<span class="ng-overlay">
+  <span class="ng-gallery-content ng-swiper-content">
+    <div *ngIf="!isAudio && !isYoutube && video" class="video-container">
+      <video controls>
+        <source [src]="video" [type]="fileType">
+      </video>
+    </div>
+    <div *ngIf="!isAudio && isYoutube && video" class="video-control">
+      <!-- CLICK EVENT ON IFRAME (keyUp)="onEscapePress($event)" -->
+      <iframe [src]="video" allow='autoplay' frameborder="0" allowfullscreen>
+      </iframe>
+      <!-- https://www.youtube.com/embed/{{video}}?autoplay=1 -->
+    </div>
+    <div *ngIf="isAudio && video" class="audio-control">
+      <audio controls>
+        <source [src]="video" [type]="fileType">
+      </audio>
+    </div>
+
+    <a class="previous" *ngIf="currentNumber > 1" (click)="onCloseDialog(currentNumber - 1)">
+      <mat-icon svgIcon="leftArrowWhite" matTooltip="Previous"></mat-icon>
+    </a>
+    <a class="next" *ngIf="currentNumber !== totalNumber" (click)="onCloseDialog(currentNumber + 1)">
+      <mat-icon svgIcon="rightArrowWhite" matTooltip="Next"></mat-icon>
+    </a>
+  </span>
+</span>

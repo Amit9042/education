@@ -1,0 +1,68 @@
+<div class="meeting-dialog-wrapper create-assignment-dialog">
+  <div class="meeting-dialog__head">
+    <h4>Submission</h4>
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="submitAssignmentForm"
+                (ngSubmit)="onSubmitSubmitAssignmentForm(submitAssignmentForm)">
+            <div class="scroll-data">
+
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                  <div class="form-control-textarea">
+                    <mat-label>Description</mat-label>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                                            <textarea id="txtDescription" formControlName="description" type="text"
+                                                      autocomplete="off" matInput
+                                                      placeholder="Enter description"></textarea>
+                      <mat-error *ngIf="isValidLength(formControls['description'])">
+                        {{validationMsg.DESCRIPTION_LENGTH}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row upload-section">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                  <button id="btnUpload" (click)="onBrowseFile('uploadImage')" type="button"
+                          id="btnUpload" mat-flat-button>
+                    <mat-icon svgIcon="attachment"></mat-icon>
+                    Upload material
+                  </button>
+                  <input type="file" hidden id="uploadImage" (change)="onFileUpload($event)"
+                         (click)="clearValue($event)"
+                         accept=".pdf, .jpg, .txt, .ppt, .pptx, .xls, .xlsx, .png, .jpeg, .doc, .docx, .mp3, .wav, .wma,
+                     .mp4, .avi, .mov, .flv, .webm, .mpg, .mpeg, .wmv"/>
+
+                  <div class="upload-view">
+                    <div class="flex-left" *ngFor="let image of materialArray;let i = index">
+                      <mat-icon [svgIcon]="getIcon(image['extension'])"></mat-icon>
+                      <span>{{image.name}}</span>
+                      <a class="flex-center" id="lnkRemove" (click)="onRemoveFile(image['attachmentId'])">
+                        <mat-icon svgIcon="close" matTooltip="Remove"></mat-icon>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button mat-flat-button id="btnSubmit" color="primary" type="submit" id="btnAdd">
+                Submit
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

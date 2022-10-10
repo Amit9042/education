@@ -1,0 +1,55 @@
+<div class="dialog-container dialog-list-container">
+  <div class="dialog-container__head dialog-list-container__head">
+    <h4>Enroll</h4>
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon svgIcon="close" matTooltip="Close"></mat-icon>
+    </a>
+  </div>
+  <div class="dialog-container__bottom dialog-list-container__bottom">
+    <form [formGroup]="studentEnrollForm" (ngSubmit)="onSubmitStudentEnrollForm(studentEnrollForm)">
+      <div class="row code-field">
+        <div class="col-md-7 col-sm-7 PLR-0">
+          <div class="form-control">
+            <mat-label>Code*</mat-label>
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input formControlName="code" id="txtCode" type="text" autocomplete="off" matInput placeholder="126043" />
+              <mat-error *ngIf="isRequiredField(formControls['code'])">
+                {{validationMsg.CODE}}
+            </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 PLR-0">
+          <button mat-flat-button id="btnSearch" color="primary" type="submit">
+            Search
+          </button>
+        </div>
+      </div>
+      <div *ngIf="providerDetails" class="details-data">
+        <div>
+          <label>Name:</label>
+          <span>{{providerDetails.name}}</span>
+        </div>
+        <div>
+          <label>Type:</label>
+          <span>{{providerDetails.provider_type.provider_type}}</span>
+        </div>
+        <div>
+          <label>Location:</label>
+          <span>
+            {{providerDetails.address}}
+            {{providerDetails.address ? (providerDetails.city.city_name ? ', ' + providerDetails.city.city_name : ' - ') : providerDetails.city.city_name ? providerDetails.city.city_name : ' - '}}
+            {{providerDetails.state.state_name ? ', ' + providerDetails.state.state_name : ' - '}}
+            {{providerDetails.country.country_name ? ', ' + providerDetails.country.country_name : ' - '}}
+          </span>
+        </div>
+      </div>
+      <div class="button-group">
+        <button type="button" id="btnCancel" (click)="onCloseDialog()" mat-button>Cancel</button>
+        <button type="button" id="btnSubmit" (click)="onEnroll()" [disabled]="!providerDetails" mat-flat-button color="primary">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

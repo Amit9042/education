@@ -1,0 +1,76 @@
+<div class="waiting-room-container meeting-room-container">
+    <div class="waiting-room meeting-room">
+        <div class="waiting-room__top">
+            <div class="row align-center">
+                <div class="col-md-7 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-8 PLR-0 col-sm-12 col-xs-12">
+                            <div class="header__search header__search-white mobile-mb-2">
+                                <div class="header__search--input">
+                                    <input type="text" name="search" placeholder="Search..." id="inputSearch"
+                                        autocomplete="off" [formControl]="searchControl" />
+                                    <mat-icon svgIcon="search"></mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-6 PL-0 col-xs-12">
+                    <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+                        (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+                </div>
+            </div>
+        </div>
+
+        <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body">
+            <div *ngSwitchCase="viewType.Data">
+                <div *ngFor="
+                        let enrolmentDetail of enrolmentList;
+                    ">
+                    <div class="visitors-info">
+                        <div class="row align-center">
+                            <div class="col-md-10 col-sm-8 col-xs-12">
+                                <div class="visitors-info__left">
+                                    <div class="visitor-image">
+                                        <img *ngIf="enrolmentDetail.provider.logo_thumbnail"
+                                            [src]="enrolmentDetail.provider.logo_thumbnail" />
+                                        <mat-icon *ngIf="!enrolmentDetail.provider.logo_thumbnail"
+                                            svgIcon="institutePlaceholder"></mat-icon>
+                                    </div>
+                                    <div class="visitor-details">
+                                        <h4>{{enrolmentDetail.provider.name}}</h4>
+                                        <p class="location">
+                                            <span>{{enrolmentDetail.provider.provider_type.provider_type}}</span> |
+                                            <span>{{enrolmentDetail.provider.provider_code}}</span>
+                                        </p>
+                                        <p class="time-date">
+                                            <!--                                            <span>10 May 2020 - 6:21 Pm</span>-->
+                                            <span>{{enrolmentDetail.created_at | date:'medium'}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [ngSwitch]="enrolmentDetail.enrollment_status" class="col-md-2 col-sm-4 col-xs-12 PL-0 text-right">
+                                <p *ngSwitchCase="enrollStatusEnum.ACCEPETD" class="accept-status">Accepted</p>
+                                <p *ngSwitchCase="enrollStatusEnum.PENDING" class="pending-status">Pending</p>
+                                <p *ngSwitchCase="enrollStatusEnum.REJECTED" class="rejected-status">Rejected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngSwitchCase="viewType.NoData">
+                <div class="no-content-found-wrapper">
+                    <mat-icon svgIcon="noEnroll"></mat-icon>
+                    <p>No Enrollment Request</p>
+                    <span>You don't have any enrollment request yet</span>
+                </div>
+            </div>
+
+            <div class="loader-data" *ngSwitchCase="viewType.Loading">
+                <label>Loading...</label>
+            </div>
+        </div>
+    </div>
+</div>

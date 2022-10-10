@@ -1,0 +1,62 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.auth-container {
+    &.signup-otp-container {
+        @include respond('phone') {
+            height: calc(100vh - 4rem);
+        }
+        @include respond('iphone') {
+            height: calc(100vh - 5rem);
+        }
+    }
+    h3 {
+        margin-bottom: 1rem;
+    }
+}
+.otp-form-field {
+    label {
+        color: $primary-color;
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+    .otp-form-container {
+        display: flex;
+
+        .form-control {
+            height: 9rem !important;
+            width: 6rem !important;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+
+            input {
+                border: 0.2rem solid $primary-color-2 !important;
+                background-color: $grey-color-10;
+                height: 5rem !important;
+                width: 5rem;
+                text-align: center;
+                font-size: 1em;
+                border-radius: 0.8rem;
+                border: none;
+                background: transparent;
+
+                @include respond('iphone') {
+                    height: 4rem !important;
+                    width: 4rem;
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-color !important;
+                }
+            }
+        }
+    }
+}
+
+b {
+    span {
+        color: $primary-color;
+    }
+}

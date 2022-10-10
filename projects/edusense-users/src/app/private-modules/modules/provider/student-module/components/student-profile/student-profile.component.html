@@ -1,0 +1,37 @@
+<div class="student-profile-container">
+  <div class="flex-right student-profile-container__top-right">
+    <button (click)="onStudentsPage()" matTooltip="Close" id="btnClose">
+      <mat-icon svgIcon="cross"></mat-icon>
+    </button>
+  </div>
+  <div class="student-profile-container__body">
+    <div class="student-profile-container__body--details">
+      <div class="student-profile-container__body__content">
+        <img [src]="student?.user?.avatar_thumbnail" (error)="onError($event)" alt="" />
+        <div>
+          <h3>{{student?.user?.first_name}} {{student?.user?.last_name}}</h3>
+          <p *ngIf="student">{{getLocation()}}</p>
+          <button id="btnRemove" mat-button class="round-button round-button-red" (click)="onOpenConfirmationDialog()">
+            Remove
+          </button>
+        </div>
+      </div>
+      <div class="student-class-list-wraper">
+        <div class="student-class-list">
+          <label>Student in Class :</label>
+          <div class="class-name">
+            <!-- <span>{{student?.classNames}}</span> -->
+            <span *ngFor="let stud of student?.parent_class;">{{stud.class_name}}</span>
+          </div>
+        </div>
+        <div class="student-class-list xs-PT-2">
+          <label>Student in Session :</label>
+          <div class="class-name">
+            <!-- <span>{{student?.classNames}}</span> -->
+            <span *ngFor="let stud of student?.class;">{{stud.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

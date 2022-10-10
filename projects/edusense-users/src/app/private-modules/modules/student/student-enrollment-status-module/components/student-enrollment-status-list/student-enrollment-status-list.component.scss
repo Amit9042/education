@@ -1,0 +1,79 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.form-control {
+    input {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+button {
+    &.action-button {
+        min-width: 4rem !important;
+        width: 4rem !important;
+        border-radius: 50%;
+        height: 4rem !important;
+        margin: 0;
+        padding: 0 0.5rem;
+    }
+}
+
+.time-date {
+    color: rgba($black-color, 0.6) !important;
+}
+
+.accept-status,
+.pending-status,
+.rejected-status {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: rgba($black-color, 0.6);
+
+    @include respond('tablet') {
+        font-size: 1.5rem;
+    }
+
+    @include respond('phone') {
+        font-size: 1.4rem;
+    }
+}
+
+.accept-status {
+    color: $green-color-5;
+}
+
+.pending-status {
+    color: $yellow-color;
+}
+
+.pending-status {
+    color: $reddish-orange-color;
+}
+
+.mobile-mb-2 {
+    @include respond('phone') {
+        margin-bottom: 2rem;
+    }
+}
+
+.waiting-room-container {
+    min-height: calc(100vh - 12rem);
+}
+.meeting-room {
+    &__body {
+        .visitors-info {
+            margin-bottom:0;
+            padding: 1.5rem 0;
+            &:hover{
+                background-color: rgba($primary-color, 0.02);
+            }
+            &__left {
+                .visitor-details {
+                    @include respond('phone') {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

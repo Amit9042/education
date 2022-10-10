@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <g id="message" transform="translate(-1800 -40)">
+    <circle id="Ellipse_14" data-name="Ellipse 14" cx="40" cy="40" r="40" transform="translate(1800 40)" opacity="0.4"/>
+    <g id="comment" transform="translate(1823.999 66.138)">
+      <path id="Path_11352" data-name="Path 11352" d="M28.126-1.332H4.484A4.488,4.488,0,0,0,0,3.151V17.619A4.488,4.488,0,0,0,4.468,22.1v6.566L13.9,22.1H28.126a4.488,4.488,0,0,0,4.483-4.483V3.151a4.488,4.488,0,0,0-4.483-4.483ZM30.7,17.619a2.575,2.575,0,0,1-2.572,2.572H13.3L6.378,25.011V20.192H4.484a2.575,2.575,0,0,1-2.572-2.572V3.151A2.575,2.575,0,0,1,4.484.579H28.126A2.575,2.575,0,0,1,30.7,3.151Zm0,0" fill="#fff"/>
+      <path id="Path_11353" data-name="Path 11353" d="M171.293,131.172h15.238v1.921H171.293Zm0,0" transform="translate(-162.607 -125.756)" fill="#fff"/>
+      <path id="Path_11354" data-name="Path 11354" d="M171.293,211.172h15.238v1.921H171.293Zm0,0" transform="translate(-162.607 -201.681)" fill="#fff"/>
+      <path id="Path_11355" data-name="Path 11355" d="M171.293,291.172h15.238v1.921H171.293Zm0,0" transform="translate(-162.607 -277.607)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

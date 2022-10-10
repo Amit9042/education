@@ -1,0 +1,294 @@
+.create-class-dialog-container es-user-class-details-dialog {
+    display: block !important;
+}
+.create-class-dialog-container {
+    h4 {
+        color: $primary-color;
+        font-size: 3.2rem;
+        font-weight: bold;
+
+        @include respond('tablet') {
+            font-size: 2.6rem;
+        }
+
+        @include respond('phone') {
+            font-size: 2rem;
+        }
+    }
+
+    .form-control {
+        height: 10.5rem;
+
+        @media screen and (min-width: 1025px) and (max-width: 1280px) {
+            height: 10rem;
+        }
+    }
+
+    .form-control-textarea {
+        height: 12rem;
+    }
+
+    .create-class-container {
+        width: 100%;
+        padding: 4rem 6.5rem;
+
+        @include respond('regular-desktop') {
+            padding: 2rem 6.5rem;
+        }
+
+        @include respond('tablet') {
+            padding: 2rem;
+        }
+
+        @include respond('phone') {
+            padding: 2rem;
+        }
+    }
+
+    .create-class {
+        &__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @include respond('tablet') {
+                margin-bottom: 3rem;
+            }
+
+            .edusense-logo {
+                position: relative;
+                top: 0;
+                left: 0;
+                padding: 0;
+
+                .mat-icon,
+                img {
+                    width: 13.5rem;
+                }
+            }
+
+            a {
+                &:last-child {
+                    .mat-icon {
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+            }
+        }
+
+        &__bottom {
+            max-width: 40%;
+            width: 100%;
+            margin: 0 auto;
+
+            @include respond('regular-desktop') {
+                max-width: 45%;
+            }
+
+            @media screen and (min-width: 1025px) and (max-width: 1279px) {
+                max-width: 50%;
+            }
+
+            @include respond('tablet') {
+                max-width: 70%;
+            }
+
+            @include respond('phone') {
+                max-width: 100%;
+            }
+
+            h4 {
+                margin-bottom: 3rem;
+                @include respond('regular-desktop') {
+                    margin-bottom: 2rem;
+                }
+
+                @include respond('phone') {
+                    margin: 2rem 0;
+                }
+            }
+
+            &.select-class__bottom {
+                @include respond('tablet') {
+                    max-width: 80%;
+                }
+            }           
+        }
+    }
+
+    .button-group-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;        
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+            .mat-icon {
+                width: 2rem;
+                height: 2rem;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    .button-group {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+
+        button {
+            &:first-child {
+                height: 5rem;
+                margin-right: 1rem;
+                span {
+                    color: $grey-color-12;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+
+    .select-class-container {
+        .mat-checkbox {
+            .mat-checkbox-inner-container {
+                width: 2.2rem;
+                height: 2.2rem;
+
+                @include respond('phone') {
+                    width: 1.8rem;
+                    height: 1.8rem;
+                }
+            }
+
+            .mat-checkbox-label {
+                color: $black-color;
+                font-weight: bold;
+                font-size: 2rem;
+
+                @include respond('tablet') {
+                    font-size: 1.6rem;
+                }
+
+                @include respond('phone') {
+                    font-size: 1.6rem;
+                }
+            }
+
+            .mat-checkbox-frame {
+                border-radius: 3px;
+            }
+        }
+
+        .select-class-wrap {
+            background-color: rgba($primary-color, 0.02);
+            margin: 3rem 0;
+            height: calc(100vh - 30.5rem);
+            padding: 3rem;
+            overflow-y: auto;
+
+            // @include respond('regular-desktop') {
+            //     height: calc(100vh - 55rem);
+            // }
+
+            // @media screen and (min-width: 1025px) and (max-width: 1280px) {
+            //     height: calc(100vh - 40rem);
+            // }
+
+            // @include respond('tablet') {
+            //     width: 100%;
+            //     height: calc(100vh - 52rem);
+            // }
+
+            @media screen and (min-width: 992px) and (max-width: 1024px) {
+                height: calc(100vh - 26rem);
+            }
+
+            @include respond('phone') {
+                width: 100%;
+                height: calc(100vh - 30rem);
+                padding: 2rem 1rem;
+            }
+
+            .mat-checkbox {
+                margin-right: 2rem;
+
+                @include respond('phone') {
+                    margin-right: 1rem;
+                }
+            }
+
+            .select-class-details {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5rem;
+
+                img,
+                .mat-icon {
+                    width: 7.4rem;
+                    height: 7.4rem;
+                    border-radius: 50%;
+                    margin-right: 1.8rem;
+
+                    @include respond('tablet') {
+                        width: 5.5rem;
+                        height: 5.5rem;
+                    }
+
+                    @include respond('phone') {
+                        width: 4.2rem;
+                        height: 4.2rem;
+                        margin-right: 1rem;
+                    }
+                }
+
+                h6 {
+                    color: $black-color;
+                    font-weight: bold;
+                    font-size: 2rem;
+                    margin-bottom: 0.6rem;
+
+                    @include respond('tablet') {
+                        font-size: 1.6rem;
+                    }
+
+                    @include respond('phone') {
+                        font-size: 1.6rem;
+                    }
+                }
+
+                p {
+                    font-size: 1.6rem;
+                    font-weight: normal;
+
+                    @include respond('tablet') {
+                        font-size: 1.4rem;
+                    }
+
+                    @include respond('phone') {
+                        font-size: 1.4rem;
+                    }
+
+                    &.location {
+                        color: rgba($black-color, 0.6);
+                        line-height: 1.25;
+                        margin-bottom: 0.6rem;
+                    }
+
+                    &.school {
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .no-content-found-wrapper {
+                height: fit-content;
+                min-height: -webkit-fill-available;
+            }
+        }
+    }
+}

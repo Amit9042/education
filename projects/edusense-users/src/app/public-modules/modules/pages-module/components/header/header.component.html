@@ -1,0 +1,60 @@
+<div class="webpages-container">
+    <div class="webpage-header">
+        <div class="webpage-header__logo">
+            <a [routerLink]="homeUrl"
+                ><mat-icon svgIcon="page-logo"></mat-icon>
+            </a>
+        </div>
+        <div class="webpage-header__lists">
+            <ul>
+                <li>
+                    <a
+                        (click)="onHomePage()"
+                        [ngClass]="{ active: isActiveHome }" id="lnkHome"
+                    >
+                        <mat-icon svgIcon="page-home"></mat-icon>
+                        <div>Home</div>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="studentUrl" routerLinkActive="active" id="lnkStudents"
+                        ><mat-icon svgIcon="page-student"></mat-icon>
+                        <div>
+                            For Students
+                        </div></a
+                    >
+                </li>
+                <li>
+                    <a [routerLink]="providerUrl" routerLinkActive="active" id="lnkInstitutes">
+                        <mat-icon svgIcon="page-provider"></mat-icon>
+                        <div>
+                            For Institutes
+                        </div></a
+                    >
+                </li>
+                <li>
+                    <a routerLinkActive="active" id="lnkPricing">
+                        <mat-icon svgIcon="page-pricing"></mat-icon>
+                        <div>Pricing</div></a
+                    >
+                </li>
+                <li>
+                    <a [routerLink]="aboutUsUrl" routerLinkActive="active" id="lnkAboutUs">
+                        <mat-icon svgIcon="page-about"></mat-icon>
+                        <div>About Us</div>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="contactUsUrl" routerLinkActive="active" id="lnkContactUs">
+                        <mat-icon svgIcon="contactUs"></mat-icon>
+                        <div>Contact Us</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="webpage-header__links">
+            <a [routerLink]="signUpUrl" id="lnkSignUp">Sign Up</a>
+            <a [routerLink]="loginUrl" id="lnkLogin">Login</a>
+        </div>
+    </div>
+</div>

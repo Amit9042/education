@@ -1,0 +1,139 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.create-course-container {
+    .create-course {
+        width: 90%;
+        margin: 3rem auto 0 auto;
+    }
+
+    .create-course-position {
+        position: sticky;
+        top: 19rem;
+
+        h5 {
+            color: $primary-color;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        ul.navigation-course {
+            li {
+                display: block;
+
+                a {
+                    position: relative;
+                    height: 4rem;
+                    padding-left: 2rem;
+                    display: flex;
+                    align-items: center;
+                    font-size: 1.8rem;
+                    color: $grey-color-12;
+
+                    &::before {
+                        height: 4rem;
+                        width: 3px;
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        background-color: #e8eaed;
+                    }
+
+                    &.active {
+                        &::before {
+                            background-color: $primary-color;
+                        }
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+
+                    small {
+                        @include square(2rem);
+                        border: 1px solid $grey-color-9;
+                        border-radius: 50%;
+                        display: inline-block;
+                        vertical-align: middle;
+
+                        .mat-icon {
+                            display: none;
+                        }
+
+                        &.fill-form-tick {
+                            background-color: $primary-color;
+                            border: 0 solid $primary-color;
+
+                            .mat-icon {
+                                display: block;
+                                width: 1.1rem;
+                                height: 1.1rem;
+                                position: relative;
+                                top: 0.3rem;
+                                left: 0.45rem;
+                            }
+                        }
+                    }
+
+                    span {
+                        vertical-align: middle;
+                        margin-left: 1rem;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+
+    .project-title {
+        position: sticky;
+        top: 7.8rem;
+        background: $white-color;
+        z-index: 2;
+        height: 7.8rem;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+        padding: 0 7.8rem;
+
+        .edit-part {
+            padding-top: 3rem;
+
+            h3 {
+                color: $primary-color;
+                font-size: 1.8rem;
+                font-weight: bold;
+            }
+
+            .edit-icon {
+                mat-icon {
+                    @include square(1.6rem);
+                }
+            }
+        }
+
+        .action-part {
+            padding-top: 1.5rem;
+
+            input {
+                color: $primary-color;
+                font-size: 1.8rem;
+                font-weight: bold;
+                border: 1px solid rgba(32, 48, 97, 0.2);
+                background-color: $white-color;
+                width: 50%;
+                padding: 1.5rem 2.2rem;
+                border-radius: 0.8rem;
+                outline: none;
+            }
+
+            .action-icon {
+                display: inline-block;
+                margin-top: 1rem;
+
+                mat-icon {
+                    @include square(3rem);
+                }
+            }
+        }
+    }
+}

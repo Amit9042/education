@@ -1,0 +1,391 @@
+<div class="course-content-container">
+  <div class="course-content">
+    <h3>Content</h3>
+    <form [formGroup]="sectionForm">
+      <a class="course-content__add-box" formArrayName="sections"
+         *ngFor="let section of sectionsFormArray().controls; let i = index">
+        <div [formGroupName]="i">
+          <div class="course-content__header-box">
+            <b>Section {{ i + 1 }} - </b>
+            <div>
+              <input (keydown.enter)="onSaveSection(i)" [id]="'title-' + i"
+                     [ngClass]="{'active' : getTitleChangeStatus(i)}"
+                     formControlName="sectionTitleCtrl" type="text" placeholder="Enter section title"
+                     autocomplete="off"/>
+              <button (click)="onSaveSection(i)" class="save-btn" *ngIf="getTitleChangeStatus(i)" type="button">Save
+              </button>
+            </div>
+
+            <div class="course-content__action">
+              <ul>
+                <li>
+                  <a matTooltip="Delete" (click)="onClickDeleteSection(i)">
+                    <mat-icon svgIcon="delete"></mat-icon>
+                  </a>
+
+                  <a [matTooltip]="isExpandPanel.includes(i) ? 'collapse' : 'Expand'" (click)="onToggleMainPanel(i)">
+                    <mat-icon *ngIf="!isExpandPanel.includes(i)" svgIcon="down"></mat-icon>
+                    <mat-icon *ngIf="isExpandPanel.includes(i)" svgIcon="up_arrow"></mat-icon>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="course-content__body-box" [ngClass]="{'hide-panel': !isExpandPanel.includes(i)}"
+               formArrayName="lecture">
+            <ul>
+              <div>
+                <li *ngFor="let lecture of lectureFormArrayControls(i).controls; let  j = index;">
+                  <div [formGroupName]="j">
+                    <div class="row">
+                      <div class="col-md-9 PL-0">
+                        <div class="course-content__body-box__title">
+                          <div class="row">
+                            <div class="col-md-10 PL-0">
+                              <div class="course-content__body-box__title__icon">
+                                <mat-icon
+                                  *ngIf="lectureFormControls(i, j)['contentType'] && lectureFormControls(i, j)['contentType'] === contentType.VIDEO"
+                                  svgIcon="VIDEO"></mat-icon>
+                                <mat-icon
+                                  *ngIf="lectureFormControls(i, j)['contentType'] && lectureFormControls(i, j)['contentType'] === contentType.YOUTUBE_LINK"
+                                  svgIcon="LINK"></mat-icon>
+                                <mat-icon
+                                  *ngIf="lectureFormControls(i, j)['contentType'] && lectureFormControls(i, j)['contentType'] === contentType.TEXT"
+                                  svgIcon="DESCRIPTION"></mat-icon>
+                                <mat-icon
+                                  *ngIf="lectureFormControls(i, j)['contentType'] && lectureFormControls(i, j)['contentType'] === contentType.FILE"
+                                  svgIcon="FILES"></mat-icon>
+                              </div>
+
+                              <div class="lecture-position">
+                                <input (keydown.enter)="onSaveLectureDetails(i, j)"
+                                       [ngClass]="{'active' : getLectureTitleChangeStatus(i, j)}"
+                                       formControlName="lectureTitle" [id]="'txtLecture-'+i.toString()+j.toString()"
+                                       type="text" class="lecture-width" placeholder="Enter lecture title"
+                                       autocomplete="off"/>
+                              </div>
+                            </div>
+                            <div class="col-md-2 lecture-position PR-0">
+                              <button *ngIf="getLectureTitleChangeStatus(i, j)" (click)="onSaveLectureDetails(i, j)"
+                                      class="save-btn" type="button">Save
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-3 PR-0 text-right">
+                        <a class="hide-show-label" *ngIf="lectureFormControls(i, j)['contentId']"
+                           (click)="onTogglePanel(i, j)">{{
+                            isExpandChildPanel.includes(i + '.' + j) ? 'Hide' : 'Show'
+                          }}</a>
+
+                        <a (click)="onToggleContentType(i, j)" *ngIf="!lectureFormControls(i, j)['contentId']"
+                           class="add-section-link">
+                          <mat-icon svgIcon="add"></mat-icon>
+                          Add content
+                        </a>
+                        <a matTooltip="Remove" class="remove-lecture" (click)="onRemoveLecture(i, j)">
+                          <mat-icon svgIcon="close">
+                          </mat-icon>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div *ngIf="getExpandContentTypeStatus(i,j) && !(lectureFormControls(i, j)['contentId'])"
+                           class="row">
+                        <div class="col-md-12 PL-0 MT-2 content-type">
+                          <span class="content-type__title">Content Type:</span>
+                          <mat-radio-group>
+                            <mat-radio-button (change)="onChangeContentType($event)" [checked]="true" value="1">Video
+                            </mat-radio-button>
+                            <mat-radio-button (change)="onChangeContentType($event)" value="2">Description
+                            </mat-radio-button>
+                            <mat-radio-button (change)="onChangeContentType($event)" value="3">Link</mat-radio-button>
+                            <mat-radio-button (change)="onChangeContentType($event)" value="4">File</mat-radio-button>
+                          </mat-radio-group>
+
+                          <div *ngIf="isShowView === contentTypeViewEnum.VIDEO_TYPE_CONTENT" class="row">
+                            <div class="col-md-12 PL-0 MT-2">
+                              <div class="row">
+                                <div class="col-md-9">
+                                  <button class="upload-course-image-button MR-1" tpye="button" mat-flat-button
+                                          color="secondary" (click)="onBrowseFile('videoFile'+i+'.'+j)">
+                                    <mat-icon svgIcon="video-camera"></mat-icon>
+                                    <input type="file" hidden [id]="'videoFile'+i+'.'+j"
+                                           accept=".mp4, .avi, .mov, .flv, .webm, .mpg, .mpeg, .wmv"
+                                           (change)="onVideoUpload($event, i, j)"/>
+                                    Upload Video
+                                  </button>
+                                  <button (click)="onBrowseFile('videoImageFile'+i+'.'+j)"
+                                          class="upload-course-image-button cover-image-icon" tpye="button"
+                                          mat-flat-button
+                                          color="secondary" *ngIf="!showImageName(i,j)">
+                                    <mat-icon svgIcon="upload-image"></mat-icon>
+                                    <input type="file" hidden [id]="'videoImageFile'+i+'.'+j"
+                                           accept=".png, .jpeg, .jpg"
+                                           (change)="onVideoCoverImageFileUpload($event, i, j)"/>
+                                    Upload Cover Image
+                                  </button>
+                                </div>
+
+                                <div class="col-md-3" *ngIf="showDoneButton(i,j) && !showImageName(i,j)">
+                                  <button class="done-btn" type="button" (click)="uploadVideo(i, j)">Done</button>
+                                </div>
+                              </div>
+
+                              <div class="upload-video-action">
+                                <div class="col-md-12 MT-2 PR-0">
+                                  <div class="row">
+                                    <div class="col-md-9 PL-0" *ngIf="showImageName(i,j)">
+                                      <p>{{ getCoverImageName(i, j) }}</p>
+                                      <a (click)="removeCoverImage(i,j)">
+                                        <mat-icon svgIcon="close"></mat-icon>
+                                      </a>
+                                    </div>
+                                    <div class="col-md-3 PR-0" *ngIf="showDoneButton(i,j) && showImageName(i,j)">
+                                      <button class="done-btn" type="button" (click)="uploadVideo(i, j)">Done</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="isShowView === contentTypeViewEnum.DESCRIPTION_TYPE_CONTENT" class="col-md-12">
+                          <quill-editor class="editor-width" [placeholder]="'Type description here'"
+                                        [formControl]="descriptionFormControl"></quill-editor>
+
+                          <div class="MT-3 description-input-border">
+                            <input class="width-100" type="text"
+                                   placeholder="Minimum amount of time required to read the content (in seconds)"
+                                   [formControl]="amountFormControl"/>
+
+                            <mat-error class="amount-valid" *ngIf="amountFormControl.invalid">
+                              {{ validationMsg.TIME_VALID }}
+                            </mat-error>
+
+                            <button class="save-btn" type="button" (click)="onAddDescription(i,j)">Save
+                            </button>
+                          </div>
+                        </div>
+
+                        <div *ngIf="isShowView === contentTypeViewEnum.LINK_TYPE_CONTENT" class="col-md-12">
+                          <div class="MT-3">
+                            <input (focus)="onFocusLectureTitle()" class="active" [formControl]="urlCtrl" type="text"
+                                   placeholder="Enter URL"/>
+                            <button class="save-btn" type="button" (click)="onAddLink(i,j)"
+                                    [disabled]="urlCtrl.invalid">Save
+                            </button>
+
+                            <mat-error class="youtube-valid" *ngIf="urlCtrl.invalid">
+                              {{ validationMsg.YOUTUBE_VALID }}
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div *ngIf="isShowView === contentTypeViewEnum.FILE_TYPE_CONTENT" class="row">
+                          <div class="col-md-12 MT-2">
+                            <button (click)="onBrowseFile('uploadFile'+i+'.'+j)" class="upload-course-image-button"
+                                    tpye="button" mat-flat-button color="secondary">
+                              <mat-icon svgIcon="content-type"></mat-icon>
+                              Upload File
+                            </button>
+                            <input type="file" hidden [id]="'uploadFile'+i+'.'+j" accept=".pdf"
+                                   #fileInput
+                                   (click)="fileInput.value = null" value=""
+                                   (change)="onLectureFileUpload($event, i, j)"/>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="isExpandChildPanel.includes(i+'.'+j) && lectureFormControls(i, j)['contentId']">
+                        <div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="text-view">
+                                <div class="text-view__action">
+                                  <a matTooltip="Edit"
+                                     *ngIf="lectureFormControls(i, j)['contentType'] === contentType.TEXT && editDescription !== i+'.'+j"
+                                     (click)="onClickEditDescription(i, j, lectureFormControls(i, j)['description'], lectureFormControls(i, j)['duration'])">
+                                    <mat-icon svgIcon="title-edit"></mat-icon>
+                                  </a>
+                                  <a matTooltip="Remove"
+                                     *ngIf="lectureFormControls(i, j)['contentType'] === contentType.TEXT && editDescription === i+'.'+j"
+                                     (click)="onCancelEditDescription()">
+                                    <mat-icon svgIcon="close"></mat-icon>
+                                  </a>
+                                  <a matTooltip="Delete"
+                                     (click)="removeContent(lectureFormControls(i, j)['lectureId'], lectureFormControls(i, j)['contentId'])">
+                                    <mat-icon svgIcon="delete"></mat-icon>
+                                  </a>
+                                </div>
+                                <div class="text-view__time"
+                                     *ngIf="lectureFormControls(i, j)['contentType'] === contentType.VIDEO">
+                                  <a class="text-view__file"
+                                     (click)="onClickVideo(lectureFormControls(i, j)['path'], lectureFormControls(i, j)['type'])">
+                                    <img *ngIf="lectureFormControls(i, j)['preview']"
+                                         [src]="lectureFormControls(i, j)['preview']"/>
+                                    <mat-icon *ngIf="!lectureFormControls(i, j)['preview']"
+                                              svgIcon="no-cover-image"></mat-icon>
+                                  </a>
+                                  <span
+                                    class="duration-position">{{
+                                      getDuration(lectureFormControls(i, j)['duration'])
+                                    }}</span>
+                                </div>
+
+                                <div>
+                                  <div class="text-view__inner-html-design"
+                                       *ngIf="lectureFormControls(i, j)['contentType'] === contentType.TEXT && (editDescription !== i+'.'+j)">
+                                    <div>
+                                      <div [innerHTML]="lectureFormControls(i, j)['description']"></div>
+                                    </div>
+
+                                    <div *ngIf="lectureFormControls(i, j)['duration']">
+                                      <span>{{ getDuration(lectureFormControls(i, j)['duration']) }}</span>
+                                    </div>
+                                  </div>
+
+                                  <div *ngIf="editDescription === i+'.'+j">
+                                    <div class="col-md-12 PL-0">
+                                      <quill-editor class="editor-width" [placeholder]="'Type description here'"
+                                                    [formControl]="editDescriptionFormControl"></quill-editor>
+
+                                      <div class="MT-3 description-input-border">
+                                        <input class="width-100" type="text"
+                                               placeholder="Minimum amount of time required to read the content (in seconds)"
+                                               [formControl]="editAmountFormControl"/>
+
+                                        <mat-error class="amount-valid" *ngIf="editAmountFormControl.invalid">
+                                          {{ validationMsg.TIME_VALID }}
+                                        </mat-error>
+
+                                        <button (click)="onUpdateDescription(i,j)" class="save-btn" type="button">Update
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="text-view__you-tube-design"
+                                     *ngIf="lectureFormControls(i, j)['contentType'] === contentType.YOUTUBE_LINK">
+                                  <a (click)="onClickYoutubeVideo(lectureFormControls(i, j)['path'])">
+                                    <mat-icon svgIcon="YOUTUBE"></mat-icon>
+                                  </a>
+                                </div>
+
+                                <div class="text-view__file-pdf-design"
+                                     *ngIf="lectureFormControls(i, j)['contentType'] === contentType.FILE">
+                                  <a (click)="onClickFile(lectureFormControls(i, j)['path'])">
+                                    <mat-icon svgIcon="FILETYPEBG"></mat-icon>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-view__resource">
+                      <a (click)="onBrowseFile('uploadResource'+i+'.'+j)">
+                        <mat-icon svgIcon="que-add"></mat-icon>
+                        Add Resource File
+                        <input type="file" hidden [id]="'uploadResource'+i+'.'+j"
+                               accept=".pdf, .txt, .ppt, .pptx, .xls, .xlsx, .png, .jpeg, .jpg, .doc, .docx, .mp3"
+                               (change)="onResourceFileUpload($event, i, j)"/>
+                      </a>
+                      <div class="text-view__resource--files pdf-document"
+                           *ngIf="getResourceFile(lectureFormControls(i, j)['sectionId'], lectureFormControls(i, j)['lectureId']).length > 0">
+                        <div class="MB-1"
+                             *ngFor="let file of getResourceFile(lectureFormControls(i, j)['sectionId'], lectureFormControls(i, j)['lectureId'])">
+                          <mat-icon [svgIcon]="getIcon(file['content_mime_type'])"></mat-icon>
+                          <label>{{ file['title'] | checkEmpty }}</label>
+                          <a (click)="removeResourceFile(file['resource_id'])">
+                            <mat-icon svgIcon="close"></mat-icon>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </ul>
+
+            <div *ngIf="addLectureSectionList.includes(i)" class="MT-3">
+              <input (keydown.enter)="onCreateLecture(i)" (focus)="onFocusLectureTitle()"
+                     [ngClass]="{'active' : lectureTitleCtrl.value}"
+                     [formControl]="lectureTitleCtrl" type="text" placeholder="Enter lecture title" appAutofocus/>
+
+              <button (click)="onCreateLecture(i)" *ngIf="isShowLectureSaveBtn" class="save-btn" type="button">Save
+              </button>
+              <a matTooltip="Remove" class="remove-sub-lecture" (click)="onRemoveNewLecture(i)">
+                <mat-icon svgIcon="close"></mat-icon>
+              </a>
+            </div>
+
+            <div class="MT-3">
+              <a (click)="onClickAddLecture(i)" class="add-section-link">
+                <mat-icon svgIcon="addField"></mat-icon>
+                Add lecture
+              </a>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <div class="row buttons">
+        <div *ngIf="isShowSectionTitle" class="course-content__add-box width-100 add-section-title">
+          <div class="course-content__header-box">
+            <b>Section {{ sectionsFormArray().length + 1 }} - </b>
+
+            <div class="description-input-border section-width">
+              <input id="txtSectionTitle" class="width-100" [formControl]="addSectionFormControl" type="text"
+                     placeholder="Enter section title" appAutofocus autocomplete="off"/>
+              <button (click)="onAddSection()" class="save-btn" type="button">Save
+              </button>
+              <a matTooltip="Remove" class="remove-sub-lecture" (click)="onRemoveNotAddedSection()">
+                <mat-icon svgIcon="close"></mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 PL-0 MB-2">
+          <div class="button-group">
+            <button (click)="onSectionTitleOpen()" type="button" id="btnAddSection" class="cancel-btn MR-2"
+                    mat-stroked-button>
+              <mat-icon svgIcon="que-add"></mat-icon>
+              <span>Add Section</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 PL-0 MT-5">
+          <div class="button-group">
+            <button type="button" id="btnPrev" class="cancel-btn MR-2" mat-stroked-button (click)="onPreviewStep()">
+              <mat-icon svgIcon="prev"></mat-icon>
+              <span>Previous</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 PR-0 text-right MT-5">
+          <div class="button-group">
+            <button type="button" id="btnCancel" class="cancel-btn MR-2" mat-stroked-button (click)="onCourseList()">
+              Cancel
+            </button>
+            <button mat-flat-button color="primary" (click)="onNextStep()" type="button" id="btnAdd">
+              <span>Save & Next</span>
+              <mat-icon svgIcon="next"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="material-list selection-container">
+    <div class="material-list__header">
+        <div class="row">
+            <div class="col-md-4 col-sm-8 col-xs-7 PL-0">
+                <div class="header__search">
+                    <div class="header__search--input">
+                        <input [formControl]="nameFilterField" autocomplete="off" type="text" name="search"
+                            placeholder="Search..." id="searchTxt" />
+                        <mat-icon svgIcon="search"></mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-5 PL-0 padding-right-zero">
+                <div class="form-control">
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-select id="matSelectType" placeholder="Type" [formControl]="types" multiple>
+                            <mat-select-trigger>
+                                {{types.value && types.value.length ? types.value[0].name : ''}}
+                                <span *ngIf="types.value && types.value?.length > 1" class="example-additional-selection">
+                                    (+{{ types.value.length - 1 }} More)
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let type of filterType" [value]="type">{{
+                                    type?.name
+                                }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="selection-body">
+        <ul>
+            <li>
+                <a (click)="onSubjectUrl()" id="lnkSubject">Subject ({{selectedGradeAndSubject?.subject_name}})</a>
+            </li>
+            <li>
+                <a class="active">Material</a>
+            </li>
+        </ul>
+
+        <div scrollWindow="true" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()" class="material-list__body">
+            <div class="material-listing grade-wrapper">
+                <a (click)="
+                viewDownloadMaterial(
+                        material.material_id,
+                        material.original_file_name,
+                        material.file_content_type,
+                        material.material_type_id,
+                        material.file_path
+                    )
+                " class="material-listing__section" *ngFor="let material of materialList; let i = index" [id]="'lnkMaterial-'+i">
+                    <div class="material-listing__section--top">
+                        <!-- FOLLOWING ICONS BASED ON FILE TYPE -->
+                        <div class="text-center">  
+                            <mat-icon [svgIcon]="getFileIcon(material.file_content_type)" class="file-type"></mat-icon>
+                            <p class="file-subname">{{material.original_file_name}}</p>
+                        </div>                       
+                    </div> 
+
+                    <div class="material-listing__section--bottom">
+                        <p class="file-name document-name">
+                            <span>{{material?.name}}</span>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <app-no-data
+        *ngIf="!isLoadingResults && materialList.length == 0"
+    ></app-no-data> -->
+
+    <div *ngIf="!isLoadingResults && materialList.length == 0">
+        <div class="no-content-found-wrapper">
+            <mat-icon svgIcon="no_material_files"></mat-icon>
+            <p>No materials available</p>
+            <span>No material has been uploaded by the provider</span>
+        </div>
+    </div>
+
+    <app-data-loading *ngIf="isLoadingResults"></app-data-loading>
+</div>

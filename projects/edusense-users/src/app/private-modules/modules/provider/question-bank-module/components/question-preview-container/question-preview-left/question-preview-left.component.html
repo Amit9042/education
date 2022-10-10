@@ -1,0 +1,128 @@
+<form>
+    <div class="question-list-container">
+        <div class="question-list">
+            <div class="question-list__header">
+                <div class="question-list__header__row">
+                    <div class="question-list__header__row__left">
+                        <a id="lnkBack" (click)="onBack()" matTooltip="Back">
+                            <mat-icon svgIcon="backArrow"></mat-icon>
+                        </a>
+                    </div>
+        
+                    <div class="question-list__header__row__center">
+                        <h4>Folder 2. Polynomials</h4>
+                        <span>Maths &bull; Grade 6</span>
+                    </div>
+                </div>
+    
+                <div class="question-list__header__search">
+                    <mat-icon svgIcon="search"></mat-icon>
+                    <input id="searchBox" type="text" placeholder="Search" />
+                </div>
+    
+                <div class="question-list__header__action">
+                    <div class="question-list__header__action__title">
+                        <h5>Question List</h5>
+                    </div>
+                    <div class="question-list__header__action__filter">
+                        <a id="lnkViewChange" (click)="onToggleView()">
+                            <mat-icon *ngIf="isListView" matTooltip="Grid View" svgIcon="tileViewOut"></mat-icon>
+                            <mat-icon *ngIf="!isListView" matTooltip="List View" svgIcon="list"></mat-icon>
+                        </a>
+                        <a id="lnkFilter" [matMenuTriggerFor]="menuFilter" class="ML-1" matTooltip="Filter">
+                            <mat-icon svgIcon="filter-round"></mat-icon>
+                        </a>
+    
+                        <mat-menu class="filter-menu-dropdown"  xPosition="before" #menuFilter="matMenu">
+                            <b>Difficulty Level</b>
+                            <div>                            
+                                <mat-checkbox id="checkFilterHigh">High</mat-checkbox>
+                            </div>
+                            <div>
+                                <mat-checkbox id="checkFilterMidum">Medium</mat-checkbox>                            
+                            </div>
+                            <div>
+                                <mat-checkbox id="checkFilterLow">Low</mat-checkbox>
+                            </div>
+    
+                            <b>Question Type</b>
+                            <div>
+                                <mat-checkbox id="checkQuestionTypeSingleAnswer">Single Answer Selection</mat-checkbox>                            
+                            </div>
+                            <div>
+                                <mat-checkbox id="checkMultipleAnswerSelection">Multiple Answer Selection</mat-checkbox>
+                            </div>
+                            <div>
+                                <mat-checkbox id="checkTrueFalse">True/False</mat-checkbox>
+                            </div>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="question-list__body" infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()">
+    
+                <div *ngIf="isListView" class="question-list__body__list-type">
+                    <div>
+                        <a [id]="'lnkQuestion'"  [ngClass]="{'active' : true}">
+                            <div class="question-list__body__list-type__count">
+                                1.
+                            </div>
+                            <div class="question-list__body__list-type__question">
+                                <p>
+                                    There are many variations of passages of Lorem
+                                    Ipsum available, but the majority have suffered
+                                    alteration in some form, by injected humour,
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+    
+                <div *ngIf="!isListView" class="question-list__body__box-type">
+                    <ul>
+                        <li *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]; let j = index ">
+                            <a [id]="'lnkQuestionBox' + j" [ngClass]="{'active' : j === 3}">
+                                {{j + 1}}
+                            </a>
+    
+                            <mat-checkbox [id]="'checkQuestionBox' + j">
+                                
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- FRONTEND DEVELOPER
+                BELOW DESIGN FOR NO DATA -->
+                <div *ngIf="false" class="no-content-found-wrapper">
+                    <mat-icon svgIcon="no-questions"></mat-icon>
+                    <p>No Question Available</p>
+                    <span>Currently you don't have any questions in your
+                        practice</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="false" class="bottom-bar-confirmation">
+        <div class="row">
+            <div class="col-md-6">
+                <span>12 Questions Selected</span>
+            </div>
+            <div class="col-md-6 text-right">
+                <button id="btnClear" class="bottom-bar-confirmation__clear" type="button">Clear</button>
+                <button id="btnSubmit" class="bottom-bar-confirmation__submit" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FRONTEND DEVELOPER
+    Loading Text -->
+    <div *ngIf="false" class="loader-text">
+        <span>Loading...</span>
+    </div>
+</form>

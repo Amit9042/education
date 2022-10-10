@@ -1,0 +1,56 @@
+<div class="assignment-submission-view-container">
+  <div class="assignment-submission-view-container__head">
+    <a (click)="onBack()">
+      <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+    </a>
+    <img [src]="submissionAssignmentDetail?.user?.avatar_thumbnail" alt="">
+    <!-- <mat-icon svgIcon="studentProfile"></mat-icon> -->
+    <div>
+      <h4>{{submissionAssignmentDetail?.user?.first_name + ' ' + submissionAssignmentDetail?.user?.last_name}}</h4>
+      <div>
+        <label>Submitted on:</label>
+        <span>{{submissionAssignmentDetail?.createdAt | date: 'dd MMMM yyyy'}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="assignment-submission-view-container__body">
+    <h4>{{submissionAssignmentDetail?.provider_assignment?.title}}</h4>
+    <div>
+      <label>Teacher:</label>
+      <span>{{submissionAssignmentDetail?.provider_assignment?.createdBy?.first_name + ' ' +
+      submissionAssignmentDetail?.provider_assignment?.createdBy?.last_name}}</span>
+      <p class="info"><span>{{submissionAssignmentDetail?.provider_assignment?.class?.name | checkEmpty}}</span></p>
+      <p>{{submissionAssignmentDetail?.description | checkEmpty}}</p>
+    </div>
+    <div class="assignment-submission-view-container__body__pdf-view row">
+      <div class="col-md-4 col-sm-6 PL-0"
+           *ngFor="let assignment of submissionAssignmentDetail?.student_assignment_attachments; let i = index">
+        <a (click)="viewDownloadMaterial(assignment.student_attachment_id,
+                        assignment.file_name,
+                        assignment.file_content_type,
+                        assignment.file_path, i+1)" class="flex-left">
+          <mat-icon
+            [svgIcon]="getIcon(assignment?.file_content_type)"
+          ></mat-icon>
+          <span>{{ assignment?.file_name }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mark-remark-section" *ngIf="(submissionAssignmentDetail?.check_status !== 1)">
+    <div class="mark-remark-section__bottom">
+      <label>Mark : </label>
+      <span>{{getAssignmentStatus(submissionAssignmentDetail)}}</span>
+    </div>
+    <div>
+      <label>Remarks : </label>
+      <span>{{submissionAssignmentDetail?.remarks | checkEmpty}}</span>
+    </div>
+  </div>
+  <div class="assignment-submission-view-container__footer" *ngIf="(submissionAssignmentDetail?.check_status === 1) &&
+  (userConfigDetails?.user_id === submissionAssignmentDetail?.provider_assignment?.createdBy?.user_id)">
+    <button (click)="openCheckDialog()" id="btnCheck" class="remove-shadow" type="button" mat-flat-button color="primary">
+      Check
+    </button>
+  </div>
+</div>

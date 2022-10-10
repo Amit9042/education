@@ -1,0 +1,136 @@
+<div class="class-view-container">
+    <div class="class-view">
+        <div class="class-view__header">
+            <a (click)="onClassList()" id="lnkClassList">
+                <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+            </a>
+            <h2>Session Detail</h2>
+        </div>
+        <div class="class-view__body">
+            <div class="class-view__body__view">
+                <label>Name</label>
+                <span>{{classDetail?.name}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Grade </label>
+                <ul *ngFor="let grade of classDetail?.grade;let i = index">
+                    <li>
+                        <span>{{grade?.grade_master?.alias}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="class-view__body__view">
+                <label>Class Name</label>
+                <span>{{classDetail?.parent_class_detail?.class_name}}</span>
+            </div>
+            
+            <div class="class-view__body__view">
+                <label>Teacher</label>
+                <!-- {{getRoleName}} -->
+                <span>{{teacherName}} - {{getRoleName}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Description</label>
+                <span>{{classDetail?.description}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Start Time</label>
+                <span>{{classDetail?.start_time}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>End Time</label>
+                <span>{{classDetail?.end_time}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Days</label>
+                <span>{{classDetail?.days_name}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Subjects</label>
+                <ul *ngFor="let subject of classDetail?.subjects;let i = index">
+                    <li>
+                        <span>{{subject?.subject_master?.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="class-view__body__view">
+                <label>Timezone</label>
+                <span>{{classDetail?.timezone?.name}}</span>
+            </div>
+
+        </div>
+        <div class="class-view__bottom">
+            <h2>Students in class</h2>
+            <div class="waiting-room-container meeting-room-container">
+                <div class="waiting-room meeting-room">
+                    <div class="waiting-room__top">
+                        <div class="row align-center">
+                            <div class="col-md-6 col-sm-6 col-xs-12 small-pad-0">
+                                <div class="row">
+                                    <div class="col-md-10 col-sm-12 col-xs-12 PLR-0">
+                                        <div class="header__search header__search-white">
+                                            <div class="header__search--input">
+                                                <input id="txtSearch" type="text" autocomplete="off" placeholder="Search..." [formControl]="searchControl"/>
+                                                <mat-icon svgIcon="search"></mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 small-pad-0">
+                              <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber" (recordChange)="onChangePagination($event)"
+                                              [recordsPerPage]="recordsPerPage"></app-pagination>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body height-box">
+                      <div *ngSwitchCase="viewType.Data">
+                        <div *ngFor="let studentDetail of studentList; let i = index; ">
+                            <div class="visitors-info">
+                                <div class="row align-center">
+                                    <div class="col-md-9 col-sm-9 col-xs-12 PLR-0">
+                                        <div class="visitors-info__left">
+                                            <div class="visitor-image">
+                                                <img *ngIf="studentDetail.Student_detail?.user?.avatar_thumbnail" [src]="studentDetail.Student_detail?.user?.avatar_thumbnail"/>
+                                                <mat-icon *ngIf="!studentDetail.Student_detail?.user?.avatar_thumbnail" svgIcon="studentProfile"></mat-icon>
+                                            </div>
+                                            <div class="visitor-details">
+                                                <h4>{{studentDetail.Student_detail?.user?.first_name + " " + studentDetail.Student_detail?.user?.last_name }}</h4>
+                                                <p class="location">
+                                                  {{studentDetail.Student_detail?.student_city?.city_name | checkEmpty}}
+                                                  {{studentDetail.Student_detail?.student_state?.state_name ?  ', ' + studentDetail.Student_detail?.student_state?.state_name : '-'}}
+                                                  {{studentDetail.Student_detail?.student_country?.country_name ?  ', ' + studentDetail.Student_detail?.student_country?.country_name : '-'}}
+                                                </p>
+                                                <p class="visit-type">
+                                                  {{studentDetail.Student_detail?.school_name | checkEmpty}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 PLR-0 text-right phone-remove-btn">
+                                        <button class="round-button round-button-red"
+                                            (click)="onOpenConfirmationDialog(studentDetail)" [id]="'btnRemove-'+i">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div *ngSwitchCase="viewType.NoData"  class="no-records-found">
+                        <div class="no-content-found-wrapper">
+                            <mat-icon svgIcon="no-student"></mat-icon>
+                            <p>No students Available </p>
+                            <span>No students in class</span>
+                        </div>
+                      </div>
+                      <div class="loader-data" *ngSwitchCase="viewType.Loading">
+                        <label>Loading...</label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

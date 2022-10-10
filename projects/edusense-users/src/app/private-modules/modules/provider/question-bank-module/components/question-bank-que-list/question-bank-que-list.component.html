@@ -1,0 +1,20 @@
+<div class="question-bank-wrapper">
+    <div class="row">
+        <div class="col-md-3 PLR-0">
+            <div class="question-sidebar-wrapper">
+                <es-user-question-list-sidebar (totalQuestions)="getQuesLength($event)"
+                    (selectedQuestionDetail)="getSelectedQuestionDetail($event)" [isQuesDelete]="isDelete"
+                    [isQuestionSave]="isQuestionSave" [isSaveAddNew]="isSaveAddNew" [isPreviousClick]="isPreviousClick">
+                </es-user-question-list-sidebar>
+            </div>
+        </div>
+        <div class="col-md-9 PLR-0">
+            <div class="question-bank-form-wrapper">
+                <es-user-question-form *ngIf="totalQuestions >= 0" [totalQuestions]="totalQuestions"
+                    [selectedQues]="selectedQues" (isDelete)="isQueDeleted($event)" (isSave)="isSaveQuestion($event)"
+                    (isSaveAddNew)="isSaveAddNewQuestion($event)" (isPreviousClick)="isPreviousQuesClick($event)">
+                </es-user-question-form>
+            </div>
+        </div>
+    </div>
+</div>

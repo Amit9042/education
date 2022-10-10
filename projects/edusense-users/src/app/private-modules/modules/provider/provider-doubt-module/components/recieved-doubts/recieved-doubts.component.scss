@@ -1,0 +1,11 @@
+
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.doubt-container{
+    .meeting-room{
+        &__body{
+            // height: calc(100vh - 33.6rem);
+            // overflow-y: auto;
+        }
+    }
+}

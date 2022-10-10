@@ -1,0 +1,107 @@
+.clear-date {
+    position: relative;
+
+    .mat-button-wrapper {
+        margin-bottom: 0 !important;
+    }
+
+    .mat-datepicker-toggle .mat-icon-button {
+        top: -1.8em;
+        width: 2em !important;
+    }
+
+    a {
+        position: absolute;
+        max-width: 2rem;
+        height: 2rem;
+        right: -0.8rem;
+
+        @include respond('regular-desktop') {
+            right: -1.2rem;
+        }
+
+        .mat-icon {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+    }
+}
+
+.table-body {
+    &.attendance-table-body {
+        margin: 0;
+
+        thead {
+            margin-bottom: 2rem;
+
+            th {
+                span {
+                    font-size: 2rem;
+                    margin-bottom: 2rem;
+                        // @include respond('regular-desktop') {
+                        //     font-size: 1.6rem;
+                        // }
+                    @include respond('tab-port') {
+                        font-size: 1.6rem;
+                    }
+                    @include respond('phone') {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+
+        tr {
+            height: auto;
+
+            td {
+                border-bottom: 0;
+
+                a {
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-left: 1rem;
+                    width: 1.4rem;
+                    height: 1.4rem;
+
+                    .mat-icon {
+                        position: relative;
+                        top: -0.3rem;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .visitors-info {
+                    margin: 2rem 0;
+                }
+            }
+        }
+    }
+
+    &.attendance-list-body {
+        table {
+            tbody {
+                tr {
+                    td {
+                        &:last-child {
+                            padding-right: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.attendance-table {
+    @include respond('tab-port') {
+        min-width: 700px;
+        overflow-x: auto;
+    }
+
+    @include respond('phone') {
+        min-width: 600px;
+        overflow-x: auto;
+    }
+}

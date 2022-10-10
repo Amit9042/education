@@ -1,0 +1,45 @@
+<div class="sidebar-drawer-wrapper">
+  <div class="sidebar-drawer__top">
+    <div class="sidebar-drawer__top--head">
+      <h3>Settings</h3>
+      <a (click)="onCloseDrawer()" id="lnkClose">
+        <mat-icon svgIcon="close"></mat-icon>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar-drawer__bottom">
+    <p class="drawer-heading">General</p>
+    <div *ngIf="isUserManage" class="sidebar-drawer__bottom--links">
+      <a (click)="onUserManagement()" id="lnkUserManagement">
+        <mat-icon svgIcon="group"></mat-icon>
+        <p>User Management</p>
+      </a>
+    </div>
+
+    <div *ngIf="isRoleManage" class="sidebar-drawer__bottom--links">
+      <a (click)="onRoleManagement()" id="lnkRoleManagement">
+        <mat-icon svgIcon="roleManagement"></mat-icon>
+        <p>Role Management</p>
+      </a>
+    </div>
+
+    <div *ngIf="config.app_id === userType.PROVIDER" class="sidebar-drawer__bottom--links">
+      <a (click)="onChapterManagement()" id="lnkChapterManagement">
+        <mat-icon svgIcon="chapterManagement"></mat-icon>
+        <p>Chapter Management</p>
+      </a>
+    </div>
+
+    <div class="sidebar-drawer__bottom--links">
+      <a (click)="onchangePassword()" id="lnkChangePassword">
+        <mat-icon svgIcon="technology"></mat-icon>
+        <p>
+          Change Password?
+        </p>
+      </a>
+    </div>
+
+    <!-- </mat-expansion-panel> -->
+  </div>
+</div>

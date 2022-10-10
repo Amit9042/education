@@ -1,0 +1,168 @@
+<div class="dialog-container">
+    <div class="dialog-container__head">
+        <h4>Edit Provider</h4>
+        <a (click)="onDialogClose()" id="lnkClose">
+            <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+        </a>
+    </div>
+    <div class="dialog-container__bottom">
+        <form [formGroup]="editProviderForm" (ngSubmit)="onSubmitEditProviderForm(editProviderForm)">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Name*</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input formControlName="name" type="text" autocomplete="off" matInput
+                                placeholder="Enter name" id="txtFname" />
+                            <mat-error *ngIf="
+                                    isRequiredField(formControls['name'])
+                                ">
+                                {{ validationMsg.NAME }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidLength(formControls['name'])">
+                                {{ validationMsg.NAME_LENGTH }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidField(formControls['name'])">
+                                {{ validationMsg.NAME_VALID }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Email*</mat-label>
+                        <mat-form-field appearance="outline">
+                            <input id="txtEmail" type="text" required formControlName="email" autocomplete="off"
+                                matInput placeholder="e.g demo123@example.com" />
+
+                            <mat-error *ngIf="isRequiredField(formControls['email'])">
+                                {{ validationMsg.EMAIL }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidField(formControls['email'])">
+                                {{ validationMsg.EMAIL_VALID }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidLength(formControls['email'])">
+                                {{ validationMsg.EMAIL_LENGTH }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Provider Name*</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input formControlName="p_name" type="text" autocomplete="off" matInput
+                                placeholder="Enter provider name" id="txtPname" />
+                            <mat-error *ngIf="
+                                    isRequiredField(formControls['p_name'])
+                                ">
+                                {{ validationMsg.PROVIDER_NAME }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidLength(formControls['p_name'])">
+                                {{ validationMsg.PROVIDER_NAME_LENGTH }}
+                            </mat-error>
+                            <mat-error *ngIf="isValidField(formControls['p_name'])">
+                                {{ validationMsg.PROVIDER_NAME_VALID }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Type*</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-select formControlName="type" placeholder="Select type" id="matSelectRole">
+                                <mat-option value="0">College</mat-option>
+                                <mat-option value="1">School</mat-option>
+                                <mat-option value="2">Institute</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isRequiredField(formControls['type'])">
+                                {{ validationMsg.TYPE }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>Board*</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-select multiple formControlName="board" placeholder="Select board" id="matSelectRole">
+                                <mat-option value="0">GHSEB</mat-option>
+                                <mat-option value="1">ICSE</mat-option>
+                                <mat-option value="2">CBSC</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isRequiredField(formControls['board'])">
+                                {{ validationMsg.BOARD }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 PL-0 small-pad-right-0">
+                    <div class="form-control">
+                        <ss-select-search id="matSelectCountry" [formName]="editProviderForm"
+                            [selectConfig]="countrySearchConfig" [selected]=""
+                            [dataList]="countryList" (changSelectEvent)="
+                      onSelectChangeEvent($event, 'country')
+                    ">
+                        </ss-select-search>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 PR-0 small-pad-left-0">
+                    <div class="form-control">
+                        <ss-select-search id="matSelectState" [formName]="editProviderForm"
+                            [selectConfig]="stateSearchConfig" [selected]=""
+                            [dataList]="stateList" (changSelectEvent)="
+                      onSelectChangeEvent($event, 'state')
+                    ">
+                        </ss-select-search>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                    <div class="form-control">
+                        <mat-label>City*</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <input id="txtCity" type="text" placeholder="Select city" aria-label="Number" matInput
+                                [matAutocomplete]="city" autocomplete="new-city" formControlName="cityInput" />
+                            <mat-error *ngIf="isRequiredField(formControls['cityInput'])">
+                                {{ validationMsg.CITY }}</mat-error>
+                        </mat-form-field>
+                        <mat-autocomplete #city="matAutocomplete">
+                            <mat-option value="Surat">Surat</mat-option>
+                            <mat-option value="Gandhinagar">Gandhinagar</mat-option>
+                            <mat-option value="Vadodara">Vadodara</mat-option>
+                        </mat-autocomplete>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="button-group">
+                <button (click)="onDialogClose()" type="button" mat-button id="btnCancel">
+                    Cancel
+                </button>
+                <button mat-flat-button color="primary" type="submit" id="btnSave">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

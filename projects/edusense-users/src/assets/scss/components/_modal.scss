@@ -1,0 +1,252 @@
+.mat-dialog-content {
+    max-height: 100vh !important;
+}
+
+.dialog-section {
+    width: 60rem;
+    margin: 0 auto;
+    &--large {
+        width: 79rem;
+    }
+
+    h2 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        margin-bottom: 4rem;
+
+        .mat-icon {
+            @include square(3.5rem);
+            vertical-align: middle;
+        }
+    }
+
+    p {
+        font-size: 1.8rem;
+        font-weight: normal;
+        line-height: 1.44;
+        text-align: left;
+        color: $black-color;
+        margin-bottom: 5rem;
+    }
+
+    &__logo {
+        line-height: $header-height;
+        position: fixed;
+        left: 8.5rem;
+        top: 0;
+
+        mat-icon {
+            vertical-align: middle;
+            height: 5rem;
+            width: 5rem;
+        }
+    }
+
+    &__close {
+        a {
+            @include square(5.7rem);
+            position: absolute;
+            text-align: center;
+            overflow: hidden;
+            display: inline-block;
+            top: 1.5rem;
+            right: 3rem;
+            border-radius: 50%;
+            line-height: 7.2rem;
+
+            &:hover {
+                mat-icon {
+                    color: $primary-color;
+                }
+            }
+
+            .mat-icon {
+                @include square(2.2rem);
+                @include respond('phone') {
+                    @include square(1.4rem);
+                }
+            }
+        }
+        button {
+            height: 5.7rem;
+            width: 5.7rem;
+            position: absolute;
+            text-align: center;
+            overflow: hidden;
+            display: inline-block;
+            top: 1.5rem;
+            right: 3rem;
+            border-radius: 50%;
+            line-height: 5rem;
+        }
+    }
+
+    .mat-stroked-button.mat-primary {
+        margin-bottom: 1rem;
+    }
+}
+
+.add-course-details {
+    h2 {
+        @include respond('regular-desktop') {
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+//background-color: rgba(255, 255, 255, 0.9) !important;
+.zone-details-container,
+.territory-details-container,
+.city-details-container,
+.user-management-details-container,
+.change-password-container,
+.course-details-container,
+.grace-period-details-container,
+.course-details-container,
+.cash-voucher-details-container,
+.candidate-course-dropout-container,
+.candidate-admission-dropout-container,
+.candidate-admission-dropout-container,
+.change-password-container,
+.branch-management-details-container,
+.discount-type-details-container,
+.raise-discount-request-container,
+.raise-fund-request-container,
+.app-branch-transfer-request-dialog,
+.add-course-details-container,
+.add-details-container,
+.create-class-dialog-container {
+    @include modalOuterWidth;
+    app-zone-details,
+    app-territory-details,
+    app-city-details,
+    app-user-management-details,
+    app-enterprise-details,
+    app-change-password,
+    app-course-details,
+    app-grace-period-details,
+    app-course-details,
+    app-cash-voucher-details,
+    app-candidate-course-dropout,
+    app-candidate-admission-dropout,
+    app-candidate-admission-dropout,
+    app-change-password,
+    app-branch-management-details,
+    app-discount-type-details,
+    app-special-discount-request-dialog,
+    app-refund-request-dialog,
+    app-branch-transfer-request-dialog,
+    app-add-course-details,
+    app-change-password,
+    app-appliances-details,
+    app-product-category-details,
+    es-user-class-details-dialog {
+        @include modalInnerWidth;
+    }
+}
+
+.field-large {
+    .form-control {
+        height: auto;
+        .mat-form-field-appearance-outline {
+            .mat-form-field-infix {
+                height: 11rem;
+            }
+        }
+    }
+}
+
+.add-details-container {
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+        border-radius: 2px 0 0 2px !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline-end {
+        border-radius: 0 2px 2px 0 !important;
+    }
+    .form-control {
+        margin: 0 0 0.5rem;
+    }
+    .form-control mat-label,
+    .mat-select,
+    .mat-select-placeholder {
+        font-size: 1.8rem !important;
+    }
+    .mat-flat-button.mat-button-base.mat-primary,
+    .mat-flat-button.mat-button-base.mat-accent {
+        height: 5rem;
+        min-width: 16rem;
+        border-radius: 0.8rem;
+
+        @include respond('phone') {
+            min-width: 12rem;
+        }
+    }
+    .form-button-cancel {
+        height: 5.8rem;
+        span {
+            font-size: 1.8rem;
+        }
+    }
+
+    @include placeholder($grey-color-2, 1.8rem);
+
+    .check-validation {
+        margin-bottom: 3rem;
+
+        li {
+            background: $grey-color-7;
+            color: $grey-color-8;
+            display: inline-block;
+            border-radius: 3px;
+            font-size: 1.6rem;
+            padding: 1rem 0.6rem;
+            margin-right: 0.7rem;
+            margin-bottom: 1rem;
+
+            &.active {
+                background: rgba($primary-color, 0.1);
+                color: $primary-color;
+            }
+        }
+    }
+    .resizeNone {
+        resize: none;
+    }
+}
+
+.country-list-option {
+    display: flex;
+}
+.country-code-ellipse-hide {
+    .mat-select-value {
+        text-overflow: clip;
+    }
+}
+
+.user-details-basic {
+    margin-bottom: 4rem;
+
+    img {
+        @include square(8rem);
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    span {
+        display: block;
+        margin-top: 1rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+}
+
+@include respond('phone') {
+    .cdk-overlay-pane.add-recording-container {
+        min-width: 95vw !important;
+
+        .meeting-dialog__bottom {
+            padding: 2rem !important;
+        }
+    }
+}

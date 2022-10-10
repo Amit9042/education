@@ -1,0 +1,7 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.padding-right-zero {
+    @include respond('phone') {
+        padding-right: 0 !important;
+    }
+}

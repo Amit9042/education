@@ -1,0 +1,131 @@
+<div class="header" (clickOutside)="onClickOutSide()" id="navHeader">
+  <div class="row align-center">
+    <div class="col-md-2 col-sm-3 col-xs-5 PLR-0">
+      <div class="header__logo">
+        <button (click)="onSidebarCollapse()" id="btnSidebarCollapse" type="button" mat-icon-button type="button">
+          <mat-icon svgIcon="menu" [matTooltip]="isShowMenu ? 'Show' : 'Hide'"></mat-icon>
+        </button>
+
+        <img src="../../../assets/images/svg_files/smartSense.svg" alt="">
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-5 col-xs-4"></div>
+
+    <div class="col-md-6 col-sm-4 col-xs-3">
+      <div class="flex-box">
+        <div class="header__search navbar-search">
+          <div class="header__search--input">
+            <input autocomplete="off" type="text" id="txtSearch" name="search" placeholder="Search..." id="searchTxt" />
+            <mat-icon svgIcon="search"></mat-icon>
+          </div>
+        </div>
+
+        <div class="header__profile text-right">
+          <ul class="profile-icons">
+            <li>
+              <a id="lnkAdd">
+                <mat-icon svgIcon="add" matTooltip="Add"></mat-icon>
+              </a>
+            </li>
+            <li class="header__profile__notification">
+              <a (click)="onOpenViews('notification')" id="lnkNotification">
+                <div class="counter">
+                  <mat-icon matBadge="2" matBadgeColor="warn" svgIcon="bell" matTooltip="Notifications"></mat-icon>
+                  <span *ngIf="true">5</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a id="lnkSettings" (click)="onOpenViews('settings')">
+                <mat-icon svgIcon="systemSettings" matTooltip="Settings"></mat-icon>
+              </a>
+            </li>
+            <li>
+              <a id="lnkHelp">
+                <mat-icon svgIcon="help" matTooltip="Help"></mat-icon>
+              </a>
+            </li>
+            <li>
+              <a id="lnkMenu">
+                <mat-icon svgIcon="dotsMenu" matTooltip="Menu"></mat-icon>
+              </a>
+            </li>
+            <li>
+              <a id="lnkProfile" (click)="onShowDropdown()">
+                <div class="user-placeholder">
+                  <img src="../../../assets/images/user.png" alt="" />
+                  <mat-icon *ngIf="false" svgIcon="userProfile" matTooltip="View Profile"></mat-icon>
+                </div>
+              </a>
+              <div *ngIf="isShowDropdown" class="dropdown-actions">
+                <ul>
+                  <li>
+                    <div class="dropdown-actions__row">
+                      <div class="dropdown-actions__row__img">
+                        <div class="dropdown-actions__row__img__user-placeholder">
+                          <mat-icon *ngIf="false" svgIcon="userProfile"></mat-icon>
+                          <img src="../../../assets/images/user.png" alt="" />
+                        </div>
+                      </div>
+                      <div class="dropdown-actions__row__details">
+                        <h3>XYZ</h3>
+                        <a (click)="onHideDropdown()" id="lnkHideDropdown">View Profile</a>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li>
+                    <a matTooltip="Logout" id="btnLogOut" (click)="onLogOut()">Logout
+                      <mat-icon svgIcon="logout"></mat-icon>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar" id="navSidebar">
+  <div class="sidebar__large" [ngClass]="{ 'sidebar__large--hide': isShowMenu }">
+    <ul class="MT-2 sidebar-scroll">
+      <li>
+        <a (click)="onCloseNav()" id="lnkStudentDashboard" routerLinkActive="active">
+          <mat-icon svgIcon="dashboard" matTooltip="Dashboard"></mat-icon>
+          <span *ngIf="!isShowMenu">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="providerUrl" (click)="onCloseNav()" id="lnkProvider" routerLinkActive="active">
+          <mat-icon svgIcon="admin-provider" matTooltip="Provider"></mat-icon>
+          <span *ngIf="!isShowMenu">Provider</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="broadcastUrl" (click)="onCloseNav()" id="lnkBroadcast" routerLinkActive="active">
+          <mat-icon svgIcon="broadcast" matTooltip="Broadcast"></mat-icon>
+          <span *ngIf="!isShowMenu">Broadcast</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- MAT DRAWER FOR SETTING -->
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #settingNav class="sidebar-drawer" position="end" hasBackdrop="false">
+    <app-admin-setting-drawer (clickEvent)="settingNav.toggle()"></app-admin-setting-drawer>
+  </mat-drawer>
+</mat-drawer-container>
+
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #notificationNav class="sidebar-drawer" position="end" hasBackdrop="false">
+    <app-admin-notification-drawer *ngIf="isNotificationSlider" (clickEvent)="notificationNav.toggle()"
+      (closeDrawerEvent)="isNotificationSlider = false"></app-admin-notification-drawer>
+  </mat-drawer>
+</mat-drawer-container>

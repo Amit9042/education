@@ -1,0 +1,188 @@
+/* =========================================
+============= INPUT FIELD=================*/
+
+.form-control {
+    .mat-form-field {
+        // CSS ON INPUT FOCUS
+        &.mat-focused {
+            .mat-form-field-flex {
+                .mat-form-field-outline {
+                    border-color: $primary-color !important;
+                }
+            }
+        }
+
+        // CSS ON INPUT HOVER
+        .mat-form-field-flex:hover {
+            .mat-form-field-outline {
+                border-color: $primary-color !important;
+            }
+        }
+
+        // CSS ON INPUT DISABLED
+        &.mat-form-field-disabled {
+            .mat-form-field-outline {
+                background-color: rgba($primary-color, 0.06) !important;
+                border-color: transparent !important;
+            }
+            .mat-form-field-flex:hover {
+                .mat-form-field-outline {
+                    border-color: transparent !important;
+                }
+            }
+        }
+
+        // CSS ON ERROR INPUT
+        &.mat-form-field-invalid.ng-touched {
+            .mat-form-field-outline {
+                border-color: $red-color !important;
+            }
+            .mat-form-field-flex:hover {
+                .mat-form-field-outline {
+                    border-color: $red-color !important;
+                }
+            }
+        }
+    }
+}
+
+/* =========================================
+  ============= CHECKBOX FIELD=================*/
+
+.mat-checkbox {
+    .mat-checkbox-background,
+    .mat-checkbox-frame {
+        border: solid 2px rgba($primary-color, 0.5);
+        border-radius: 5px;
+    }
+
+    //   CHECKBOX DISABED STATE CSS
+    &.mat-accent.mat-checkbox-disabled {
+        pointer-events: none;
+    }
+
+    &.mat-accent.mat-checkbox-disabled .mat-checkbox-frame {
+        border: solid 2px rgba($primary-color, 0.2) !important;
+        background-color: rgba($primary-color, 0.2) !important;
+    }
+
+    &.mat-accent.mat-checkbox-disabled .mat-checkbox-background {
+        background-color: $white-color !important;
+        border: solid 2px rgba($primary-color, 0.2) !important;
+    }
+
+    &.mat-checkbox-checked.mat-accent.mat-checkbox-disabled
+        .mat-checkbox-background {
+        background-color: rgba($primary-color, 0.2) !important;
+        border: solid 2px rgba($primary-color, 0.2) !important;
+    }
+
+    &.mat-accent.mat-checkbox-disabled .mat-checkbox-label {
+        opacity: 0.4;
+        a {
+            opacity: 0.4;
+        }
+    }
+
+    &.mat-checkbox-checked.mat-accent.mat-checkbox-disabled
+        .mat-checkbox-checkmark-path {
+        stroke: rgba($primary-color, 0.03);
+    }
+
+    //   CHECKBOX HOVER CSS
+    &:hover {
+        .mat-checkbox-frame {
+            border: solid 2px #004e81;
+        }
+    }
+
+    &.mat-checkbox-checked:hover .mat-checkbox-background {
+        background-color: rgba($primary-color, 0.9);
+    }
+
+    // INTERMINATE STATE
+    &.mat-checkbox-indeterminate.mat-checkbox-checked.mat-checkbox-disabled
+        .mat-checkbox-background {
+        background-color: rgba($primary-color, 0.5) !important;
+        border: solid 2px rgba($primary-color, 0.5) !important;
+    }
+}
+
+/* =========================================
+  ============= RADIO BUTTON FIELD=================*/
+
+.mat-radio-button {
+    .mat-radio-outer-circle {
+        border-color: rgba($primary-color, 0.5);
+    }
+
+    .mat-radio-container:hover {
+        .mat-radio-outer-circle {
+            border-color: $primary-color;
+        }
+    }
+
+    &.mat-radio-checked {
+        .mat-radio-container:hover {
+            .mat-radio-outer-circle {
+                border-color: rgba($primary-color, 0.9);
+            }
+            .mat-radio-inner-circle {
+                background-color: rgba($primary-color, 0.9);
+            }
+        }
+    }
+}
+
+/* =========================================
+  ============= BUTTON CSS=================*/
+button {
+    &.mat-primary {
+        background-color: $primary-color;
+        border-radius: 0.8rem;
+        height: 5rem;
+        // box-shadow: none !important;
+        min-width: 12.6rem;
+        border: 2px solid transparent !important;
+
+        &:hover {
+            background-color: rgba($primary-color, 0.9) !important;
+            box-shadow: 0px 0px 0px 4px rgba($blue-color, 0.2) !important;
+            color: $white-color;
+        }
+
+        &:focus {
+            background-color: $blue-color !important;
+            box-shadow: 0px 0px 0px 4px rgba($blue-color, 0.2) !important;
+            color: $white-color;
+        }
+
+        &[disabled] {
+            background-color: rgba($primary-color, 0.2) !important;
+
+            .mat-button-wrapper {
+                color: rgba($primary-color, 0.4) !important;
+            }
+        }
+    }
+
+    &.auth-green-button {
+        background-color: $green-color-5 !important;
+
+        &:hover {
+          background-color: rgba($green-color-5, 0.9) !important;
+          box-shadow: 0px 0px 0px 4px rgba($green-color, 0.2) !important;
+          color: $white-color;
+      }
+
+      &:focus {
+          background-color: rgba($green-color-5, 0.9) !important;
+          box-shadow: 0px 0px 0px 4px rgba($green-color, 0.2) !important;
+          color: $white-color;
+      }
+    }
+
+    .mat-button-wrapper {
+        font-weight: 600 !important;
+    }
+}

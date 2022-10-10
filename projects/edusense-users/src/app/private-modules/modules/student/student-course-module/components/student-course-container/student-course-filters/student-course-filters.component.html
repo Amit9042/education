@@ -1,0 +1,43 @@
+<div class="student-course-filter-container">
+    <div class="course-filters">
+        <form [formGroup]="studentCourseFiltersForm">
+            <div class="row">
+                <div class="col-md-6 PL-0 xs-PR-0">
+                    <div class="form-control form-control-course">
+                        <mat-form-field appearance="outline">
+                            <input matInput autocomplete="off" placeholder="Search..."
+                                [formControlName]="filterFormEnum.titleCtrl">
+                            <mat-icon class="search-icon" matPrefix svgIcon="search-2"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-2 PL-0 xs-PR-0">
+                    <div class="form-control form-control-course">
+                        <app-ss-select-search id="matSelectLanguage" [formName]="studentCourseFiltersForm"
+                            [selectConfig]="languageSearchConfig" [dataList]="languageList" 
+                            (changSelectEvent)="onSelectLanguageChangeEvent(studentCourseFiltersForm)">
+                        </app-ss-select-search>
+                    </div>
+                </div>
+
+                <div class="col-md-2 PL-0 xs-PR-0">
+                    <div class="form-control form-control-course">
+                        <app-ss-select-search id="matSelectDuration" [formName]="studentCourseFiltersForm"
+                            [selectConfig]="durationSearchConfig" [dataList]="durationList">
+                        </app-ss-select-search>
+                    </div>
+                </div>
+
+                <div class="col-md-2 PL-0  xs-PR-0">
+                    <div class="form-control form-control-course">
+                        <app-ss-select-search id="matSelectcategory" [formName]="studentCourseFiltersForm"
+                            [selectConfig]="categorySearchConfig" [dataList]="subCategoryList"
+                            (changSelectEvent)="onSelectCategory($event)">
+                        </app-ss-select-search>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<mat-progress-bar *ngIf="showLoader" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="showLoader" class="loader-layer"></div>
+
+<app-navbar (menuClick)="panelMove = $event" *ngIf="isLoggedIn"></app-navbar>
+
+<div [ngClass]="{ 'panel': isLoggedIn && (userConfig?.app_id === userType.PROVIDER),
+   'panel-move' : panelMove && isLoggedIn && (userConfig?.app_id === userType.PROVIDER),
+    'student-panel': isLoggedIn && (userConfig?.app_id === userType.STUDENT), 'student-panel-top': hideChildHeader}">
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>

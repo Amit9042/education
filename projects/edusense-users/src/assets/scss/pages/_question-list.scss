@@ -1,0 +1,813 @@
+.question-bank-wrapper {
+    background-color: $white-color;
+
+    .question-sidebar-wrapper {
+        .question-sidebar-wrap {
+            .sidebar-top {
+                background-color: rgba($primary-color, 0.05);
+                padding: 2.2rem 4rem 2.2rem 3rem;
+
+                &__chapter-info {
+                    display: flex;
+                    align-items: center;
+
+                    a {
+                        margin-right: 2rem;
+
+                        .mat-icon {
+                            color: $primary-color;
+                            width: 1.8rem;
+                            height: 1.5rem;
+
+                            path {
+                                fill: $primary-color !important;
+                            }
+                        }
+                    }
+
+                    h5 {
+                        @include elipsis(100%);
+                        color: $primary-color;
+                        font-size: 2.2rem;
+                        font-weight: bold;
+                    }
+                }
+
+                &__grade-info {
+                    margin: 0.8rem 0 3rem 4rem;
+
+                    ul {
+                        li {
+                            color: $grey-color-12;
+                            font-size: 1.6rem;
+                            padding-right: 1.5rem;
+                            position: relative;
+
+                            &::before {
+                                background-color: $grey-color-12;
+                                content: '';
+                                position: absolute;
+                                width: 4px;
+                                height: 4px;
+                                border-radius: 50%;
+                                right: 0.5rem;
+                                top: 1rem;
+                            }
+
+                            &:last-child {
+                                &::before {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .waiting-room-container {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+
+            .sidebar-bottom {
+                background-color: $grey-color-19;
+                min-height: calc(100vh - 26rem);
+
+                &__top {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 1.5rem 2rem 1.5rem 3rem;
+                    border-bottom: 1px solid rgba($primary-color, 0.2);
+
+                    p {
+                        font-size: 2rem;
+                        font-weight: bold;
+                    }
+
+                    .filter-icons {
+                        display: flex;
+                        align-items: center;
+
+                        a {
+                            background-color: $white-color;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: relative;
+                            width: 4rem;
+                            height: 4rem;
+                            border-radius: 50%;
+                            margin-left: 1rem;
+
+                            .mat-icon {
+                                width: 1.6rem;
+                                height: 1.6rem;
+
+                                svg {
+                                    path {
+                                        fill: $primary-color !important;
+                                    }
+                                }
+                            }
+
+                            .filter-count {
+                                background-color: $red-color;
+                                color: $white-color;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: bold;
+                                font-size: 1.2rem;
+                                border-radius: 50%;
+                                width: 2rem;
+                                height: 2rem;
+                                position: absolute;
+                                top: -0.5rem;
+                                right: -0.5rem;
+                            }
+                        }
+                    }
+                }
+
+                &__bottom {
+                    height: calc(100vh - 33rem);
+                    overflow-y: auto;
+
+                    &--ques-list {
+                        display: flex;
+                        align-items: baseline;
+                        position: relative;
+                        padding: 2rem 2rem 2rem 3rem;
+                        text-decoration: none;
+
+                        span.count {
+                            color: $primary-color;
+                            font-size: 1.6rem;
+                            font-weight: bold;
+                            margin-right: 1.5rem;
+                            line-height: 1.8;
+                        }
+
+                        .que-action {
+                            position: absolute;
+                            background: transparent;
+                            border: 0;
+                            right: 1rem;
+                            top: 2.5rem;
+                            visibility: hidden;
+                            opacity: 0;
+                            width: 3rem;
+
+                            .mat-icon {
+                                width: 0.6rem;
+                                height: 2rem;
+                            }
+                        }
+
+                        p {
+                            color: $grey-color-14;
+                            word-break: break-all;
+                            max-width: calc(100% - 8rem);
+                            font-size: 1.6rem;
+                            line-height: 1.38;
+
+                            span {
+                                margin: 2rem 0;
+                            }
+                        }
+
+                        &.active,
+                        &:hover {
+                            background-color: rgba($green-color-5, 0.1);
+
+                            span.count {
+                                color: $green-color-5;
+                            }
+
+                            .que-action {
+                                visibility: visible;
+                                opacity: 1;
+                            }
+                        }
+                    }
+
+                    .grid-formation {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        padding: 3rem 3rem 2rem 1rem;
+
+                        a {
+                            background-color: rgba($primary-color, 0.1);
+                            text-decoration: none;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: bold;
+                            border-radius: 1rem;
+                            width: 6rem;
+                            height: 6rem;
+                            font-size: 1.8rem;
+                            margin: 0 0 2rem 2rem;
+
+                            &.active {
+                                color: $green-color-5;
+                                border: solid 1px #8cc178;
+                                background-color: rgba(140, 193, 120, 0.2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .question-bank-form-wrapper {
+        form {
+            .question-bank-wrap {
+                padding: 4.5rem 0 3rem;
+                height: calc(100vh - 7.8rem);
+                overflow-y: scroll;
+
+                .question-list {
+                    // width: 108rem;
+                    // margin-left: 9rem;
+                    padding: 0 9rem;
+
+                    .question-box {
+                        position: relative;
+                        margin-top: 1rem;
+
+                        .remove-question {
+                            display: block;
+                            position: absolute;
+                            width: 2.5rem;
+                            height: 2.5rem;
+                            right: 2rem;
+                            top: 2rem;
+
+                            .mat-icon {
+                                width: 1.5rem;
+                                height: auto;
+                            }
+                        }
+
+                        &-top {
+                            &__select-box {
+                                display: flex;
+                                align-items: center;
+                                width: 80%;
+                                margin-bottom: 4.5rem;
+
+                                .form-control {
+                                    margin-right: 1rem;
+                                    height: 6rem;
+                                    width: 30rem;
+
+                                    .mat-form-field-outline {
+                                        background-color: rgba(
+                                            $primary-color,
+                                            0.03
+                                        );
+                                        height: auto;
+                                        border: 0 !important;
+                                    }
+                                }
+                            }
+
+                            &-fields {
+                                display: flex;
+                                align-items: flex-start;
+
+                                .form-control {
+                                    width: calc(100% - 20px);
+                                    height: auto;
+
+                                    .mat-form-field-outline {
+                                        background-color: rgba(
+                                            $primary-color,
+                                            0.03
+                                        );
+                                        height: auto;
+                                        border: 0 !important;
+                                    }
+                                }
+
+                                .hover-content {
+                                    position: relative;
+                                    visibility: hidden;
+                                    display: flex;
+                                    align-items: center;
+                                    opacity: 0;
+                                    top: 1.8rem;
+                                    margin: 0 0rem;
+                                    margin-left: 10px;
+
+                                    .mat-icon {
+                                        width: 2rem;
+                                        height: 2rem;
+                                    }
+                                }
+
+                                &:hover {
+                                    .hover-content {
+                                        visibility: visible;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+
+                            .multiple-choice-type {
+                                .hover-content {
+                                    a {
+                                        &:last-child {
+                                            .mat-icon {
+                                                width: 1.5rem;
+                                                height: 1.5rem;
+                                                margin-left: 3rem;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .custom-file-upload {
+                                    max-width: 86rem;
+                                    margin-left: 40px;
+                                    top: -2.4rem;
+                                }
+
+                                .form-control {
+                                    display: flex;
+                                    align-items: flex-start;
+                                    height: 7.5rem;
+
+                                    .mat-radio-button,
+                                    .mat-checkbox {
+                                        position: relative;
+                                        top: 1.8rem;
+                                        margin-right: 1.6rem;
+                                    }
+
+                                    .mat-radio-button {
+                                        .mat-radio-outer-circle,
+                                        .mat-radio-container,
+                                        .mat-radio-label {
+                                            width: 2.4rem;
+                                            height: 2.4rem;
+                                        }
+
+                                        .mat-radio-inner-circle {
+                                            background-color: $green-color-5;
+                                            width: 2.4rem;
+                                            height: 2.4rem;
+                                        }
+
+                                        &.mat-radio-checked {
+                                            .mat-radio-outer-circle {
+                                                border-color: $green-color-5;
+                                            }
+                                        }
+                                    }
+
+                                    .mat-checkbox {
+                                        .mat-checkbox-inner-container {
+                                            width: 2.4rem;
+                                            height: 2.4rem;
+                                        }
+
+                                        .mat-checkbox-frame {
+                                            border-color: rgba(
+                                                32,
+                                                48,
+                                                97,
+                                                0.25
+                                            );
+                                        }
+
+                                        &.mat-checkbox-checked {
+                                            .mat-checkbox-background {
+                                                background-color: $green-color-5;
+                                            }
+
+                                            .mat-checkbox-frame {
+                                                border-color: $green-color-5;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .add-more {
+                                    color: $green-color-5;
+                                    display: block;
+                                    font-size: 1.8rem;
+                                    font-weight: 600;
+                                    text-decoration: none;
+                                    margin: 0 0 4rem 4rem;
+                                }
+
+                                &.true-false-type {
+                                    margin-bottom: 4rem;
+                                }
+                            }
+                        }
+
+                        &-bottom {
+                            color: $grey-color-12;
+                            font-size: 1.8rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-top: 1.5rem;
+
+                            &__left {
+                                .mat-checkbox-inner-container {
+                                    width: 2.4rem;
+                                    height: 2.4rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .question-add-more {
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: space-between;
+
+                        h2 {
+                            color: $green-color-5;
+                            font-size: 2.2rem;
+                            font-weight: bold;
+                        }
+
+                        button {
+                            border: 0.2rem solid $primary-color;
+                            border-radius: 0.8rem;
+                            height: 5rem;
+                            line-height: 3.6rem;
+
+                            .mat-button-wrapper {
+                                display: flex;
+                                align-items: center;
+
+                                p {
+                                    color: $primary-color;
+                                    font-size: 1.6rem;
+                                    font-weight: 600;
+                                }
+                            }
+
+                            .mat-icon {
+                                margin: 0 0.8rem 0 1.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .button-group {
+                background-color: $white-color;
+                margin-top: 2rem;
+
+                &__width {
+                    // width: 108rem;
+                    margin: 0 auto 0 9rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding-right: 9rem;
+
+                    button {
+                        font-size: 1.6rem;
+
+                        &:first-child {
+                            height: 5rem;
+                            min-width: 12rem;
+                            margin-right: 2rem;
+                        }
+
+                        .mat-icon {
+                            &.next-arrow {
+                                margin-left: 0.5rem;
+                            }
+                        }
+
+                        &.btn-border {
+                            border: 0.2rem solid $primary-color;
+                            color: $primary-color;
+                            border-radius: 0.8rem;
+                            line-height: 3.6rem;
+                        }
+                    }
+
+                    .previous-button {
+                        button {
+                            border: 0.2rem solid rgba($primary-color, 0.4);
+                            border-radius: 0.8rem;
+                            width: 15rem;
+                            line-height: 3.6rem;
+
+                            span {
+                                color: rgba($primary-color, 0.4);
+                                font-size: 1.6rem;
+                                font-weight: 600;
+                            }
+
+                            .mat-icon {
+                                width: 1.2rem;
+                                height: 1rem;
+                                line-height: 0.5rem;
+                                margin-right: 0.5rem;
+
+                                path {
+                                    fill: rgba($primary-color, 0.4) !important;
+                                }
+                            }
+
+                            &.btn-border {
+                                border: 2px solid $primary-color !important;
+                                color: $primary-color !important;
+                                border-radius: 0.8rem;
+
+                                span {
+                                    color: $primary-color !important;
+                                }
+
+                                .mat-icon {
+                                    path {
+                                        fill: $primary-color !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+    .ace_hidden-cursors .ace_cursor {
+        opacity: 0 !important;
+    }
+}
+
+.question-type-menu,
+.delete-question {
+    padding: 0.8rem;
+
+    button {
+        color: rgba($primary-color, 0.7);
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+}
+
+.delete-question {
+    padding: 0;
+}
+
+.filter-options {
+    width: 30rem;
+    padding: 2rem;
+    margin-top: 1rem;
+
+    label {
+        color: $primary-color;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        display: block;
+    }
+
+    .mat-checkbox {
+        display: block;
+        margin-top: 1.5rem;
+
+        .mat-checkbox-label {
+            color: rgba($primary-color, 0.7);
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-transform: none;
+        }
+
+        .mat-checkbox-frame {
+            border-color: rgba($primary-color, 0.1);
+        }
+    }
+}
+
+// PAGINATION CSS IN CHAPTER-LIST PAGE
+.que-bank-ch-list-container {
+    .custom-pagination-section {
+        justify-content: flex-start !important;
+
+        &__show-row {
+            .text-page {
+                display: none !important;
+            }
+        }
+
+        &__go-to {
+            display: none !important;
+        }
+    }
+}
+
+// EDITOR CSS
+.md-editor-container {
+    border-radius: 0.8rem;
+    border: 0 !important;
+    margin-bottom: 0 !important;
+    resize: none !important;
+
+    .md-layout {
+        background-color: rgba($primary-color, 0.03);
+
+        .editor-container {
+            position: relative;
+            top: 6rem !important;
+
+            .preview-container {
+                position: absolute;
+                width: 100%;
+                height: 86.5%;
+                padding-bottom: 10px;
+
+                .preview-panel {
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    white-space: pre;
+                    overflow: auto;
+
+                    ul,
+                    ol {
+                        padding-left: 40px;
+                    }
+                }
+
+                .hljs {
+                    display: block;
+                    padding: 12px 20px;
+                    background: #f7f7f7;
+                    color: #5d5d5d;
+                    border-radius: 9px;
+                    margin-top: 8px;
+                    font-family: 'Muli', sans-serif;
+                    font-weight: 500;
+                    font-size: 15px;
+                    line-height: initial;
+                }
+            }
+            .ace-editor {
+                font-size: 1.8rem;
+            }
+        }
+
+        .tool-bar {
+            background-color: $white-color !important;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            border: 0 !important;
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+
+            .btn {
+                background-color: transparent;
+                border: 0;
+                height: 4rem;
+                width: 3rem;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: #ebebeb;
+                }
+
+                .fa {
+                    color: rgba(32, 48, 97, 0.3);
+                    font-size: 1.4rem;
+                }
+            }
+
+            [title~='Image'] {
+                display: none;
+            }
+
+            .btn-group > .btn:first-child::before {
+                background-color: transparent !important;
+            }
+        }
+
+        .editor-panel {
+            padding: 0 0 45px 0;
+        }
+
+        .tool-bar {
+            .btn-group {
+                &.pull-right.hide-split {
+                    display: none;
+                }
+
+                &:nth-child(2) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .ace_gutter {
+        display: none;
+    }
+    .ace-tm {
+        background-color: transparent;
+
+        .ace_print-margin {
+            display: none;
+        }
+
+        .ace_active-line {
+            background-color: transparent;
+        }
+    }
+
+    .ace_scroller {
+        left: 0 !important;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.option-editor {
+    width: 100% !important;
+    margin-bottom: 0;
+
+    .tool-bar {
+        display: none !important;
+    }
+
+    .md-layout {
+        padding: 1rem !important;
+        .editor-container {
+            top: 0 !important;
+
+            .editor-panel {
+                padding: 0;
+            }
+        }
+
+        .md-footer {
+            display: none !important;
+        }
+    }
+
+    .ace_hidden-cursors .ace_cursor {
+        opacity: 0;
+    }
+}
+
+.custom-file-upload {
+    border-top: 2px dotted rgba(32, 48, 97, 0.1);
+    border-radius: 0;
+    display: block;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+    top: -0.6rem;
+    background-color: #f8f8fa;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    text-align: left;
+    color: rgba(42, 48, 63, 0.6);
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+
+    .mat-icon {
+        vertical-align: bottom;
+        margin-right: 0.6rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #2a303f;
+    }
+
+    input[type='file'] {
+        display: none;
+    }
+}
+
+.editor-error-msg-section {
+    height: 1.6rem;
+    display: block;
+}
+
+.multiple-choice-type {
+    .editor-error-msg-section {
+        height: 1.6rem;
+        display: block;
+        padding-left: 4.3rem;
+        position: relative;
+        top: -1.4rem;
+    }
+}

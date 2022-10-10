@@ -1,0 +1,317 @@
+.material-list {
+    padding: 6rem;
+
+    @include respond('regular-desktop') {
+        padding: 2rem;
+    }
+
+    @include respond('tablet') {
+        padding: 2rem;
+    }
+
+    @include respond('phone') {
+        padding: 2rem;
+    }
+
+    .material-list {
+        &__header {
+            .header__search {
+                margin-right: 0;
+                &--input {
+                    width: 100%;
+                }
+            }
+
+            .mat-chip-input {
+                height: 3.6rem;
+            }
+
+            .form-control {
+                height: auto;
+
+                .mat-form-field {
+                    &.mat-focused,
+                    &.mat-form-field-disabled {
+                        .mat-form-field-flex {
+                            .mat-form-field-outline {
+                                border-color: $grey-color-3 !important;
+                            }
+                        }
+                        .mat-form-field-flex:hover {
+                            .mat-form-field-outline {
+                                border-color: $grey-color-3 !important;
+                            }
+                        }
+                    }
+                }
+
+                .mat-form-field-appearance-outline .mat-form-field-outline {
+                    background-color: $grey-color-3 !important;
+                    border-color: $grey-color-3 !important;
+                }
+
+                .mat-form-field-wrapper {
+                    margin-top: 0;
+                }
+
+                .mat-select-placeholder {
+                    color: rgba($black-color, 0.6);
+                }
+            }
+        }
+        &__body {
+            .material-listing {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+
+                &__section {
+                    border-radius: 10px;
+                    border: solid 1px rgba($primary-color, 0.16);
+                    width: calc(20% - 2rem);
+                    margin: 0 1rem 2rem;
+                    text-decoration: none;
+
+                    @media screen and (min-width: 992px) and (max-width: 1024px) {
+                        width: calc(33.33% - 2rem);
+                    }
+                    @media screen and (max-width: 991px) {
+                        width: calc(50% - 2rem);
+                    }
+
+                    @include respond('phone') {
+                        width: 100%;
+                        margin: 0 0 2rem;
+                    }
+
+                    &--top {
+                        background-color: $grey-color-3;
+                        border-radius: 1rem 1rem 0 0;
+                        position: relative;
+                        height: 16rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        z-index: 1;
+
+                        @include respond('regular-desktop') {
+                            height: 14rem;
+                        }
+
+                        .mat-icon {
+                            &.file-type {
+                                width: 7rem;
+                                height: 8rem;
+                            }
+                        }
+
+                        .material-action {
+                            button {
+                                background-color: transparent;
+                                box-shadow: none;
+                                border: 0;
+                                z-index: 2;
+                                cursor: pointer;
+                                position: absolute;
+                                top: 0.5rem;
+                                right: 0.5rem;
+                            }
+
+                            .mat-icon {
+                                opacity: 0.6;
+                                height: 2.2rem;
+
+                                &.white-action {
+                                    opacity: 1;
+
+                                    svg {
+                                        path {
+                                            fill: $white-color !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .video-container {
+                            width: 26rem;
+                            height: 16rem;
+
+                            @include respond('regular-desktop') {
+                                height: 14rem;
+                            }
+
+                            video {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 1rem 1rem 0 0;
+                                object-fit: cover;
+                            }
+
+                            a {
+                                background-color: rgba($black-color, 0.4);
+                                position: absolute;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 5rem;
+                                height: 5rem;
+                                z-index: 99;
+                                border-radius: 50%;
+
+                                .mat-icon {
+                                    width: 1.3rem;
+                                    height: 1.8rem;
+                                }
+                            }
+                        }
+                    }
+
+                    &--bottom {
+                        padding: 1rem 1.5rem;
+
+                        .file-name {
+                            color: $grey-color-12;
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: flex-start;
+                            font-size: 1.6rem;
+                            font-weight: 600;
+
+                            @include respond('phone') {
+                                font-size: 1.4rem;
+                            }
+
+                            .mat-icon {
+                                position: relative;
+                                top: 0.3rem;
+                                max-width: 15px;
+                                height: 15px;
+                                width: auto;
+                                margin-right: 0.85rem;
+                            }
+
+                            span {
+                                max-width: 85%;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                white-space: nowrap;
+                                // word-break: break-word;
+                            }
+
+                            &.document-name {
+                                justify-content: flex-start;
+
+                                span {
+                                    color: $primary-color;
+                                    max-width: 100%;
+                                    padding: 1rem 0;
+                                }
+                            }
+                        }
+
+                        .student-name {
+                            color: $primary-color;
+                            font-size: 1.8rem;
+                            font-weight: bold;
+                            margin: 1rem 0;
+
+                            @include respond('tablet') {
+                                font-size: 1.6rem;
+                            }
+
+                            @include respond('phone') {
+                                font-size: 1.4rem;
+                            }
+                        }
+
+                        .subject-name {
+                            color: $green-color-5;
+                            font-size: 1.6rem;
+                            font-weight: 600;
+                            margin: 1rem 0;
+
+                            @include respond('phone') {
+                                font-size: 1.4rem;
+                            }
+                        }
+
+                        .recorded-time {
+                            color: rgba($primary-color, 0.6);
+                            font-size: 1.4rem;
+                            font-weight: 600;
+                            font-style: italic;
+                        }
+
+                        ul,
+                        li {
+                            margin: 0;
+                            padding: 0;
+                        }
+                        li {
+                            display: block;
+                            margin-bottom: 1rem;
+
+                            label,
+                            span {
+                                color: $primary-color;
+                                font-size: 1.6rem;
+                                font-weight: 600;
+                                opacity: 0.8;
+
+                                @include respond('phone') {
+                                    font-size: 1.4rem;
+                                }
+                            }
+                        }
+                    }
+
+                    &.tile-disabled {
+                        .material-listing__section--top,
+                        .material-listing__section--bottom {
+                            background-color: $grey-color-15;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.upload-material {
+    background-color: rgba($primary-color, 0.1) !important;
+    color: $primary-color !important;
+    font-size: 1.6rem;
+
+    @include respond('phone') {
+        font-size: 1.4rem;
+    }
+
+    .mat-button-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-icon {
+        height: 1.8rem !important;
+        width: 1.5rem !important;
+        margin-right: 1rem !important;
+        line-height: 1;
+
+        &.videoIcon {
+            height: 2.4rem !important;
+            width: 2.4rem !important;
+        }
+    }
+
+    &.mat-primary {
+        &:hover,
+        &:focus {
+            background-color: rgba($primary-color, 0.1) !important;
+            box-shadow: none !important;
+        }
+    }
+}

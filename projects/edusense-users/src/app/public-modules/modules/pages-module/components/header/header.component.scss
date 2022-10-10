@@ -1,0 +1,166 @@
+@import '../../../../../../assets/scss/abstracts/abstracts';
+
+//page header
+.webpage-header {
+    background-color: $white-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    height: 7.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 11.2rem;
+    padding-left: 7.4rem;
+
+    // @include respond('regular-desktop') {
+    //     height: 6.2rem;
+    // }
+
+    @include respond('tablet') {
+        padding: 2rem;
+        height: auto;
+    }
+
+    @include respond('phone') {
+        padding: 1.5rem 2rem;
+        height: auto;
+    }
+
+    &__logo {
+        mat-icon {
+            height: 3.4rem;
+            width: 13.8rem;
+
+            @include respond('phone') {
+                width: 12rem;
+                height: auto;
+            }
+        }
+    }
+
+    &__lists {
+        @include respond('tablet') {
+            background-color: $white-color;
+            box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.16);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            ul {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                div {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        @include respond('phone') {
+            background-color: $white-color;
+            box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.16);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            ul {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+        }
+
+        li {
+            text-align: center;
+            div {
+                @include respond('iphone') {
+                    display: none;
+                }
+            }
+        }
+
+        a {
+            color: $grey-color-16;
+            display: block;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+
+            // @include respond('regular-desktop') {
+            //     font-size: 1.2rem;
+            // }
+
+            @include respond('phone') {
+                font-size: 1rem;
+            }
+
+            mat-icon {
+                svg {
+                    fill: $grey-color-16;
+                }
+            }
+
+            &.active {
+                color: $green-color-5;
+                mat-icon {
+                    svg {
+                        fill: $green-color-5;
+                    }
+                }
+            }
+        }
+
+        mat-icon {
+            width: auto;
+            height: 2.6rem;
+            max-width: 3rem;
+            margin: 0 6rem 0.2rem;
+
+            // @include respond("regular-desktop"){
+            //     height:2rem;
+            // }
+
+            @include respond('tab-port') {
+                height: 3.5rem;
+                max-width: 4rem;
+                margin: 0 5.5rem 0rem;
+            }
+
+            @include respond('phone') {
+                max-width: 1.8rem;
+                margin: 0;
+            }
+        }
+    }
+
+    &__links {
+        a {
+            text-decoration: none;
+            margin-right: 2.8rem;
+            font-size: 1.6rem;
+            @include respond('tab-port') {
+                font-size: 2.4rem;
+            }
+            &:last-child {
+                color: $green-color-5;
+                margin-right: 0;
+            }
+
+            @include respond('phone') {
+                font-size: 1.4rem;
+                margin-right: 1.5rem;
+            }
+        }
+    }
+}

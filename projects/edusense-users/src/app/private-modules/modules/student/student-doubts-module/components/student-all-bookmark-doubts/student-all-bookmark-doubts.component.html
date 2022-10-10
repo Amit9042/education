@@ -1,0 +1,37 @@
+<div class="doubt-container partition-design-container doubt-container-spacing">
+    <div class="row">
+        <div class="col-md-9 PL-0">
+            <div class="waiting-room-container meeting-room-container">
+                <div class="waiting-room meeting-room">
+                    <div class="back-header">
+                        <mat-icon (click)="onBack()" svgIcon="back" matTooltip="Back" id="iconBack"></mat-icon>
+                        <h3>Bookmarks</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body">
+                <div *ngSwitchCase="viewType.Data">
+                    <es-user-doubt-list [doubtList]="bookmarkedList" [userType]="userType.STUDENT"
+                        (quesClick)="onQuestionAnswer($event)" (bookmarkClick)="onBookmarkQuestion($event)" (scroll)="onScroll($event)"></es-user-doubt-list>
+                </div>
+                <div *ngSwitchCase="viewType.NoData">
+                    <div class="no-content-found-wrapper">
+                        <mat-icon svgIcon="noBookmark"></mat-icon>
+                        <p>No Bookmarks</p>
+                        <span *ngIf="!isNotAdmitted">Solutions not bookmarked yet</span>
+                        <span *ngIf="isNotAdmitted">{{notAdmittedMsg}}</span>
+                    </div>
+                </div>
+
+                <div class="loader-data" *ngSwitchCase="viewType.Loading">
+                    <label>Loading...</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 left-border PLR-0">
+            <es-user-side-doubt-list [allDoubtList]="allDoubtList" [lable]="linkLable" [title]="title" 
+                (linkClick)="onViewBookmark($event)" (quesClick)="onQuestionAnswer($event)"></es-user-side-doubt-list>
+        </div>
+    </div>
+</div>

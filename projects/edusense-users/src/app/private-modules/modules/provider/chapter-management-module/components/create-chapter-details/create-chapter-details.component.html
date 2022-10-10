@@ -1,0 +1,92 @@
+<div class="meeting-dialog-wrapper">
+  <div class="meeting-dialog__head">
+    <h4>Create Chapter</h4>
+    <h4 *ngIf="false"> Edit Chapter</h4>   <!-- for edit chapter-->
+    <a (click)="onCloseDialog(false)" id="lnkClose">
+      <mat-icon matTooltip="Close" svgIcon="close"></mat-icon>
+    </a>
+  </div>
+  <div class="meeting-dialog__bottom">
+    <div class="auth-container create-class-container">
+      <div class="auth-box">
+        <div class="auth-box__data">
+          <form [formGroup]="createChapterForm" (ngSubmit)="onSubmitCreateChapterForm(createChapterForm)">
+
+            <!--CHAPTER NAME FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control">
+                  <mat-label>Chapter Name*</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                    <input id="txtChapterName" formControlName="title" type="text"
+                           autocomplete="off" matInput placeholder="Enter chapter name"/>
+                    <mat-error *ngIf="isRequiredField(formControls['title'])">
+                      {{ validationMsg.CHAPTER_NAME }}
+                    </mat-error>
+                    <mat-error *ngIf="isValidLength(formControls['title'])">
+                      {{ validationMsg.CHAPTER_NAME_LENGTH }}
+                    </mat-error>
+                    <mat-error *ngIf="isValidField(formControls['title'])">
+                      {{ validationMsg.CHAPTER_NAME_VALID }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- DESCRIPTION FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control-textarea">
+                  <mat-label>Description</mat-label>
+                  <mat-form-field appearance="outline" floatLabel="always">
+                                        <textarea id="txtDescription" formControlName="description" type="text"
+                                                  autocomplete="off" matInput
+                                                  placeholder="Enter description"></textarea>
+                    <mat-error *ngIf="isValidLength(formControls['description'])">
+                      {{ validationMsg.CHAPTER_DESCRIPTION_LENGTH }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- GRADE FIELD -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 PLR-0">
+                <div class="form-control">
+
+                  <app-ss-select-search id="matSelectGrade" [formName]="createChapterForm"
+                                        [selectConfig]="gradeSearchConfig" [selected]="selectedGrade" [dataList]="gradeList"
+                                        (changSelectEvent)="onSelectChangeEvent($event, 'grade')">
+                  </app-ss-select-search>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-12 PLR-0">
+                <div class="form-control">
+                  <app-ss-select-search [formName]="createChapterForm"
+                                        [selectConfig]="subjectSearchConfig" [selected]="selectedSubject" [dataList]="subjectList"
+                                        (changSelectEvent)="onSelectChangeEvent($event, 'subject')"
+                                        id="matSelectSubject">
+                  </app-ss-select-search>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="button-group">
+              <button type="button" id="btnCancel" (click)="onCloseDialog(false)" mat-button>Cancel</button>
+              <button mat-flat-button color="primary" type="submit" id="btnAdd">
+                Submit
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

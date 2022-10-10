@@ -1,0 +1,81 @@
+<div
+    class="edit-profile-details-container enrollment-request-student-view-dialog-container"
+>
+    <a (click)="onCloseDialog(false)" class="close">
+        <mat-icon svgIcon="close" matTooltip="Close"></mat-icon>
+    </a>
+
+    <div class="profile-details__header">
+        <div class="profile-details__header--image">
+            <img *ngIf="userData?.user?.user?.avatar_thumbnail"
+                          [src]="userData?.user?.user?.avatar_thumbnail"/>
+            <mat-icon *ngIf="!userData?.user?.user?.avatar_thumbnail" svgIcon="userProfilePlaceholder"></mat-icon>
+        </div>
+        <div class="profile-details__header--details">
+            <h2>{{userData?.user?.user?.first_name}} {{userData?.user?.user?.last_name}}</h2>
+            <p class="location">
+                {{userData?.user?.student_city?.city_name | checkEmpty}}
+                          {{userData?.user?.student_state?.state_name ?  ', ' + userData?.user?.student_state?.state_name : '-'}}
+                          {{userData?.user?.student_country?.country_name ?  ', ' + userData?.user?.student_country?.country_name : '-'}}
+            </p>
+            <div *ngIf="enrollDetail?.enrollment_status == enrollStatuses.PENDING" class="accept-reject">
+                <a class="reject-btn" (click)="onOpenRejectDialog(enrollDetail?.request_id)">
+                    Reject
+                </a>
+                <button type="button" (click)="onAccept(enrollDetail)">
+                    Accept
+                </button>
+            </div>
+
+            <p class="rejected" *ngIf="enrollDetail?.enrollment_status == enrollStatuses.REJECTED">Rejected</p>
+            <button type="button" *ngIf="enrollDetail?.enrollment_status == enrollStatuses.ACCEPETD"
+                (click)="onAssignEnrollmentRequestDialog(false, enrollDetail)">
+                Assign Class
+            </button>
+        </div>
+    </div>
+
+    <div class="profile-details__body">
+        <div class="profile-details__body__info">
+            <label>Grade</label>:
+            <span>{{userData?.user?.student_grade?.alias}}</span>
+        </div>
+        <div class="profile-details__body__info">
+            <label>College/School</label>:
+            <span>{{userData?.user?.school_name | checkEmpty}}</span>
+        </div>
+        <div class="profile-details__body__info">
+            <label>Email</label>:
+            <span>{{userData?.user?.user?.email | checkEmpty}}</span>
+        </div>
+        <div class="profile-details__body__info">
+            <label>Number</label>:
+            <span>{{userData?.user?.user?.dial_code}} {{userData?.user?.user?.contact_number}}</span>
+        </div>
+        <div class="profile-details__body__info">
+           <div class="profile-details__body__info--details">
+            <label>Student in class</label>
+            <span>
+                <ul *ngIf="userData?.parent_class.length">
+                    <li *ngFor="let class of userData?.parent_class">
+                        {{class?.class_name}}
+                    </li>
+                </ul>
+                <span *ngIf="userData?.parent_class.length == 0"> - </span>
+            </span>
+           </div>
+
+           <div class="profile-details__body__info--details">
+            <label>Student in session</label>
+            <span>
+                <ul *ngIf="userData?.class">
+                    <li *ngFor="let class of userData?.class">
+                        {{class?.name}}
+                    </li>
+                </ul>
+                <span *ngIf="userData?.class.length == 0"> - </span>
+            </span>
+           </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+.raise-request-container {
+  width: 60rem;
+  max-height: 95vh;
+
+  .meeting-room__body {
+    max-height: calc(95vh - 7.1rem);
+    overflow-y: auto;
+    margin: 0;
+    padding: 0 4rem;
+
+    .visitors-info {
+      border-bottom: 1px solid rgba($primary-color, 0.2);
+      padding: 2rem 0;
+      margin-bottom: 0;
+
+      &__left {
+        .visitor-image {
+          width: 3.4rem;
+          height: 3.4rem;
+          margin-right: 1.3rem;
+
+          .mat-icon {
+            width: 3.4rem;
+            height: 3.4rem;
+            margin-right: 1.3rem;
+          }
+        }
+
+        .visitor-details {
+          h4 {
+            color: $primary-color;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      &__right {
+        align-items: center;
+
+        button {
+          height: 4.6rem !important;
+          
+          span {
+            font-size: 1.4rem !important;
+            font-weight: bold !important;
+          }
+
+          &:first-child {
+            min-width: 7rem !important;
+            padding-left: 0;
+            padding-right: 0;
+            margin: 0;
+            width: 7rem;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

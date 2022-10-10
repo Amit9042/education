@@ -1,0 +1,50 @@
+<div class="doubt-container partition-design-container">
+    <div class="row">
+        <div class="col-md-9 PL-0 col-sm-12 col-xs-12">
+            <div class="waiting-room-container meeting-room-container">
+                <div class="waiting-room meeting-room">
+                    <div class="doubt-container__top">
+                        <h3>Your Doubts</h3>
+                        <div class="flex-right">
+                            <!-- <a (click)="onAllDoubts()">
+                                <mat-icon svgIcon="question" matTooltip="All doubts"></mat-icon>
+                            </a> -->
+                            <a (click)="onAllBookmarks()" id="lnkBookmark">
+                                View Bookmarks
+                                <!-- <mat-icon svgIcon="bookmark" *ngIf="true" matTooltip="All bookmark"></mat-icon> -->
+                            </a>
+                            <button (click)="onSelectDoubtSubject()" id="btnAskDoubts" mat-flat-button color="primary"
+                                type="button">
+                                Ask Doubts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body">
+                <div *ngSwitchCase="viewType.Data">
+                    <es-user-doubt-list [doubtList]="studentDoubtList" [userType]="userType.STUDENT"
+                        (quesClick)="onQuestionAnswer($event)" (bookmarkClick)="onBookmarkQuestion($event)" (scroll)="onScroll($event)">
+                    </es-user-doubt-list>
+                </div>
+                <div *ngSwitchCase="viewType.NoData">
+                    <div class="no-content-found-wrapper">
+                        <mat-icon svgIcon="noDoubts"></mat-icon>
+                        <p>Doubts Not Found!</p>
+                        <span *ngIf="!isNotAdmitted">You have not yet created any Doubt</span>
+                        <span *ngIf="isNotAdmitted">{{notAdmittedMsg}}</span>
+                    </div>
+                </div>
+
+                <div class="loader-data" *ngSwitchCase="viewType.Loading">
+                    <label>Loading...</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 left-border PLR-0  col-sm-12 col-xs-12">
+            <es-user-side-doubt-list [allDoubtList]="allDoubtList" [lable]="linkLable" [title]="title"
+                (linkClick)="onViewAllDoubts($event)" (quesClick)="onQuestionAnswer($event)">
+            </es-user-side-doubt-list>
+        </div>
+    </div>
+</div>

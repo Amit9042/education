@@ -1,0 +1,105 @@
+<div class="auth-container signup-container">
+  <div class="auth-box logo-box--large">
+    <div class="auth-box__data">
+      <div>
+        <h3>Welcome !</h3>
+        <p>Sign up by entering information below</p> 
+      </div>
+
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmitSignUpForm(signUpForm)">
+        <div class="row">
+          <div class="col-md-6 PL-0 PR-05 xs-PR-0">
+            <div class="form-control">
+              <mat-label>First Name*</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input id="txtFirstName" formControlName="first_name" type="text" autocomplete="off" matInput
+                  placeholder="Enter first name" />
+                <mat-error *ngIf="isRequiredField(formControls['first_name'])">{{
+                  validationMsg.FIRST_NAME
+                }}</mat-error>
+                <mat-error *ngIf="isValidLength(formControls['first_name'])">{{
+                  validationMsg.FIRST_NAME_LENGTH
+                }}</mat-error>
+                <mat-error *ngIf="isValidField(formControls['first_name'])">{{
+                  validationMsg.FIRST_NAME_VALID
+                }}</mat-error>
+                <!-- <mat-icon matSuffix svgIcon="user"></mat-icon> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 PR-0 PL-05  xs-PL-0">
+            <div class="form-control">
+              <mat-label>Last Name*</mat-label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input id="txtLastName" formControlName="last_name" type="text" autocomplete="off" matInput
+                  placeholder="Enter last name" />
+                <mat-error *ngIf="isRequiredField(formControls['last_name'])">{{
+                  validationMsg.LAST_NAME
+                }}</mat-error>
+                <mat-error *ngIf="isValidLength(formControls['last_name'])">{{
+                  validationMsg.LAST_NAME_LENGTH
+                }}</mat-error>
+                <mat-error *ngIf="isValidField(formControls['last_name'])">{{
+                  validationMsg.LAST_NAME_VALID
+                }}</mat-error>
+                <!-- <mat-icon matSuffix svgIcon="user"></mat-icon> -->
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-control">
+          <mat-label>Email Address*</mat-label>
+          <mat-form-field appearance="outline">
+            <input id="txtEmail" formControlName="email" type="text" autocomplete="off" matInput placeholder="Enter email address" />
+            <mat-error *ngIf="isRequiredField(formControls['email'])">{{
+              validationMsg.EMAIL
+            }}</mat-error>
+            <mat-error *ngIf="isValidLength(formControls['email'])">{{
+              validationMsg.EMAIL_LENGTH
+            }}</mat-error>
+            <mat-error *ngIf="isValidField(formControls['email'])">{{
+              validationMsg.EMAIL_VALID
+            }}</mat-error>
+            <!-- <mat-icon matSuffix svgIcon="email"></mat-icon> -->
+          </mat-form-field>
+        </div>
+
+        <div class="form-control">
+          <mat-label>Password*</mat-label>
+          <mat-form-field appearance="outline">
+            <input id="txtPassword" formControlName="password" type="password" autocomplete="off" matInput placeholder="Enter password"
+              [type]="isHidePassword ? 'password' : 'text'" />
+            <a id="lnkShowPassword" class="eye-icon" type="button" matSuffix (click)="isHidePassword = !isHidePassword"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
+              <mat-icon *ngIf="!isHidePassword" svgIcon="hide" matTooltip="Hide"></mat-icon>
+              <mat-icon *ngIf="isHidePassword" svgIcon="eye" matTooltip="Show"></mat-icon>
+            </a>
+            <!-- <mat-icon matSuffix svgIcon="hide"></mat-icon> -->
+            <mat-error *ngIf="isRequiredField(formControls['password'])">{{
+              validationMsg.PASSWORD
+            }}</mat-error>
+            <mat-error *ngIf="isValidLength(formControls['password'])">{{
+              validationMsg.PASSWORD_LENGTH
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-checkbox id="matCheckBoxTerms" class="PB-2 md-PB-1" formControlName="has_accepted_tnc">I agree <a>Terms</a> and
+            <a>Conditions</a>
+          </mat-checkbox>
+        </div>
+
+        <div>
+          <button id="btnSignUp" class="auth-green-button" mat-flat-button color="primary" type="submit">
+            Sign Up
+          </button>
+        </div>
+      </form>
+
+      <div class="bottom-link">
+        <p>I am already member <a (click)="onLogin()" id="btnSignIn">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+</div>

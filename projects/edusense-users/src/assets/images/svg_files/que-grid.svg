@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__menu_1_" width="16" height="16" data-name="menu (1)" viewBox="0 0 16 16">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#203061}
+        </style>
+    </defs>
+    <g id="prefix__Group_22470" data-name="Group 22470">
+        <g id="prefix__Group_22469" data-name="Group 22469">
+            <path id="prefix__Path_16104" d="M6.835 0H.6a.6.6 0 0 0-.6.6v6.235a.6.6 0 0 0 .6.6h6.235a.6.6 0 0 0 .6-.6V.6a.6.6 0 0 0-.6-.6zm-.6 6.235H1.2V1.2h5.035z" class="prefix__cls-1" data-name="Path 16104"/>
+        </g>
+    </g>
+    <g id="prefix__Group_22472" data-name="Group 22472" transform="translate(8.566)">
+        <g id="prefix__Group_22471" data-name="Group 22471">
+            <path id="prefix__Path_16105" d="M152.835 0H146.6a.6.6 0 0 0-.6.6v6.235a.6.6 0 0 0 .6.6h6.235a.6.6 0 0 0 .6-.6V.6a.6.6 0 0 0-.6-.6zm-.6 6.235H147.2V1.2h5.036z" class="prefix__cls-1" data-name="Path 16105" transform="translate(-146)"/>
+        </g>
+    </g>
+    <g id="prefix__Group_22474" data-name="Group 22474" transform="translate(0 8.566)">
+        <g id="prefix__Group_22473" data-name="Group 22473">
+            <path id="prefix__Path_16106" d="M6.835 146H.6a.6.6 0 0 0-.6.6v6.235a.6.6 0 0 0 .6.6h6.235a.6.6 0 0 0 .6-.6V146.6a.6.6 0 0 0-.6-.6zm-.6 6.235H1.2V147.2h5.035z" class="prefix__cls-1" data-name="Path 16106" transform="translate(0 -146)"/>
+        </g>
+    </g>
+    <g id="prefix__Group_22476" data-name="Group 22476" transform="translate(8.566 8.566)">
+        <g id="prefix__Group_22475" data-name="Group 22475">
+            <path id="prefix__Path_16107" d="M152.835 146H146.6a.6.6 0 0 0-.6.6v6.235a.6.6 0 0 0 .6.6h6.235a.6.6 0 0 0 .6-.6V146.6a.6.6 0 0 0-.6-.6zm-.6 6.235H147.2V147.2h5.036z" class="prefix__cls-1" data-name="Path 16107" transform="translate(-146 -146)"/>
+        </g>
+    </g>
+</svg>

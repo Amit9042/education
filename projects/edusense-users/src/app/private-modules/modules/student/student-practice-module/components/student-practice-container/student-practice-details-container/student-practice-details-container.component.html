@@ -1,0 +1,23 @@
+<div class="select-question-container">
+  <div class="select-question">
+    <form [formGroup]="practiceQuestionForm">
+      <div class="select-question__left">
+        <es-user-question-list-left [formGroup]="practiceQuestionForm" [formGroupArray]="formArrayControlsLeft"
+          [subject]="subject" [practiceDetails]="practiceDetails" [studentQuestionList]="studentQuestionList"
+          (selectQuestion)="getRandomQuestionDetails($event)" (onBackConfirm)="onBackConfirm($event)" [questionDetail]="questionDetail">
+
+        </es-user-question-list-left>
+      </div>
+
+      <div class="select-question__right">
+        <es-user-question-details-right (submitEvent)="onPracticeQuestionFormSubmit($event)"
+          (previousEvent)="onPreviousClick($event)" (nextEvent)="onNextClick($event)"
+          (viewResultEvent)="onViewResultClick($event)" [practiceDetails]="practiceDetails"
+          [totalQuestions]="studentQuestionList.length" [questionDetail]="questionDetail"
+          [selectedQuestionNumber]="selectedQuestionNumber" [answerSubmitted]="answerSubmitted" [showResult]="showResult">
+
+        </es-user-question-details-right>
+      </div>
+    </form>
+  </div>
+</div>

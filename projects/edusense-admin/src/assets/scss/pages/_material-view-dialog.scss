@@ -1,0 +1,94 @@
+.view-material-dialog-container {
+    width: 130rem;
+    height: 64rem;
+
+    .video-container {
+        width: 100%;
+        height: 100%;
+        background-color: $grey-color-3;
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+.pdf-material-dialog-container {
+    // width: 100rem;   
+    // height: auto;
+    width: auto;
+    height: calc(100vh - 15rem);
+    margin-top: 15rem;
+    overflow-y: auto;
+    margin-bottom: 5rem;
+}
+
+.dialog-links {
+    background-image: linear-gradient(
+        to bottom,
+        rgba($black-color, 0.6),
+        rgba($black-color, 0.5) 54%,
+        rgba($black-color, 0)
+    );
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: fixed;
+    padding: 1.5rem 4rem;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 8rem;
+
+    @include respond('phone') {
+        padding: 1.5rem 1rem;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-icon {
+        color: $white-color !important;
+
+        @include respond('phone') {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &.action {
+            margin-left: 4rem;
+
+            @include respond('phone') {
+                margin-left: 1rem;
+            }
+
+            svg {
+                path {
+                    fill: $white-color;
+                }
+
+                #prefix__more_1_ {
+                    opacity: 1 !important;
+                }
+            }
+        }
+    }
+
+    p {
+        margin-left: 2rem;
+
+        @include respond('phone') {
+            margin-left: 1rem;
+        }
+
+        .mat-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        color: $white-color;
+    }
+}

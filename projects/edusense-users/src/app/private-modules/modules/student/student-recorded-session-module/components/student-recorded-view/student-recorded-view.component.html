@@ -1,0 +1,61 @@
+<div class="class-view-container">
+    <div class="class-view">
+        <div class="class-view__header">
+            <a (click)="onRecordedlList()" id="lnkBack">
+                <mat-icon matTooltip="Back" svgIcon="leftArrow"></mat-icon>
+            </a>
+            <h2>Recorded Session</h2>
+        </div>
+        <div class="class-view__body material-view student-record-direction">
+            <div class="block class-view__body__view">
+                <div *ngIf="sessionDetail?.recording_path" class="material-view--icon">
+                    <mat-icon svgIcon="video-file"></mat-icon>
+                </div>
+                <!-- <p class="file-name">Maths lacture.mp3</p> -->
+            </div>
+
+            <div class="class-view__body__view">
+                <label>Title</label>
+                <span>
+                    {{sessionDetail?.title}}</span>
+            </div>
+            <div class="class-view__body__view" *ngIf="sessionDetail?.class_map_details.length">
+                <label>Class</label>
+                <p>
+                    <span class="width-auto" *ngFor="let class of sessionDetail?.class_map_details;let s = index">
+                        {{class.class.name + (s < sessionDetail.class_map_details.length - 1 ? ', ' : '')}}</span>
+                </p>
+            </div>
+            <div class="class-view__body__view">
+                <label>Standard</label>
+                <span class="subject-name">
+                    {{ sessionDetail?.grade_master.name }}</span>
+
+            </div>
+            <div class="class-view__body__view">
+                <label>Subject</label>
+                <span class="subject-name">
+                    {{ sessionDetail?.subject_master.name }}</span>
+
+            </div>
+            <div class="class-view__body__view">
+                <label>Teacher</label>
+                <p>
+                    <span *ngFor="
+                                    let user of sessionDetail?.teacher_map_details;
+                                    let g = index
+                                ">
+                        {{ user.user_details.first_name +' '+ user.user_details.last_name + (g < sessionDetail.teacher_map_details.length - 1 ? ', ' : '') }}
+                    </span>
+                    <span *ngIf="sessionDetail?.teacher_map_details == 0">{{" - "}}</span>
+                </p>
+            </div>
+            <div class="class-view__body__view">
+                <label>Recorded Time</label>
+                <span>
+                    {{ sessionDetail?.created_at | date: 'mediumDate' }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

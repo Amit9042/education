@@ -1,0 +1,145 @@
+<div class="practice-subject-chapter-container">
+  <div class="que-bank-ch-list-container practice-chapter-spacing">
+    <div class="que-bank-ch-list-container__head practice-chapter-spacing-bottom">
+      <div class="que-bank-ch-list-container__head__left">
+        <a id="lnkBack" (click)="onBack()">
+          <mat-icon svgIcon="back" matTooltip="Back"></mat-icon>
+        </a>
+        <!--<mat-icon  svgIcon="maths"></mat-icon>-->
+
+        <mat-icon *ngIf="!subject?.logo" svgIcon="defaultSubject"></mat-icon>
+        <img *ngIf="subject?.logo" [src]="subject?.logo" (error)="onError($event)"/>
+
+        <div>
+          <label>{{subject?.name}}</label>
+          <!--<span>Grade 6th</span>-->
+        </div>
+      </div>
+      <div class="que-bank-ch-list-container__head__right">
+        <button id="lnkViewBookMarked"
+          class="que-bank-ch-list-container__head__right__bookmark-btn chapter-bookmark-btn MT-1" type="submit"
+          mat-flat-button color="primary" (click)="onBookmarkQuestionOpen()">
+          View Bookmarked
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="waiting-room__body meeting-room__body">
+    <div *ngIf="true">
+      <div class="row">
+        <div class="col-md-11 PL-0 xs-PR-0">
+          <div [ngClass]="{'complete-question-bank' : false}" *ngFor="let practice of practiceList; let j = index;"
+            class="visitors-info visitor-info-color chapter-spacing">
+            <div class="row align-center">
+              <div class="col-md-8 col-sm-9 col-xs-9 xs-PL-0">
+                <div class="visitors-info__left">
+                  <div class="visitor-image">
+                    <!--<img *ngIf="false" [src]=""/>-->
+                    <mat-icon svgIcon="physics-list"></mat-icon>
+                  </div>
+                  <div class="visitor-details">
+                    <h4>{{practice?.name | checkEmpty}}</h4>
+                    <p
+                      [ngClass]="{'gray' : (practice?.completeStatus === 0), 'green': (practice?.completeStatus !== 0)}">
+                      {{practice?.completeStatus}}% Completed
+                      <small>Total Questions : {{practice?.totalQuestion}}</small>
+                    </p>
+                    <p class="time-date-student" *ngIf="practice?.startedAt && practice?.completeStatus !== 0">
+                      <span>Started On : {{practice?.startedAt | date:'dd/MM/yyyy hh:mm aa'}} </span>
+                      <span *ngIf="practice?.finishedAt">Finished On :
+                        {{practice?.finishedAt | date:'dd/MM/yyyy hh:mm aa'}}</span>
+                      <!--<b class="name-create">Created by : {{practice?.providerUserName | checkEmpty}}</b>-->
+                    </p>
+                    <p class="total-question" *ngIf="practice?.completeStatus !== 0">
+                      <span>Total attempted {{practice?.totalAttemptedQuestion}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-sm-3 col-xs-3 xs-PR-0">
+                <div class="visitors-info__right">
+                  <button [id]="'btnStart-' + j" *ngIf="!(practice?.startedAt)"
+                          class="visitors-info__right__publish-btn"
+                          mat-flat-button color="primary" (click)="onPracticeQuestionList(practice, false)">Start
+                  </button>
+                  <button [id]="'btnResume-' + j" *ngIf="(practice?.status === 'STARTED') && (practice?.startedAt)"
+                    class="visitors-info__right__publish-btn" mat-flat-button color="primary"
+                    (click)="onPracticeQuestionList(practice, false)">Resume
+                  </button>
+                  <!-- <button [disabled]="true" [id]="'btnComplete-' + j" *ngIf="practice?.status === 'COMPLETED'"
+                          class="visitors-info__right__publish-btn" mat-flat-button color="primary">Complete
+                  </button> -->
+
+                  <div *ngIf="practice?.status === 'COMPLETED'">
+                    <span class="completed-status">Completed</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-1 col-sm-2">
+                <div class="ML-5" [ngClass]="{'arrow-width ' : !(practice?.status === 'COMPLETED')}">
+                  <mat-icon *ngIf="practice?.completeStatus === 0" svgIcon="rightArrow"></mat-icon>
+
+                  <button *ngIf="practice?.status === 'COMPLETED'" mat-icon-button [matMenuTriggerFor]="menu" id="btnMoreOptions">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button type="button" id="btnView" mat-menu-item (click)="onPracticeQuestionList(practice, true)">
+                      <span>View</span>
+                    </button>
+                    <button type="button" id="btnViewResult" mat-menu-item (click)="onViewPracticeResult(practice)">
+                      <span>View result</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="practiceList.length === 0">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noPractice"></mat-icon>
+        <p>No Practice Available</p>
+        <span>There seems to be no practice to show right now.</span>
+      </div>
+    </div>
+  </div>
+
+  <app-data-loading *ngIf="false"></app-data-loading>
+
+  <div class="chapters-section" *ngIf="chapterList.length !== 0">
+    <h4>Other Chapters</h4>
+    <div class="row">
+      <div class="col-md-11 col-sm-12 PL-0">
+        <div class="row">
+          <div *ngFor="let chapter of chapterList; let j = index;" class="MR-4">
+            <div class="chapters-section__box">
+              <a (click)="onPracticeListOpen(chapter)">
+                <mat-icon svgIcon="book"></mat-icon>
+                <span
+                  matTooltip="{{chapter?.title | checkEmpty}}">{{getChapterName(chapter?.title) | checkEmpty}}</span>
+              </a>
+            </div>
+          </div>
+          <div class="chapters-section__box"
+               *ngIf="(chapterList.length !== totalChapterList.length) && (totalChapterList.length > 11)">
+            <a (click)="onClickViewMore()">
+              <span>View More</span>
+            </a>
+          </div>
+          <div class="chapters-section__box"
+               *ngIf="(chapterList.length == totalChapterList.length) && (totalChapterList.length > 11)">
+            <a (click)="onClickViewLess()">
+              <span>View Less</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

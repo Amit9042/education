@@ -1,0 +1,5 @@
+<es-admin-admin-navbar (menuClick)="panelMove = $event" *ngIf="isLoggedIn"></es-admin-admin-navbar>
+
+<div [ngClass]="{ panel: isLoggedIn, 'panel-move' :  panelMove && isLoggedIn}">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>

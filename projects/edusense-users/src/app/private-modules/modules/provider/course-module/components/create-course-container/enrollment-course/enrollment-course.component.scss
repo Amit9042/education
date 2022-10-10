@@ -1,0 +1,12 @@
+@import '../../../../../../../../assets/scss/abstracts/abstracts';
+
+.class-table-container {
+    .student-name {
+        text-decoration: none;
+        color: $black-color-2;
+    }
+
+    .table-body {
+        height: calc(100vh - 33.5rem);
+    }
+}

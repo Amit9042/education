@@ -1,0 +1,141 @@
+.paginator-section {
+    text-align: center;
+
+    .ngx-pagination {
+        padding: 0px;
+
+        li {
+            font-size: 1.6rem;
+            font-weight: 500;
+
+            &:nth-last-child(2) {
+                a {
+                    color: $primary-color !important;
+                }
+            }
+
+            a {
+                &:hover {
+                    background: none;
+                }
+
+                &.disabled {
+                    cursor: normal;
+                    color: $light-gray-color-2;
+                }
+            }
+
+            &:not(.pagination-next) {
+                &:not(.pagination-previous) {
+                    &.current {
+                        background-color: $light-blue-color-4;
+                        border-radius: 3px;
+                        color: $primary-color;
+                        display: inline-block;
+                    }
+                    & a {
+                        &:hover {
+                            background-color: $light-blue-color;
+                            border-radius: 3px;
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+            &.pagination-next {
+                span {
+                    a {
+                        background-color: $white-color;
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            &.pagination-previous {
+                float: left;
+                // margin-left:-15px;
+                margin-left: 0;
+                a {
+                    color: $primary-color;
+                    &::before {
+                        content: '';
+                        background-image: url('./assets/images/svg_files/left_chevron_blue.svg');
+                        width: 14px;
+                        height: 21px;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                        position: relative;
+                        top: 9px;
+                        right: -6px;
+                    }
+                }
+
+                &.disabled {
+                    color: $light-gray-color-2;
+                    // margin-left:-15px;
+                    margin-left: 0;
+                    &::before {
+                        content: '';
+                        background-image: url('./assets/images/svg_files/left_chevron_grey.svg');
+                        width: 14px;
+                        height: 21px;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                        position: relative;
+                        top: 9px;
+                        right: -6px;
+                    }
+                }
+            }
+            &.pagination-next {
+                float: right;
+                a {
+                    color: $primary-color;
+                    &::after {
+                        content: '';
+                        background-image: url('./assets/images/svg_files/right_chevron_blue.svg');
+                        width: 14px;
+                        height: 21px;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                        position: relative;
+                        top: 9px;
+                        left: -6px;
+                    }
+                }
+
+                &.disabled {
+                    color: $light-gray-color-2;
+                    margin-right: -15px;
+
+                    &::after {
+                        content: '';
+                        background-image: url('./assets/images/svg_files/right_chevron_grey.svg');
+                        width: 14px;
+                        height: 21px;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                        position: relative;
+                        top: 9px;
+                        left: -6px;
+                    }
+                }
+            }
+
+            &.pagination-previous,
+            &.pagination-next {
+                position: relative;
+                top: -4px;
+                a {
+                    color: $primary-color;
+                    text-decoration: none;
+                    outline: 0;
+                }
+
+                &.disabled {
+                    color: #868686;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<div *ngIf="classJoinClassDetails">
+  <div [ngSwitch]="classJoinClassDetails?.status">
+    <div *ngSwitchCase="classJoinStat.Active">
+      <app-streaming [channelName]="classJoinClassDetails?.channel_name"
+        [meetingToken]="classJoinClassDetails?.meeting_token" [isProvider]="false" [classDetails]="classDetails"
+        [userDetails]="userDetails" (endStreaming)="endClass()">
+      </app-streaming>
+    </div>
+    <div *ngSwitchCase="classJoinStat.Waiting">
+      <app-student-waiting-screen [classDetails]="classDetails"></app-student-waiting-screen>
+    </div>
+    <div *ngSwitchCase="classJoinStat.Left">
+      <span>
+        <label>Session complete</label>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="join-class-details" *ngIf="!classJoinClassDetails">
+  <label>
+    Class details not found. Please rejoin the class.
+  </label>
+</div>

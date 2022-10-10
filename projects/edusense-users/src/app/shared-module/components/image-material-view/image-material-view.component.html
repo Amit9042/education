@@ -1,0 +1,38 @@
+<div class="dialog-links">
+  <div class="dialog-links__file-name">
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon matTooltip="Back" svgIcon="backArrow"></mat-icon>
+    </a>
+    <p>
+      <mat-icon svgIcon="png"></mat-icon>
+      {{materialName}}
+    </p>
+  </div>
+  <div class="dialog-links__page-count" *ngIf="showSlider">
+    <p><span>{{currentNumber}}</span> of <span>{{totalNumber}}</span></p>
+  </div>
+
+  <div>
+    <a (click)="donwload()" id="lnkDownload">
+      <mat-icon matTooltip="Download" svgIcon="download"></mat-icon>
+    </a>
+    <a id="lnkAction">
+      <mat-icon matTooltip="More Options" class="action" svgIcon="actionBtn"></mat-icon>
+    </a>
+  </div>
+</div>
+
+<div class="image-preview-modal__close">
+
+</div>
+<div class="ng-overlay">
+  <div class="ng-gallery-content ng-swiper-content">
+    <img [src]="image" alt="" class="effect" />
+    <a class="previous" *ngIf="currentNumber > 1" (click)="onCloseDialog(currentNumber - 1)">
+      <mat-icon svgIcon="leftArrowWhite" matTooltip="Previous"></mat-icon>
+    </a>
+    <a class="next" *ngIf="currentNumber !== totalNumber" (click)="onCloseDialog(currentNumber + 1)">
+      <mat-icon svgIcon="rightArrowWhite" matTooltip="Next"></mat-icon>
+    </a>
+  </div>
+</div>

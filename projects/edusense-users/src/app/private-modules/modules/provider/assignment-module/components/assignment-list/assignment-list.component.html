@@ -1,0 +1,76 @@
+<div class="assignment-list-container">
+  <form [formGroup]="assignmentSearchForm">
+    <div class="assignment-list-container__head">
+      <div class="assignment-list-container__head__left">
+        <div class="assignment-list-container__head__search">
+          <input type="text" name="search" placeholder="Search..." id="inputSearch" autocomplete="off"
+            [formControl]="searchAssignmentTitle" />
+          <mat-icon svgIcon="search"></mat-icon>
+        </div>
+        <div class="form-control">
+          <app-ss-select-search [formName]="assignmentSearchForm" [selectConfig]="classSearchConfig" [selected]=""
+            [dataList]="classList" (changSelectEvent)="onSelectChangeEvent($event,'classFilterField')"
+            id="matSelectClass">
+          </app-ss-select-search>
+        </div>
+      </div>
+      <button id="btnCreateAssignment" class="remove-shadow" (click)="onCreateAssignment()" type="submit"
+        mat-flat-button color="primary">
+        Create Assignment
+      </button>
+    </div>
+  </form>
+  <div [ngSwitch]="currentViewType" class="assignment-list-container__body">
+    <div *ngSwitchCase="viewType.Data">
+      <div *ngFor="let assignment of assignmentList; let i = index">
+        <div class="assignment-list-container__body__list">
+          <a (click)="onAssignmentView(assignment?.assignment_id)">
+            <h3>{{assignment?.title | checkEmpty}}</h3>
+          </a>
+
+          <p class="teacher-name">
+            <label>Teacher:</label>
+            <span>{{assignment?.createdBy?.first_name + ' ' + assignment?.createdBy?.last_name}}</span>
+          </p>
+          <div class="flex-between row">
+            <div class="col-md-4 PL-0">
+              <p class="date">{{assignment?.start_date | date: 'dd MMMM yyyy'}}</p>
+              <p class="subject-info">
+                <span>{{assignment?.class?.name | checkEmpty}}</span>
+              </p>
+            </div>
+            <div class="col-md-4 PL-0">
+              <p><label>Submission date:</label><span>{{assignment?.submission_date | date: 'dd MMMM yyyy'}}</span>
+              </p>
+            </div>
+            <div>
+              <p><label>Submitted by:</label><span>{{assignment?.student_assignment}} students</span></p>
+            </div>
+          </div>
+          <div class="more-option-edit-button" *ngIf="showMoreOptions(assignment)">
+            <button [id]="'btnAction-'+i" class="action-button" mat-button [matMenuTriggerFor]="menu">
+              <mat-icon matTooltip="More Options" svgIcon="action" [id]="'iconTriggerMenu-' + i"></mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action">
+              <button [id]="'btnEdit-'+i" type="button" mat-menu-item [id]="'btnEdit-' + i"
+                (click)="getAssignmentDetail(assignment?.assignment_id)">
+                <span>Edit</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="viewType.NoData">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noAssignment"></mat-icon>
+        <p>No assignment available</p>
+        <span>No assignment has been assigned</span>
+      </div>
+    </div>
+
+    <div class="loader-data" *ngSwitchCase="viewType.Loading">
+      <label>Loading...</label>
+    </div>
+  </div>
+</div>

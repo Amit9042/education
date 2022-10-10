@@ -1,0 +1,41 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.student-course-container {
+    .student-course {
+        background-color: $grey-color-3;
+        padding: 5rem 8rem 0 8rem;
+
+        @include respond('phone') {
+            padding: 1rem 0;
+        }
+
+        &__course-navigation {
+            width: 90%;
+            height: 100vh;
+
+            @include respond('phone') {
+                width: 100%;
+                height: auto;
+            }
+
+            ul {
+                li {
+                    display: block;
+
+                    a {
+                        color: $black-color;
+                        text-decoration: none;
+                        display: block;
+                        padding: 1rem 2rem;
+
+                        &.active {
+                            color: $white-color;
+                            background-color: $blue-color-1;
+                            border-radius: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

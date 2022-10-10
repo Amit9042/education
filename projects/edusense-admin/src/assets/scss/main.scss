@@ -1,0 +1,20 @@
+// Import abstracts Scss
+@import "abstracts/abstracts";
+
+// Import Base Scss
+@import "base/base";
+
+// Import Component Scss files
+@import "components/components";
+
+// Import Layout Scss files
+@import "layout/layout";
+
+// Import Responsive Scss Files
+@import "browser-support/browser-support";
+
+// Import Vendor Scss Files
+@import "vendors/vendors";
+
+// Import Pages Scss files
+@import "pages/pages";

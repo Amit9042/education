@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="filter" width="18.739" height="12.486" viewBox="0 0 18.739 12.486">
+    <defs>
+        <style>
+            .filter-1{fill:#193a6f}
+        </style>
+    </defs>
+    <g id="filter-2" data-name="filter">
+        <path id="Path_10" d="M8.9 30.286h4.16V28.2H8.9zM1.6 17.8v2.091h18.739V17.8zm3.136 7.279h12.486v-2.091H4.736z" class="filter-1" data-name="Path 10" transform="translate(-1.6 -17.8)"/>
+    </g>
+</svg>

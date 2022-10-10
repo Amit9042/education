@@ -1,0 +1,30 @@
+<form [formGroup]="formName">
+  <mat-label>{{ selectConfig.displayLabel
+    }}<span *ngIf="selectConfig?.isRequired">*</span></mat-label>
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-select [formControlName]="selectConfig.controlName" [placeholder]="selectConfig?.selectPlaceholderLabel"
+      #singleSelect [required]="selectConfig?.isRequired" (selectionChange)="onSelectChange($event)"
+      (blur)="onBlur(formName)" [multiple]="selectConfig?.selectMulti">
+      <mat-option>
+        <ngx-mat-select-search [placeholderLabel]="selectConfig?.searchPlaceholderLabel"
+          noEntriesFoundLabel="'No matching data'" [formControlName]="selectConfig?.filterControlName">
+          <mat-icon ngxMatSelectSearchClear svgIcon="close"></mat-icon>
+        </ngx-mat-select-search>
+      </mat-option>
+
+      <mat-select-trigger *ngIf="selectConfig?.trigger">
+        {{
+          formControls[selectConfig.controlName].value[
+            selectConfig?.triggerKeyPath
+          ]
+        }}
+      </mat-select-trigger>
+      <mat-option *ngFor="let data of filteredData | async" [value]="data">
+        {{ getColumnValue(data, selectConfig?.keyPath) | checkEmpty }}
+      </mat-option>
+    </mat-select>
+    <button *ngIf="selectedElementValue && selectConfig?.isClearRequired" matSuffix mat-icon-button type="button" aria-label="Clear" (click)="removeSelectedData()"><mat-icon>close</mat-icon></button>
+    <mat-error *ngIf="isRequiredField(formControls[selectConfig.controlName])">{{ selectConfig?.validationMsg }}
+    </mat-error>
+  </mat-form-field>
+</form>

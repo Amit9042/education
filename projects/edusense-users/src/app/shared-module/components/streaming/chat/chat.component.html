@@ -1,0 +1,54 @@
+<div class="chat-container">
+  <div class="chat-container__head">
+    <h4>Chat</h4>
+    <a id="lnkCloseChat" (click)="onCloseChat()">
+      <mat-icon svgIcon="close" matTooltip="Close"></mat-icon>
+    </a>
+  </div>
+  <div *ngIf="!messagesArray.length" class="no-content-found-wrapper">
+      <p>No Messages</p>
+  </div>
+  <div class="chat-container__bottom">
+    <div #scrollMe class="chat-container__bottom--body">
+      <div *ngFor="let message of messagesArray; let i = index">
+        <div *ngIf="message.id" class="chat-container__bottom-left">
+          <div>
+            <!-- <img src="./assets/images/student_picture.jpg" alt="" /> -->
+            <mat-icon svgIcon="profile"></mat-icon>
+          </div>
+          <div class="chat-message">
+            <h4>{{message.sender_name}}<span>·</span><span>{{message.created_at | date:'shortTime'}}</span></h4>
+            <p>
+              {{message.msg}}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="!message.id" class="chat-container__bottom-right">
+          <div>
+            <!-- <img src="./assets/images/student_picture.jpg" alt="" /> -->
+            <mat-icon svgIcon="profile"></mat-icon>
+          </div>
+          <div class="chat-message">
+            <h4>{{message.sender_name}}<span>·</span><span>{{message.created_at | date:'shortTime'}}</span></h4>
+            <p>
+              {{message.msg}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-footer">
+    <form [formGroup]="chatFormGroup"id="chatForm" (ngSubmit)="onSendMsg(chatFormGroup)">
+    <div class="chat-footer__input">
+      <textarea placeholder="Send a message everyone" formControlName="msg" (keyup.enter)="onSendMsg(chatFormGroup)"  required maxlength="500"></textarea>
+      <!-- <button mat-icon-button class="mat-left">
+        <mat-icon svgIcon="smileys" matTooltip="Emoji"></mat-icon>
+      </button> -->
+      <button id="btnSendMessage" mat-icon-button class="mat-right">
+        <mat-icon svgIcon="interface" matTooltip="Send"></mat-icon>
+      </button>
+    </div>
+    </form>
+  </div>
+</div>

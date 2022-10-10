@@ -1,0 +1,57 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+.class-table-container {
+    .page-header {
+        h2 {
+            @include respond('phone') {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+    .table-body {
+        height: calc(100vh - 26rem);
+        @include respond('phone') {
+            margin-top: 1.5rem;
+        }
+
+        tr {
+            // @include respond('regular-desktop') {
+            //      height: 5.5rem;
+            // }
+            td {
+                // @include respond('regular-desktop') {
+                //      font-size: 1.4rem;
+                // }
+            }
+            .width-th {
+                @include respond('tab-port') {
+                    padding-right: 20rem;
+                }
+                @include respond('phone') {
+                    padding-right: 10rem;
+                }
+            }
+        }
+    }
+
+    .no-content-found-wrapper,
+    .coming-soon-wrapper {
+        @include respond('tab-port') {
+            min-height: calc(100vh - 39rem);
+        }
+
+        @include respond('phone') {
+            padding: 2rem 0;
+        }
+        mat-icon {
+            @include respond('regular-desktop') {
+                height: 13rem;
+            }
+            @include respond('phone') {
+                height: 10rem;
+            }
+        }
+        span {
+            max-width: 50rem;
+        }
+    }
+}

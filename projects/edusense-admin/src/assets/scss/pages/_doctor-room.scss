@@ -1,0 +1,109 @@
+.waiting-room-container {
+    background-color: $grey-color-3;
+    padding: 4rem 2.5rem;
+    margin: 2rem;
+
+    @include respond('tablet') {
+        padding: 2rem 1rem 1rem;
+    }
+
+    @include respond('phone') {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .waiting-room {
+        &__top {
+            .header__search {
+                &-white {
+                    width: 100%;
+                    margin-right: 0;
+                }
+
+                &--input {
+                    width: 100%;
+
+                    input {
+                        background-color: $white-color;
+                    }
+                }
+            }
+
+            &--right {
+                padding: 1.7rem 1.5rem;
+                background: white;
+                border-radius: 10px;
+
+                .select-emergency {
+                    .mat-select-arrow-wrapper {
+                        top: 0.3rem;
+
+                        .mat-select-arrow {
+                            width: 1.2rem;
+                            height: 2rem;
+                            border: 0;
+                            background: url('assets/images/svg_files/down.svg')
+                                no-repeat center;
+                        }
+                    }
+                }
+
+                .form-control {
+                    cursor: pointer;
+                    height: auto;
+
+                    .mat-form-field-wrapper {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .mat-form-field-outline {
+                        border: 0;
+                    }
+
+                    .mat-form-field-suffix {
+                        width: auto;
+
+                        .mat-icon {
+                            position: relative;
+                            top: 3px;
+                        }
+                    }
+
+                    @include placeholder($grey-color-4, 1.8rem);
+
+                    @include respond('phone') {
+                        &.student-search-class {
+                            height: 5rem;
+                        }
+                    }
+                }
+
+                &.padding-0 {
+                    padding: 0 !important;
+                }
+            }
+        }
+
+        .custom-pagination-section__show-row {
+            .text-page {
+                display: none;
+            }
+        }
+
+        .custom-pagination-section__go-to {
+            display: none;
+        }
+    }
+}
+.opd-calendar {
+    width: 1.6rem !important;
+    height: auto;
+    top: 1px !important;
+
+    svg {
+        path {
+            fill: $black-color !important;
+        }
+    }
+}

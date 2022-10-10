@@ -1,0 +1,125 @@
+<div class="waiting-room__body meeting-room__body question-answer__body">
+    <div class="question-wrapper">
+        <div class="question-user-info">
+            <div class="question-user-info__image">
+                <img *ngIf="questionData?.from_user_obj?.avatar_thumbnail" [src]="questionData?.from_user_obj?.avatar_thumbnail" />
+                <mat-icon *ngIf="!questionData?.from_user_obj?.avatar_thumbnail" svgIcon="providerProfile"></mat-icon>
+            </div>
+            <div>
+                <h6 *ngIf="questionData?.from_user_obj?.user_id === userId">You</h6>
+                <h6 *ngIf="questionData?.from_user_obj?.user_id != userId">{{questionData?.from_user_obj?.first_name + ' ' + questionData?.from_user_obj?.last_name}}</h6>
+                <p>{{questionData?.created_at | date: 'd MMMM y, hh:mm a'}}</p>
+            </div>
+        </div>
+
+        <div class="action-button" >
+            <button id="btnAction" mat-button [matMenuTriggerFor]="menu" *ngIf="questionData?.from_user_obj?.user_id === userId">
+                <mat-icon matTooltip="More Options" svgIcon="actionBtn" id="iconTriggerMenu">
+                </mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action">
+                <button type="button" mat-menu-item id="btnEdit"
+                    (click)="onEditQuestion(questionData)">
+                    <span>Edit</span>
+                </button>
+                <button type="button" mat-menu-item id="btnView"
+                    (click)="onDeleteQuestion(questionData)">
+                    <span>Delete</span>
+                </button>
+            </mat-menu>
+        </div>
+
+        <!-- 1ST QUESTION PATTERN -->
+        <div class="user-questions">
+            <h4>{{questionData?.question}}</h4>
+            <div class="user-questions__image">
+                <es-user-student-question-view [questionDetail]="questionData"></es-user-student-question-view>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-wrapper answer-wrapper" *ngIf="copyOfAnswerList.length">
+        <p class="answer-counting">
+            {{copyOfAnswerList.length}} {{answerTxt}}
+        </p>
+        <!-- 1ST ANSWER PATTERN -->
+        <div div class="answer-content-wrapper" *ngFor="let comment of answerList">
+            <div class="question-user-info">
+                <div class="question-user-info__image">
+                    <img *ngIf="comment?.user_id.avatar_thumbnail" [src]="comment?.user_id.avatar_thumbnail" />
+                    <mat-icon *ngIf="!comment?.user_id.avatar_thumbnail" svgIcon="providerProfile"></mat-icon>
+                </div>
+                <div>
+                    <h6 *ngIf="comment?.user_id?.user_id === userId">You</h6>
+                    <h6 *ngIf="comment?.user_id?.user_id != userId">{{comment?.user_id?.first_name + ' ' + comment?.user_id?.last_name}}</h6>
+                    <p>{{comment?.created_at | date: 'd MMMM y, hh:mm a'}} 
+                        <span *ngIf="comment?.user_id?.grade_id"> Grade {{comment?.user_id?.grade_id?.alias}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="answer-content-wrap">
+                <div class="answer-content" *ngIf="(comment?.copyOfDescription && comment?.isMoreDesc) || (comment?.isMoreDesc)">
+                    <p>{{comment?.copyOfDescription ? comment?.copyOfDescription : comment?.description}}</p>
+                </div>
+                <div class="answer-content" *ngIf="!comment?.isMoreDesc">
+                    <p>{{comment?.description}}</p>
+                </div>
+                <div *ngIf="comment?.images.length && !comment.isMoreDesc">
+                    <div *ngFor="let image of comment.images">
+                        <div class="user-questions__image">
+                            <img [src]="image?.url" />
+                        </div>
+                        <p class="summery" *ngIf="image?.description">
+                            {{image?.description}}
+                        </p>
+                    </div>
+                </div>
+                <div *ngIf="comment.isMoreDesc" class="see-more-less">
+                    <span (click)="onSeeMoreDesc(comment)">See More</span>
+                </div>
+                <div class="see-more-less" *ngIf="(comment.copyOfDescription && !comment.isMoreDesc) || (comment.description && comment.images.length > 0 && !comment.isMoreDesc)">
+                    <span (click)="onSeeMoreDesc(comment)">See Less</span>
+                </div>
+                <!-- <div class="see-more-less" *ngIf="comment.description && comment.images && !comment.isMoreDesc">
+                    <span (click)="onSeeMoreDesc(comment)">See Less</span>
+                </div> -->
+            </div>
+
+            <div class="action-button" *ngIf="comment?.user_id?.user_id === userId">
+                <button id="btnAction" mat-button [matMenuTriggerFor]="menu">
+                    <mat-icon matTooltip="More Options" svgIcon="actionBtn" id="iconTriggerMenu">
+                    </mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action">
+                    <button type="button" mat-menu-item id="btnEdit"
+                        (click)="onEditAnswer(comment)">
+                        <span>Edit</span>
+                    </button>
+                    <button type="button" mat-menu-item id="btnView"
+                        (click)="onDeleteAnswer(comment)">
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <div class="show-more-answer" *ngIf="isShowMore">
+        <button (click)="onShowMore()" id="btnShowAnswer" mat-flat-button type="button">
+            Show More Answer
+        </button>
+    </div>
+
+    <div *ngIf="!copyOfAnswerList.length">
+        <div class="no-content-found-wrapper">
+            <mat-icon svgIcon="noQuestion"></mat-icon>
+            <span>No one answered this question yet</span>
+        </div>
+    </div>
+
+    <div class="loader-data" *ngIf="false">
+        <label>Loading...</label>
+    </div>
+</div>

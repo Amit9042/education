@@ -1,0 +1,128 @@
+<div class="class-table-container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12 PL-0 list-header-view">
+        <h2>Chapters Management</h2>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 PR-0 text-right">
+        <button (click)="openCreateChapterDialog()" id="btnDownloadReport" class="remove-shadow" type="submit"
+                mat-flat-button color="primary">
+          Create Chapter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-body attendance-list-body">
+    <table class="table" matSort mat-table [dataSource]="chapterList">
+
+      <!-- chapter name column -->
+      <ng-container matColumnDef="chapter_name">
+        <th width="20%" mat-header-cell *matHeaderCellDef>
+          <span>Chapter Name</span>
+
+          <div class="form-control form-control--width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtChapterName" type="text" autocomplete="off" matInput [formControl]="chapterNameFormControl"
+                     placeholder="Search chapter"/>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.title | checkEmpty }}
+        </td>
+      </ng-container>
+
+      <!-- description column -->
+      <ng-container matColumnDef="description">
+        <th width="40%" class="width-th" mat-header-cell *matHeaderCellDef>
+          <span>Description</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.description | checkEmpty }}
+        </td>
+      </ng-container>
+
+
+      <!-- grade column  -->
+      <ng-container matColumnDef="grade">
+        <th width="15%" mat-header-cell *matHeaderCellDef>
+          <span>Grade</span>
+
+          <div class="form-control form-control--width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtSearchGrade" type="text" autocomplete="off" matInput [formControl]="gradeFormControl"
+                     placeholder="Search grade"/>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.aliasName | checkEmpty }}
+        </td>
+      </ng-container>
+
+
+      <!-- subject column -->
+      <ng-container matColumnDef="subject">
+        <th width="15%" mat-header-cell *matHeaderCellDef>
+          <span>Subject</span>
+          <div class="form-control form-control--width">
+            <mat-form-field appearance="outline" floatLabel="always">
+              <input id="txtSearchSubject" type="text" autocomplete="off" matInput [formControl]="subjectFormControl"
+                     placeholder="Search subject"/>
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.subjectName | checkEmpty }}
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef width="10%"></th>
+        <td mat-cell *matCellDef="let element; let i = index" class="text-right">
+          <div class="table-action">
+            <button [id]="'btnAction-'+i" class="action-button" mat-button [matMenuTriggerFor]="menu">
+              <mat-icon matTooltip="More Options" svgIcon="action" [id]="'iconTriggerMenu-' + i">
+              </mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action">
+              <button [id]="'btnView-'+i" type="button" mat-menu-item [id]="'btnView-' + i"
+                      (click)="onViewChapter(element)">
+                <span>View</span>
+              </button>
+              <button [id]="'btnEdit-'+i" type="button" mat-menu-item [id]="'btnEdit-' + i"
+                      (click)="onEditChapter(element)">
+                <span>Edit</span>
+              </button>
+              <button [id]="'btnDelete-'+i" type="button" mat-menu-item [id]="'btnDelete-' + i"
+                      (click)="onDeleteChapter(element)">
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr [ngClass]="{ 'row-disabled': false }" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div *ngIf="!isLoadingResults && chapterList.length === 0">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noChapter"></mat-icon>
+        <p>No Chapters Available</p>
+        <span>There seems to be no chapter to show right now.</span>
+      </div>
+    </div>
+
+    <app-data-loading *ngIf="isLoadingResults">Loading...</app-data-loading>
+  </div>
+
+  <div class="table-footer" *ngIf="!isLoadingResults && chapterList.length > 0">
+    <app-pagination [totalElements]="totalElements" [rowNumber]="rowNumber"
+                    (recordChange)="onChangePagination($event)" [recordsPerPage]="recordsPerPage"></app-pagination>
+  </div>
+</div>

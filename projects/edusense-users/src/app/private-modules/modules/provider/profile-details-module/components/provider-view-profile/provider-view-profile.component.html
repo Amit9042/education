@@ -1,0 +1,44 @@
+<div class="provider-view-container">
+    <!-- <div class="provider-view__header">
+        <h4>About</h4>
+        <p>{{userData.description | checkEmpty}}</p>
+    </div> -->
+
+    <div class="provider-view__body class-view-container">
+        <div class="provider-view__body--listing class-view__body">
+            <div class="class-view__body__view">
+                <label>Name</label>
+                <span>{{userData.name}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>About</label>
+                <span>{{userData.description | checkEmpty}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Board</label>
+                <span>{{getBoard()}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Grade </label>
+                <ul class="profile-left-space" *ngIf="userData.provider_grades">
+                    <li *ngFor="let gradeData of userData?.provider_grades">
+                        <span>{{gradeData.grade.alias}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="class-view__body__view">
+                <label>Medium</label>
+                <span>{{getMedium()}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Subject</label>
+                <span class="profile-left-space">{{getSubjects()}}</span>
+            </div>
+            <div class="class-view__body__view">
+                <label>Location</label>
+                <span>{{getLocation()}}</span>
+            </div>
+
+        </div>
+    </div>
+</div>

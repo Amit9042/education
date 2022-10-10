@@ -1,0 +1,105 @@
+<div class="assignment-list-container">
+  <div class="assignment-list-container__student-head">
+    <div class="assignment-list-container__student-head__top">
+      <h2>
+        Assignment
+      </h2>
+      <!-- <div class="form-control">
+        <mat-form-field appearance="outline" floatLabel="always">
+          <input matInput id="txtDate" [formControl]="assignmentDate" [matDatepicker]="date" placeholder="Date"
+                 id="txtdate" (click)="date.open()" [max]="todayDate" readonly/>
+          <mat-datepicker-toggle matSuffix [for]="date">
+            <mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #date></mat-datepicker>
+        </mat-form-field>
+      </div> -->
+    </div>
+
+    <div class="assignment-list-container__student-head__date-select">
+      <a [ngClass]="{'selected-date': !(selectedDate)}" (click)="getAllAssignmentList(1)">All Assignments</a>
+      <!--FRONTEND DEVELOPER:  selected-date class when all assignment select-->
+      <a *ngFor="let day of weekDateArray; let i = index" (click)="onClickWeekDays(day.value)"
+         [ngClass]="{'selected-date':(day.value === selectedDate)}">
+        {{day.label}}
+      </a>
+
+      <div class="form-control date-picker-spacing">
+        <mat-form-field appearance="outline" floatLabel="always">
+          <input matInput id="txtDate" [formControl]="assignmentDate" [matDatepicker]="date" placeholder="Date"
+            id="txtdate" (click)="date.open()" [max]="todayDate" readonly />
+          <mat-datepicker-toggle matSuffix [for]="date"><mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon> </mat-datepicker-toggle>
+          <mat-datepicker #date></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div [ngSwitch]="currentViewType" class="assignment-list-container__body">
+    <div *ngSwitchCase="viewType.Data" scrollWindow="true" infiniteScroll [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+      <div *ngFor="let assignment of studentAssignmentList; let i = index">
+        <a (click)="onAssignmentCompletedView(assignment)" [id]="'lnkOnAssignmentView-'+i">
+          <div class="assignment-list-container__body__list">
+
+            <h3>{{assignment?.title | checkEmpty}}</h3>
+            <p class="teacher-name">
+              <label>Teacher:</label>
+              <span>{{assignment?.createdBy?.first_name + ' ' + assignment?.createdBy?.last_name}}</span>
+            </p>
+            <div class="flex-between row">
+              <div class="col-md-4 PL-0">
+                <p class="student-subject-info">
+                  <span>{{assignment?.class?.name | checkEmpty}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 PL-0">
+                <p>
+                  <label>Submission date:</label><span>{{assignment?.submission_date | date: 'dd MMMM yyyy'}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 PL-0">
+                <a [id]="'lnkAssignmentCompletedView'+i"
+                   *ngIf="assignment?.student_assignment?.check_status && assignment?.student_assignment?.check_status > 1">
+                  <p class="submission-status"><label>Checked:</label> <span>{{getAssignmentStatus(assignment)}}</span>
+                  </p>
+                </a>
+                <p class="submission-status"
+                   *ngIf="assignment?.student_assignment && assignment?.student_assignment?.check_status === 1">
+                  <label>Submitted</label>
+                </p>
+                <p class="submission-status" *ngIf="!(assignment?.student_assignment)"><label>Not submitted</label>
+                  <span *ngIf="getOverdueFlag(assignment)">: Submission Date Overdue</span>
+                </p>
+              </div>
+            </div>
+            <a>
+              <mat-icon svgIcon="rightArrow"></mat-icon>
+            </a>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div *ngSwitchCase="(enterpriseList.length !== 0) && viewType.NoData">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noAssignment"></mat-icon>
+        <p>No Assignment available</p>
+        <span>No assignment has been assigned</span>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="enterpriseList.length === 0">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noAssignment"></mat-icon>
+        <p>No Assignment available</p>
+        <span>You are not admitted in any institutes or schools</span>
+      </div>
+    </div>
+
+    <div class="loader-data" *ngSwitchCase="viewType.Loading">
+      <label>Loading...</label>
+    </div>
+  </div>
+</div>

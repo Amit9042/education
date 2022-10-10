@@ -1,0 +1,70 @@
+<div class="student-my-courses-container">
+    <div class="student-course__course-details">
+        <h2>My Courses</h2>
+        <es-user-student-course-filters [parentCategoryId]="null" (filterParamChangedEvent)="setFilterParams($event)">
+        </es-user-student-course-filters>
+    </div>
+    <div>
+        <a class="student-course__course-box">
+            <div class="row" *ngIf="studentCourseList.length">
+                <div *ngFor="let course of studentCourseList | paginate: { itemsPerPage: recordsPerPage, currentPage: pageNumber+1, totalItems: totalElements }; let j=index;" class="col-md-3 PL-0">
+                    <div class="student-course__course-box__details">
+                        <img *ngIf="course.cover_image"
+                            (click)="routeToCourseDetailContainer(course.course_id, course.enrollment_id)"
+                            [src]="course.cover_image" />
+                        <div *ngIf="!course?.cover_image" style='
+                            background-color: rgba(219, 220, 221, 0.3);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: column;
+                            min-width: 100%;
+                            max-width: 100%;
+                            height: 16rem;
+                            border-top-left-radius: 1rem;
+                            border-top-right-radius: 1rem;
+                            ' (click)="routeToCourseDetailContainer(course.course_id, course.enrollment_id)">
+                            <mat-icon svgIcon="course-no-image-list"></mat-icon>
+                            <small>No cover image available</small>
+                        </div>
+                        <div class="student-course__course-box__details__progress-line">
+                            <div [ngStyle]="{'width': course.course_progress ? course.course_progress+'%' : '1%'}">
+                            </div>
+                        </div>
+
+                        <div class="student-course__course-box__details__content">
+                            <div class="student-course__course-box__details__content__progress">
+                                <div class="row">
+                                    <div class="col-md-6 PL-0">
+                                        <span>{{course?.total_duration | duration : durationPattern.HH_MM : suffixUnit.HR_M}}</span>
+                                    </div>
+
+                                    <div class="col-md-6 PR-0 text-right">
+                                        <label>{{course.course_progress ? course.course_progress+'%' : '0%'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 (click)="routeToCourseDetailContainer(course.course_id, course.enrollment_id)">
+                                {{(course.title | checkEmpty) | ellipsis: 45}}</h4>
+                            <div class="student-course__course-box__details__content__footer">
+                                <img *ngIf="course.avatar" [src]="course.avatar" />
+                                <mat-icon *ngIf="!course?.avatar" svgIcon="profile"></mat-icon>
+                                <label>{{course.first_name}}&nbsp;{{course.last_name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div *ngIf="!isLoadingResult && !studentCourseList.length">
+        <div class="no-content-found-wrapper course-no-content-found-wrapper">
+            <mat-icon svgIcon="my-course"></mat-icon>
+            <p>No courses opted</p>
+            <span>The courses you have enrolled in will shop up here.</span>
+        </div>
+    </div>
+    <div class="paginator-section">
+        <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true"></pagination-controls>
+    </div>
+</div>

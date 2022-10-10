@@ -1,0 +1,208 @@
+<app-header></app-header>
+
+<div class="contact-us-container webpages-container">
+    <h2>Contact Us</h2>
+    <div class="contact-us-container__info">
+        <div class="text-center">
+            <mat-icon svgIcon="visit-us"></mat-icon>
+            <h4>Visit Us</h4>
+            <p>
+                9th Floor, GIFT One, <br />
+                GIFT City, Gandhinagar, <br />
+                Gujarat, India
+            </p>
+        </div>
+        <div class="text-center">
+            <mat-icon svgIcon="contact-us"></mat-icon>
+            <h4>Contact Us</h4>
+            <p>+91 97268 88759</p>
+            <p class="contact-color">info@theedusense.io</p>
+        </div>
+        <div class="text-center">
+            <mat-icon svgIcon="message-us"></mat-icon>
+            <h4>Message Us</h4>
+            <button type="button" (click)="onContactFormRedirection()">Complete Form</button>
+        </div>
+    </div>
+    <form
+        [formGroup]="contactUsForm"
+        (ngSubmit)="onSubmitContactUsForm(contactUsForm)"
+        #contactFormRef
+    >
+        <div class="contact-us-container__form">
+            <h2>Get in touch</h2>
+            <p>
+                Please fill out the quick form and will be in touch with
+                lightning speed.
+            </p>
+            <div>
+                <div class="fields">
+                    <div class="PR-3 width-50 xs-PR-0 xs-MB-4 relative-property">
+                        <input
+                            formControlName="first_name"
+                            type="text"
+                            id="fname"
+                            placeholder="First name*"
+                            autocomplete="off"
+                        />
+                        <mat-error
+                            *ngIf="isRequiredField(formControls['first_name'])"
+                            >{{ validationMsg.FIRST_NAME }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidLength(formControls['first_name'])">
+                            {{ validationMsg.FIRST_NAME_LENGTH }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidField(formControls['first_name'])"
+                            >{{ validationMsg.FIRST_NAME_VALID }}
+                        </mat-error>
+                    </div>
+                    <div class="ML-3 width-50 xs-ML-0 relative-property">
+                        <input
+                            formControlName="last_name"
+                            type="text"
+                            id="lname"
+                            placeholder="Last name*"
+                            autocomplete="off"
+                        />
+                        <mat-error
+                            *ngIf="isRequiredField(formControls['last_name'])"
+                            >{{ validationMsg.LAST_NAME }}
+                        </mat-error>
+                        <mat-error *ngIf="isValidLength(formControls['last_name'])"
+                            >{{ validationMsg.LAST_NAME_LENGTH }}
+                        </mat-error>
+                        <mat-error
+                            *ngIf="isValidField(formControls['last_name'])"
+                            >{{ validationMsg.LAST_NAME_VALID }}</mat-error
+                        >
+                    </div>
+                </div>
+                <div class="fields relative-property">
+                    <input
+                        formControlName="email"
+                        type="text"
+                        id="email"
+                        placeholder="Email"
+                        autocomplete="off"
+                    />
+                    <mat-error *ngIf="isValidLength(formControls['email'])">{{
+                        validationMsg.EMAIL_LENGTH
+                    }}</mat-error>
+                    <mat-error *ngIf="isValidField(formControls['email'])">{{
+                        validationMsg.EMAIL_VALID
+                    }}</mat-error>
+                </div>
+                <div class="fields">
+                    <div class="PR-3 width-50 xs-PR-0 xs-MB-4 relative-property">
+                        <input
+                            formControlName="phone"
+                            type="text"
+                            id="phone"
+                            placeholder="Phone*"
+                            autocomplete="off"
+                        />
+                        <mat-error
+                            *ngIf="isRequiredField(formControls['phone'])"
+                        >
+                            {{ validationMsg.PHONE }}</mat-error
+                        >
+                        <mat-error *ngIf="isValidLength(formControls['phone'])">
+                            {{ validationMsg.PHONE_LENGTH }}</mat-error
+                        >
+                        <mat-error *ngIf="isValidField(formControls['phone'])">
+                            {{ validationMsg.PHONE_VALID }}</mat-error
+                        >
+                    </div>
+                    <div class="ML-3 width-50 xs-ML-0 relative-property">
+                        <input
+                            formControlName="city"
+                            type="text"
+                            id="city"
+                            placeholder="City*"
+                            autocomplete="off"
+                        />
+                        <mat-error
+                            *ngIf="isRequiredField(formControls['city'])"
+                        >
+                            {{ validationMsg.CITY }}</mat-error
+                        >
+                        <mat-error *ngIf="isValidLength(formControls['city'])">
+                            {{ validationMsg.CITY_LENGTH }}</mat-error
+                        >
+                        <mat-error *ngIf="isValidField(formControls['city'])">
+                            {{ validationMsg.CITY_VALID }}</mat-error
+                        >
+                    </div>
+                </div>
+                <div class="fields relative-property">
+                    <input
+                        formControlName="institute"
+                        type="text"
+                        id="instituteName"
+                        placeholder="Institute name*"
+                        autocomplete="off"
+                    />
+                    <mat-error
+                        *ngIf="isRequiredField(formControls['institute'])"
+                        >{{ validationMsg.INSTITUTE_NAME }}</mat-error
+                    >
+                    <mat-error
+                        *ngIf="isValidLength(formControls['institute'])"
+                        >{{ validationMsg.INSTITUTE_NAME_LENGTH }}</mat-error
+                    >
+                    <mat-error
+                        *ngIf="isValidField(formControls['institute'])"
+                        >{{ validationMsg.INSTITUTE_NAME_VALID }}</mat-error
+                    >
+                </div>
+                <div class="fields relative-property">
+                    <input
+                        formControlName="about_us"
+                        type="text"
+                        id="comeToKnow"
+                        placeholder="How did you come to know about us?"
+                        autocomplete="off"
+                    />
+                    <mat-error
+                        *ngIf="isValidLength(formControls['about_us'])"
+                        >{{ validationMsg.COME_TO_KNOW_LENGTH }}</mat-error
+                    >
+                    <mat-error
+                        *ngIf="isValidField(formControls['about_us'])"
+                        >{{ validationMsg.COME_TO_KNOW_VALID }}</mat-error
+                    >
+                </div>
+                <div class="fields relative-property">
+                    <input
+                        formControlName="comments"
+                        type="text"
+                        id="comments"
+                        placeholder="Additional Comments"
+                        autocomplete="off"
+                    />
+                    <mat-error
+                        *ngIf="isValidLength(formControls['comments'])"
+                        >{{ validationMsg.COMMENT_LENGTH }}</mat-error
+                    >
+                    <mat-error *ngIf="isValidField(formControls['comments'])">{{
+                        validationMsg.COMMENT_VALID
+                    }}</mat-error>
+                </div>
+            </div>
+            <!-- <div class="flex-center recapcha-section">
+                <ngx-recaptcha2
+                    #captchaElem
+                    [siteKey]="'sadsdsdfdsfsdfsdf'"
+                    [useGlobalDomain]="false"
+                    formControlName="recaptcha"
+                >
+                </ngx-recaptcha2>
+            </div> -->
+            <div class="text-center">
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<app-footer></app-footer>

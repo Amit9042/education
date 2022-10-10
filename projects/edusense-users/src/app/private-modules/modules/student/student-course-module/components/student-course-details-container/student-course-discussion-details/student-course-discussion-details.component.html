@@ -1,0 +1,123 @@
+<div class="student-course-discussion-container">
+    <div class="course-discussion">
+        <div class="course-discussion__details">
+            <div class="course-discussion__details__image">
+                <img *ngIf="true" src="assets/images/beautiful-beauty-blurred-background.png" />
+                <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+            </div>
+
+            <div class="course-discussion__details__content">
+                <div>
+                    <h4>Saransh Mehta <small>3hr ago</small> </h4>
+                    <p> I have been always dreaming to create the Trippy Parallel unverse visauls..but i couldnt able
+                        do.. i
+                        always had a dream to do a video with a Fantasy visuals.. but im soo weak in animation..but
+                        Visual
+                        Don Brother helped me alottt with his clarity instructions and clarifications of doubts in every
+                        stage.. thanks alot brother..</p>
+                    <ul>
+                        <li>
+                            <a> <span>Like</span> </a>
+                        </li>
+
+                        <li>
+                            <a> <span>Reply</span> </a>
+                        </li>
+
+                        <li>
+                            <a [ngClass]="{'active' : false}">
+                                <mat-icon svgIcon="like"></mat-icon>
+                                <mat-icon svgIcon="dis-like"></mat-icon>
+                                <span>20</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a>
+                                <mat-icon class="chat-icon" svgIcon="chat-2"></mat-icon> <span>3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-discussion__history">
+            <div class="course-discussion__details">
+                <div class="course-discussion__details__image">
+                    <img *ngIf="true" src="assets/images/beautiful-beauty-blurred-background.png" />
+                    <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+                </div>
+
+                <div class="course-discussion__details__content">
+                    <h4>Saransh Mehta </h4>
+                    <input placeholder="Leave a reply..." type="text" />
+                </div>
+            </div>
+
+            <div *ngFor="let i of [1,2,3]; let j=index;" class="course-discussion__details">
+                <div class="course-discussion__details__image">
+                    <img *ngIf="true" src="assets/images/beautiful-beauty-blurred-background.png" />
+                    <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+                </div>
+
+                <div class="course-discussion__details__content">
+                    <h4>Saransh Mehta <small>3hr ago</small> </h4>
+                    <p> I have been always dreaming to create the Trippy Parallel unverse visauls..but i couldnt able
+                        do.. i
+                        always had a dream to do a video with a Fantasy visuals.. but im soo weak in animation..but
+                        Visual
+                        Don Brother helped me alottt with his clarity instructions and clarifications of doubts in every
+                        stage.. thanks alot brother..</p>
+                    <ul>
+                        <li>
+                            <a> <span>Like</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="course-discussion PT-2">
+        <div *ngFor="let i of [1,2,3]; let j=index;" class="course-discussion__details">
+            <div class="course-discussion__details__image">
+                <img *ngIf="true" src="assets/images/beautiful-beauty-blurred-background.png" />
+                <mat-icon *ngIf="false" svgIcon="profile"></mat-icon>
+            </div>
+
+            <div class="course-discussion__details__content">
+                <div>
+                    <h4>Saransh Mehta <small>3hr ago</small> </h4>
+                    <p> I have been always dreaming to create the Trippy Parallel unverse visauls..but i couldnt able do
+                        had a dream to do a video with a Fantasy visuals.. but im soo weak in animation..but Visual Ang
+                        helped me
+                        alottt with his clarity instructions and clarifications of doubts in every stage.. thanks.</p>
+                    <ul>
+                        <li>
+                            <a> <span>Like</span> </a>
+                        </li>
+
+                        <li>
+                            <a> <span>Reply</span> </a>
+                        </li>
+
+                        <li>
+                            <a [ngClass]="{'active' : true}">
+                                <mat-icon svgIcon="like"></mat-icon>
+                                <mat-icon svgIcon="dis-like"></mat-icon>
+                                <span>20</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a>
+                                <mat-icon class="chat-icon" svgIcon="chat-2"></mat-icon> <span>0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

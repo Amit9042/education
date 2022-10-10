@@ -1,0 +1,116 @@
+<div [ngSwitch]="currentViewType" class="material-list">
+    <div class="material-list__header">
+        <h2 class="student-text-header record-session-spacing">Recorded Session</h2>
+        <div class="row">
+            <form [formGroup]="recordedSessionForm" class="col-md-12 col-sm-12 col-xs-12 PLR-0"
+                (ngSubmit)="onSubmitFilterForm()">
+                <div class="row">
+                    <div class="col-md-2 col-sm-4 col-xs-12 PL-1 pad-0-phone">
+                        <div class="form-control">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="Search Title" [formControl]="titleFormControl">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4 col-xs-6 PL-0">
+                        <div class="form-control">
+                            <app-ss-select-search [formName]="recordedSessionForm" [selectConfig]="classSearchConfig"
+                                [selected]="" [dataList]="classList" (changSelectEvent)="onClassChange($event)"
+                                id="matSelectClass">
+                            </app-ss-select-search>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6 PL-0 pad-0-phone MB-0">
+                        <div class="form-control">
+                            <app-ss-select-search [formName]="recordedSessionForm" [selectConfig]="teacherSearchConfig"
+                                [selected]="selectedValue" [dataList]="teacharList"
+                                (changSelectEvent)="onTeacherChange($event)" id="matSelectClass">
+                            </app-ss-select-search>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 PL-0 pad-0-phone MB-0">
+                        <div class="form-control">
+
+                            <app-ss-select-search [formName]="recordedSessionForm" [selectConfig]="subjectSearchConfig"
+                                [selected]="selectedValue" [dataList]="subjectList"
+                                (changSelectEvent)="onSubjectChange($event)" id="matSelectTeacher">
+                            </app-ss-select-search>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngSwitchCase="viewType.Data" class="material-list__body" scrollWindow="true" infiniteScroll
+        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+        <div class="material-listing">
+            <a class="material-listing__section" *ngFor="let sessionDetail of sessionList; let i = index"
+                [id]="'lnkVideoPreview-' + i" (click)="onVideoPreview(sessionDetail)">
+                <div class="material-listing__section--top">
+                    <mat-icon svgIcon="video-file" class="file-type"></mat-icon>
+
+                    <div class="material-action">
+                        <button mat-button class="action-button" [matMenuTriggerFor]="menu"
+                            (click)="$event.stopPropagation()">
+                            <mat-icon matTooltip="More Options" svgIcon="actionBtn" [id]="'iconTriggerMenu-' + i">
+                            </mat-icon>
+                        </button>
+
+                        <mat-menu #menu="matMenu" [overlapTrigger]="false" class="class-action"
+                            (click)="$event.stopPropagation()">
+
+                            <button type="button" mat-menu-item [id]="'btnView-' + i"
+                                (click)="onViewMaterial(sessionDetail)">
+                                <span>View</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+
+                <div class="material-listing__section--bottom">
+                    <p class="subject-name">
+                        {{sessionDetail?.title}}
+                    </p>
+                    <ul>
+                        <li>
+                            <label>Standard: </label>
+                            <span>
+                                {{ sessionDetail?.grade_master.alias }}
+                            </span>
+                        </li>
+                        <li>
+                            <label>Subject: </label>
+                            <span>
+                                {{ sessionDetail?.subject_master.name }}
+                            </span>
+                        </li>
+                        <li>
+                            <label>Teacher: </label>
+                            <span *ngFor="
+                                    let user of sessionDetail?.teacher_map_details;
+                                    let g = index
+                                ">
+                                {{ user.user_details.first_name +' '+ user.user_details.last_name + (g < sessionDetail.teacher_map_details.length - 1 ? ', ' : '') }}
+                            </span>
+                            <!-- <span
+                                *ngIf="sessionDetail.user">{{sessionDetail.user.first_name + " " + sessionDetail.user.last_name}}</span>
+                            <span *ngIf="!sessionDetail.user">{{" - "}}</span> -->
+                        </li>
+                    </ul>
+                    <p class="recorded-time">
+                        {{ sessionDetail.created_at | date: 'mediumDate' }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div *ngSwitchCase="viewType.NoData">
+        <div class="no-content-found-wrapper">
+            <mat-icon svgIcon="no_material_files"></mat-icon>
+            <p>No recorded session available</p>
+            <span>No recorded session has been uploaded by the provider</span>
+        </div>
+    </div>
+    <app-data-loading *ngSwitchCase="viewType.Loading"></app-data-loading>
+</div>

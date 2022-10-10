@@ -1,0 +1,41 @@
+<div class="assignment-submission-list-view-container">
+  <div [ngSwitch]="currentViewType">
+    <div *ngSwitchCase="viewType.Data">
+      <div *ngFor="let submission of submissionList; let i = index">
+        <a class="assignment-submission-list-view-container__list"
+           [ngClass]="{ 'cursor-pointer': !!(submission?.student_assignment) }"
+           (click)="onAssignmentSubmissionView(submission)">
+          <img *ngIf="submission?.user?.avatar_thumbnail" [src]="submission?.user?.avatar_thumbnail" alt="">
+          <mat-icon *ngIf="!(submission?.user?.avatar_thumbnail)" svgIcon="studentProfile"></mat-icon>
+          <div>
+            <h4>{{submission?.user?.student_name | checkEmpty}}</h4>
+            <div *ngIf="!!(submission?.student_assignment)">
+              <label>Submitted on:</label>
+              <span>{{
+                submission?.student_assignment?.created_at | date: 'dd MMMM yyyy'
+                }}</span>
+            </div>
+            <div class="red-color" *ngIf="!(submission?.student_assignment)">
+              Not Submitted
+            </div>
+          </div>
+
+          <a *ngIf="submission?.student_assignment">
+            <mat-icon svgIcon="rightArrow"></mat-icon>
+          </a>
+        </a>
+      </div>
+    </div>
+    <div *ngSwitchCase="viewType.NoData">
+      <div class="no-content-found-wrapper">
+        <mat-icon svgIcon="noSubmission"></mat-icon>
+        <p>No submission found</p>
+        <span>The student has not yet submitted the assignment</span>
+      </div>
+    </div>
+
+    <div class="loader-data" *ngSwitchCase="viewType.Loading">
+      <label>Loading...</label>
+    </div>
+  </div>
+</div>

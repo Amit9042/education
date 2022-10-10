@@ -1,0 +1,13 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+.small-pad-0 {
+    @include respond('phone') {
+        padding-right: 0 !important;
+    }
+}
+
+@include respond('tablet') {
+    .bottom-small-2 {
+        margin-bottom: 2rem;
+    }
+}

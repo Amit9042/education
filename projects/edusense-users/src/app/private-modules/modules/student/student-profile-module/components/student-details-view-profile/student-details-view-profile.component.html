@@ -1,0 +1,32 @@
+<div class="provider-view-container">
+
+  <div class="provider-view__body class-view-container">
+    <div class="provider-view__body--listing class-view__body">
+      <div class="class-view__body__view">
+        <label>Gender</label>
+        <span>{{profileDetail?.gender | checkEmpty}}</span>
+      </div>
+
+      <div class="class-view__body__view">
+        <label>Mobile number</label>
+        <span>{{profileDetail.user_details?.dial_code + ' ' + profileDetail.user_details?.contact_number}}</span>
+      </div>
+      <div class="class-view__body__view">
+        <label>Grade</label>
+        <span>{{profileDetail.student_grade?.alias | checkEmpty}}</span>
+      </div>
+      <div class="class-view__body__view">
+        <label>Email</label>
+        <span>{{profileDetail.user_details?.email | checkEmpty}}</span>
+      </div>
+      <div class="class-view__body__view">
+        <label>College / Tuition / School / Institute Name</label>
+        <span>{{profileDetail.school_name | checkEmpty}}</span>
+      </div>
+      <div class="class-view__body__view">
+        <label>Location</label>
+        <span>{{getLocatiton()}}</span>
+      </div>
+    </div>
+  </div>
+</div>

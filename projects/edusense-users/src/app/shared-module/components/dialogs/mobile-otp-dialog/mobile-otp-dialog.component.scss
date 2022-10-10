@@ -1,0 +1,67 @@
+@import '../../../../../assets/scss/abstracts/abstracts';
+.dialog-container {
+    width: 52rem;
+
+    @include respond('phone') {
+        max-width: 95vw;
+        width: auto;
+    }
+}
+.otp-form-field {
+    label {
+        color: $primary-color;
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+    .otp-form-container {
+        display: flex;
+
+        .form-control {
+            height: 9rem !important;
+            width: 6rem !important;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+            @include respond('phone') {
+                height: 7rem !important;
+                width: 4.5rem !important;
+            }
+            @include respond('iphone') {
+                height: 4rem !important;
+                width: 4.5rem !important;
+            }
+
+            input {
+                border: 2px solid $primary-color-2 !important;
+                background-color: $grey-color-10;
+                height: 5rem !important;
+                width: 5rem;
+                text-align: center;
+                font-size: 1em;
+                border-radius: 0.8rem;
+                border: none;
+                background: transparent;
+                @include respond('phone') {
+                    height: 4rem !important;
+                    width: 4rem;
+                }
+                @include respond('iphone') {
+                    height: 3.5rem !important;
+                    width: 3.5rem;
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-color !important;
+                }
+            }
+        }
+    }
+}
+
+b {
+    span {
+        color: $primary-color;
+    }
+}

@@ -1,0 +1,11 @@
+@import '../../../../../../../assets/scss/abstracts/abstracts';
+
+label{
+    min-width: 15rem !important;
+    @include respond('phone'){
+        min-width: 10.5rem !important;
+    }
+}
+p{
+    width: calc(100% - 18rem);
+}

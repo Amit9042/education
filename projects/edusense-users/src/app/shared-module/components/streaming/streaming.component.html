@@ -1,0 +1,365 @@
+<div [ngSwitch]="currentConnectionState" class="streaming-component-container">
+    <div class="connection-lable" *ngSwitchCase="connectionState.NOT_CONNECTED">
+        <div>
+            <span>{{ localUser?.ph_char }}</span>
+        </div>
+        <label>Connecting...</label>
+    </div>
+
+    <div>
+        <div *ngSwitchCase="connectionState.CONNECTED" id='streaming_container'>
+            <!-- Streaming header -->
+            <div class="streaming-container" (mousemove)="onMouseMove($event)"
+                [ngClass]="{ 'open-chat-container': activeView !== null }">
+                <!-- isSessionStarted -->
+                <div class="streaming-container__header animate__animated" [ngClass]="{
+                    animate__slideInDown: isShowActions,
+                    animate__fadeOut: !isShowActions
+                }">
+                    <div class="streaming-container__header--section">
+                        <div class="streaming-container__header--section--left">
+                            <div class="timer">
+                                <span>{{ timerDuration }}</span>
+                            </div>
+                        </div>
+                        <div class="streaming-container__header--section--center animate__animated" [ngClass]="{
+                            animate__slideInDown: isShowActions,
+                            animate__fadeOut: !isShowActions
+                        }">
+                            <div *ngIf="!isProvider">
+                                <span>
+                                    Classmates
+                                    <a (click)="onTotalStudentView()" [ngClass]="{ active: isTotalStudentView }">
+                                        <small>
+                                            {{object.keys(users).length}}
+                                        </small>
+                                        <mat-icon svgIcon="students"></mat-icon>
+                                    </a>
+                                </span>
+                                <span class="class-info">
+                                    <mat-icon svgIcon="info_1" [matTooltip]="
+                                        classDetails?.provider_detail
+                                            ?.provider_first_name +
+                                        ' ' +
+                                        classDetails?.provider_detail
+                                            ?.provider_last_name +
+                                        ' â—? ' +
+                                        classDetails?.name
+                                    ">
+                                    </mat-icon>
+                                </span>
+                            </div>
+                            <span *ngIf="isProvider">
+                                Students
+                                <a (click)="showHandRaise()">
+                                    <small>
+                                        {{object.keys(users).length}}
+                                    </small>
+                                    <mat-icon svgIcon="students"></mat-icon>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="streaming-container__header--section--right animate__animated" [ngClass]="{
+                            animate__slideInDown: isShowActions,
+                            animate__fadeOut: !isShowActions
+                        }">
+                            <ul>
+                                <li class="recording-section" *ngIf="isProvider">
+                                    <a *ngIf="!recSession" (click)="startRecording()">
+                                        <span>REC</span>
+                                    </a>
+                                    <a *ngIf="recSession" [ngClass]="{'started': recSession}" (click)="stopRecording()">
+                                        <span>REC</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="shared-icon zoom-icon" (click)="onToggleFullScreen()">
+                                        <mat-icon svgIcon="zoomOut" *ngIf="isFullScreen"></mat-icon>
+                                        <mat-icon svgIcon="zoom" *ngIf="!isFullScreen"></mat-icon>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="streaming-container__body">
+                    <!-- LoggedIn user video / image section -->
+                    <div class="remote-user"
+                        [ngClass]="{'local-provider-large-screen': ((centerViewDetail.id == localUser.id) && isVideo)}">
+                        <span *ngIf="
+                            !centerViewDetail['track'] ||
+                            centerViewDetail['track']?.isMuted()
+                        " class="image-container">
+                            <span>{{ centerViewDetail['ph_char'] }}</span>
+                        </span>
+                        <span>
+                            <audio autoplay id="center_audio"></audio>
+                        </span>
+                        <span class="video-container" id="largeVideoWrapper">
+                            <div id="largeVideo">
+                                <video autoplay muted id="center_video"></video>
+                            </div>
+                        </span>
+                    </div>
+
+                    <a (click)="onSelectRemoteUser(localUser.id)" class="local-user" [ngClass]="{
+                        'local-student': !isProvider,
+                        'local-provider': isProvider,
+                        'local-provider-shared-screen': !isVideo,
+                        'display-none': isTotalStudentView && isProvider
+                    }">
+                        <span *ngIf="isVideo && localUser?.tracks['video']?.isMuted()" class="image-container">
+                            <span>{{ localUser?.ph_char }}</span>
+                        </span>
+                        <span>
+                            <audio autoplay id="local_audio"></audio>
+                        </span>
+
+                        <span *ngIf="localUser?.connType" class="local-user-network-icon">
+                            <mat-icon [svgIcon]="localUser?.connType" [matTooltip]="localUser?.connType.toUpperCase()">
+                            </mat-icon>
+                        </span>
+
+                        <span class="video-container">
+                            <video autoplay muted id="local_video"></video>
+                        </span>
+                    </a>
+
+                    <a *ngIf="providerUserId" class="local-user" [ngClass]="{
+                        'remote-provider': !isProvider,
+                        'display-none': isTotalStudentView
+                    }">
+                        <div (click)="onSelectRemoteUser(providerUserId)" [id]="providerUserId + '_div'">
+                            <label>
+                                {{users[providerUserId]['display_name']}}
+                            </label>
+                            <span *ngIf="
+                                !users[providerUserId]?.tracks ||
+                                !(users[providerUserId]?.tracks)[1] ||
+                                users[providerUserId]?.tracks[1].isMuted()
+                            " class="image-container">
+                                <span>
+                                    {{users[providerUserId]?.ph_char}}
+                                </span>
+                            </span>
+                            <span>
+                                <audio autoplay [id]="providerUserId +'_audio'"></audio>
+                            </span>
+                            <span class="audio-icon">
+                                <mat-icon [svgIcon]="
+                                    !users[providerUserId]?.tracks ||
+                                    !(users[providerUserId]?.tracks)[0] ||
+                                    (users[providerUserId]?.tracks)[0].muted
+                                        ? 'audioMute'
+                                        : 'audio'
+                                "></mat-icon>
+                            </span>
+                            <span class="video-container">
+                                <video autoplay muted [id]="providerUserId +'_video'"></video>
+                            </span>
+                            <span *ngIf="users[providerUserId]?.connType" class="local-user-network-icon">
+                                <mat-icon [svgIcon]="users[providerUserId]?.connType"
+                                    [matTooltip]="users[providerUserId]?.connType.toUpperCase()"></mat-icon>
+                            </span>
+                        </div>
+                    </a>
+
+                    <div class="streaming-container__body--bottom-controls animate__animated" [ngClass]="{
+                        animate__slideInUp: isShowActions,
+                        animate__fadeOut: !isShowActions
+                    }">
+                        <div class="streaming-controls-container">
+                            <!-- Streaming controls -->
+                            <div class="streaming-controls">
+                                <ul>
+                                    <li>
+                                        <a (click)="onMute(mediaTracksEnum.AUDIO)">
+                                            <mat-icon [svgIcon]="
+                                                localUser?.tracks[
+                                                    mediaTracksEnum.AUDIO
+                                                ]?.isMuted()
+                                                    ? 'audioMute_user'
+                                                    : 'audio_user'
+                                            "></mat-icon>
+                                        </a>
+
+                                        <span *ngIf="isProvider">
+                                            <mat-icon class="audio-arrow-icon" svgIcon="down"
+                                                [matMenuTriggerFor]="menu">
+                                            </mat-icon>
+                                            <mat-menu #menu="matMenu" class="audio-settings-menu">
+                                                <button mat-menu-item type="button" (click)="onMuteAll()">
+                                                    Mute All
+                                                </button>
+                                            </mat-menu>
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <a (click)="callEnd()">
+                                            <mat-icon svgIcon="callEnd"></mat-icon>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a (click)="onMute(mediaTracksEnum.VIDEO)">
+                                            <mat-icon [svgIcon]="
+                                                localUser?.tracks[
+                                                    mediaTracksEnum.VIDEO
+                                                ]?.isMuted()
+                                                    ? 'videoMute_user'
+                                                    : 'video_user'
+                                            "></mat-icon>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="chat-controls">
+                                <ul>
+                                    <li>
+                                        <a (click)="screenShare()" [ngClass]="{ active: isVideo}">
+                                            <mat-icon matTooltip="Screen Share" [svgIcon]="isVideo ? 'screenShare' : 'screenShareOn'"></mat-icon>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a (click)="onUserViewChange()" [ngClass]="{ active: isGridView }">
+                                            <mat-icon [svgIcon]="
+                                                isGridView
+                                                    ? 'tileViewOut'
+                                                    : 'tileView'
+                                            " matTooltip="Grid View"></mat-icon>
+                                        </a>
+                                    </li>
+
+                                    <!-- <li *ngIf="!isProvider">
+                                    <a [ngClass]="{ active: false }">
+                                        <mat-icon
+                                            svgIcon="raiseHand"
+                                            matTooltip="Raise Hand"
+                                        ></mat-icon>
+                                    </a>
+                                </li> -->
+                                    <li>
+                                        <a (click)="onChangeChat(0)" [ngClass]="{
+                                            active:
+                                                activeView ===
+                                                htmlView.CHAT_VIEW
+                                        }">
+                                            <mat-icon [svgIcon]="
+                                                activeView ===
+                                                htmlView.CHAT_VIEW
+                                                    ? 'chatOn'
+                                                    : 'chat1'
+                                            "></mat-icon>
+                                            <div class="counter" *ngIf="msgBadgeCount">
+                                                <span>{{
+                                                msgBadgeCount > 99
+                                                    ? '99+'
+                                                    : msgBadgeCount
+                                            }}</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- isSessionStarted -->
+                    <div class="streaming-container__body--online-users" [ngClass]="{
+                        'students-view-grid': isGridView,
+                        'total-student-view': isTotalStudentView,
+                        'display-none': !isShowStudents
+                    }">
+                        <!-- Online user section -->
+
+                        <div *ngIf="object.keys(users).length" id="online_users" class="online-user-list">
+                            <div *ngFor="let remoteUserId of object.keys(users)" [id]="remoteUserId + '_div'">
+                                <div *ngIf="remoteUserId !== providerUserId" class="online-user">
+                                    <a (click)="onSelectRemoteUser(remoteUserId)" class="online-user-section">
+                                        <label>
+                                            {{users[remoteUserId]['display_name']}}
+                                        </label>
+                                        <div *ngIf="
+                                        !users[remoteUserId]?.tracks ||
+                                        !(users[remoteUserId]?.tracks)[1] ||
+                                        (users[remoteUserId]?.tracks)[1].muted" class="online-user-image">
+                                            <span>
+                                                {{users[remoteUserId]['ph_char']}}
+                                            </span>
+                                        </div>
+
+                                        <div class="online-user-video">
+                                            <video autoplay [id]="remoteUserId +'_video'"></video>
+                                        </div>
+
+                                        <div>
+                                            <audio autoplay [id]="remoteUserId +'_audio'"></audio>
+                                        </div>
+
+                                        <div class="audio-icon">
+                                            <mat-icon [svgIcon]="
+                                                !users[remoteUserId]?.tracks ||
+                                                !(users[remoteUserId]?.tracks)[0] ||
+                                                (users[remoteUserId]?.tracks)[0].muted ? 'audioMute' : 'audio'">
+                                            </mat-icon>
+                                        </div>
+
+                                        <div class="video-icon">
+                                            <mat-icon [svgIcon]="
+                                                !users[remoteUserId]?.tracks ||
+                                                !(users[remoteUserId]?.tracks)[1] ||
+                                                (users[remoteUserId]?.tracks)[1].muted ? 'videoMute': 'video'">
+                                            </mat-icon>
+                                        </div>
+
+                                        <span *ngIf="users[remoteUserId]?.connType" class="remote-user-network-icon">
+                                            <mat-icon [svgIcon]="users[remoteUserId]?.connType"
+                                                [matTooltip]="users[remoteUserId]?.connType.toUpperCase()">
+                                            </mat-icon>
+                                        </span>
+                                    </a>
+                                    <span *ngIf="isTotalStudentView" class="student-name-streaming">
+                                        {{users[remoteUserId]['display_name']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a class="user-toggle-arrow" (click)="onToggleStudents()" *ngIf="
+                        !(isTotalStudentView || isGridView) &&
+                        object.keys(users).length
+                    ">
+                        <mat-icon svgIcon="leftArrow_1" *ngIf="isShowStudents"></mat-icon>
+                        <mat-icon svgIcon="rightArrow_1" *ngIf="!isShowStudents"></mat-icon>
+                    </a>
+                </div>
+            </div>
+
+            <div [ngClass]="{ 'right-side-container': activeView !== null }">
+                <div *ngIf="activeView === htmlView.CHAT_VIEW">
+                    <app-chat [messagesArray]="messagesArray" (clickEvent)="onCloseChatBar($event)"
+                        (sendMsg)="onSendMsg($event)"></app-chat>
+                </div>
+            </div>
+        </div>
+
+        <div [ngClass]="{'display-none': currentConnectionState !== connectionState.NETWORK_FAILURE}">
+            <app-slow-internet-connection></app-slow-internet-connection>
+        </div>
+
+        <div *ngSwitchCase="connectionState.CONNECTION_FAILURE">
+            <label>Connection Failure</label>
+        </div>
+
+        <div *ngSwitchCase="connectionState.DISCONNECTED" class="connection-lable">
+            <div>
+                <span>{{ localUser?.ph_char }}</span>
+            </div>
+            <label>Leaving...</label>
+        </div>
+    </div>
+</div>

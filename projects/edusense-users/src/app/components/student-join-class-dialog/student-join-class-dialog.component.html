@@ -1,0 +1,64 @@
+<div class="dialog-container dialog-list-container">
+  <div class="dialog-container__head dialog-list-container__head">
+    <h4>Join Session</h4>
+    <a (click)="onCloseDialog()" id="lnkClose">
+      <mat-icon svgIcon="close" matTooltip="Close"></mat-icon>
+    </a>
+  </div>
+  <div infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()" class="dialog-container__bottom dialog-list-container__bottom">
+    <div [ngSwitch]="currentViewType" class="waiting-room__body meeting-room__body">
+      <div *ngSwitchCase="viewType.Data">
+        <div *ngFor="let classDetail of classList" class="visitors-info">
+          <div class="row align-center">
+            <div class="col-md-9 col-sm-9 col-xs-12 PLR-0">
+              <div class="visitors-info__left">
+                <div class="visitor-image">
+                  <h2>{{classDetail.class_details?.provider_detail?.name?.charAt(0).toUpperCase()}}</h2>
+                </div>
+                <div class="visitor-details">
+                  <h4>
+                    {{classDetail.class_details?.provider_detail?.name}}
+                    <span>·</span>
+                    <span> {{classDetail.class_details.name}}</span>
+                  </h4>
+                  <p class="location">
+                    <span *ngFor="let grade of classDetail.class_details.grade; let i = index">
+                      Standard {{grade.grade_master.alias}}
+                      <label *ngIf="i < classDetail.class_details.grade.length - 1">, </label>
+                    </span>
+                    <span *ngIf="classDetail.class_details.start_time"> |
+                      {{classDetail.class_details.start_time + " - " + classDetail.class_details.end_time}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 PLR-0">
+              <div class="visitors-info__right">
+                <div *ngIf="classDetail?.class_details?.session_details?.session_running_status === classSessionStatus.STARTED" class="live-tag">Live</div>
+                <button (click)="onJoinClass(classDetail)" id="btnJoin" type="button" mat-button
+                  class="round-button round-button-primary">
+                  Join
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="viewType.NoData">
+        <div class="no-content-found-wrapper dialog-no-data">
+          <mat-icon svgIcon="no-class"></mat-icon>
+          <p>No classes</p>
+          <span *ngIf="!isNotAdmitted">No class is available</span>
+          <span *ngIf="isNotAdmitted">{{notAdmittedMsg}}</span>
+        </div>
+      </div>
+
+      <div class="loader-data" *ngSwitchCase="viewType.Loading">
+        <label>Loading...</label>
+      </div>
+    </div>
+  </div>
+</div>

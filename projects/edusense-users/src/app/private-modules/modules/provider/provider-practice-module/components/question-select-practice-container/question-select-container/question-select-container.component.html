@@ -1,0 +1,17 @@
+<div class="select-question-container">
+    <div class="select-question">
+        <div class="select-question__left">
+            <es-user-question-list-left (totalQuestions)="getQuesLength($event)"
+                (selectedQuesId)="selectedQuestionId($event)">
+
+            </es-user-question-list-left>
+        </div>
+
+        <div class="select-question__right">
+            <es-user-question-details-right *ngIf="totalQuestions > 0" [totalQuestions]="totalQuestions"
+                [selectedQues]="selectedQues">
+
+            </es-user-question-details-right>
+        </div>
+    </div>
+</div>

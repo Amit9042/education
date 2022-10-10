@@ -1,0 +1,16 @@
+<div class="dialog-container confirmation-dialog-container">
+  <div class="dialog-container__head">
+    <h4>{{title}}</h4>
+    <a (click)="onCloseDialog()" id="lnkClose"><mat-icon svgIcon="close"  matTooltip="Close"></mat-icon></a>
+  </div>
+  <div class="dialog-container__bottom">
+    <p>{{caption}}</p>
+
+    <div class="button-group">
+      <button (click)="onCloseDialog()" id="btnClose" mat-button>{{secondaryButtonLabel}}</button>
+      <button (click)="onSave()" id="btnSave" mat-flat-button color="warn" type="submit">
+        {{primaryButtonLabel}}
+      </button>
+    </div>
+  </div>
+</div>
